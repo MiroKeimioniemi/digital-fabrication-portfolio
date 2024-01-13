@@ -1,19 +1,4 @@
+# The Docker image that will be used to build your app
 image: registry.gitlab.com/pages/hugo/hugo_extended
-
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-
-test:
-  script:
-  - hugo
-  except:
-  - master
-
-pages:
-  script:
-  - hugo -F
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
+# Functions that should be executed before the build script is run
+before_script: []
