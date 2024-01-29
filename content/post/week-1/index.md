@@ -1,22 +1,36 @@
 +++
 author = "Miro Keimiöniemi"
-title = "Week 1 - Setting up"
+title = "Project Management"
 date = "2024-01-13"
-description = "Crating the documentation website."
+description = "Weeks 1 - 3"
 tags = [
     "markdown",
-    "css",
-    "html",
+    "CSS",
+    "HTML",
     "themes",
-    "website"
+    "website",
+    "version control",
+    "CI/CD",
+    "Git",
+    "GitLab",
+    "dependency management",
+    "compression",
+    "optimization",
+    "documentation",
+    "ssh"
 ]
 categories = [
-    "themes",
-    "syntax",
+    "Web Development",
+    "Documentation",
+    "DevOps"
 ]
-series = ["Themes Guide"]
+series = ["Weekly Assignments"]
 aliases = ["migrate-from-jekyl"]
 image = "About page code.png"
 +++
 
+## I
+## want
+## a
+## contents page
 I will soon document here how this website sprung to life.

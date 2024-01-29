@@ -36,3 +36,10 @@ body {
     background-color: transparent;
 }
 /**/
+
+@media (min-width: 1024px) {
+    body {
+        margin-left: 80px;
+        margin-right: 40px;
+    }
+}
