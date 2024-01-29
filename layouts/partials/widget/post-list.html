@@ -1,0 +1,19 @@
+<div class="post-list">
+    <section class="widget archives">
+        <h2 class="widget-title section-title">Weekly Assignments</h2>
+        <div class="widget-archive--list">
+            {{ $posts := where .Context.Site.RegularPages "Section" "post" }}
+            {{ range $posts }}
+                <div class="post-item archives-year">
+                    <a href="{{ .Permalink }}" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center;">
+                        <span class="year" style="white-space: wrap;">{{ .Title }}</span>
+                        {{ with .Description }}
+                            <span class="separator" style="text-align: center; margin-left: min(0.5rem, 1rem); margin-right: min(0.5rem, 1rem);">|</span>
+                            <span class="count" style="white-space: wrap;">{{ . }}</span>
+                        {{ end }}
+                    </a>
+                </div>
+            {{ end }}
+        </div>
+    </section>
+</div>

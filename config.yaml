@@ -1,7 +1,7 @@
 baseurl: https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io
 languageCode: en-us
 theme: hugo-theme-stack
-paginate: 5
+paginate: 100
 title: Miro's Digital Fabrication Portfolio
 copyright: Miro Keimiöniemi
 
@@ -53,7 +53,7 @@ params:
         toc: true
         readingTime: true
         license:
-            enabled: true
+            enabled: false
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
@@ -136,9 +136,7 @@ params:
     widgets:
         homepage:
             - type: search
-            - type: archives
-              params:
-                  limit: 5
+            - type: post-list
             - type: categories
               params:
                   limit: 10
