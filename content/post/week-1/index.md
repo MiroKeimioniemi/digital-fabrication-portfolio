@@ -1,7 +1,7 @@
 +++
 author = "Miro Keimiöniemi"
 title = "Project Management"
-date = "2024-01-13"
+date = "2024-01-30"
 description = "Weeks 1 - 3"
 tags = [
     "markdown",
@@ -13,7 +13,7 @@ tags = [
     "CI/CD",
     "Git",
     "GitLab",
-    "dependency management",
+    "documentation",
     "compression",
     "optimization",
     "documentation",
@@ -25,7 +25,6 @@ categories = [
     "DevOps"
 ]
 series = ["Weekly Assignments"]
-aliases = ["migrate-from-jekyl"]
 image = "About page code.png"
 +++
 
