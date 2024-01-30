@@ -65,6 +65,7 @@ GitLab instead of GitHub, which was fine by me, having routinely used both. What
 however, was using the non-organization-hosted [GitLab](https://gitlab.com/), for which I had to make
 an account separately.
 
-IMAGE OF GITLAB project creation prompt
+![GitLab signup create project view](gitlab-signup-create-project.webp)
 
 ## Creating the website
+

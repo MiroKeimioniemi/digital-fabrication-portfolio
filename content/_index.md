@@ -1,8 +1,8 @@
 ---
 menu:
     main:
-        name: Home
+        name: Weekly Assignments
         weight: -100
         params:
-            icon: home
+            icon: date
 ---
