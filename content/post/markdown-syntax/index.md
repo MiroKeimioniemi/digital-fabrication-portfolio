@@ -15,7 +15,7 @@ categories = [
 ]
 series = ["Themes Guide"]
 aliases = ["migrate-from-jekyl"]
-image = "pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg"
+image = "pawel-czerwinski-8uZPynIu-rQ-unsplash.webp"
 +++
 
 This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.
@@ -166,3 +166,4 @@ Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and ot
 ## Hyperlinked image
 
 [![Google](https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.webp)](https://google.com)
+

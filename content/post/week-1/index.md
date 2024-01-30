@@ -25,7 +25,7 @@ categories = [
     "DevOps"
 ]
 series = ["Weekly Assignments"]
-image = "about-page-code.png"
+image = "about-page-code.webp"
 +++
 
 Here begins the documentation of my digital fabrication journey. It is produced in accordance to the
@@ -70,3 +70,4 @@ IMAGE OF GITLAB project creation prompt
 ## Creating the website
 
 ![Alt text](pexels-elijah-o'donnell-3439214.webp)
+
