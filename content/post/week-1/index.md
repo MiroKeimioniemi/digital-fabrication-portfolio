@@ -68,5 +68,3 @@ an account separately.
 IMAGE OF GITLAB project creation prompt
 
 ## Creating the website
-
-
