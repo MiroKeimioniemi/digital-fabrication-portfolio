@@ -6,18 +6,15 @@ $ImageFiles = Get-ChildItem -Path $ImageDir -Recurse -Include *.jpg,*.jpeg,*.png
 
 # Loop through each image file
 foreach ($ImageFile in $ImageFiles) {
-    # Check if the file size is greater than 100 KB
-    if ($ImageFile.Length -gt 100KB) {
-        # Define the output file name
-        $OutputFile = $ImageFile.FullName -replace '\.[^.]*$', '.webp'
-        
-        # Define the ImageMagick command to run on the current image
-        $ImageMagickCommand = "magick convert `"$ImageFile`" -strip -resize 1280x1920 -define webp:lossless=false -quality 75 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
-        
-        # Run the ImageMagick command on the file
-        Invoke-Expression -Command $ImageMagickCommand
+    # Define the output file name
+    $OutputFile = $ImageFile.FullName -replace '\.[^.]*$', '.webp'
+    
+    # Define the ImageMagick command to run on the current image
+    $ImageMagickCommand = "magick convert `"$ImageFile`" -strip -resize 1920x1920 -define webp:lossless=true -quality 75 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
+    
+    # Run the ImageMagick command on the file
+    Invoke-Expression -Command $ImageMagickCommand
 
-        # Delete the original image
-        Remove-Item -Path $ImageFile.FullName
-    }
+    # Delete the original image
+    Remove-Item -Path $ImageFile.FullName
 }
