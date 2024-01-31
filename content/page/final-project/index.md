@@ -1,17 +1,15 @@
 ---
 title: Final Project
 description: Gesture controlled bright alarm lamp
-date: '2024-01-31'
+date: '2024-02-01'
 aliases:
-  - about-us
-  - about-hugo
-  - contact
-lastmod: '2024-01-31'
+  - project
+lastmod: '2024-02-01'
 menu:
     main: 
         weight: -99
         params:
-            icon: user
+            icon: bulb
 links:
   - title: My Website
     description: See my portfolio on my personal website.

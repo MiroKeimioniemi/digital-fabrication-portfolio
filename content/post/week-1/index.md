@@ -1,7 +1,7 @@
 +++
 author = "Miro Keimiöniemi"
 title = "Project Management"
-date = "2024-01-30"
+date = "2024-02-01"
 description = "Weeks 1 - 3"
 tags = [
     "markdown",
@@ -9,10 +9,12 @@ tags = [
     "HTML",
     "code",
     "themes",
+    "Hugo",
     "website",
     "version control",
     "CI/CD",
     "Git",
+    "Git Bash",
     "GitLab",
     "documentation",
     "compression",
@@ -23,7 +25,9 @@ tags = [
     "PowerShell",
     "scripting",
     "automation",
-    "pipeline"
+    "pipeline",
+    "command line",
+    "Windows"
 ]
 categories = [
     "Web Development",
@@ -79,25 +83,123 @@ under a group as shown below event though I was in no need of one.
 I was baffled about this and googled around for a while but in retrospect, it was easy enough to delete 
 this repository and then create one just under my username, which made way more sense to me. I then created
 an empty repository for the project, onto which I uploaded the hugo website created using the stack template
-using the SSH protocol.
+using the SSH protocol. The GitLab repository of this website can be found [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/commits/main/content/post/week-1/index.md?ref_type=heads).
 
-### Git
-
-What is Git?
-
-How to install Git?
-
-How to use Git?
-
-Resources for Git
+![My GitLab repository](gitlab-repository.webp)
 
 ### Hugo
 
-What is Hugo? Why I chose it?
+I have made both static and dynamic websites in the past and wanted to challenge myself with something new this time.
+Furthermore, due to the nature of this website - that being documentation - I wanted to automate the addition of new
+content as far as possible as adding content to [my own static website](https://mirokeimioniemi.com) is quite annoying
+and unsustainable in the long run as the number of interlinked pages grows. I have long thought about having to refactor
+it at some point, so I decided to use this opportunity for experimenting how I should do it.
 
-How to install Hugo? (first install chocolatey on windows)
+While preparing for this spring by googling workload estimates and alumni's experiences with the Fab Academy, I had
+discovered Nadieh Bremer's [Nadieh's Fab Academy](https://fabacademy.org/2021/labs/waag/students/nadieh-bremer/)
+documentation website from 2021 and I really liked how it looked. She had used [Hugo](https://gohugo.io/) and her
+documentation was incredibly extensive, so I decided to give it a try following her comprehensive instructions.
 
-How to initialize a Hugo website using a template?
+![Nadieh's Fab Academy](nadiehs-fab-academy.webp)
+
+Hugo is an open-source static site generator that claims to be "the world's fastest framework for building websites"
+and thus it sounded like just the right tool for this. To install it on windows, I realize now in retrospect that I
+could have used WSL, which I had installed for an old C course, but instead I used [chocolatey](https://chocolatey.org/), a package manager for
+Windows, which could be installed according to the installation guide [here](https://chocolatey.org/install#individual)
+by opening PowerShell as an administrator and running:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+After installing chocolatey, Hugo could be installed by simply running:
+
+```powershell
+choco install hugo-extended
+```
+
+I created a new hugo site in my digital fabrication project folder by running:
+
+```powershell
+hugo new site digital-fabrication-portfolio
+```
+
+This created a new `digital-fabrication-portfolio` folder with Hugo's directory structure. I initialized Git in the new directory
+with `git init` as detailed in the [Git section](/p/project-management/#git) and added the [Stack](https://stack.jimmycai.com/) [Hugo theme](https://themes.gohugo.io/themes/hugo-theme-stack/)
+by Jimmy Cai as a submodule by running:
+
+```
+cd digital-fabrication-portfolio
+git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+```
+
+One would imagine, that using a template would be relatively simple and straightforward but in my opinion, Hugo's 
+documentation did not make a clear enough distinction between the functions of Hugo itself and the themes built on 
+top of it. The [Stack theme's documentation](https://stack.jimmycai.com/guide/) thus appeared insufficient to me, 
+because it expected me to know these differences, which I did not quite fully comprehend on my first quick 
+skim-through of the [Hugo documentation](https://gohugo.io/documentation/). It took me long to understand how
+exactly to use the theme, which was certainly not helped by multiple different kinds of configuration files such
+as the default `hugo.toml` and the `config.yaml` used by the Stack theme's example site. If you want to construct
+the site additively from the ground up using the theme, make sure to add `theme = "hugo-theme-stack"` to the
+`hugo.toml` file, but I would highly recommend the subtractive approach I ended up taking, where I started from
+the demo website and carved it into my own.
+
+I followed in Nadieh's footsteps and copied the files from `digital-fabrication-portfolio/themes/hugo-theme-stack/exampleSite`
+to `digital-fabrication-portfolio`, replacing the pre-existing `content` folder. I also deleated the `hugo.toml` file
+in order to use the theme's default `config.yaml` configuration file instead, which I modified to be more suitable for my purposes. 
+Now running the following command:
+
+```
+hugo server -D -F
+```
+resulted in the following example site being deployed at `localhost:1313`, which can be accessed by merely typing
+that to any browser and pressing enter.
+
+![Stack theme demo website](stack-demo.webp)
+
+overview of file structure & workings
+
+### Git
+
+Git is a very versatile and robust, distributed version control system that can be used to save "snapshots" of your
+repositories locally and sync them across multiple devices, most commonly done through hosting services such as [GitHub](https://github.com/) and [GitLab](https://gitlab.com/). Most often Git is used with code but it is especially well suited for almost
+all kinds of text files as it enables tracking how the files evolve over time and what changes are made to them at
+each point. [Here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/commits/main/content/post/week-1/index.md?ref_type=heads) you can see the history of this very post for example.
+
+I was already familiar with Git, as you can see from my previous projects on [GitHub](https://github.com/MiroKeimioniemi),
+so I already had it installed but it is also very simple to download for free from the official website [git-scm.com](https://git-scm.com/downloads). Install and configure it using the following commands:
+
+```git
+$ git config --global user.name "YOUR_USERNAME_HERE"
+$ git config --global user.email "your_email_here@email.com"
+```
+
+Git can get quite complex but everyday usage of it is quite straightforward. Essentially, when working solo
+on a single machine, you only need 6 commands:
+
+- `git init` initializes a repository in the currently open directory.
+- `git clone` clones a remote repository into the currently open local directory.
+- `git add` stages the selected changes made to the repository since the last commit to be committed with the next one.
+- `git commit` saves all the staged changes to the repository into the permanent git record.
+- `git push` uploads the locally committed changes to a remote repository.
+- `git pull` downloads the changes from a remote repository to the local repository.
+
+I would highly recommend running all the commands using either Git Bash that comes with the Git installation or using the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about), WSL,
+as Windows' PowerShell / Command Prompt may have some quirks. How I initialized my git repository was by executing the 
+following commands in Git Bash opened in my digital fabrication project folder on my laptop to navigate into my hugo
+website folder and then initializing Git in it:
+
+```git
+cd digital-fabrication-portfolio
+git init
+```
+
+There are a lot of great resources for learning Git on various levels of complexity (from simplest to most complex):
+
+- [git - the simple guide](https://rogerdudler.github.io/git-guide/)
+- [FreeCodeCamp](https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/)
+- [GitKraken](https://www.gitkraken.com/learn/git/tutorials)
+- [Git documentation](https://git-scm.com/doc)
 
 ### SSH connection
 
@@ -255,5 +357,8 @@ How to deploy the site?
 
 I ended up using Hugo's Stack template just as Nadieh as why stray from perfection.
 
+Ended up using the same template even
+
+Started with the about me page.
 
 
