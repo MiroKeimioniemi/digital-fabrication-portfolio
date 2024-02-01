@@ -397,7 +397,7 @@ smaller than 100kb, it stays untouched.
 
 ```powershell
 # Define the directory containing the images
-$ImageDir = '.\content\post'
+$ImageDir = '.\content'
 
 # Get all image files in the directory and its subdirectories
 $ImageFiles = Get-ChildItem -Path $ImageDir -Recurse -Include *.jpg,*.jpeg,*.png
@@ -416,8 +416,8 @@ foreach ($ImageFile in $ImageFiles) {
     # Check the file size of the output file
     $OutputFileSize = (Get-Item $OutputFile).Length / 1KB
 
-    # If the file size is larger than 100KB, compress it lossily
-    if ($OutputFileSize -gt 100) {
+    # If the file size is larger than 200KB, compress it lossily
+    if ($OutputFileSize -gt 200) {
         $ImageMagickCommandLossy = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
         Invoke-Expression -Command $ImageMagickCommandLossy
     }
@@ -462,7 +462,7 @@ achieves:
 
 ```powershell
 # Define the directory to search
-$dirPath = './content/post'
+$dirPath = './content'
 
 # Define the extensions to replace
 $extensions = @('.png', '.jpg', '.jpeg')
@@ -652,3 +652,4 @@ essentially had to re-study how everything worked so that I could write it down.
 now that I do not have the excuse of not having the documentation platform ready anymore.
 
 Overall, I am quite proud of what I have achieved thus far and cannot wait for the new and undoubtedly plentiful challenges that the course will bring! But now (06:18), to sleep.
+
