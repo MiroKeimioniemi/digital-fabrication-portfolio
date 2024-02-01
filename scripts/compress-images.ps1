@@ -1,5 +1,5 @@
 # Define the directory containing the images
-$ImageDir = '.\content\post'
+$ImageDir = '.\content'
 
 # Get all image files in the directory and its subdirectories
 $ImageFiles = Get-ChildItem -Path $ImageDir -Recurse -Include *.jpg,*.jpeg,*.png

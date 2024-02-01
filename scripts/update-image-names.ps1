@@ -1,5 +1,5 @@
 # Define the directory to search
-$dirPath = './content/post'
+$dirPath = './content'
 
 # Define the extensions to replace
 $extensions = @('.png', '.jpg', '.jpeg')

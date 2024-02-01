@@ -604,3 +604,6 @@ that lists the weekly assignments in the right sidebar on the [Weekly Assignment
 
 Activated by turning it on in config.yaml
 
+
+
+
