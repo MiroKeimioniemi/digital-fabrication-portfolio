@@ -62,12 +62,12 @@ Most interesting avenues:
 
 Currently I am leaning toward creating some kind of an alarm clock / light that would wake me up to a simulated sunset. Many exist already, but they are kind of expensive and boring looking so the point here would prehaps be either the design or adding some cool feature that they do not have, at least in lower pricing points. With my non-existent drawing skills, I sketched a few ideas on Samsung Notes with my tablet. They look pretty horrendous due to being incredibly quick, not being drawn in an app made for it and being drawn by me, but perhaps they might still be somewhat representative.
 
-![](sketch-1.jpg)
-![](sketch-2.jpg)
-![](sketch-3.jpg)
-![](sketch-4.jpg)
-![](sketch-5.jpg)
-![](sketch-6.jpg)
+![](sketch-1.webp)
+![](sketch-2.webp)
+![](sketch-3.webp)
+![](sketch-4.webp)
+![](sketch-5.webp)
+![](sketch-6.webp)
 
 I have grown very interested towards the last one "Oval blimp thingy" that I then renamed to "gesture controlled bright alarm lamp". It was actually a real shower thought stumbled upon when pondering possible interesting shapes for a sunrise alarm clock. I think I am drawn to it for its elegance, where the oval is the perfect shape for simulating sunrises and sunsets. All electronics would be packed inside of it so that the stands could be changeable and thus a bit more of a design elemnt that can go anywhere from minimalist to elaborate. 
 
