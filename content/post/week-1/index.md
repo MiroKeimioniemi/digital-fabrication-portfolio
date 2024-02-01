@@ -391,9 +391,9 @@ I learned how to write PowerShell scripts on Windows to unleash ImageMagick's fu
 First, I created a script called `compress-images.ps1` under a new `scripts` folder to resize, compress and convert all images under 
 `content/post` and all its subdirectories to `.webp` by finding all files ending with `.jpg`, `.jpeg` or `.png` and applying the same
 ImageMagick command to each while also deleting the original image. It then evolved to the script below, which first converts
-the image losslessly, then checks if it is larger than 100kb and if this is the case, redos the conversion using the original image,
+the image losslessly, then checks if it is larger than 200kb and if this is the case, redos the conversion using the original image,
 replacing the initial converted image, thus producing a smaller, lossy output this time. If the initial conversion produces an image
-smaller than 100kb, it stays untouched.
+smaller than 200kb, it stays untouched.
 
 ```powershell
 # Define the directory containing the images
@@ -652,4 +652,5 @@ essentially had to re-study how everything worked so that I could write it down.
 now that I do not have the excuse of not having the documentation platform ready anymore.
 
 Overall, I am quite proud of what I have achieved thus far and cannot wait for the new and undoubtedly plentiful challenges that the course will bring! But now (06:18), to sleep.
+
 
