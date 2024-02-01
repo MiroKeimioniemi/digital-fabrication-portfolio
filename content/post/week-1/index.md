@@ -16,11 +16,12 @@ tags:
   - "Git"
   - "Git Bash"
   - "GitLab"
+  - "GitHub Copilot"
   - "documentation"
   - "compression"
   - "optimization"
   - "documentation"
-  - "ssh"
+  - "SSH"
   - "ImageMagick"
   - "PowerShell"
   - "scripting"
@@ -570,14 +571,39 @@ baseurl: https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f
 
 ## Creating the website
 
-I ended up using Hugo's Stack template just as Nadieh as why stray from perfection.
+Despite its complexities, Hugo seemed like just the tool I had been long looking for. I browsed through all its [themes](https://themes.gohugo.io/)
+and still ended up with Stack - the same theme Nadieh had used. I thought to myself, why stray from perfection? So I took the same theme, but made
+it my own.
 
-Ended up using the same template even
+Initially, I only changed the colors of the theme to match [my personal website](https://mirokeimioniemi.com/), modified the `config.yaml` to have the
+right titles, descriptions, social media links etc. as shown in [2.2.3 Hugo Overview](/p/project-management/#overview) and added the [About Me]({{< relref "page/about/index.md" >}})
+page with some quick stream of consciousness ramblings. This was enough for the first week as I was quite done with all the setting up at that point.
 
-Started with the about me page.
+During the second week, I did not even touch the website as I had a lot of events to attend to and I was brainstorming what to make as my final project,
+which I updated on the [Final Project]({{< relref "page/final-project/index.md" >}}) page just now. Thank you Krisjanis Rijnieks for the single, uniform
+deadline for all the assignments 🙏.
 
+Now, during the third week, I have tried to systematically make sure that I have satisfied all the assignment requirements. I finalized the look of the
+website by adjusting scaling and margins of different HTML elements as well as images, built the automatic image processing pipeline, organized all pages
+and wrote this documentation. The most notable, non-sass changes are detailed below.
 
-I also created the `post-list` widget layout under `layouts/partials/widget` with the help of [GitHub Copilot](https://github.com/features/copilot),
+I added "Previous week" and "Next week" buttons to the weekly assignment posts, that only show up when there are other posts, by copying the `single.html`
+file from `themes/hugo-theme-stack/layouts/_default` to `layouts/_default` and adding the following piece of code:
+
+```html
+<div style="display: flex; justify-content: space-around;">
+        {{ if .PrevInSection }}
+            <a href="{{ .PrevInSection.Permalink }}" class="prev-article-button">Previous week</a>
+        {{ end }}
+
+        {{ if .NextInSection }}
+            <a href="{{ .NextInSection.Permalink }}" class="next-article-button">Next week</a>
+        {{ end }}
+    </div>
+```
+
+The most noticeable change is the `post-list` widget, inspired by Nadieh's similar weekly assignments list. 
+I created the `post-list` widget layout under `layouts/partials/widget` with the help of [GitHub Copilot](https://github.com/features/copilot),
 that lists the weekly assignments in the right sidebar on the [Weekly Assignments]({{< relref "_index.md" >}}) page:
 
 ```html
@@ -602,9 +628,27 @@ that lists the weekly assignments in the right sidebar on the [Weekly Assignment
 </div>
 ```
 
-Activated by turning it on in config.yaml
+The widget could then be enabled by adding it to the config.yaml:
 
+```yaml
+widgets:
+        homepage:
+            - type: post-list
+```
 
+## Reflections
 
+The start of the course was quite gentle, especially for someone already very familiar with web development, although I did stil manage to complicate it for myself
+quite well by picking up yet another framework and learning scripting to automate image processing - something which we were really not expected to do. On yesterday's
+global lecture, Neil Gershenfeld mentioned that PowerShell is probably not the best command line interface to use, because of some unique quirks and I might want to
+keep that in mind for the future, especially considering that I have all the nicer tools installed already, but it works for now and so I will follow the programmer
+ethos "if it works, don't touch it" for now.
 
+I am used to writing very extensive documentation as can be seen, for example, [here](https://github.com/MiroKeimioniemi/probabilistic-strategy-game), but even though
+I just finished the [Design Thinking and Electronic Prototyping](https://www.linkedin.com/posts/miro-keimi%C3%B6niemi_now-that-school-is-over-for-the-year-ill-activity-7143994838173089792-1WlC?utm_source=share&utm_medium=member_desktop)
+course with weekly learning diaries and extensive project documentation, it still managed to surprise me just how long I was again able to spend on writing this. Easily
+as long as everything thus far combined. And it did not help that I only took very barebones bulletpoint notes only during the most foreign phases to me, meaning that I
+essentially had to re-study how everything worked so that I could write it down. This week's learning definitely is to then document as I go, which should not be a problem
+now that I do not have the excuse of not having the documentation platform ready anymore.
 
+Overall, I am quite proud of what I have achieved thus far and cannot wait for the new and undoubtedly plentiful challenges that the course will bring! But now (06:18), to sleep.
