@@ -1,42 +1,41 @@
-+++
-author = "Miro Keimiöniemi"
-title = "Project Management"
-date = "2024-02-01"
-description = "Weeks 1 - 3"
-tags = [
-    "markdown",
-    "CSS",
-    "HTML",
-    "code",
-    "themes",
-    "Hugo",
-    "website",
-    "version control",
-    "CI/CD",
-    "Git",
-    "Git Bash",
-    "GitLab",
-    "documentation",
-    "compression",
-    "optimization",
-    "documentation",
-    "ssh",
-    "ImageMagick",
-    "PowerShell",
-    "scripting",
-    "automation",
-    "pipeline",
-    "command line",
-    "Windows"
-]
-categories = [
-    "Web Development",
-    "Documentation",
-    "DevOps"
-]
-series = ["Weekly Assignments"]
-image = "script.webp"
-+++
+---
+author: "Miro Keimiöniemi"
+title: "Project Management"
+date: "2024-02-01"
+description: "Weeks 1 - 3"
+tags: 
+  - "markdown"
+  - "CSS"
+  - "HTML"
+  - "code"
+  - "themes"
+  - "Hugo"
+  - "website"
+  - "version control"
+  - "CI/CD"
+  - "Git"
+  - "Git Bash"
+  - "GitLab"
+  - "documentation"
+  - "compression"
+  - "optimization"
+  - "documentation"
+  - "ssh"
+  - "ImageMagick"
+  - "PowerShell"
+  - "scripting"
+  - "automation"
+  - "pipeline"
+  - "command line"
+  - "Windows"
+categories: 
+  - "Web Development"
+  - "Documentation"
+  - "DevOps"
+series: 
+  - "Weekly Assignments"
+image: "script.webp"
+---
 
 Here begins the documentation of my digital fabrication journey. It is produced in accordance to the
 specifications and pace of the AXM-E7009 - Digital Fabrication I course at [Aalto University](https://aalto.my.site.com/courses/s/course/a057T0000043wLhQAI/digital-fabrication-i?language=en_US) / Aalto
@@ -102,6 +101,8 @@ documentation was incredibly extensive, so I decided to give it a try following 
 
 ![Nadieh's Fab Academy](nadiehs-fab-academy.webp)
 
+#### Installation
+
 Hugo is an open-source static site generator that claims to be "the world's fastest framework for building websites"
 and thus it sounded like just the right tool for this. To install it on windows, I realize now in retrospect that I
 could have used WSL, which I had installed for an old C course, but instead I used [chocolatey](https://chocolatey.org/), a package manager for
@@ -118,13 +119,15 @@ After installing chocolatey, Hugo could be installed by simply running:
 choco install hugo-extended
 ```
 
-I created a new hugo site in my digital fabrication project folder by running:
+#### Creating a website
+
+I created a new hugo site in my digital fabrication project directory by running:
 
 ```powershell
 hugo new site digital-fabrication-portfolio
 ```
 
-This created a new `digital-fabrication-portfolio` folder with Hugo's directory structure. I initialized Git in the new directory
+This created a new `digital-fabrication-portfolio` directory with Hugo's directory structure. I initialized Git in the new directory
 with `git init` as detailed in the [Git section](/p/project-management/#git) and added the [Stack](https://stack.jimmycai.com/) [Hugo theme](https://themes.gohugo.io/themes/hugo-theme-stack/)
 by Jimmy Cai as a submodule by running:
 
@@ -132,6 +135,8 @@ by Jimmy Cai as a submodule by running:
 cd digital-fabrication-portfolio
 git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
 ```
+
+Yes, to my surprise too, the whitespace in "`/ themes`" was actually necessary.
 
 One would imagine, that using a template would be relatively simple and straightforward but in my opinion, Hugo's 
 documentation did not make a clear enough distinction between the functions of Hugo itself and the themes built on 
@@ -145,7 +150,7 @@ the site additively from the ground up using the theme, make sure to add `theme 
 the demo website and carved it into my own.
 
 I followed in Nadieh's footsteps and copied the files from `digital-fabrication-portfolio/themes/hugo-theme-stack/exampleSite`
-to `digital-fabrication-portfolio`, replacing the pre-existing `content` folder. I also deleated the `hugo.toml` file
+to `digital-fabrication-portfolio`, replacing the pre-existing `content` directory. I also deleated the `hugo.toml` file
 in order to use the theme's default `config.yaml` configuration file instead, which I modified to be more suitable for my purposes. 
 Now running the following command:
 
@@ -153,11 +158,156 @@ Now running the following command:
 hugo server -D -F
 ```
 resulted in the following example site being deployed at `localhost:1313`, which can be accessed by merely typing
-that to any browser and pressing enter.
+that to any browser and pressing enter. `hugo` starts the hugo program, `server` launches a local development server,
+`-D` ensures that draft pages are included and `-F` does the same but for pages with dates in the future. 
 
 ![Stack theme demo website](stack-demo.webp)
 
-overview of file structure & workings
+#### Overview
+
+Hugo works by using [Sass](https://sass-lang.com/)-styled and [Go](https://go.dev/)-powered HTML templates stored in the
+`layouts` directory to render markdown files in ways specified by the templates. When using a theme as a git submodule, the
+layouts under `themes/hugo-theme-stack/layouts` are used, unless overwritten in the project `layouts` directory. These layouts
+can contain templates for both generic and specific pages as well as partials, analogous to [React](https://react.dev/)
+components, and [shortcodes](https://gohugo.io/content-management/shortcodes/) that add additional functionality to markdown.
+
+![Hugo file structure](hugo-file-structure.webp)
+
+[Hugo's documentation](https://gohugo.io/getting-started/directory-structure/) goes into more depth on the file structure and
+everything else. What was relevant to me were the icons, images and scss files under `assets` that provided styling for the different
+pages and components as well as site-wide resources, the `content` directory that contains all the markdown files from which the site's
+content is generated and the `layouts` directory, where theme layouts could be overwritten. The static pages are created based on a set
+[lookup order](https://gohugo.io/templates/lookup-order/), which dictates which template is used for which page.
+
+The `content` directory must be organized, in my case, into `page` and `post` directories. The `post` directory contains all the weekly
+assignemnt documentation entries, which are paginated on the [Weekly Assignments]({{< relref "_index.md" >}}) page and the `page` directory 
+contains folders for each page that appear in the left sidebar menu such as [Weekly Assignments]({{< relref "_index.md" >}}), 
+[Final Project]({{< relref "page/final-project/index.md" >}}) and [About Me]({{< relref "page/about/index.md" >}}). <-- Those internal links
+are an example of using the Hugo shortcodes by the way:
+
+```markdown
+[Final Project]({{</* relref "page/final-project/index.md" */>}})
+```
+
+Each page is represented as a folder that must contain a `index.md` file, which is the rendered file. They can also contain, for example,
+images, which can be rendered with `![image](image.webp)`. Each page has a front matter that defines page-specific parameters such as this page's:
+
+```yaml
+---
+author: "Miro Keimiöniemi"
+title: "Project Management"
+date: "2024-02-01"
+description: "Weeks 1 - 3"
+tags: 
+  - "markdown"
+
+  ...
+
+  - "Windows"
+categories: 
+  - "Web Development"
+  - "Documentation"
+  - "DevOps"
+series: 
+  - "Weekly Assignments"
+image: "script.webp"
+---
+```
+
+Global site parameters are set and adjusted using the `config.yaml` file, which for me looks something like this:
+
+```yaml
+baseurl: https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io
+languageCode: en-us
+theme: hugo-theme-stack
+paginate: 100
+title: Miro's Digital Fabrication Portfolio
+copyright: Miro Keimiöniemi
+
+...
+
+params:
+    mainSections:
+        - post
+    featuredImageField: image
+    rssFullContent: true
+    favicon:  /favicon.ico
+
+     footer:
+        since: 2024
+        customText:
+
+    dateFormat:
+        published: Jan 02, 2006
+        lastUpdated: Jan 02, 2006 15:04 MST
+
+    sidebar:
+        # emoji: 👾
+        subtitle: Documentation of my 2024 Digital Fabrication journey.
+        avatar:
+            enabled: true
+            local: true
+            src: img/Profile picture-min.png
+
+    article:
+        math: false
+        toc: true
+        readingTime: true
+        license:
+            enabled: false
+
+    ...
+
+    widgets:
+        homepage:
+            - type: search
+            - type: post-list
+            - type: categories
+              params:
+                  limit: 10
+            - type: tag-cloud
+              params:
+                  limit: 10
+        page:
+            - type: toc
+
+...
+
+menu:
+    main: []
+
+    social:
+        - identifier: portfolio
+          name: Portfolio
+          url: https://mirokeimioniemi.com/
+          params:
+              icon: world-www
+
+        - identifier: linkedin
+          name: LinkedIn
+          url: https://www.linkedin.com/in/miro-keimi%C3%B6niemi/
+          params:
+              icon: brand-linkedin
+
+        - identifier: github
+          name: GitHub
+          url: https://github.com/MiroKeimioniemi
+          params:
+              icon: brand-github
+
+        - identifier: instagram
+          name: Instagram
+          url: https://www.instagram.com/m1r0k3/
+          params:
+              icon: brand-instagram
+
+        - identifier: x
+          name: X
+          url: https://twitter.com/M1R0K3
+          params:
+              icon: brand-X
+
+```
 
 ### Git
 
@@ -186,8 +336,8 @@ on a single machine, you only need 6 commands:
 
 I would highly recommend running all the commands using either Git Bash that comes with the Git installation or using the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about), WSL,
 as Windows' PowerShell / Command Prompt may have some quirks. How I initialized my git repository was by executing the 
-following commands in Git Bash opened in my digital fabrication project folder on my laptop to navigate into my hugo
-website folder and then initializing Git in it:
+following commands in Git Bash opened in my digital fabrication project directory on my laptop to navigate into my hugo
+website directory and then initializing Git in it:
 
 ```git
 cd digital-fabrication-portfolio
@@ -362,3 +512,29 @@ Ended up using the same template even
 Started with the about me page.
 
 
+I also created the `post-list` widget layout under `layouts/partials/widget` with the help of [GitHub Copilot](https://github.com/features/copilot),
+that lists the weekly assignments in the right sidebar on the [Weekly Assignments]({{< relref "_index.md" >}}) page:
+
+```html
+<div class="post-list">
+    <section class="widget archives">
+        <h2 class="widget-title section-title">Weekly Assignments</h2>
+        <div class="widget-archive--list">
+            {{ $posts := where .Context.Site.RegularPages "Section" "post" }}
+            {{ range $posts }}
+                <div class="post-item archives-year">
+                    <a href="{{ .Permalink }}" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center;">
+                        <span class="year" style="white-space: wrap;">{{ .Title }}</span>
+                        {{ with .Description }}
+                            <span class="separator" style="text-align: center; margin-left: min(0.5rem, 1rem); margin-right: min(0.5rem, 1rem);">|</span>
+                            <span class="count" style="white-space: wrap;">{{ . }}</span>
+                        {{ end }}
+                    </a>
+                </div>
+            {{ end }}
+        </div>
+    </section>
+</div>
+```
+
+Activated by turning it on in config.yaml

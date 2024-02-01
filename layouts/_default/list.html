@@ -83,18 +83,4 @@
 {{ define "right-sidebar" }}
     {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
 
-    <aside>
-        <h2 class="section-title">All Posts</h2>
-        <div class="post-list">
-            {{ $posts := where .Site.RegularPages "Section" "post" }}
-            {{ range $posts }}
-                <div class="post-item">
-                    <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                    {{ with .Description }}
-                        <p>{{ . }}</p>
-                    {{ end }}
-                </div>
-            {{ end }}
-        </div>
-    </aside>
 {{ end }}
