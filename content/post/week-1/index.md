@@ -353,11 +353,24 @@ There are a lot of great resources for learning Git on various levels of complex
 
 ### SSH connection
 
-How to create SSH keys?
+I had an [SSH](https://www.ssh.com/) key pair already generated, so connecting my local Hugo website repository to the remote GitLab
+repository was as easy as adding the public key to my SSH keys on GitLab (can be found by searching "SSH Keys" on the left sidebar of
+GitLab and clicking the link under "Settings") and connecting with the following command ran in Git Bash in the local repository: 
 
-How to add SSH key to GitLab?
+```git
+git remote add origin git@gitlab.com:miro.keimioniemi/digital-fabrication-portfolio.git
+```
 
-How to link to repository using SSH?
+Then I could push my local repository to the remote one using:
+
+```git
+git push -u origin master
+```
+
+Now I was set and could stage all my changes, commit, sync (push and pull) and solve merge conflicts directly in [VS Code](https://code.visualstudio.com/), without
+having to use the command line, which I feel is often faster as these basic operations are so well integrated to VS Code.
+
+GitLab has very extensive documentation for generating, adding, verifying and using SSH keys, which can be found [here](https://docs.gitlab.com/ee/user/ssh.html).
 
 ### Automated image compression pipeline
 
@@ -371,12 +384,15 @@ time consuming. And as with almost all small-scale automation tasks, that turned
 
 After those ~6 hours, however, I had something that actually works. We were introduced to [ImageMagick](https://imagemagick.org/index.php)
 on one of our lectures, which is a powerful command line tool for image processing. Being a command line tool means that it is easy to
-automate and thus, in collaboration with GitHub Copilot, integrated into [VS Code](https://code.visualstudio.com/) and [available for free for all students](https://education.github.com/benefits),
+automate and thus, in collaboration with GitHub Copilot, integrated into VS Code and [available for free for all students](https://education.github.com/benefits),
 I learned how to write PowerShell scripts on Windows to unleash ImageMagick's full potential. 
 
 First, I created a script called `compress-images.ps1` under a new `scripts` folder to resize, compress and convert all images under 
 `content/post` and all its subdirectories to `.webp` by finding all files ending with `.jpg`, `.jpeg` or `.png` and applying the same
-ImageMagick command (line `13`) to each while also deleting the original image.
+ImageMagick command to each while also deleting the original image. It then evolved to the script below, which first converts
+the image losslessly, then checks if it is larger than 100kb and if this is the case, redos the conversion using the original image,
+replacing the initial converted image, thus producing a smaller, lossy output this time. If the initial conversion produces an image
+smaller than 100kb, it stays untouched.
 
 ```powershell
 # Define the directory containing the images
@@ -390,11 +406,20 @@ foreach ($ImageFile in $ImageFiles) {
     # Define the output file name
     $OutputFile = $ImageFile.FullName -replace '\.[^.]*$', '.webp'
     
-    # Define the ImageMagick command to run on the current image
-    $ImageMagickCommand = "magick convert `"$ImageFile`" -strip -resize 1280x1920 -define webp:lossless=false -quality 75 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
+    # Define the ImageMagick command to run on the current image for lossless compression
+    $ImageMagickCommandLossless = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=true `"$OutputFile`""
     
-    # Run the ImageMagick command on the file
-    Invoke-Expression -Command $ImageMagickCommand
+    # Run the ImageMagick command on the file for lossless compression
+    Invoke-Expression -Command $ImageMagickCommandLossless
+
+    # Check the file size of the output file
+    $OutputFileSize = (Get-Item $OutputFile).Length / 1KB
+
+    # If the file size is larger than 100KB, compress it lossily
+    if ($OutputFileSize -gt 100) {
+        $ImageMagickCommandLossy = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
+        Invoke-Expression -Command $ImageMagickCommandLossy
+    }
 
     # Delete the original image
     Remove-Item -Path $ImageFile.FullName
@@ -406,11 +431,11 @@ or right-clicking and selecting "Run with PowerShell" when using file explorer (
 After a lot of testing, I determined that the best ImageMagick command for achieving maximum compression with minimum quality loss was:
 
 ```powershell
-magick convert `"$ImageFile`" -strip -resize 1280x1920 -define webp:lossless=false -quality 75 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`"
+magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`"
 ```
 
-This removes most of the image metadata and resizes it to fit a rectangle with dimensions 1280x1920 (a bit wider than the maximum width of the page so that
-opening it still provides more detail) while retaining its original aspect-ratio. It converts it to a lossy webp format with 75% quality and 80% alpha-quality,
+This removes most of the image metadata and resizes it to fit a rectangle with dimensions 1200x1920 (a bit wider than the maximum width of the page so that
+opening it still provides more detail) while retaining its original aspect-ratio. It converts it to a lossy webp format with 85% quality and 80% alpha-quality,
 while also applying the most sophisticated compression methods that take little more time but produce smaller results.
 
 Emboldened by how well this worked, I set out to automate the process fully. I asked copilot how to approach this and it enlightened me about
@@ -501,7 +526,47 @@ StackOverflow or GitHub Copilot, always study very carefully, whether it is doin
 
 ### GitLab Pages
 
-How to deploy the site?
+To deploy the Hugo site, I followed a [tutorial](https://docs.gitlab.com/ee/tutorials/hugo/) by GitLab made specifically for Hugo. I must again
+applaud GitLab for their thorough documentation, but in short, I added the `.gitlab-ci.yml` file with the following contents to the root directory:
+
+```yml
+image: registry.gitlab.com/pages/hugo/hugo_extended
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+test:
+  script:
+  - hugo
+  except:
+  - main
+
+pages:
+  script:
+  - hugo -F
+  artifacts:
+    paths:
+    - public
+  only:
+  - main
+```
+
+From the left side-panel, I navigated to Deploy > Pages and found the link where the website was deployed: [https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/).
+
+![GitLab Deploy > Pages](gitlab-pages.webp)
+
+It is generally a good practice to always use HTTPS whenever possible, so I checked "Force HTTPS". The unique domain is rather hideous, so I tried unchecking
+the "Use unique domain" option, but when I then tried to open the link, I got the following warning:
+
+![Google HTTP security warning](google-security-warning.webp)
+
+This was rather bad PR for my site, so I opted for the unique domain instead, which prompts no such issues, even though it was quite ugly.
+
+To finish the deployment gracefully, I then added the URL to the baseurl parameter in config.yaml and was done!
+
+```yaml
+baseurl: https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io
+```
 
 ## Creating the website
 
@@ -538,3 +603,4 @@ that lists the weekly assignments in the right sidebar on the [Weekly Assignment
 ```
 
 Activated by turning it on in config.yaml
+
