@@ -5,7 +5,7 @@
     {{ $pag := .Paginate ($filtered) }}
 
     <section class="article-list">
-        {{ range $index, $element := $pag.Pages }}
+        {{ range $index, $element := $pag.Pages.ByDate }}
             {{ partial "article-list/default" . }}
         {{ end }}
     </section>

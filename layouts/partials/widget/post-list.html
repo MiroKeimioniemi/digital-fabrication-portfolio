@@ -3,7 +3,7 @@
         <h2 class="widget-title section-title">Weekly Assignments</h2>
         <div class="widget-archive--list">
             {{ $posts := where .Context.Site.RegularPages "Section" "post" }}
-            {{ range $posts }}
+            {{ range $posts.ByDate }}
                 <div class="post-item archives-year">
                     <a href="{{ .Permalink }}" style="display: grid; grid-template-columns: auto 1fr auto; align-items: center;">
                         <span class="year" style="white-space: wrap;">{{ .Title }}</span>

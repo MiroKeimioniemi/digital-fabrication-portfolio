@@ -36,3 +36,4 @@ I heard about this course from a friend during the first year of my studies and 
 After one day retiring as a musician from my software startup, I definitely envision myself having a lean fab lab in my garage for all kinds of fun personal projects, but I do have some ideas with potential commercial viability too and thus want to become really good at rapid prototyping. To follow these projects or to get to know me better, do check out my website at [mirokeimioniemi.com](https://mirokeimioniemi.com/) and follow me on [GitHub](https://github.com/MiroKeimioniemi), [Instagram](https://www.instagram.com/m1r0k3/), [X](https://twitter.com/M1R0K3) or even [Goodreads](https://www.goodreads.com/user/show/127709857-miro-keimi-niemi) if you are into books and connect with me on [LinkedIn](https://www.linkedin.com/in/miro-keimi%C3%B6niemi/).
 
 
+
