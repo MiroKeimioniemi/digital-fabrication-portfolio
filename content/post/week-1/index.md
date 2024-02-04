@@ -584,8 +584,8 @@ which I updated on the [Final Project]({{< relref "page/final-project/index.md" 
 deadline for all the assignments 🙏.
 
 Now, during the third week, I have tried to systematically make sure that I have satisfied all the assignment requirements. I finalized the look of the
-website by adjusting scaling and margins of different HTML elements as well as images, built the automatic image processing pipeline, organized all pages
-and wrote this documentation. The most notable, non-sass changes are detailed below.
+website by adjusting the scaling and margins of different HTML elements, styling the images to be more card-like, building the automatic image processing pipeline, organizing all pages
+and writing this documentation. The most notable, non-sass changes are detailed below.
 
 I added "Previous week" and "Next week" buttons to the weekly assignment posts, that only show up when there are other posts, by copying the `single.html`
 file from `themes/hugo-theme-stack/layouts/_default` to `layouts/_default` and adding the following piece of code:
@@ -652,6 +652,7 @@ essentially had to re-study how everything worked so that I could write it down.
 now that I do not have the excuse of not having the documentation platform ready anymore.
 
 Overall, I am quite proud of what I have achieved thus far and cannot wait for the new and undoubtedly plentiful challenges that the course will bring! But now (06:18), to sleep.
+
 
 
 
