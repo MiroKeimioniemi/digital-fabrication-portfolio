@@ -99,7 +99,31 @@ I then started over with a 5-knot B-spline, which offered me more flexibility ov
 ![Lamp cover sketch](lamp-cover-sketch.webp)
 ![Lamp cover as a solid of revolution 3D object](lamp-cover-model.webp)
 
+I made the cover more rounded by further adjusting the constraints and then hid it from view by selecting it from the tree view on the left and pressing `space`. I then clicked "Create body" and with it selected, "Create sketch", where I drew a center-constrained rectangle with side lengths `Spreadsheet.length / 2` and `Spreadsheet.largest_diameter * 0.8` and extruded it with the "Pad" tool, where I input `Spreadsheet.largest_diameter / 2 + Spreadsheet.stand_height` as the padding length and applied it in reverse. This made it reach up to the widest part of the lamp while simultaneoustly lifting it off the ground by `stand_height`, which was initially set to be 30mm.
+
+![Padded rectangle](padded-rectangle.webp)
+
+Now I had a cuboid that was partially inside and partially outside the lamp cover. In order to shape it to be compatible with the lamp, I tried to copy the the lamp body, which initially did not work because I had not yet exited the padding operation by pressing "OK". After I did and retried, it prompted the following dialogue:
+
+
+![Copying an object](copy-object.webp)
+
+Initially I had all automatically selected and I just pressed "OK", after which I pasted it with `Ctrl + V`. This, however, also copied the spreadsheet as `Spreasheet001` as can be seen in the picture below. This aroused suspicion in me and so I opened `Sketch002` under `Body002` to inspect its constrains, which validated my suspicion. The constraints were now linked to `Spreadsheet001`, which meant that the values in the orginal spreadsheet no longer affected them. This allows for entirely indpendent modification of the body but was undesirable to me as it meant that the stand created with a cut boolean operation would not automatically adjust to the dimensions. Thus, I deleted the object and copied the original again with the above settings. I unselected "Auto select depending objects" and "Spreadsheet", which gave me a new copy that was still dependent on the original spreadheet as it should be.
+
+I then selected the cuboid and the copied lamp cover and attempted to cut the latter from the former using the "Boolean operation", but I got the following error: `Boolean: Result has multiple solids: that is not currently supported.` This occurred because should the boolean cut operation have been successfully executed, the body would have been split into two such that it would have contained two disjoint objects, which is not allowed as explained in [this useful video](https://youtu.be/StQlYt2HY_k?si=euU7TYR30mPhNzFz) covering some of the basic rules and logic of using FreeCAD.
+
+I thus edited the sketch of the copied object to produce a solid ellipsoid instead of a hollow one by deleting the inner B-spline and replacing it with a straight line between the ends of the remaining B-spline. For some reason it complained about not being fully constrained, but then I realized I was accidentally drawing reference lines instead of construction geometry. The fix was as simple as pressing "Toggle construction geometry" but the lesson was forever important: always pay close attention to the state of the program, whether that is the settings of the tools currently in use or the entire workbench.
+
+After modifying the copied lamp cover to be solid, it was easy to cut it from the stand by selecting both (latter first), selecting "Cut" from the resulting dialogue and pressing "OK", which created the simple stand below.
+
+![Boolean cut stand](boolean-cut.webp)
+
+I then applied the "Fillet" tool to all the edges, which turned out to be an order-sensitive operation, where I had to first apply it to the longer edges before the shorter ones to accomodate them all. I then toggled the visibility of the lamp cover back on by selecting it from the tree on the left and pressing `space` to end up with the simple parametric 3D model below, which can easily be resized in all the dimensions defined in the spreadsheet by simply changing their values.
+
+![Lamp with simple stand](lamp-with-stand.webp)
+
 ## Reflections
+
 
 
 
