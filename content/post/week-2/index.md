@@ -102,3 +102,4 @@ I then started over with a 5-knot B-spline, which offered me more flexibility ov
 ## Reflections
 
 
+
