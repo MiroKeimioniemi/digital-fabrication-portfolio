@@ -76,5 +76,29 @@ I created a shortcut to it by selecting it and then right-clicking on it, choosi
 
 ![Ondsel Assembly Example](ondsel-assembly-example.webp)
 
+#### Usage
+
+I started a new project by clicking "Empty File" from the start page and changed to the "Part Design" mode via View > Workbench > Part Design. Following the example of [this video](https://www.youtube.com/watch?v=V1P4bhulIaU), I created a spreadsheet with the following values for length, largest diameter, thickness and stand height based on my night stand and window stool dimensions, and saved the project as `lamp.FCStd` to this repository us.
+
+| Dimensions       | Values|
+|------------------|-------|
+| Length           | 400 mm|
+| Largest Diameter | 140 mm|
+| Thickness        | 2 mm  |
+| Stand Height     | 30 mm |
+
+My currently strongest idea for the final project is to create a gesture controlled bright alarm lamp, more about which can be read [here]({{< relref "page/final-project/index.md" >}}). Its design is very simple, as it takes the form of an ellipsoid, which can then be placed on different more or less elaborate stands.
+
+I was already familiar with the revolution method from previous projects, in which a cross-section is first sketched and then rotated around the chosen axis to create the solid 3D object. I figured that this would be the easiest way to create the ellipsoid and to carefully control its outline.
+
+I started out by clicking "Create sketch" and choosing the XZ-plane, where I sketched a B-spline with 3 knots (a bit similar in look and feel to Bézier curves for those familiar with, for example, [After Effects](https://www.adobe.com/products/aftereffects.html) but still different according to [Wikipedia](https://en.wikipedia.org/wiki/B-spline)), with the ends being level and the middle one being horizontally centered but vertically off. When I created the solid of revolution by selecting the current sketch and then "Revolution" with "Axis: Horizontal sketch axis" and "Angle: 360°", the result turned out almost comically pointy at the ends. 
+
+I then started over with a 5-knot B-spline, which offered me more flexibility over the shape. I set the constraints using the values I defined in the spreadsheet by clicking the bluish icon in the "Length" field, which opens another dialogue, which allows mathematical expressions using variables as input. The values defined in the spreadsheet can be accessed by `{spreadsheet-name}.{value/cell-alias}`. After fully constraining the first B-spline, I drew another, which I constrained to be the distance specified by `Spreadsheet.thickness` inwards from the outer B-spline, whose lowest point was vertically constrained to the origin by `Spreadsheet.largest_diameter / 2` and whose ends were horizontally constrained with the origin by `Spreadsheet.length / 2`. 
+
+![Set constraints with spreadsheet variables](image.webp)
+![Lamp cover sketch](lamp-cover-sketch.webp)
+![Lamp cover as a solid of revolution 3D object](lamp-cover-model.webp)
+
 ## Reflections
+
 

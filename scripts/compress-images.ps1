@@ -10,7 +10,7 @@ foreach ($ImageFile in $ImageFiles) {
     $OutputFile = $ImageFile.FullName -replace '\.[^.]*$', '.webp'
     
     # Define the ImageMagick command to run on the current image for lossless compression
-    $ImageMagickCommandLossless = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=true `"$OutputFile`""
+    $ImageMagickCommandLossless = "magick convert `"$ImageFile`" -strip -adaptive-resize 1920x1920 -define webp:lossless=true `"$OutputFile`""
     
     # Run the ImageMagick command on the file for lossless compression
     Invoke-Expression -Command $ImageMagickCommandLossless
@@ -20,7 +20,7 @@ foreach ($ImageFile in $ImageFiles) {
 
     # If the file size is larger than 200KB, compress it lossily
     if ($OutputFileSize -gt 200) {
-        $ImageMagickCommandLossy = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
+        $ImageMagickCommandLossy = "magick convert `"$ImageFile`" -strip -adaptive-resize 1920x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
         Invoke-Expression -Command $ImageMagickCommandLossy
     }
 

@@ -75,6 +75,10 @@ It also provides the perfect range of scaling challenge. Its primary function wo
 
 An interesting addition would also be habit tracking, where, for example, a one fingered tap is a positive note, to which the lamp would react by a brief, gentle green blink and catalogue that in the app, where it could possibly be elaborated upon or just left as a positive mark. The ranking is based on which functionalities I would most need but it might be that 1 and 2 change places too. Achieving all of these would be perfect but there are also further expansion possibilites such as adding more long-distance proximity detection, adding mood lamp and connectivity functionality between other similar lamps, so that if two are connected and one is being touched, that is signaled to the other too. Also orientation detection for optimizing the light patterns based for each stand could be interesting. The possibilities are almost endless and the end product might be something like an expressive companion that would be similar to, for example, Alexa, but with light instead of voice.
 
+Potential components:
+
+- TTP223 capacitive sensor (30 for $8.59 on [Amazon](https://www.amazon.com/ALAMSCN-TTP223-Capacitive-Locking-Arduino/dp/B0BJDJP1ZR?th=1) or 100 for $10.99)
+- RCWL-9196 microwave radar sensor (10 for 3-4€ on [AliExpress](https://www.aliexpress.com/item/1005004991510841.html?spm=a2g0o.detail.pcDetailTopMoreOtherSeller.2.293ey2yqy2yqlE&gps-id=pcDetailTopMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=dc574ca4-b32f-4aac-8885-e2c47e0f1d27&_t=gps-id:pcDetailTopMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:dc574ca4-b32f-4aac-8885-e2c47e0f1d27,tpp_buckets:668%232846%238114%231999&pdp_npi=4%40dis%21EUR%210.36%210.28%21%21%210.38%210.30%21%40210318c317070893569726894eab04%2112000031266085716%21rec%21FI%21%21AB&utparam-url=scene%3ApcDetailTopMoreOtherSeller%7Cquery_from%3A))
 
 
 
