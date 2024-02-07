@@ -1,6 +1,6 @@
 ---
 title: Final Project
-description: Gesture controlled bright alarm lamp
+description: Gesture controlled bright alarm lamp - LED Zeppelin
 date: '2024-02-01'
 aliases:
   - project
@@ -79,6 +79,7 @@ Potential components:
 
 - TTP223 capacitive sensor (30 for $8.59 on [Amazon](https://www.amazon.com/ALAMSCN-TTP223-Capacitive-Locking-Arduino/dp/B0BJDJP1ZR?th=1) or 100 for $10.99)
 - RCWL-9196 microwave radar sensor (10 for 3-4€ on [AliExpress](https://www.aliexpress.com/item/1005004991510841.html?spm=a2g0o.detail.pcDetailTopMoreOtherSeller.2.293ey2yqy2yqlE&gps-id=pcDetailTopMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=dc574ca4-b32f-4aac-8885-e2c47e0f1d27&_t=gps-id:pcDetailTopMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:dc574ca4-b32f-4aac-8885-e2c47e0f1d27,tpp_buckets:668%232846%238114%231999&pdp_npi=4%40dis%21EUR%210.36%210.28%21%21%210.38%210.30%21%40210318c317070893569726894eab04%2112000031266085716%21rec%21FI%21%21AB&utparam-url=scene%3ApcDetailTopMoreOtherSeller%7Cquery_from%3A))
+
 
 
 

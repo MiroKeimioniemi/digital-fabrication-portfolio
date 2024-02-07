@@ -122,8 +122,48 @@ I then applied the "Fillet" tool to all the edges, which turned out to be an ord
 
 ![Lamp with simple stand](lamp-with-stand.webp)
 
+To create a bit more interesting stand next, I hid the simple stand and started exploring ways to create rounded cylinders as quickly and easily as possible. I first started a new sketch and drew a slot, which seemed like exactly what I was looking for. However, the constraints were difficult to figure out and I could not make out how to rotate it after drawing it.
+
+![Slot sketch](slot-sketch.webp)
+
+ In fact, the search for the most convenient way to rotate objects turned out to be incredibly frustrating. The "Rotate" tool in "Draft" workbench would only rotate whatever was selected along the XY-plane or crash the entire program with the below error message incrementing the counter with every click on anything if I had, for example, "Revolution" selected inside a body instead of the body itself, which often occurred due to Ondsel autoselecting that instead of the body. 
+
+![GUI Error upon rotating "Revolution"](gui-error.webp)
+
+An even more surefire way to crash the program entire was to use the "Ruler" tool. I would get the reading once, yes, but if I tried to do anything afterwards, such as right- or left-click anywhere on the application window, it would dependably go white and eventually display the "not responding" dialogue. Luckily their recovery feature works impressively well though! 
+
+![Ruler crashes the program](crash.webp)
+
+It can thus be said that I am not particulary impressed by the "Draft" workbench. I did eventually find a somewhat satisfying way to rotate and move the bodies in the form of the "Transform" tool, found by selecting a body, right-clicking and choosing "Transform", which brings about the below arrows and curves that enable easy moving and rotating. 
+
+![Select body > right-click > transform](transform.webp)
+
+
+ In terms of creating a cylinder, what I was looking for was so simple that I thought that there must be a faster way to prototype something so simple. I discovered that you can add ready-made shapes in the "Part" workbench, where I then created a cylinder and experimented with the values, eventually arriving at the ones presented below. What was especially convenient was that the angles could be input into it upon creation.
+
+![Cylinder](cylinder.webp)
+
+The above cylinder was still not quite what I was looking for, however, as setting the angles only conserned its body, not the top and bottom faces. The bottom face was fine as I wanted it flat against the XY-plane anyway, but the top I wanted to round off. I tried some extreme fillet values and thought about extruding or insetting it somehow but could not come up with a way how. The only way I could come up with was the "Boolean cut" operation, which was a major hassle to set up. I created a sphere an lined it up with the cylinder with some careful camera work. I then duplicated it, decreased its radius and moved it more towards the cylinder by subtracting an equal amount from all of its coordinates. I then cut it from the bigger sphere using "Boolean cut", after which I carefully positioned the result to optimally cover the tip as shown below, and then cut that from the cylinder, using the same "Boolean cut" method.
+
+![An unorthodox rounding method](unorthodox-rounding.webp)
+
+I then mirrored the resulting cylinder first in the XZ-plane and then the result of that in the YZ-plane to produce the four
+legs (or arms in this case?) of the slighlty less simple stand. I boolean cut another copy of the lamp cover of the original cylinder, which propagated the cut to the three others upon refresh (`Ctrl + R`), and added a rectangle to connect them on the bottom and to act as a stable surface. It required a bit of fiddling with the numbers as well but inputting the same radius as on the cylinders made it nicely as round as them at the ends. Below are the resulting stand as well as the lamp, which my girlfriend coined "LED Zeppelin" and which I might now roll with, along with the treeview of all the tasks performed to arrive at it.
+
+![A sligthly less simple stand](less-simple-stand.webp)
+![LED Zeppelin 3D model](led-zeppelin-cad.webp)
+
+Ondsel does not yet have extensive documentation, but as it is a FreeCAD fork, almost everything one can do in FreeCAD applies to Ondsel as well - although I do wonder where the "Draft" workbench issues originate from. Only the tasks window is on the right and the UI does not feel quite as boxed in. Here are some very useful FreeCAD resources for learning the very basics of both FreeCAD and Ondsel:
+
+- [FreeCAD Tutorial for Beginners 2024](https://youtu.be/t8nPF-qWyfE?si=q6U-c51pNgZR4zcp)
+- [FreeCAD Basic Rules](https://youtu.be/StQlYt2HY_k?si=euU7TYR30mPhNzFz)
+- [Design for CNC with FreeCAD](https://www.youtube.com/watch?v=V1P4bhulIaU)
+
+## Blender
+
 ## Reflections
 
+Do not use default parts in Ondsel/FreeCAD. They are annoying to deal with and have bad customizability especially with respect to parameters.
 
 
 
