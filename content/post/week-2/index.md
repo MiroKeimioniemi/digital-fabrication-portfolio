@@ -1,12 +1,27 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Computer-Aided Design"
-date: "2024-02-02"
+date: "2024-02-09"
 description: "Week 4"
 tags: 
   - "CAD"
+  - "software"
+  - "2D modeling"
+  - "3D modeling"
+  - "vector"
+  - "raster"
+  - "rendering"
+  - "Inkscape"
+  - "Gimp"
+  - "Ondsel"
+  - "FreeCAD"
+  - "Blender"
+  - "SVG"
+  - "parametric"
 categories: 
   - "CAD"
+  - "Parametric Modeling"
+  - "Final Project"
 series: 
   - "Weekly Assignments"
 image: "led-zeppelin-render.webp"
@@ -17,11 +32,11 @@ image: "led-zeppelin-render.webp"
 - Pick a simple object and design it using vector drawing software such as InkScape, Illustrator or Boxy SVG. The object could be something as simple as a nail, a hinge or a bolt or anything related to your final project. It could be a logo of a product that you are about to prototype.
 - Use a raster graphics software of your choice, such as Gimp, Photoshop or Photopea, to edit, crop, resize and optimize an image of your choice.
 - Explore a few 3D modelling tools (e.g. Blender, FreeCAD (Onsdel ES), SolveSpace, Fusion 360, Solidworks, Rhino) and pick one to make something for your final project.
-- Create page containing the assignment documentation on your website.
+- Create a page containing the assignment documentation on your website.
 - Document your process with screenshots and descriptions.
 - Submit a link to that page here.
 
-## 2D Modelling
+## 2D Modeling
 
 ### Vector - Inkscape
 
@@ -406,7 +421,7 @@ I scaled down the assets to 150px and 128px with `Shift + S` and rotated the blu
 ![Gimp export ico](gimp-export.webp)
 ![Probabilistic strategy game icon](probabilistic-strategy-game-icon.webp)
 
-## 3D Modelling
+## 3D Modeling
 
 I got my first experience with 3D modeling just last autumn on the [Design Thinking and Electronic Prototyping](https://courses.aalto.fi/s/course/a053X000012QyDfQAK/design-thinking-and-electronic-prototyping?language=en_US) course, where we got a similar task to design and 3D-print something. I decided to create a magnetic tray for our whiteboard as we had meant to get one for a while but had not found a suitable one. For this, I used Fusion 360 as Aalto students have a license for it and it seemed good to know in the industry. I largely liked it, although it fell severly short in one aspect: it did not have a dark theme. For a [Dark Reader](https://darkreader.org/) user like me, this rendered the application practically unusable. I must admit that my inexperience with general 3D modeling workflows might have contributed to that initially but it is a major shortcoming anyway. 
 
@@ -567,3 +582,5 @@ With more shaders and lights stacking up, I could feel my laptop with integrated
 Quite a packed week. I definitely learned a lot about 3D-modeling and rendering in particular. Additionally, I learned about what knowledge one can reasonably expect to transfer over to different programs in the same niche. This can vary anywhere from absolutely nothing to delightfully much. Ondsel/FreeCAD and, to an extent, Gimp occasionally felt like playing on an inverted piano; the music theory remains the same but you have to change the roles of the hands and play in different directions, whereas with Inkscape I felt quite pleasantly at home from the get go. Blender was a bit overwhelming with its multiplicity of tabs, modifiers, nodes, panels and views but that is likely just a symptom of great depth and I feel quite confident that I largely understood the basics even though I will still have study the rendering pipeline and configurations so that there will not be any unwanted surprises.
 
 In terms of specifics, I learned not to use default parts in Ondsel/FreeCAD. They are annoying to deal with and difficult to customize especially with respect to parameters. I also learned to go far around the "Draft" workbench where next to nothing seemed to work. I also learned what portable software is and how to run it on Windows. I got a lot more experience with various workflows in 3D and learned that if I want to do it on any more serious level, I might want to invest in a proper PC with a powerful graphics card, which is something I have been looking for a good excuse for for long now. Every other part I could justify as an investment as producing music is one of the most CPU and RAM intensive tasks out there but a graphics card I could not justify as an investment, even though it might really be for the games... Too bad [Cyberpunk 2077](https://www.cyberpunk.net/) is one of my favorite franchises out there... But now this might be a convenient excuse. And it is only a small leap from Blender to [Unreal Engine](https://www.unrealengine.com/en-US), where I could make my more complex game ideas come to life, now with assets and renders I can make myself.
+
+In conclusion, the two most important takeaways for this week were, however, that I can easily crash any program and that free, open-source software is pretty damn advanced and cool in 2024! The barrier to entry in almost anything that can be done digitally seems to nowadays only be the learning curve for [FOSS](ttps://en.wikipedia.org/wiki/Free_and_open-source_software). In fact, [Fab Academy's](https://fabacademy.org/) most valuable resource might just be the [exhaustive list of software and hardware](https://fabacademy.org/2024/schedule.html) for each of the weekly topics that Neil Gershenfeld walks us through every Wednesday on the global lectures.
