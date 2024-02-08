@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="185.92621mm"
+   height="31.397728mm"
+   viewBox="0 0 702.71324 118.66858"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     style="display:inline"
+     transform="translate(-197.89593,-641.17655)">
+    <path
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1a0a0a;stroke-width:18.8976;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       d="m 37.795276,670.88517 c 0.0019,-22.27682 0.0038,-44.55298 0.05265,-67.36413 0.04885,-22.81115 0.147261,-46.79251 12.907285,-58.78342 12.760023,-11.99092 37.731593,-11.99092 50.280547,-1.95664 12.54895,10.03428 12.44951,30.10166 12.39979,52.73462 -0.0497,22.63296 -0.0497,47.82881 -0.0497,49.79106 0,1.96224 0,-19.30979 0.0497,-41.94253 0.0497,-22.63275 0.14916,-46.62438 12.79755,-58.62091 12.6484,-11.99652 37.84425,-11.99652 50.3932,0 12.54896,11.99653 12.44952,35.98863 12.3998,58.99634 -0.0497,23.00771 -0.0497,45.02967 -0.0497,67.05207"
+       id="path30-2-6-5"
+       transform="matrix(1.0014352,0,0,0.763025,169.50877,239.80019)" />
+    <path
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1a0a0a;stroke-width:18.8976;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       d="m 283.05699,749.62285 c -2e-5,-7.13868 3.6e-4,-12.42538 3.4e-4,-19.56406"
+       id="path31-6-9-0" />
+    <path
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1a0a0a;stroke-width:18.8471;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       d="m 339.29821,539.4203 c 0,0.93013 0,1.86025 0,23.77678 0,21.91653 0,64.81946 0,107.7224"
+       id="path33-5-3-5"
+       transform="matrix(1.0012468,0,0,0.76726727,167.49312,236.80941)" />
+    <path
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1a0a0a;stroke-width:18.8471;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       d="m 339.29821,539.4203 c 0,43.83306 0,87.66611 0,131.49918"
+       id="path33-4-4-0-6"
+       transform="matrix(1.0012468,0,0,0.76726727,217.61011,236.9628)" />
+    <rect
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1a0a0a;stroke-width:16.5191;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect34-0-0-7"
+       width="100.66113"
+       height="100.51252"
+       x="405.10995"
+       y="650.77924"
+       ry="34.813114"
+       rx="50.33057" />
+    <rect
+       style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1a0a0a;stroke-width:16.5191;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect34-2-9-7-3"
+       width="100.66113"
+       height="100.51252"
+       x="642.87213"
+       y="651.07306"
+       ry="34.813114"
+       rx="50.33057" />
+    <path
+       style="display:inline;fill:none;stroke:#1a0a0a;stroke-width:18.8976;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 444.49513,538.78197 c -18.95715,0 -37.91429,0 -47.45235,11.00588 -9.53805,11.00588 -9.65702,33.01675 -9.77599,55.02806"
+       id="path1-0-2-8"
+       transform="matrix(1.0014352,0,0,0.763025,169.50877,239.80019)" />
+    <path
+       style="display:inline;fill:none;stroke:#1a0a0a;stroke-width:18.8976;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 617.34929,544.78718 c 0,19.97908 0,39.95777 0,62.54619 0,22.58842 0,47.78427 16.79383,60.38295 16.79383,12.59868 50.38014,12.59868 67.17363,0 16.7935,-12.59868 16.7935,-37.79504 16.7935,-60.37593 0,-22.5809 -10e-6,-42.54505 -10e-6,-62.5096"
+       id="path2-3-1-5"
+       transform="matrix(1.0014352,0,0,0.763025,172.00559,234.82668)" />
+  </g>
+</svg>
