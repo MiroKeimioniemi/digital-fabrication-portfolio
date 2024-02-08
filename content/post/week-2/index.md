@@ -9,7 +9,7 @@ categories:
   - "CAD"
 series: 
   - "Weekly Assignments"
-image: 
+image: "led-zeppelin-render.webp"
 ---
 
 ## Assignments
@@ -148,7 +148,7 @@ The above cylinder was still not quite what I was looking for, however, as setti
 ![An unorthodox rounding method](unorthodox-rounding.webp)
 
 I then mirrored the resulting cylinder first in the XZ-plane and then the result of that in the YZ-plane to produce the four
-legs (or arms in this case?) of the slighlty less simple stand. I boolean cut another copy of the lamp cover of the original cylinder, which propagated the cut to the three others upon refresh (`Ctrl + R`), and added a rectangle to connect them on the bottom and to act as a stable surface. It required a bit of fiddling with the numbers as well but inputting the same radius as on the cylinders made it nicely as round as them at the ends. Below are the resulting stand as well as the lamp, which my girlfriend coined "LED Zeppelin" and which I might now roll with, along with the treeview of all the tasks performed to arrive at it.
+legs (or arms in this case?) of the slighlty less simple stand, which I bundled up into a part container by clicking "Create part" and dragging and dropping all parts of the stand to it. I boolean cut another copy of the lamp cover of the original cylinder, which propagated the cut to the three others upon refresh (`Ctrl + R`), and added a rectangle to connect them on the bottom and to act as a stable surface. It required a bit of fiddling with the numbers as well but inputting the same radius as on the cylinders made it nicely as round as them at the ends. Below are the resulting stand as well as the lamp, which my girlfriend coined "LED Zeppelin" and which I might now roll with, along with the treeview of all the tasks performed to arrive at it.
 
 ![A sligthly less simple stand](less-simple-stand.webp)
 ![LED Zeppelin 3D model](led-zeppelin-cad.webp)
@@ -159,11 +159,49 @@ Ondsel does not yet have extensive documentation, but as it is a FreeCAD fork, a
 - [FreeCAD Basic Rules](https://youtu.be/StQlYt2HY_k?si=euU7TYR30mPhNzFz)
 - [Design for CNC with FreeCAD](https://www.youtube.com/watch?v=V1P4bhulIaU)
 
-## Blender
+### Blender
+
+I was really excited to finally have a great excuse for playing with Blender. I have long been fascinated by visual effects, animation and 3D rendering, as is evident from my YouTube history being full of [Corridor Crew](https://www.youtube.com/channel/UCSpFnDQr88xCZ80N-X7t0nQ)'s [VFX Artists React](https://www.youtube.com/watch?v=_4WrKeoeZhk&list=PLwVUbPpIRn1QspuvMVVfQvO7RPWnMJ1aA&pp=iAQB) and [RocketJump](https://www.youtube.com/@rocketjump) who created one of my favorite internet shows [Video Game High School](https://www.youtube.com/watch?v=1JqR3GVqib4&list=PLsMtUWKCmBPRFzqglpk4YQlNFy8wzSXBN&pp=iAQB), which I last rewatched a couple of years ago and still found highly entertaining! I searched for some quick overviews for absolute beginners and stumbled upon the goldmine of content that is the [Blender Fast Track](https://www.youtube.com/watch?v=98qKfdJRzr0&list=PL8eKBkZzqDiV2xca_7QVNdG8LGBfZBCkI&pp=iAQB) series, which was 4.5h of extensive, in depth scene building in [Blender 4.0 ](https://www.blender.org/download/releases/4-0/) that I accidentally drank up at 2x speed during a single sitting.
+
+I exported the model as a Wavefront OBJ - Arch module (*.obj) from Ondsel and imported it to Blender via "File > Import > Wavefront (.obj)". Now, the first thing that I immediately noticed was how much more responsive it is as compared to Ondsel/FreeCAD. Navigation is immediate and rotating and moving the view is very pleasant thanks to the automatic lock on origin, in addition to which, Blender's corresponding ruler "Measure" does not crash the application! I now had successfully imported `lamp.obj` but the scaling was off. This could, however, be adjusted in the right panel under Scene > Units by inputting 0.001 to "Unit Scale" to correspond to millimeters instead of meters. 
+
+![lamp.obj imported to Blender](blender.webp)
+
+I headed over to the shading tab and experimented with the default Principled BSDF settings, but noticed something quite peculiar when turning "Metallic" to 1.000 and "Roughness" to 0.000. Observation #1 was that the surfaces were not smooth and observation #2 was that, for some reason, the orginial - non-mirrored - leg of the stand got the same shading. 
+
+![Initial shading](initial-shading.webp)
+
+Problem #2 was easy to fix by clicking the dropdown with the sphere icon in the image and selecting the same material as the other parts of the stand. Somehow Blender had recognized that the lamp cover should be a different material from the stand but it had accidentally included one leg. Problem #1 was similarly easy to solve by selecting "Object > Shade Smooth".
+
+![Shade smooth](shade-smooth.webp)
+
+I smoothened both the lamp as well as the stand. Then I headed back to the shading tab, where I set the "Emission Strength" to 6.900 instead of 0.000 and added a little bit of coating, by increasing "Coat Weight" from 0.000 to 0.343 and "Roughness from 0.040 to 0.066. This, in combination with enabling "Bloom" from the "Scene" settings on the right tab and decreasing the "Radius" a bit, created the look of controlled glowing light. I then followed [this tutorial](https://www.youtube.com/watch?v=Egd_BNAT3l8) to create a quick procedural wood texture for the stand. The video was a couple of years old and thus the "Principled BSDF" node looked a bit different but the following routing produced similar effects. The values of the parameters on the video were entirely different and these required a lot of tweaking, but even though it still looks a bit plasticy in these light conditions, it might just pass for lacquered wood in certain light. I also enabled "Ambient Occlusion" and changed the "Factor" from 1.00 to 2.00 to make it look a little more dramatic.
+
+![Lamp emitting light](light-emitting.webp)
+![Shaded LED Zeppelin](shaded.webp)
+
+Now that the shading was done, I tried to figure out how to render an image of the lamp. I tried to position the camera for a good shot but there was only grey. I tried to mess with all possible settings and positions but nothing changed. I then just deleted the camera and created a new one from "Add > Camera", which worked perfectly out of the box. Then the question was, why does the point light not do anything? The answer was that for some reason, likely due to changing the "Unit Scale" from metres to millimeters, the default settings of the lights were negligibly low. 
+
+![Point light default settings](point-light.webp)
+
+I added a point light with more reasonable settings and realized that the scene is quite empty. I added a planar mesh with the intention to add a backdrop too. I tested what rendering would produce for this most simple case and the result was pretty horrible as can be seen below:
+
+![First render with one point light source](ugly-render.webp)
+
+At that point it was already super late and I did not feel too enthusiastic about having create, construct and light the scene. I revisited the shading tab in between, which looked quite good with its global illumination and decided that it would do for now. I researched how to render that and found a solution in the form of "View > Viewport Render Image", which is supposed to render more or less what was currently on my screen. However, when I first rendered with it, in addition to the unnecessary overlay, the ambient occlusion that makes the lamp sit in the scene more nicely was missing. 
+
+After a lot research and trial and error as this did not seem to be a common problem (or goal, which would explain the problem not arising for many), I found that toggling the overlays off somehow mysteriously brought back the ambient occlusion as well as got rid of the sphere as an added bonus. However, the image was more dimmer and more washed out so that the light did not clearly pop out of the background, which was baffling because it looked just perfect in the "Shading" view. As I did not have the time to build a proper scene nor conduct more troubleshooting and the quick renders fell short, I resorted to a good old screenshot with the overlays turned off and it clearly looks the best, which is kind of ironic for rendering software. This is most likely due to my settings, configurations etc. but I will dig into them more when I have time for a proper scene too!
+
+![Viewport Render Image with Overlays on](image-1.webp)
+![Viewport Render Image with Overlays off](image.webp)
+![Screenshot through camera in Shading view](led-zeppelin-render.webp)
+
+With more shaders and lights stacking up, I could feel my laptop with integrated AMD Radeon graphics starting to be pushed outside of its comfort zone by the sound of the fans and the increased latency in moving around. Rotating the scene around immediately pushes the integrated GPU to 100% usage from which it then returns to idle 4-7% when staying still. I gotta say that the software is pretty well optimized considering the lack of graphical power in my machine, but this is definitely tempting me to grab one of those RTX 4080s that I have been eyeing for a while now. Perhaps this would finally be the viable excuse to do so...
 
 ## Reflections
 
 Do not use default parts in Ondsel/FreeCAD. They are annoying to deal with and have bad customizability especially with respect to parameters.
+
 
 
 
