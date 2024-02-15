@@ -390,10 +390,10 @@ I learned how to write PowerShell scripts on Windows to unleash ImageMagick's fu
 
 First, I created a script called `compress-images.ps1` under a new `scripts` folder to resize, compress and convert all images under 
 `content/post` and all its subdirectories to `.webp` by finding all files ending with `.jpg`, `.jpeg` or `.png` and applying the same
-ImageMagick command to each while also deleting the original image. It then evolved to the script below, which first converts
-the image losslessly, then checks if it is larger than 200kb and if this is the case, redos the conversion using the original image,
+ImageMagick command to each while also deleting the original image. Over the course of the first few weeks, it then evolved into the script below, which first converts
+the image to `.webp` format losslessly, then checks if it is larger than 200kb and if this is the case, redos the conversion using the original image,
 replacing the initial converted image, thus producing a smaller, lossy output this time. If the initial conversion produces an image
-smaller than 200kb, it stays untouched.
+smaller than 200kb, it stays untouched. Initially, I had the resolution set to 1200x1920 but this in combination with the lossy compresison made some of the larger screenshots captured on my external 4k monitor borderline illegible and I wanted to also protect the future images of my projects.
 
 ```powershell
 # Define the directory containing the images
@@ -408,7 +408,7 @@ foreach ($ImageFile in $ImageFiles) {
     $OutputFile = $ImageFile.FullName -replace '\.[^.]*$', '.webp'
     
     # Define the ImageMagick command to run on the current image for lossless compression
-    $ImageMagickCommandLossless = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=true `"$OutputFile`""
+    $ImageMagickCommandLossless = "magick convert `"$ImageFile`" -strip -adaptive-resize 1920x1920 -define webp:lossless=true `"$OutputFile`""
     
     # Run the ImageMagick command on the file for lossless compression
     Invoke-Expression -Command $ImageMagickCommandLossless
@@ -418,7 +418,7 @@ foreach ($ImageFile in $ImageFiles) {
 
     # If the file size is larger than 200KB, compress it lossily
     if ($OutputFileSize -gt 200) {
-        $ImageMagickCommandLossy = "magick convert `"$ImageFile`" -strip -adaptive-resize 1200x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
+        $ImageMagickCommandLossy = "magick convert `"$ImageFile`" -strip -adaptive-resize 1920x1920 -define webp:lossless=false -quality 85 -define webp:alpha-quality=80 -define webp:auto-filter=true -define webp:method=6 `"$OutputFile`""
         Invoke-Expression -Command $ImageMagickCommandLossy
     }
 
@@ -652,6 +652,8 @@ essentially had to re-study how everything worked so that I could write it down.
 now that I do not have the excuse of not having the documentation platform ready anymore.
 
 Overall, I am quite proud of what I have achieved thus far and cannot wait for the new and undoubtedly plentiful challenges that the course will bring! But now (06:18), to sleep.
+
+
 
 
 

@@ -10,10 +10,16 @@ tags:
   - "3D modeling"
   - "vector"
   - "Inkscape"
-  - "Ondsel"
-  - "FreeCAD"
+  - "Adobe Illustrator"
+  - "Fusion 360"
   - "SVG"
   - "parametric"
+  - "cardboard"
+  - "press-fit"
+  - "construction kit"
+  - "Epilog Fusion Pro 48"
+  - "Roland GX-24"
+  - "heat transfer vinyl"
 categories: 
   - "CAD"
   - "Parametric Modeling"
@@ -102,7 +108,7 @@ I ordered the hoodie a few days ago already but it has not arrived yet. I will u
 
 ### Safety and documentation
 
-Graham Featherstone was appointed our group leader / secretary and thus wrote our group's this week's documentation on the use of the [Epilog Fusion Rro 48](https://www.epiloglaser.com/laser-machines/fusion-pro-laser-series/) laser cutter, which can be found [here](https://grahamfeatherstone.gitlab.io/digital-fabrication/Projects/LaserTraining/Laser.html). Aalto Fablab also has extensive step-by-step documentation about its everyday use on the [Aalto University Wiki](https://wiki.aalto.fi/display/AF/Laser+Cutting+with+Epilog+Fusion+Pro+48).
+Graham Featherstone was appointed our group leader / secretary and thus wrote our group's this week's documentation on the use of the [Epilog Fusion Pro 48](https://www.epiloglaser.com/laser-machines/fusion-pro-laser-series/) laser cutter, which can be found [here](https://grahamfeatherstone.gitlab.io/digital-fabrication/Projects/LaserTraining/Laser.html). Aalto Fablab also has extensive step-by-step documentation about its everyday use on the [Aalto University Wiki](https://wiki.aalto.fi/display/AF/Laser+Cutting+with+Epilog+Fusion+Pro+48).
 
 To briefly summarize the process: turn on ventilation to the max, register your presence (periodically every 5 minutes) by tapping the card reader with the card next to it, open the laser cutter lid, insert your material and close the lid, turn the key (available during 9 - 16 from staff) to turn on the laser cutter, open designs in Illustrator, choose "File > Print", position them in the Epilog software, adjust speed and power, set "Auto Focus" to "Plunger", click "Print" on the computer and then press the play/pause button on the machine after which, enjoy the satisfying show. When finished, wait a moment for the air to clear out inside the machine before opening the lid. In case of small trouble, press the play/pause button on the machine to pause the cutting. In case of big trouble, press the big red button. In case of software issues, turning it off and on again seems to work here too.
 
@@ -208,7 +214,7 @@ The design of the kit intentionally avoids straight connections and sharp angles
 
 ![Part of the Dragon Kit organized by type](dragon-kit.webp)
 
-The files for cutting and modifying the pieces can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main?ref_type=heads) under content > week-3. Feel free to cut your own kit and share it with me on any of the platforms found from the column on the left if you do! I can always also cut more from cardboard or plywood but the materials cost and it takes time. If there is demand, I can see what I can do though!
+The files for cutting and modifying the pieces can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main?ref_type=heads) under "content > post > week-3" in `.f3d`, `.step`, `.dxf` and `.svg` formats, first two of which are for parametric 3D modeling and the latter two being suited for cutting. Feel free to cut your own kit and share it with me on any of the platforms found from the column on the left if you do!
 
 I have not yet had the time to fully assemble the Chinese Dragon, but I will update it here when I do. In the meantime, do enjoy the more western variant below! By the way, it is also assembled entirely without any glue and has stood firm for a couple of days already with no sign of anything going against that in the future either. If it gets boring or we move, we'll just dissassemble it and create something new out of the versatile pieces.
 
@@ -220,6 +226,7 @@ This was an amazing week! Not the least because I got to play with construction 
 
 It was a lot of work too and a lot was learned. Mainly about double-checking things perhaps. Make sure that the vinyl is the right way around and the cutting area is large enough. Make sure that the pieces always fit. Constantly make and test samples. Ask others how they tackled similar issues. Be creative and most importantly, have fun!
 
-Creativity is tough when you have to summon it on a tight schedule but pressure also makes diamonds. The opportunity cost of brainstorming, which sometimes results in gold and other times in gravel, is difficult to compare against more linear courses, where you just have to solve a set amount of problems and are then ready. In a way, I am thus looking forward to next week's electronics production, where Neil Gershenfeld warned that there will be almost no creativity as then I get to catch up a little on my three other courses and maybe catch my breath a bit otherwise too. Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it also feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
+Creativity is tough when you have to summon it on a tight schedule but pressure also makes diamonds. The opportunity cost of brainstorming, which sometimes results in gold and other times in gravel, is difficult to compare against more linear courses, where you just have to solve a set amount of problems and are then ready. In a way, I am thus looking forward to next week's electronics production, where Neil Gershenfeld warned that there will be almost no creativity as then I get to catch up a little on my three other courses and maybe catch my breath a bit otherwise too. 
 
+Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it always feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. It is like a scrum sprint with a two-week period but where you immediately switch projects instead of iterating. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
 
