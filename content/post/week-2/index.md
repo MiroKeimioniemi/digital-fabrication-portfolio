@@ -584,3 +584,4 @@ In terms of specifics, I learned not to use default parts in Ondsel/FreeCAD. The
 
 In conclusion, the two most important takeaways for this week were, however, that I can easily crash any program and that free, open-source software is pretty damn advanced and cool in 2024! The barrier to entry in almost anything that can be done digitally seems to nowadays only be the learning curve for [FOSS](ttps://en.wikipedia.org/wiki/Free_and_open-source_software). In fact, [Fab Academy's](https://fabacademy.org/) most valuable resource might just be the [exhaustive list of software and hardware](https://fabacademy.org/2024/schedule.html) for each of the weekly topics that Neil Gershenfeld walks us through every Wednesday on the global lectures.
 
+

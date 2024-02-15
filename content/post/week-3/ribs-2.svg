@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="40.57288mm"
+   height="37.791252mm"
+   viewBox="0 0 40.57288 37.791252"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:export-filename="spine.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" /><defs
+     id="defs1" /><g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-152.19306,-90.329976)"><g
+       id="g3"
+       transform="matrix(0,-0.26458333,0.26458333,0,-124.52049,109.19138)"
+       style="stroke-width:0.0377953;stroke-dasharray:none"
+       inkscape:export-filename=".\g3.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><g
+         inkscape:label="0"
+         id="g4-0"
+         style="stroke-width:0.0377953;stroke-dasharray:none" /><g
+         inkscape:label="CUTOUTS"
+         id="g5-1"
+         style="stroke-width:0.0377953;stroke-dasharray:none" /><g
+         inkscape:label="PERIMETER"
+         id="g6-4"
+         style="stroke-width:0.0377953;stroke-dasharray:none"><path
+           d="m -28.636305,1069.6451 a 52.934983,52.934983 0 0 0 -37.131189,17.8146 l -5.752488,-3.2644 a 76.648819,76.648819 0 0 1 142.78672,32.2393 H 57.751181 v 12.1701 h 13.515557 a 76.648819,76.648819 0 0 1 -142.78672,32.2394 l 5.752488,-3.2644 a 52.934983,52.934983 0 0 0 37.131189,17.8145 37.795276,37.795276 0 0 0 47.593805,-33.4985 l 5.908394,-2.9729 6.183642,12.2895 10.871446,-5.4701 -11.684762,-23.2225 11.684762,-23.2225 -10.871446,-5.4701 -6.183642,12.2894 -5.908394,-2.9729 a 37.795276,37.795276 0 0 0 -47.593805,-33.4985 z"
+           style="fill:none;stroke:#0000ff;stroke-width:0.0377953;stroke-dasharray:none"
+           id="path5-5" /></g></g></g></svg>
