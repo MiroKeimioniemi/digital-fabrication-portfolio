@@ -304,7 +304,7 @@ I already had [Arduino IDE](https://www.arduino.cc/en/software) installed from t
 ![Arduino IDE preferences](arduino-ide-preferences.webp)
 ![Additional Boards Manager URLs](additional-boards-manager.webp)
 ![Boards manager](boards-manager.webp)
-![Seeed XIAO RP2040 board](<xiao-board.png>)
+![Seeed XIAO RP2040 board](xiao-board.webp)
 ![Tarantino LED on](tarantino-lit-up.webp)
 
 {{< video src="functional-tarantino-board.mp4" loop="true" muted="true" >}}
@@ -314,4 +314,5 @@ I already had [Arduino IDE](https://www.arduino.cc/en/software) installed from t
 I definitely learned a lot this week. A whole new process for creating embedded electronics that feels more serious and a lot more powerful than playing around with breadboards, even though for me they are still at least far faster and perhaps nicer to experiment on. I cannot call the skillset of soldering acquired yet but I got my first tastes, which set me up on a path of continuous learning, which is now necessary to make it more habitual and fluent. What is nice about the global lectures is seeing what all kinds of other methods people have used to, for example, solder and what tricks worked for them. I still have a lot to do on that front and there is a lot to be learned from reading other people's documentation, which is what I shall now do. 
 
 I am looking forward to acquiring a lot more experience with soldering and luckily there are quite a few of electronics weeks to provide that for me. For now, I have to research if there are any health risks and how to mitigate against them. The smell gave me a headache already, even though it was only occasional. I also have to learn the rhythm and intricasies of how to not create the smell. I should also research different temperatures and find out what could be the reason for unpredictability in the soldering process. I did routinely clean the soldering iron so I highly doubt it is that but there might be something else that I have missed. Nevertheless, this was a very educational and quite a fun week!
+
 
