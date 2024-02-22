@@ -67,7 +67,7 @@ To create the toolpaths for the machine needed for isolation engraving, open [Co
 
 If the files do not line up perfectly, right-click a pad on the front layer, set it as a reference pad, select the drill layer, right-click on the corresponding pad and select "Adjust to reference pad" as instructed [here](https://wiki.aalto.fi/display/AF/Creating+Tool+Paths+with+CopperCAM) with images. 
 
-To correctly engrave text, right-click on it and select "Engrave tracks as centerlines" and click "yes" to all dialogues.
+To correctly engrave text, right-click on it and select "Engrave tracks as centerlines" and click "Yes" to all dialogues.
 
 ![Engrave tracks as centerlines](engrave-centerlines.webp)
 
@@ -92,6 +92,8 @@ To export the toolpaths, click the "Mill" icon with lightning and a drill bit on
 
 ![CopperCAM output modal](coppercam-output.webp)
 ![Exported .nc files](coppercam-output-files.webp)
+
+Aalto wiki has an excellent article on this topic called "[Creating Tool Paths with CopperCAM](https://wiki.aalto.fi/display/AF/Creating+Tool+Paths+with+CopperCAM)".
 
 ### Milling with Roland MDX-40
 
@@ -162,7 +164,7 @@ Vacuum the result before starting the next phase of milling. To drill and cut th
 ![Import toolpath for 1mm bit](import-t3.webp)
 ![Mill using 1mm bit](output-t3.webp)
 
-Aalto wiki has an excellent article on this topic too, called "[Creating Tool Paths with CopperCAM](https://wiki.aalto.fi/display/AF/Creating+Tool+Paths+with+CopperCAM)".
+Aalto wiki has an excellent article on this topic too, called "[PCB Milling with Roland MDX-40](https://wiki.aalto.fi/display/AF/PCB+Milling+with+Roland+MDX-40)".
 
 ## Making a Tarantino board
 
@@ -170,9 +172,9 @@ To make my own "Tarantino" board as specified [here](https://gitlab.fabcloud.org
 
 ### Milling
 
-I downloaded the `Tarantino-F_Cu.gbr` and `Tarantino-PTH-drl.gbr` files, imported them to CopperCAM where they were immediately nicely aligned without the need to do anything. Really, this course has thus far gone suspiciously smoothly. I configured the dimensions to have 1mm margin and 1.6mm thickness for the material, checked that tools were correctly configured and set the contours with 4 passes + 1 for pads. I exported the `.nc` files and was a bit confused for a second as it felt like exporting a single file, but upon checking all that was necessary was there.
+I downloaded the `Tarantino-F_Cu.gbr` and `Tarantino-PTH-drl.gbr` files, imported them to CopperCAM where they were immediately nicely aligned without the need to do anything. Really, this course has thus far gone suspiciously smoothly as I have somehow managed to avoid finding every single potential problem this time, now I have only had many. I configured the dimensions to have 1mm margin and 1.6mm thickness for the material, checked that tools were correctly configured and set the contours with 4 passes + 1 extra for pads. I exported the `.nc` files and was a bit confused for a second as it felt like exporting a single file, but upon checking all that was necessary was there.
 
-I vacuumed the platform inside the machine, installed the 0.2-0.5mm 60deg V-bit, sanded the copper side of my material and covered the bottom with the double-sided tape fully to ensure maximum stability, with which I then attached it to the most level seeming spot on the platform, parallel to its edges. I turned on the machine, configured VPanel and set the XY-origin a couple millimeters inward from the bottom-left corner for safety. I set the Z-origin there as well with the paper trick, making sure I was as careful with the bit as possible. I lifted the bit, imported the `CopperCAM-T1.nc` file and watched it engrave for approximately 12 minutes with the given settings, the results of which can be seen below as first entirely fresh and then vacuumed.
+I vacuumed the platform inside the machine, installed the 0.2-0.5mm 60deg V-bit, sanded the copper side of my material and covered the bottom with the double-sided tape fully to ensure maximum stability, with which I then attached it to the most level-seeming spot on the platform, parallel to its edges. I turned on the machine, configured VPanel and set the XY-origin a couple millimeters inward from the bottom-left corner for safety. I set the Z-origin there as well with the paper trick, making sure I was as careful with the bit as possible. I lifted the bit, imported the `CopperCAM-T1.nc` file and watched it engrave for approximately 12 minutes with the given settings, the results of which can be seen below as first entirely fresh and then vacuumed.
 
 ![Freshly engraved PCB](fresh-engrave.webp)
 ![Vacuumed fresh PCB](clean-engrave.webp)
@@ -249,7 +251,7 @@ I thought I had finally just completed the final sprint until I turned around th
 ![Rivet soldered shut](soldered-shut.webp)
 ![Pushing solder out](pushing-solder-out.webp)
 
-It took me a while of brainstorming and trial and error but eventually I managed to push the solder out by heating it up and pushing with a pin connector. Of course I then managed to resolder it shut a couple more times and got to even try desoldering when it accidentally spread way too far.
+It took me a while of brainstorming and trial and error but eventually I managed to push the solder out by heating it up and pushing with a pin connector. Of course I then managed to resolder it shut a couple more times and got to even try desoldering when it accidentally spread way too far. Desoldering with a strip like below should theoretically be as simple as placing it on the solder to be removed, heating it up and removing the strip with the excess solder but it did not go quite so smoothly.
 
 ![Desoldering](desoldering.webp)
 
@@ -314,5 +316,6 @@ I already had [Arduino IDE](https://www.arduino.cc/en/software) installed from t
 I definitely learned a lot this week. A whole new process for creating embedded electronics that feels more serious and a lot more powerful than playing around with breadboards, even though for me they are still at least far faster and perhaps nicer to experiment on. I cannot call the skillset of soldering acquired yet but I got my first tastes, which set me up on a path of continuous learning, which is now necessary to make it more habitual and fluent. What is nice about the global lectures is seeing what all kinds of other methods people have used to, for example, solder and what tricks worked for them. I still have a lot to do on that front and there is a lot to be learned from reading other people's documentation, which is what I shall now do. 
 
 I am looking forward to acquiring a lot more experience with soldering and luckily there are quite a few of electronics weeks to provide that for me. For now, I have to research if there are any health risks and how to mitigate against them. The smell gave me a headache already, even though it was only occasional. I also have to learn the rhythm and intricasies of how to not create the smell. I should also research different temperatures and find out what could be the reason for unpredictability in the soldering process. I did routinely clean the soldering iron so I highly doubt it is that but there might be something else that I have missed. Nevertheless, this was a very educational and quite a fun week!
+
 
 
