@@ -18,7 +18,7 @@ categories:
   - "Milling"
 series: 
   - "Weekly Assignments"
-image: "finished-tarantino-board.jpg"
+image: "finished-tarantino-board.webp"
 ---
 
 This week was a lot less creative in terms of coming up with what to make and thus only took me a single day from 13:15 to 23:45 minus writing the documentation. The day was a lot more formulaic with our group being shown the process and us more or less following it until we had something that worked. Milling the PCB was straightforward enough as long as one follows the instructions meticulously, but soldering for a complete novice like me was tough as that required quite a bit more work and precision than merely copying configuration settings from instructions and pressing play. Nevertheless, it was quite fun and highly rewarding when the self-made board came to life and responded to button presses. 
@@ -314,3 +314,4 @@ I already had [Arduino IDE](https://www.arduino.cc/en/software) installed from t
 I definitely learned a lot this week. A whole new process for creating embedded electronics that feels more serious and a lot more powerful than playing around with breadboards, even though for me they are still at least far faster and perhaps nicer to experiment on. I cannot call the skillset of soldering acquired yet but I got my first tastes, which set me up on a path of continuous learning, which is now necessary to make it more habitual and fluent. What is nice about the global lectures is seeing what all kinds of other methods people have used to, for example, solder and what tricks worked for them. I still have a lot to do on that front and there is a lot to be learned from reading other people's documentation, which is what I shall now do. 
 
 I am looking forward to acquiring a lot more experience with soldering and luckily there are quite a few of electronics weeks to provide that for me. For now, I have to research if there are any health risks and how to mitigate against them. The smell gave me a headache already, even though it was only occasional. I also have to learn the rhythm and intricasies of how to not create the smell. I should also research different temperatures and find out what could be the reason for unpredictability in the soldering process. I did routinely clean the soldering iron so I highly doubt it is that but there might be something else that I have missed. Nevertheless, this was a very educational and quite a fun week!
+

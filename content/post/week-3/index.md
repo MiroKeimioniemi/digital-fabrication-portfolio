@@ -231,3 +231,4 @@ Creativity is tough when you have to summon it on a tight schedule but pressure 
 Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it always feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. It is like a scrum sprint with a two-week period but where you immediately switch projects instead of iterating. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
 
 
+
