@@ -214,7 +214,7 @@ The design of the kit intentionally avoids straight connections and sharp angles
 
 ![Part of the Dragon Kit organized by type](dragon-kit.webp)
 
-The files for cutting and modifying the pieces can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main?ref_type=heads) under "content > post > week-3" in `.f3d`, `.step`, `.dxf` and `.svg` formats, first two of which are for parametric 3D modeling and the latter two being suited for cutting. Feel free to cut your own kit and share it with me on any of the platforms found from the column on the left if you do!
+The files for cutting and modifying the pieces can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main?ref_type=heads) under "content > post > week-3" in `.f3d`, `.step`, `.dxf` and `.svg` formats, first two of which are for parametric 3D modeling and the latter two being suited for cutting. Feel free to cut your own kit for personal use and share your creations with me on any of the platforms found from the column on the left if you do!
 
 I have not yet had the time to fully assemble the Chinese Dragon, but I will update it here when I do. In the meantime, do enjoy the more western variant below! By the way, it is also assembled entirely without any glue and has stood firm for a couple of days already with no sign of anything going against that in the future either. If it gets boring or we move, we'll just dissassemble it and create something new out of the versatile pieces.
 
@@ -229,4 +229,5 @@ It was a lot of work too and a lot was learned. Mainly about double-checking thi
 Creativity is tough when you have to summon it on a tight schedule but pressure also makes diamonds. The opportunity cost of brainstorming, which sometimes results in gold and other times in gravel, is difficult to compare against more linear courses, where you just have to solve a set amount of problems and are then ready. In a way, I am thus looking forward to next week's electronics production, where Neil Gershenfeld warned that there will be almost no creativity as then I get to catch up a little on my three other courses and maybe catch my breath a bit otherwise too. 
 
 Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it always feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. It is like a scrum sprint with a two-week period but where you immediately switch projects instead of iterating. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
+
 
