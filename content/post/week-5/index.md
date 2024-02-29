@@ -141,6 +141,39 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 ![Visual glitch in Cura Prepare](cura-visual-glitch.webp)
 ![Sliced tesseract keychain v1](sliced-tesseract-v1.webp)
 
+
+![](plug-in-usb.webp)
+![](select-print.webp)
+![](selected-print.webp)
+![](preparing-print.webp)
+
+![](s3-ready-to-print.webp)
+![](s3-select-print.webp)
+![](s3-start-print.webp)
+![](s3-prepare-print.webp)
+![](s3-printing.webp)
+
+![](first-print-ready.webp)
+
+![](first-print.webp)
+
+![](remove-adhesion.webp)
+
+![](first-keychain.webp)
+
+![](broken.webp)
+
+![](fresh-cable-holder.webp)
+
+![](processed-cable-holder.webp)
+
+![](processed-cable-holder-from-below.webp)
+
+![](fresh-final-keychain.webp)
+
+![](processed-final-keychain.webp)
+
+
 ![All 3D-printing iterations](3d-printing-results.webp)
 
 ![Tesseract keychain](tesseract-keychain.webp)
@@ -253,6 +286,7 @@ https://www.creality.com/pages/download-cr-scan-ferret
 
 
 To clean up in blender Edit > X-ray > Lasso Select > Delete
+
 
 
 
