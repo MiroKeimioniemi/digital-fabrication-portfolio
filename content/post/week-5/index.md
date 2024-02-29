@@ -142,36 +142,37 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 ![Sliced tesseract keychain v1](sliced-tesseract-v1.webp)
 
 
-![1](plug-in-usb.webp)
-![2](select-print.webp)
-![3](selected-print.webp)
-![4](preparing-print.webp)
+![Ultimaker S2+ Connect ready to print](plug-in-usb.webp)
+![Select print](select-print.webp)
+![Start print](selected-print.webp)
+![Preparing to print](preparing-print.webp)
 
-![5](s3-ready-to-print.webp)
-![6](s3-select-print.webp)
-![7](s3-start-print.webp)
-![8](s3-prepare-print.webp)
-![9](s3-printing.webp)
+![Ultimaker S3 ready to print](s3-ready-to-print.webp)
+![Select print](s3-select-print.webp)
+![Start print](s3-start-print.webp)
+![Preparing to print](s3-prepare-print.webp)
+![Printing](s3-printing.webp)
 
-![10](first-print-ready.webp)
+![3D-print stuck to the 3D-printer nozzle](stuck-to-nozzle.webp)
 
-![11](first-print.webp)
+![Removing 3D-printed tesseract keychain from the Ultimaker S2+ Connect 3D-printer](first-print-ready.webp)
 
-![12](remove-adhesion.webp)
+![Unprocessed 3D-printed tesseract keychain](first-print.webp)
 
-![13](first-keychain.webp)
+![Removing adhesion layer from 3D-printed tesseract keychain](remove-adhesion.webp)
 
-![14](broken.webp)
+![Tesseract keychain in action](first-keychain.webp)
 
-![15](fresh-cable-holder.webp)
+![Broken tesseract keychain](broken.webp)
 
-![16](processed-cable-holder.webp)
+![Unprocessed 3D-printed cable holder](fresh-cable-holder.webp)
 
-![17](processed-cable-holder-from-below.webp)
+![Post-processed 3D-printed cable holder](processed-cable-holder.webp)
+![Post-processed 3D-printed cable holder from below](processed-cable-holder-from-below.webp)
 
-![18](fresh-final-keychain.webp)
+![Unprocessed 3D-printed tesseract keychain](fresh-final-keychain.webp)
 
-![19](processed-final-keychain.webp)
+![Post-processed 3D-printed tesseract keychain](processed-final-keychain.webp)
 
 
 ![All 3D-printing iterations](3d-printing-results.webp)
@@ -182,75 +183,69 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 
 ## 3D Scanning
 
-![1](hammer-on-stool.webp)
+![Hammer taped onto a platform](hammer-on-stool.webp)
 
-![2](mobile-scan-setup.webp)
+![Mobile scanning setup](mobile-scan-setup.webp)
 
-![3](starting-3d-scan.webp)
+![Scanning with Creality Scan mobile app](starting-3d-scan.webp)
 
-![4](delusional-scan.webp)
+![Scanning issues with Creality Scan mobile app](delusional-scan.webp)
 
-![5](delusional-scan-2.webp)
+![Scanning issues with Creality Scan mobile app](delusional-scan-2.webp)
 
-![6](delusional-scan-3.webp)
+![Scanning issues with Creality Scan mobile app](delusional-scan-3.webp)
 
-![7](bad-scan.webp)
+![Poor scan result using Creality Scan mobile app](bad-scan.webp)
 
-![8](remove-jesus.webp)
+![Uninstalling the Jesus statue from the turntable](remove-jesus.webp)
+![Hammer on a turntable](hammer-on-turntable.webp)
 
-![9](hammer-on-turntable.webp)
+![Desktop scanner setup](desktop-scan-setup.webp)
 
-![10](desktop-scan-setup.webp)
+![Scanning settings for hammer](hammer-scan-settings.webp)
 
-![alt text](<Screenshot (396).webp>)
+![Scanning the hammer](scanning-hammer.webp)
 
-![alt text](<Screenshot (397).webp>)
+![Processing scan](processing-scan.webp)
 
-![alt text](<Screenshot (399).webp>)
+![Scanned hammer](scanned-hammer.webp)
 
-![alt text](<Screenshot (403).webp>)
+![Panther on a turntable](panther-on-turntable.webp)
 
-![11](panther-on-turntable.webp)
+![Scanning settings for panther](panther-scan-settings.webp)
 
-![alt text](<Screenshot (404)-1.webp>)
-
-![alt text](<Screenshot (407).webp>)
+![Scanning issues when moving from left side to right](unsuccessful-scan.webp)
 
 Start scan from other side works
 
-![alt text](<Screenshot (412).webp>)
+![Successful scanning of panther](successful-scan.webp)
 
-![](<Screenshot (417).webp>)
+![Finished scan of the black panther](scanned-panther.webp)
 
-![alt text](<Screenshot (443).webp>)
+![Use lasso select in X-ray mode](lasso-select.webp)
+![Delete excess vertices](delete-vertices.webp)
 
-![alt text](<Screenshot 2024-02-26 212258.webp>)
+![Move origin only](move-origin.webp)
+![Centered panther](centered-panther.webp)
 
-![alt text](<Screenshot 2024-02-26 212344.webp>)
+![Patching panther foot](patch-foot.webp)
+![Mapping texture to panther foot](map-foot-texture.webp)
 
-![alt text](<Screenshot (445).webp>)
+![Compress panther mesh using Decimate Collapse modifier](decimate-panther.webp)
+![Overcompressed panther mesh](overcompressed.webp)
+![Compressed panther mesh](decimated-panther.webp)
 
-![alt text](<Screenshot (446).webp>)
-
-![alt text](<Screenshot 2024-02-28 175859.webp>)
-
-![alt text](<Screenshot 2024-02-28 183626.webp>)
-
-![alt text](<Screenshot 2024-02-28 183558.webp>)
-
-![alt text](<Screenshot 2024-02-28 183756.webp>)
-
-![alt text](<Screenshot 2024-02-28 184153.webp>)
+![Compress panther foot with Decimate Collapse modifier](compress-foot.webp)
 
 {{< 3DModel "black-panther.glb" >}}
 
-![alt text](<Screenshot 2024-02-28 191807.webp>)
+![Removing taped bottom of the hammer](fix-hammer.webp)
 
-![alt text](<Screenshot 2024-02-28 192307.webp>)
+![Patching the hole in the hammer with a cylinder](patch-hammer.webp)
 
-![alt text](<Screenshot 2024-02-28 192823.webp>)
+![Mapping texture to the cylinder](hammer-texture-map.webp)
 
-![alt text](<Screenshot 2024-02-28 193811.webp>)
+![Compressing the hammer model with Decimate Collapse modifier](decimate-hammer.webp)
 
 {{< 3DModel "wooden-hammer.glb" >}}
 
@@ -286,6 +281,7 @@ https://www.creality.com/pages/download-cr-scan-ferret
 
 
 To clean up in blender Edit > X-ray > Lasso Select > Delete
+
 
 
 
