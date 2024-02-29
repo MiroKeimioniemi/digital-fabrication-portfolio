@@ -169,55 +169,55 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 
 ![](desktop-scan-setup.webp)
 
-![alt text](<Screenshot (396).png>)
+![alt text](<Screenshot (396).webp>)
 
-![alt text](<Screenshot (397).png>)
+![alt text](<Screenshot (397).webp>)
 
-![alt text](<Screenshot (399).png>)
+![alt text](<Screenshot (399).webp>)
 
-![alt text](<Screenshot (403).png>)
+![alt text](<Screenshot (403).webp>)
 
 ![](panther-on-turntable.webp)
 
-![alt text](<Screenshot (404)-1.png>)
+![alt text](<Screenshot (404)-1.webp>)
 
-![alt text](<Screenshot (407).png>)
+![alt text](<Screenshot (407).webp>)
 
 Start scan from other side works
 
-![alt text](<Screenshot (412).png>)
+![alt text](<Screenshot (412).webp>)
 
-![](<Screenshot (417).png>)
+![](<Screenshot (417).webp>)
 
-![alt text](<Screenshot (443).png>)
+![alt text](<Screenshot (443).webp>)
 
-![alt text](<Screenshot 2024-02-26 212258.png>)
+![alt text](<Screenshot 2024-02-26 212258.webp>)
 
-![alt text](<Screenshot 2024-02-26 212344.png>)
+![alt text](<Screenshot 2024-02-26 212344.webp>)
 
-![alt text](<Screenshot (445).png>)
+![alt text](<Screenshot (445).webp>)
 
-![alt text](<Screenshot (446).png>)
+![alt text](<Screenshot (446).webp>)
 
-![alt text](<Screenshot 2024-02-28 175859.png>)
+![alt text](<Screenshot 2024-02-28 175859.webp>)
 
-![alt text](<Screenshot 2024-02-28 183626.png>)
+![alt text](<Screenshot 2024-02-28 183626.webp>)
 
-![alt text](<Screenshot 2024-02-28 183558.png>)
+![alt text](<Screenshot 2024-02-28 183558.webp>)
 
-![alt text](<Screenshot 2024-02-28 183756.png>)
+![alt text](<Screenshot 2024-02-28 183756.webp>)
 
-![alt text](<Screenshot 2024-02-28 184153.png>)
+![alt text](<Screenshot 2024-02-28 184153.webp>)
 
 {{< 3DModel "black-panther.glb" >}}
 
-![alt text](<Screenshot 2024-02-28 191807.png>)
+![alt text](<Screenshot 2024-02-28 191807.webp>)
 
-![alt text](<Screenshot 2024-02-28 192307.png>)
+![alt text](<Screenshot 2024-02-28 192307.webp>)
 
-![alt text](<Screenshot 2024-02-28 192823.png>)
+![alt text](<Screenshot 2024-02-28 192823.webp>)
 
-![alt text](<Screenshot 2024-02-28 193811.png>)
+![alt text](<Screenshot 2024-02-28 193811.webp>)
 
 {{< 3DModel "wooden-hammer.glb" >}}
 
@@ -253,5 +253,6 @@ https://www.creality.com/pages/download-cr-scan-ferret
 
 
 To clean up in blender Edit > X-ray > Lasso Select > Delete
+
 
 
