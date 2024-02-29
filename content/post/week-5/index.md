@@ -142,36 +142,36 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 ![Sliced tesseract keychain v1](sliced-tesseract-v1.webp)
 
 
-![](plug-in-usb.webp)
-![](select-print.webp)
-![](selected-print.webp)
-![](preparing-print.webp)
+![1](plug-in-usb.webp)
+![2](select-print.webp)
+![3](selected-print.webp)
+![4](preparing-print.webp)
 
-![](s3-ready-to-print.webp)
-![](s3-select-print.webp)
-![](s3-start-print.webp)
-![](s3-prepare-print.webp)
-![](s3-printing.webp)
+![5](s3-ready-to-print.webp)
+![6](s3-select-print.webp)
+![7](s3-start-print.webp)
+![8](s3-prepare-print.webp)
+![9](s3-printing.webp)
 
-![](first-print-ready.webp)
+![10](first-print-ready.webp)
 
-![](first-print.webp)
+![11](first-print.webp)
 
-![](remove-adhesion.webp)
+![12](remove-adhesion.webp)
 
-![](first-keychain.webp)
+![13](first-keychain.webp)
 
-![](broken.webp)
+![14](broken.webp)
 
-![](fresh-cable-holder.webp)
+![15](fresh-cable-holder.webp)
 
-![](processed-cable-holder.webp)
+![16](processed-cable-holder.webp)
 
-![](processed-cable-holder-from-below.webp)
+![17](processed-cable-holder-from-below.webp)
 
-![](fresh-final-keychain.webp)
+![18](fresh-final-keychain.webp)
 
-![](processed-final-keychain.webp)
+![19](processed-final-keychain.webp)
 
 
 ![All 3D-printing iterations](3d-printing-results.webp)
@@ -182,25 +182,25 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 
 ## 3D Scanning
 
-![](hammer-on-stool.webp)
+![1](hammer-on-stool.webp)
 
-![](mobile-scan-setup.webp)
+![2](mobile-scan-setup.webp)
 
-![](starting-3d-scan.webp)
+![3](starting-3d-scan.webp)
 
-![](delusional-scan.webp)
+![4](delusional-scan.webp)
 
-![](delusional-scan-2.webp)
+![5](delusional-scan-2.webp)
 
-![](delusional-scan-3.webp)
+![6](delusional-scan-3.webp)
 
-![](bad-scan.webp)
+![7](bad-scan.webp)
 
-![](remove-jesus.webp)
+![8](remove-jesus.webp)
 
-![](hammer-on-turntable.webp)
+![9](hammer-on-turntable.webp)
 
-![](desktop-scan-setup.webp)
+![10](desktop-scan-setup.webp)
 
 ![alt text](<Screenshot (396).webp>)
 
@@ -210,7 +210,7 @@ Both filetypes had a weird visual feature in Cura's Prepare view where additiona
 
 ![alt text](<Screenshot (403).webp>)
 
-![](panther-on-turntable.webp)
+![11](panther-on-turntable.webp)
 
 ![alt text](<Screenshot (404)-1.webp>)
 
@@ -286,6 +286,7 @@ https://www.creality.com/pages/download-cr-scan-ferret
 
 
 To clean up in blender Edit > X-ray > Lasso Select > Delete
+
 
 
 
