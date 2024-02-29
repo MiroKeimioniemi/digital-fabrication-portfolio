@@ -14,7 +14,7 @@ categories:
   - "3D Scanning"
 series: 
   - "Weekly Assignments"
-image:
+image: "3d-printing-final-products.webp"
 ---
 
 Easily the hardest part of this course is to come up with the ideas for each week's project. Not because of my lack of ideas or creativity in general but because of my desire to make something useful or meaningful for each project with limited time in the lab because of its opening hours, the number of other students on the course whose machine time I do not want to encroach upon, and because I am taking three other courses at the same time with this, those being [Statistical Inference](https://www.aalto.fi/en/open-university-course-list/statistical-inference), [Theory of Computation](https://courses.aalto.fi/s/course/a053X000012R0qeQAC/theory-of-computation?language=en_US) and [Artificial Intelligence D](https://courses.aalto.fi/s/course/a053X000012QzrRQAS/artificial-intelligence-d?language=en_US). Additionally, I just joined a startup called [Miitti App](https://www.miitti.app/) and am still in the process of finding a paying summer job in the software industry too. 
@@ -134,12 +134,94 @@ Both design files can be found as `.stl`, `.obj`, `.glb` and `.blend` from my re
 
 This week's group documentation, made by Zina, can be found [here](https://zinaaaa.gitlab.io/digital-fabrication/week6_docu.html).
 
+First, I rather ambitiously tried to print the first version with no supports and no adhesion so that no post-processing would be necessary. I first opened the `.stl` in [Ultimaker Cura](https://ultimaker.com/software/ultimaker-cura/) - a 3D slicer program - but I noticed that it contained all the objects I had hidden in Blender. Cura also informed me that it had scaled it up by 10000%, which was rather peculiar. I then deleted it and tried the `.obj` instead, which did not contain the hidden elements. 
+
+Both filetypes had a weird visual feature in Cura's Prepare view where additional walls were shown where none existed. Below is an image (left) of that even though the keychain version is different. However, in the Preview view after slicing, they were gone. I did my first quick test print on the Ultimaker S3 with the slicing settings shown below in the image on the right. Draft quality, 0.3mm resolution for "Extra Fast", 20% infill density with a triangle pattern and default shell thickness and no supports or adhesion. The screenshot was taken before adjusting the scale and thus shows much longer print time and greater weight. In reality, it came out at around 13mm height, 1 gram weight and taking only around 10 minutes to print.
+
+![Visual glitch in Cura Prepare](cura-visual-glitch.webp)
+![Sliced tesseract keychain v1](sliced-tesseract-v1.webp)
+
+![All 3D-printing iterations](3d-printing-results.webp)
+
+![Tesseract keychain](tesseract-keychain.webp)
+
+![Final 3D printing products](3d-printing-final-products.webp)
+
 ## 3D Scanning
 
-### Displaying 3D-models on the web
+![](hammer-on-stool.webp)
+
+![](mobile-scan-setup.webp)
+
+![](starting-3d-scan.webp)
+
+![](delusional-scan.webp)
+
+![](delusional-scan-2.webp)
+
+![](delusional-scan-3.webp)
+
+![](bad-scan.webp)
+
+![](remove-jesus.webp)
+
+![](hammer-on-turntable.webp)
+
+![](desktop-scan-setup.webp)
+
+![alt text](<Screenshot (396).png>)
+
+![alt text](<Screenshot (397).png>)
+
+![alt text](<Screenshot (399).png>)
+
+![alt text](<Screenshot (403).png>)
+
+![](panther-on-turntable.webp)
+
+![alt text](<Screenshot (404)-1.png>)
+
+![alt text](<Screenshot (407).png>)
+
+Start scan from other side works
+
+![alt text](<Screenshot (412).png>)
+
+![](<Screenshot (417).png>)
+
+![alt text](<Screenshot (443).png>)
+
+![alt text](<Screenshot 2024-02-26 212258.png>)
+
+![alt text](<Screenshot 2024-02-26 212344.png>)
+
+![alt text](<Screenshot (445).png>)
+
+![alt text](<Screenshot (446).png>)
+
+![alt text](<Screenshot 2024-02-28 175859.png>)
+
+![alt text](<Screenshot 2024-02-28 183626.png>)
+
+![alt text](<Screenshot 2024-02-28 183558.png>)
+
+![alt text](<Screenshot 2024-02-28 183756.png>)
+
+![alt text](<Screenshot 2024-02-28 184153.png>)
+
+{{< 3DModel "black-panther.glb" >}}
+
+![alt text](<Screenshot 2024-02-28 191807.png>)
+
+![alt text](<Screenshot 2024-02-28 192307.png>)
+
+![alt text](<Screenshot 2024-02-28 192823.png>)
+
+![alt text](<Screenshot 2024-02-28 193811.png>)
 
 {{< 3DModel "wooden-hammer.glb" >}}
-{{< 3DModel "black-panther.glb" >}}
+
+### Displaying 3D-models on the web
 
 Only kept .glb files in the repo (others are saved locally) because they contain textures and everything as jpgs get converted to webps by my scripts. also to save space
 
@@ -171,3 +253,4 @@ https://www.creality.com/pages/download-cr-scan-ferret
 
 
 To clean up in blender Edit > X-ray > Lasso Select > Delete
+

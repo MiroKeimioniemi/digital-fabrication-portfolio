@@ -597,3 +597,4 @@ In conclusion, the two most important takeaways for this week were, however, tha
 
 
 
+
