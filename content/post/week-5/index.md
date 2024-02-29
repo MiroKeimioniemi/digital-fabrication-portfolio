@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "3D Printing & Scanning"
-date: "2024-02-27"
+date: "2024-02-29"
 description: "Week 7"
 tags: 
   - "CAD"
@@ -27,7 +27,6 @@ All of that put together adds up to quite a bit of intellectual work, on top of 
 
 - Do NOT use Formlabs printers. This assignment is only FDM.
 - Join one of the scheduled introduction / TA sessions to complete the group assignment and get booking access to printers.
-- The FDM 3D printers are booked for you until end of next week.
 
 **Group assignment**
 
@@ -56,44 +55,88 @@ According to ChatGPT, subtractive manufacturing involves removing material from 
 
 ## Designs
 
-As already mentioned, this week's project was particularly difficult to come up with due to the strictness of the requirements, those being the small size and something that cannot be created using subtractive manufacturing. To achieve the desired scale, my ideas initially fell into two categories: characters and cable holders, preferably fusing them into one somehow to have both a design challenge as well as something somewhat functional. However, the limitation of it having to be something that cannot be manufactured subtractively proved to be very challenging for my skillset
+### Ideation
 
-I could only come up with two kinds 
+As already mentioned, this week's project was particularly difficult to come up with due to the strictness of the requirements, those being the small size and something that cannot be created using subtractive manufacturing. To achieve the desired scale, my ideas initially revolved around small characters and cable holders, preferably fusing them into one somehow to have both a design challenge as well as something somewhat functional. 
 
+However, the limitation of it having to be something that cannot be manufactured subtractively proved to be very challenging for the types of characters I was considering, those being [minions](https://www.imdb.com/title/tt2293640/), [Paddington](https://www.imdb.com/title/tt1109624/), some [Pokémon](https://www.pokemon.com/us/pokedex) and the like. Furthermore, I am still not quite sure of the technicalities of copyright in terms of creating a 3D-model of something and printing it for personal, non-commercial use but publically sharing it. That being said, looking forward to the ["Invention, Intellectual Property, and Income"](https://academy.cba.mit.edu/classes/invention_IP_business/index.html) week!
 
+I continued my brainstorming for different avenues and thought about creating an elaborate bookmark, accessories either for my phone or [student overalls](https://www.ayy.fi/en/student-culture/overalls-and-jackets) and eventually landed on a keychain. I thought about creating some procedurally generated shapes but that seemed too vague of an idea and due to abovementioned reasons I unfortunately did not have time for such an exploratory process. That, however, got me to the domain of geometry and dimensions beyond three pretty quickly. The first thing I came up with was the [tesseract](https://en.wikipedia.org/wiki/Tesseract), which is the first thing one thinks of in terms of objects in higher dimensions. 
 
-wanted to create some kind of a character 
+This felt a bit vanilla and so I initially tried to explore further but it turns out that the but the difficulty of making them increased exponentially while their actual representativeness in 3D decreased almost similarly. Now that I think about it afterwards, a [Klein bottle](https://en.wikipedia.org/wiki/Klein_bottle) or the [shadow of a four-dimensional flat torus](https://new.math.uiuc.edu/math198/MA198-2010/jesse_kearns/) might have been similarly interesting but I ended up defaulting to the tesseract as it looked the coolest, is widely recognized and would certainly be exceedingly difficult to produce subtractively - or at all, as it is technically a four-dimensional object after all. Below are some very interesting and enlightening videos I came across when researching tesseracts and the fourth dimension in general:
 
+- [What Does a 4D Ball Look Like in Real Life? Amazing Experiment Shows Spherical Version of Tesseract](https://www.youtube.com/watch?v=_4ruHJFsb4g)
+- [What Exactly is a Tesseract? (Hint: Not a Superhero Stone)](https://www.youtube.com/watch?v=KjIUzV094wE)
+- [Understanding 4D -- The Tesseract](https://www.youtube.com/watch?v=iGO12Z5Lw8s)
+- [A Beginner's Guide to the Fourth Dimension](https://www.youtube.com/watch?v=j-ixGKZlLVc)
 
-Adding a loopcut to the center and deleting the vertices on one side made it so that the object scales only in the remaining direction as the centerpoint was now in the corner.
+To really make sure that it could not be subtractively made, I also made a chain that is inherently connected to the tesseract and so cannot be removed without breaking it. This saved me the effort of finding a chain for it but would likely be the most risky part of the print due to its small scale, odd angles and various overhangs.
 
-Scale 1 is good, rotated 180deg over y-axis and 45 over z-axis and then additionally 4.5 in both over x and y
+### Modeling with Blender
 
-Added a mirror modifier over all X, Y and Z
+I had made the decision to use [Blender](https://www.blender.org/) for this already when considering the characters as I figured that a standalone 3D-printed object would not gain anything from being parametric and so it would be fastest to create with Blender's robust tools, which I also wanted to explore further. The tesseract - or rather, its 3D projection - was quite simple to make.
 
-Remember to apply modifiers, weird shit happens if you don't
+I started a new Blender project with the "General" template and created the outer frame of the tesseract by copying the default cube, scaling it to 0.8 in the Y and Z dimensions and to 1.2 in the X-dimension, centering it onto the cube on every axis and copying it twice more, rotated by 90° over each remaining axis and using three Boolean Difference modifiers on the default cube with respect to each of them.
 
-1.6cm
+![Boolean Difference modifiers on the default cube](boolean-difference-modifiers.webp)
 
-https://www.creality.com/pages/download-cr-scan-ferret
+I then added two more cubes, one of which I scaled to 0.5 in all dimensions and the other I scaled to 0.1 in the X and Y dimensions and initially 1.0 in the Z-dimension. I rotated the latter by 40.5° over both Z and Y axes and positioned its middle in one of the corners. Adding a loopcut to the center and deleting the vertices on one side made it so that the object scales only in the remaining direction as the centerpoint was now in the outer end of the connector. I then added a mirror modifier over X, Y and Z axes to automatically add identical connectors to all corners. In the end I adjusted the connector's length to be 0.9, which automatically propagated to all its mirrored instances as well.
 
-Make sure modifiers are the right way around
+![Corner connector](corner-connector.webp)
+![Mirrored corner connectors](mirrored-corner-connectors.webp)
 
-Exporting .stl also exports invisible items
+I then repeated the process to hollow out a cube on all sides using Boolean Difference modifiers on the small cube as well, producing the first ready version of the tesseract.
 
-To clean up in blender Edit > X-ray > Lasso Select > Delete
+![Hollowing out the inner cube using Boolean Difference modifiers](boolean-small-cube.webp)
+![Tesseract v1](hollow-small-cube.webp)
 
+I then moved the ready tesseract up and added a torus with a minor radius of 0.16m (Blender works in meters by default instead of centi- or millimeters but this is no problem as scaling is easy) and positioned it carefully in a corner of the tesseract so that it would just touch the ground but not the tesseract at any point. Clicking the ends of the rotation visualizer in the upper right corner (see "Mirrored corner connectors" image), in this case "-X", enters a more precise view with a denser grid from that particular angle.
+
+![Add torus](add-torus.webp)
+![Position torus in the corner](position-torus.webp)
+
+I copied the torus, rotated it 70° over the X-axis and stretched it a little in the X-dimension after moving it away from the first torus so that they still interlinked but did not touch each other. I then copied that and rotated it 45° over the X-axis, continuing the chain. I then selected the two stretched loops and copy-pasted a few pairs to make a chain, at the end of which I added a rotated copy of the first torus again. 
+
+![Creating the chain](creating-the-chain.webp)
+![Tesseract keychain v1](tesseract-keychain-v1.webp)
+
+I tried to keep all the toruses as upright as possible so that they would be easy to print layer by layer by an [FDM](https://www.hubs.com/knowledge-base/what-is-fdm-3d-printing/) 3D-printer. This meant trying to reduce the number and angles of overhangs. As discussed in this week's [group documentation by Zina](https://zinaaaa.gitlab.io/digital-fabrication/week6_docu.html), a bridge is significantly better than an overhang as the filament has supports at both ends. Luckily, with this design for the tesseract, most overhangs took the form of bridges and I intended to print it at such a small scale that they should come out nice as seen in the [bridge test](https://zinaaaa.gitlab.io/digital-fabrication/week6_docu.html). The corner connectors were an exception to this but they were at shallow enough angles so that it should not be a problem either according to the [angle test](https://zinaaaa.gitlab.io/digital-fabrication/week6_docu.html).
+
+I then exported it as both `.stl` as well as `.obj` using the default settings for both, other than changing the scales to 0.016 in order to scale down from meters to 1.6cm. I also made sure to have the "Up Axis" be Z for both as this was not always with `.obj`.
+
+![Export as .stl](export-stl.webp)
+![Export as .obj](export-obj.webp)
+
+Some important points on Blender modifiers and different filetypes: make sure to have the modifiers in the correct order for the desired effect and for clean exporting to any file format, make sure to apply them. `.glb`, for example, does not automatically include them unless explicitly applied, whereas `.obj` and `.stl` do not have this issue. Also delete unnecessary hidden components as `.stl` files included them all - even those hidden from view. 
+
+After a few iterations of printing, I ended up thickening everything for the final version of the tesseract keychain using the Solidify modifier in Complex mode with a negative value for thickness as it produced the same result as positive values but without the glitch seen in the third image. This made it more structurally sound and better looking as a small print. 
+
+![Add Solidify modifier](solidify.webp)
+![Thicker tesseract](thicker-tesseract.webp)
+![Positive thickness glitch](positive-thickness-glitch.webp)
+
+I also made new, thicker toruses with increased, rounder geometry, which I later reduced for the 3D model below using the Decimate Un-Subdivide modifier to make its file size smaller. I made the first and last links in the chain larger so that they would be easier to position for 3D-printing in the tesseract end and for easily fitting any keychain on the other end. I also made them all round for increased structural integrity and easier 3D-printing. 
+
+![New round toruses](round-toruses.webp)
+![Decimate Un-Subdivide modifier with 4 iterations on toruses](decimate-toruses.webp)
+
+Below is the 3D-model for the final tesseract keychain. Go to section "[Displaying 3D-models on the web](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/p/3d-printing-scanning/#displaying-3d-models-on-the-web)" for documentation on how it is displayed.
+
+{{< 3DModel "tesseract-keychain.glb" >}}
+
+I also quickly created a very simplistic cable holder as pretty much just my own custom overhang test, that might provide some utility too should it come out successfully. Below is its 3D-model.
+
+{{< 3DModel "cable-holder.glb" >}}
+
+Both design files can be found as `.stl`, `.obj`, `.glb` and `.blend` from my repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-5?ref_type=heads).
 
 ## 3D Printing
 
-{{< 3DModel "tesseract-keychain.glb" >}}
-{{< 3DModel "cable-holder.glb" >}}
-
-Remember to apply modifiers to be displayed in .glb
-
-[Group documentation](https://zinaaaa.gitlab.io/digital-fabrication/week6_docu.html)
+This week's group documentation, made by Zina, can be found [here](https://zinaaaa.gitlab.io/digital-fabrication/week6_docu.html).
 
 ## 3D Scanning
+
+### Displaying 3D-models on the web
 
 {{< 3DModel "wooden-hammer.glb" >}}
 {{< 3DModel "black-panther.glb" >}}
@@ -122,3 +165,9 @@ Paddington or another non-descript bear with a hat and a raincoat if there is a 
 Tesseract
 
 select face in edit mode and move up along Z-axis
+
+
+https://www.creality.com/pages/download-cr-scan-ferret
+
+
+To clean up in blender Edit > X-ray > Lasso Select > Delete
