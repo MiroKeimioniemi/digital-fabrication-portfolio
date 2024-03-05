@@ -345,3 +345,4 @@ Although I expected to be way more enthusiastic about the 3D-printing, I ended u
 For some reason this week's documentation took me twice as long as other weeks' even though it is of similar length relatively straightforward. I know it would be good to do it even more as I go in terms of time allocation but I feel like that would slow the experimentation down lethally. This week I had to do a lot of it images first in order to have something to present at the local lecture and that kind of made sense but also made the website annoying to deal with between saves and also felt somehow even slower. I will keep on exploring and hope to find a better, more efficient technique! 
 
 On a positive note, my Blender skills also improved considerably this week and I learned that 3D-printing without supports is, first of all, a possiblity and, second of all, surprisingly successful given good design. 
+
