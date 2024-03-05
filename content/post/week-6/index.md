@@ -355,6 +355,13 @@ The [Seeed Studio XIAO RP2040](https://wiki.seeedstudio.com/XIAO-RP2040/) is a p
 
 ![Seeed Studio XIAO RP2040 pinout diagram](xiao-rp2040-pinout.webp)
 
+
+WARNINGS!
+!
+!
+!
+!
+
 ### Testing the board
 
 ![XIAO RP2040 on the Tarantino board](xiao-rp2040.webp)
@@ -363,9 +370,102 @@ The board I am using is the [XIAO RP2040](https://wiki.seeedstudio.com/XIAO-RP20
 
 Similarly to the ["Testing" section](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/p/electronics-production/#testing) in [week 6 Electronics Production]({{< relref "post/week-4/index.md" >}}), I opened Arduino IDE, chose the board and uploaded the [hello_tarantino code](https://gitlab.fabcloud.org/pub/programmers/tarantino/-/blob/main/Arduino/hello_tarantino/hello_tarantino.ino?ref_type=heads) onto it, which resulted in the LED turning on and off in response to a button press.
 
-
 ![Arduino IDE after uploading code](arduino-ide.webp)
 
+I then figured out which pins control which LED by going back to week 6 documentation and inspecting the [screenshot of `Tarantino-F_Cu.gbr` open in CopperCAM](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/p/electronics-production/#setting-up-using-coppercam). Below is a list of which XIAO pin corresponds to which LED from left to right when viewing the board directly from above so that the "Seeed Studio" on the XIAO board is horizontally positioned:
+
+- LED 1 - D0
+- LED 2 - D6
+- LED 3 - D7
+
+When testing them out by redefining the LED variable in the code as each one, one at a time, I noticed that LED 2 did not work. It might be either a defective component or either one of the bit rougher looking solders. 
+
+I modified the `hello_tarantino.ino` code into the one below by defining all of the LEDs and setting their states based on a switch statement that rotates the lit LED by incrementing the `int targetLED` variable and taking its modulo 3 to create the three cases every time the button is pressed.
+
+```C
+#define LED1 D0
+#define LED2 D6
+#define LED3 D7
+#define BTN D1
+
+bool led1State = HIGH; // HIGH, true and 1 mean the same
+bool led2State = HIGH;
+bool led3State = HIGH;
+
+int targetLED = 0;
+
+bool btnState = HIGH; // button is high as it is connected to 3.3V via a pull-up resistor
+
+void setup() {
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(BTN, INPUT);
+
+  // set initial state of LEDs
+  digitalWrite(LED1, led1State);
+  digitalWrite(LED3, led2State);
+  digitalWrite(LED2, led3State);
+}
+
+void loop() {
+  bool btnReading = digitalRead(BTN);
+
+  // we want to do something only if the reading and the state are different
+  // in this case they are the same and we exit the loop immediatly
+  if(btnReading == btnState){
+    return; 
+  }
+ 
+  if(btnReading == LOW){ // LOW means button is pressed on Tarantino
+    btnState = LOW;
+    targetLED++;
+
+    switch(targetLED % 3){
+      case 0: 
+        led1State = LOW;
+        led2State = LOW;
+        led3State = HIGH;
+        break;
+      case 1: 
+        led1State = HIGH;
+        led2State = LOW;
+        led3State = LOW;
+        break;
+      case 2: 
+        led1State = LOW;
+        led2State = HIGH;
+        led3State = LOW;
+        break;
+    }
+  }else{
+    btnState = HIGH;
+  }
+
+  digitalWrite(LED1, led1State);
+  digitalWrite(LED2, led2State);
+  digitalWrite(LED3, led3State);
+  delay(10);
+}
+```
+
+The define statements in the beginning map the digital pins to the `LEDx` and `BTN` [macros](https://www.geeksforgeeks.org/macros-and-its-types-in-c-cpp/). The boolean `ledxState`s are all set to `HIGH` (= `true` = `1`) initially in order to quickly verify at a glance that all the LEDs work. The `targetLED` variable is initialized at zero and `btnState` is identified initially as `HIGH` due to the design of the circuit.
+
+Inside the `void setup()` function, which initializes the program, the pins are configured with their roles with the `pinMode()` function and the LEDs are initially turned on using `digitalWrite()` with the arguments for pins and the output, which in this case holds `HIGH` / `true` / `1` as defined above.
+
+After the initialization, the program enters the main loop with `void loop()`, which is repeatedly called by the processor. It continuously scans the button state by reading the `BTN` pin's value with `digitalRead()` into the `btnReading` variable and comparing it with `btnState`. If no change is detected, the function returns, skipping over the rest of the code within the function until a change is detected. When `LOW` is encountered in `btnReading`, the program sets `btnState` to `LOW` and increments the integer value in the `targetLED` variable by one. 
+
+The `switch(targetLED % 3)` statement checks for the remainder after dividing the value of `targetLED` by 3 and changes the values of the `ledxState` variables in a manner which appears to rotate the light on the board by one increment every time the button is pressed. A small memory optimization, especially with more cases would be to set all of them to `LOW` before and only use the `switch` statement for setting one of them to `HIGH` but this is arguably clearer.
+
+If the `btnReading` changed but to `HIGH` instead of `LOW`, such as when releasing the press, the `btnState` is updated to `HIGH` but nothing else is done. Finally, the LEDs are turned on or off by setting the pins to 1s and 0s with `digitalWrite` and the updated states. The function is delayed for 10 milliseconds, doing nothing before it is called again by the processor.
+
+### PlatformIO
+
+### MicroPython
+
+
+
 ## Reflections
+
 
 

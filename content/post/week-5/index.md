@@ -346,3 +346,4 @@ For some reason this week's documentation took me twice as long as other weeks' 
 
 On a positive note, my Blender skills also improved considerably this week and I learned that 3D-printing without supports is, first of all, a possiblity and, second of all, surprisingly successful given good design. 
 
+
