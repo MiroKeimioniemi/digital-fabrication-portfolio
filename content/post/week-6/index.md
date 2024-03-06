@@ -355,12 +355,9 @@ The [Seeed Studio XIAO RP2040](https://wiki.seeedstudio.com/XIAO-RP2040/) is a p
 
 ![Seeed Studio XIAO RP2040 pinout diagram](xiao-rp2040-pinout.webp)
 
+A list for software pin definitions can be found [here](https://mycourses.aalto.fi/pluginfile.php/2228725/mod_resource/content/2/pins_arduino.h).
 
-WARNINGS!
-!
-!
-!
-!
+The XIAO RP2040 board operates at a working voltage of 3.3V but can be powered with 5V via VIN-PIN and 5V-PIN, which will be changed to 3.3V by the built-in DC-DC converter circuit. GPIO pins can only handle input of 3.3V and may cause the chip damage upon receiving anything higher. Do not connect to Type-C while a battery is connected.
 
 ### Testing the board
 
@@ -378,7 +375,7 @@ I then figured out which pins control which LED by going back to week 6 document
 - LED 2 - D6
 - LED 3 - D7
 
-When testing them out by redefining the LED variable in the code as each one, one at a time, I noticed that LED 2 did not work. It might be either a defective component or either one of the bit rougher looking solders. 
+When testing them out by redefining the LED variable in the code as each one, one at a time, I noticed that LED 2 did not work. Initially I thought it might be either a defective component or either one of the bit rougher looking solders. I nevertheless wrote the below program with the assumption that all three LEDs would work, because I assumed that I could fix the board the next day.
 
 I modified the `hello_tarantino.ino` code into the one below by defining all of the LEDs and setting their states based on a switch statement that rotates the lit LED by incrementing the `int targetLED` variable and taking its modulo 3 to create the three cases every time the button is pressed.
 
@@ -459,7 +456,38 @@ The `switch(targetLED % 3)` statement checks for the remainder after dividing th
 
 If the `btnReading` changed but to `HIGH` instead of `LOW`, such as when releasing the press, the `btnState` is updated to `HIGH` but nothing else is done. Finally, the LEDs are turned on or off by setting the pins to 1s and 0s with `digitalWrite` and the updated states. The function is delayed for 10 milliseconds, doing nothing before it is called again by the processor.
 
+{{< video src="program1.mp4" loop="true" >}}
+
+The next day I went to the lab to resolder the lower quality solders with no effect. I even changed the LED component to see if it were faulty by lifting it with tweezers while pushing down with the hot solder iron on the solder and pad and soldering another LED in its place as described in [week 6 documentation](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/p/electronics-production/#soldering). It still did not work. I then tried running the above program on the reference board but it did not work with that either. 
+
+Upon further inspection of the design files, we figured it out with [Thanh Vo](https://0nitfans.com/) that the third LED is actually not attached to ground. I had noticed this already upon my first inspection but I had just assumed that the routing would occur inside the connector component. It appears to not have been the case after all and due to the lacking documentation of the Tarantino board, it is not obvious if this is intended or not. It might be intentional, so that it signals of a successful connection or it might just be that it was forgotten in the design phase. Without intention it is difficult to tell. The LED and the program were verified to be working by connecting the second pin on the lower row of the connector to ground, which resulted in it successfully lighting up. As the board was fully functional to the extent it was designed, I decided to forego the third LED and adapt my programs for two and the one RGB LED mounted on the XIAO RP2040.
+
 ### PlatformIO
+
+[PlatformIO](https://platformio.org/) is a plugin, most commonly used as a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=platformio.platformio-ide), that provides a wide variety of more advanced features over the simpler Arduino IDE. These include an integrated debugger, unit testing, static code analysis, continuous integration, increased flexibility and most importantly to me, all VS Code's benefits such as autocompletion, copilot and the extensions ecosystem. Not only is it much more advanced but also more broad as well, it supports 40+ platforms, 20+ frameworks, Arduino being just one of them, 1500+ boards and 13000+ libraries. For a quick introduction, check out [this video](https://www.youtube.com/watch?v=PYSy_PLjytQ). With all of that, one would naturally expect it to be relatively straightforward to start programming with it in a plug-and-play manner but this was not the case for me.
+
+Installing PlatformIO was straightforward enough. I just had to click on the "Extensions" tab in VS Code, search for "PlatformIO" and click install. That is where the straightforwardness mostly ended. If you are lucky and your board is among one of the directly supported boards, starting development is as easy as clicking on the PlatformIO logo on the VS Code side panel and navigating to "PIO Home" > "Open", clicking "New Project" and giving it a name as well as searching and selecting the board to be used. This automatically selects a supported framework, which, depending on the board, can also be changed. Then either use the default location at `C:\Users\[user]\Documents\PlatformIO\Projects` or navigate to another location and click "Finish". When creating the first project, this may take multiple minutes but it is almost instantaneous afterwards.
+
+![PlatformIO home page](platformio-home.webp)
+
+The Seeed Studio XIAO RP2040 board obviously did not appear on the list. Luckily, after a while of searching, I found [Hiroe Takeda's documentation](https://fabacademy.org/2023/labs/kitakagaya/students/hiroe-takeda/assignments/week04/2.xiao_RP2040/) from 2023, which contained a link to a GitHub repository for the [RP2040 development platform](https://github.com/maxgerhardt/platform-raspberrypi) for PlatformIO, which could be added by going to "Platforms" > "Advanced Installation", pasting in the GitHub link: [https://github.com/maxgerhardt/platform-raspberrypi](https://github.com/maxgerhardt/platform-raspberrypi) and clicking "Install", which soon gives an overly lengthy success message. However, I have clearly gotten away with everything working a bit too smoothly in terms of the course for a bit too long now and the universe decided to throw me a real curveball. That is, creating a new project would consistently and reliably fail after a few minutes of waiting each time. Funnily enough, opening `arduino-blink` from "Project Examples" gave me a bit of false hope by opening the workspace but trying to build or upload the code ultimately resulted in the same terminal output and failure.
+
+![Initializing a new PlatformIO project failed](failed-initialization.webp)
+
+Unfortunately I did not scroll to the bottom of the terminal output for the screenshot but it said that it could not clone the plaform-raspberrypi repository because of a too long filename(/path). I have bumped into this issue on Windows before but in those cases it was easier to just shorten the filenames or move the file using, for example, PowerShell. I found [this article](https://helpdeskgeek.com/how-to/how-to-fix-filename-is-too-long-issue-in-windows/) about how to make Windows accept long paths by setting the `LongPathsEnabled` variable to 1 at `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem` in Registry Editor, which can be accessed by pressing `Windows + R`, typing "regedit" and clicking "OK". However, this did not work either - alone at least. From Windows 10 onwards, the maximum path length limitation has been removed, as mentioned [here](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry), but one must opt into this with the above method. Even though it did not work, it should not cause problems either and so I left it on.
+
+![Setting the LongPathsEnabled variable to 1 in Registry Editor](regedit.webp)
+
+After hours of more research and multiple laptop restarts, I found the following git command on [StackOverflow](https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows): `git config --system core.longpaths true`. Running GitBash as an administrator and running the command enabled me to finally successfully start a new XIAO RP2040 project on PlatformIO. I made sure to set `core.longpaths` back to `false` immediately afterwards due to potential drawbacks of having it on that were discussed under the most upvoted answer. Judging from the number of upvotes, the problem is quite common and perhaps it was then good to discover and document it at this point. I am not certain whether this alone fixed the issue or whether the previous step in regex was also necessary, but the important thing is that it finally worked.
+
+![Create PlatformIO project for XIAO RP2040](create-pio-project.webp)
+
+I created a new project within this weeks folder ("week-6" for week 8 because week 1-3 was called "week-1" and I have stuck to that due to fear of refactoring), copied the code in the testing session to `main.cpp` under `src` and made sure to include the Arduino header with `#include <Arduino.h>` on line 1 as due to PlatformIOs generality, this was no longer automatic.
+
+
+
+
+XIAO RP2040 built-in R, G and B LEDs must be set to HIGH to turn off and LOW to turn on.
 
 ### MicroPython
 
@@ -467,5 +495,8 @@ If the `btnReading` changed but to `HIGH` instead of `LOW`, such as when releasi
 
 ## Reflections
 
+What was actually relevant from datasheet? Never need to read one so closely again
+
+Need intuition on what fits in what capacity memories
 
 
