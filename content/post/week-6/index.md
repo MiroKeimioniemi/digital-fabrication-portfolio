@@ -401,8 +401,8 @@ void setup() {
 
   // set initial state of LEDs
   digitalWrite(LED1, led1State);
-  digitalWrite(LED3, led2State);
-  digitalWrite(LED2, led3State);
+  digitalWrite(LED2, led2State);
+  digitalWrite(LED3, led3State);
 }
 
 void loop() {
@@ -482,21 +482,348 @@ After hours of more research and multiple laptop restarts, I found the following
 
 ![Create PlatformIO project for XIAO RP2040](create-pio-project.webp)
 
-I created a new project within this weeks folder ("week-6" for week 8 because week 1-3 was called "week-1" and I have stuck to that due to fear of refactoring), copied the code in the testing session to `main.cpp` under `src` and made sure to include the Arduino header with `#include <Arduino.h>` on line 1 as due to PlatformIOs generality, this was no longer automatic.
+I created a new project within this weeks folder ("week-6" for week 8 because week 1-3 was called "week-1" and I have stuck to that due to fear of refactoring), copied the code in the testing session to `main.cpp` under `src` and made sure to include the Arduino header with `#include <Arduino.h>` on line 1 as due to PlatformIOs generality, this was no longer automatic. I then built and uploadedd the code onto the board, where it worked just as previously. The upload feels a bit slower when compared to Arduino IDE but otherwise it is just as simple, if not more satisfying due to richer terminal feedback.
+
+To test the NeoPixel RGB LED, I added the FastLED library to the project via the "Libraries" tab by searching for "[FastLED](https://fastled.io/docs/)", which is a very intuitive and powerful library for easily controlling RGB LEDs that I found when creating the [Networking Bracelet prototypes](https://www.linkedin.com/posts/miro-keimi%C3%B6niemi_now-that-school-is-over-for-the-year-ill-activity-7143994838173089792-r3KP?utm_source=share&utm_medium=member_desktop). I added it to the project by clicking "Add to Project", selecting the right project in the right place and clicking "Add", which added the line `lib_deps = fastled/FastLED@^3.6.0` to the `platformio.ini` configuration file.
+
+![Add library](add-library.webp)
+![Add library to project](add-library-to-project.webp)
+
+I adapted the [FastLED Blink example](https://fastled.io/docs/_blink_8ino-example.html) with Copilot's help for the RP2040 by setting the number of LEDs to 1 and same for the brightness (out of 255), due to how ridiculously bright it gets. The LED also needs to have a power pin toggled on, which I defined and set to `HIGH`, but otherwise the below code is mostly the same, except for the addition of the `#include <Arduino.h>` statement and the removal of redundant LED types.
+
+```C
+#include <Arduino.h>
+#include <FastLED.h>
+
+#define NUM_LEDS 1
+#define BRIGHTNESS 1
+
+CRGB leds[NUM_LEDS];
+
+void setup() { 
+    FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL>(leds, NUM_LEDS);
+    FastLED.setBrightness(BRIGHTNESS);
+    pinMode(NEOPIXEL_POWER, OUTPUT);
+    digitalWrite(NEOPIXEL_POWER, HIGH);
+}
+
+void loop() { 
+
+  leds[0] = CRGB::Red;
+  FastLED.show();
+  delay(500);
+
+  leds[0] = CRGB::Black;
+  FastLED.show();   
+  delay(500);
+  
+}
+```
+
+Having gotten it to work too, I then quickly modified the earlier code to use the NeoPixel RGB LED instead of the unconnected LED by replacing it with the `NEOPIXEL_POWER` pin, making the RGB LED orange with `leds[0] = CRGB::Orange` and refreshing the LED with `FastLED.show()` at the end of each loop. I also turned off the R, G and B LEDs in the corner by setting them to `HIGH` - a quirk of XIAO's. `LOW` turns them on and `HIGH` off.
+
+```C
+#include <Arduino.h>
+#include <FastLED.h>
+
+#define LED1 D0
+#define LED2 NEOPIXEL_POWER
+#define LED3 D7
+#define BTN D1
+#define NUM_LEDS 1
+#define NEOPIXEL_BRIGTHNESS 2
+
+CRGB leds[NUM_LEDS];
+
+bool led1State = HIGH; // HIGH, true and 1 mean the same
+bool led2State = HIGH;
+bool led3State = HIGH;
+
+bool btnState = HIGH; // button is high as it is connected to 3.3V via a pull-up resistor
+
+int targetLED = 0;
+
+void setup() {
+
+  FastLED.addLeds<NEOPIXEL, PIN_NEOPIXEL>(leds, NUM_LEDS);
+  FastLED.setBrightness(NEOPIXEL_BRIGTHNESS);
+
+  pinMode(PIN_LED_R, OUTPUT);
+  pinMode(PIN_LED_G, OUTPUT);
+  pinMode(PIN_LED_B, OUTPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(BTN, INPUT);
+
+  // set initial state of LEDs
+  digitalWrite(PIN_LED_R, HIGH);
+  digitalWrite(PIN_LED_G, HIGH);
+  digitalWrite(PIN_LED_B, HIGH);
+
+  digitalWrite(LED1, led1State);
+  digitalWrite(LED2, led2State);
+  digitalWrite(LED3, led3State);
+
+  leds[0] = CRGB::Orange;
+  FastLED.show();
+}
+
+void loop() {
+  bool btnReading = digitalRead(BTN);
+
+  // we want to do something only if the reading and the state are different
+  // in this case they are the same and we exit the loop immediatly
+  if(btnReading == btnState){
+    return; 
+  }
+ 
+  if(btnReading == LOW){ // LOW means button is pressed on Tarantino
+    btnState = LOW;
+    targetLED++;
+
+    switch(targetLED % 3){
+      case 0: 
+        led1State = LOW;
+        led2State = LOW;
+        led3State = HIGH;
+        break;
+      case 1: 
+        led1State = HIGH;
+        led2State = LOW;
+        led3State = LOW;
+        break;
+      case 2: 
+        led1State = LOW;
+        led2State = HIGH;
+        led3State = LOW;
+        break;
+    }
+  }else{
+    btnState = HIGH;
+  }
+
+  digitalWrite(LED1, led1State);
+  digitalWrite(LED2, led2State);
+  digitalWrite(LED3, led3State);
+  delay(10);
+  FastLED.show();
+}
+```
+
+Below is the result: the RGB orange is not even near the other LEDs' orange but I could not bother trying to match them with trial and error at 1am anymore.
+
+{{< video src="program2.mp4" loop="true" >}}
+
+Below is the code for a reaction game to be explained when I have the time.
+
+```C
+#include <Arduino.h>
+#include <FastLED.h>
+
+// Decoy LED pin
+#define D_LED D0
+
+// Win LED pin
+#define W_LED D7
+
+// Neopixel feedback LED configuration
+#define FEEDBACK_LED PIN_NEOPIXEL
+#define NEOPIXEL_BRIGHTNESS 2
+#define NUM_LEDS 1
+CRGB leds[NUM_LEDS];
+
+// Button pin
+#define BTN D1
+
+// Maximum delay value
+#define MAX_DELAY 600
+
+// LED states
+bool w_LED_state = LOW;
+bool d_LED_state = LOW;
+
+// Button state (connected to 3.3V via a pull-up resistor)
+bool btnState = HIGH;
+
+// Game variables
+unsigned long time_taken;
+unsigned long best_time = ULONG_MAX;
+int victory_count = 0;
+int failure_count = 0;
+
+// Function to measure time until button press
+// Waits for delay_time milliseconds and returns the time taken to press 
+// the button or the delay time given as an input, whichever is smaller
+unsigned long timeUntilButtonPress(int delay_time) {
+  unsigned long startTime = millis();
+  while (digitalRead(BTN) == HIGH) {
+    if (millis() - startTime > delay_time) {break;}
+  }
+  unsigned long endTime = millis();
+  return endTime - startTime;
+}
+
+void setup() {
+
+  // Initialize serial communication at 115200 baud
+  Serial.begin(115200);
+
+  // Neopixel setup
+  FastLED.addLeds<NEOPIXEL, FEEDBACK_LED>(leds, NUM_LEDS);
+  FastLED.setBrightness(NEOPIXEL_BRIGHTNESS);
+  pinMode(NEOPIXEL_POWER, OUTPUT);
+  digitalWrite(NEOPIXEL_POWER, HIGH);
+  delay(10);
+
+  // Map pins
+  pinMode(W_LED, OUTPUT);
+  pinMode(D_LED, OUTPUT);
+  pinMode(PIN_LED_R, OUTPUT);
+  pinMode(PIN_LED_G, OUTPUT);
+  pinMode(PIN_LED_B, OUTPUT);
+  pinMode(BTN, INPUT);
+
+  // Set initial LED states
+  digitalWrite(PIN_LED_R, HIGH);
+  digitalWrite(PIN_LED_G, HIGH);
+  digitalWrite(PIN_LED_B, HIGH);
+
+  digitalWrite(W_LED, w_LED_state);
+  digitalWrite(D_LED, d_LED_state);
+
+  // Visual countdown for player to get ready
+  leds[0] = CRGB::Red;
+  FastLED.show();
+  delay(1000);
+
+  leds[0] = CRGB::Yellow;
+  FastLED.show();
+  delay(1000);
+
+  leds[0] = CRGB::Green;
+  FastLED.show();
+  delay(1000);
+
+  leds[0] = CRGB::Black;
+  FastLED.show();
+}
+
+void loop() {
+
+  // Random delay before one of the LEDs turns on
+  int random_delay = random(500, 5000);
+  time_taken = timeUntilButtonPress(random_delay);
+  // If the button is pressed before the target LED lights up, the
+  // feedback LED flashes red and the player gets a failure point
+  if (time_taken < random_delay) {
+    Serial.println("Too early!");
+    leds[0] = CRGB::Red;
+    FastLED.show();
+    delay(MAX_DELAY);
+    leds[0] = CRGB::Black;
+    FastLED.show();
+    failure_count++;
+  }
+
+  // Randomly selects one of the LEDs to turn on after the random delay time
+  switch (random(0, 2))
+  {
+  case 0:
+    // Turn on the decoy LED and wait if a button press is detected while it is on
+    d_LED_state = HIGH;
+    digitalWrite(D_LED, d_LED_state);
+    time_taken = timeUntilButtonPress(MAX_DELAY);
+    d_LED_state = LOW;
+    digitalWrite(D_LED, d_LED_state);
+    // If the button is pressed while the decoy LED is on, the feedback 
+    // LED flashes red and the player gets a failure point
+    if (time_taken < MAX_DELAY) {
+      Serial.println("Wrong LED!");
+      leds[0] = CRGB::Red;
+      FastLED.show();
+      delay(MAX_DELAY);
+      leds[0] = CRGB::Black;
+      FastLED.show();
+      failure_count++;
+    }
+    break;
+  case 1:
+    // Turn on the target LED and wait if a button press is detected while it is on
+    w_LED_state = HIGH;
+    digitalWrite(W_LED, w_LED_state);
+    time_taken = timeUntilButtonPress(MAX_DELAY);
+    w_LED_state = LOW;
+    digitalWrite(W_LED, w_LED_state);
+    // If the button is pressed while the target LED is on and faster than the previous time, 
+    // the feedback LED flashes green and the player gets a victory point
+    if (time_taken < best_time && time_taken < MAX_DELAY) {
+      // Prints the new best time taken to press the button and the previous best time if it exists
+      Serial.print("New best time_taken: " + String(time_taken) + "ms"); if (best_time != ULONG_MAX) {Serial.print(" (previous best: " + String(best_time) + "ms)");} Serial.println();
+      best_time = time_taken;
+      leds[0] = CRGB::Green;
+      FastLED.show();
+      delay(MAX_DELAY);
+      leds[0] = CRGB::Black;
+      FastLED.show();
+      victory_count++;
+      // If the button is pressed while the target LED is on but slower than the previous time,
+      // the feedback LED flashes yellow and the player gets a message to keep trying
+    } else {
+      // Prints the keep on trying message and the current best time if it exists
+      Serial.print("keep on trying!"); if (best_time != ULONG_MAX) {Serial.print(" (Current best time: " + String(best_time) + "ms)");} Serial.println();
+      leds[0] = CRGB::Yellow;
+      FastLED.show();
+      delay(MAX_DELAY);
+      leds[0] = CRGB::Black;
+      FastLED.show();
+    }
+  }  
+
+  // If the player has 10 victory points, they win the game, indicated 
+  // by the final scoreboard and green LEDs that stay on
+  if (victory_count >= 10) {
+    Serial.println("You win with a score of " + String(victory_count) + " victories and " + String(failure_count) + " failures!");
+    digitalWrite(PIN_LED_G, LOW);
+    leds[0] = CRGB::Green;
+    FastLED.show();
+    delay(ULONG_MAX);
+  }
+
+  // If the player has 10 failure points, they lose the game, indicated
+  // by the final scoreboard and red LEDs that stay on
+  if (failure_count >= 10) {
+    Serial.println("You lose with a score of " + String(victory_count) + " victories and " + String(failure_count) + " failures!");
+    digitalWrite(PIN_LED_R, LOW);
+    leds[0] = CRGB::Red;
+    FastLED.show();
+    delay(ULONG_MAX);
+  }
+
+  delay(10);
+}
+```
+
+Point of the game is to overcome yourself consecutively multiple times
+
+{{< video src="reaction-game.mp4" loop="true" >}}
 
 
 
+Much nicer in VS Code with PlatformIO thanks to autocomplete and copilot suggestions that knew to, for example, invert the actions and flash the LED as red upon failure cases and helped generate the comments a lot faster
 
-XIAO RP2040 built-in R, G and B LEDs must be set to HIGH to turn off and LOW to turn on.
+VS Code match case and whole word are pretty cool functions when searching for text
 
 ### MicroPython
 
-
+Serial communication using micropython, e.g. change the color of led using english messages 
 
 ## Reflections
 
 What was actually relevant from datasheet? Never need to read one so closely again
 
 Need intuition on what fits in what capacity memories
+
+
 
 
