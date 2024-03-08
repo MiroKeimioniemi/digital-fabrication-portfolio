@@ -21,7 +21,7 @@ categories:
   - "Programming"
 series: 
   - "Weekly Assignments"
-image: "reaction-game-won.jpg"
+image: "reaction-game-won.webp"
 ---
 
 As a second-year Data Science student, I have experience in all types of programming from web development with React, HTML, CSS and JavaScript to machine learning with Python and game development with - funnily enough - Scala, a lot of which can be found from [my GitHub](https://github.com/MiroKeimioniemi). Recently, however, I have also gained experience in embedded programming. I took the [Basic Course in C programming](https://courses.aalto.fi/s/course/a053X000012Qx0rQAC/basic-course-in-c-programming?language=en_US) last spring and got to apply those skills on the [Design Thinking and Electronic Prototyping](https://www.aalto.fi/en/open-university-course-list/design-thinking-and-electronic-prototyping) course last fall, where we created a [prototype for the Networking Bracelet](https://github.com/MiroKeimioniemi/networking-bracelet-arduino-prototype), the idea of which is to encourage and facilitate interesting, spontaneous in-person conversations with the most interesting people at networking events of various kinds.
@@ -920,6 +920,7 @@ Below is a video of the program in action.
 Having now read a datasheet perhaps a bit too closely (although still nowhere near fully) I will never have to do it again. I learned a lot about how to approach reading one, what is the relevant information and where to find it. I got familiar with the RP2040 architecture specifically but also learned a lot about, for example, I/O communication protocols in general as well. The most relevant data of course depends on the type of the part in question, but for microprocessors they are software compatibility, memory, speed, number, layout and descriptions of pins, types of interfaces, cost and sometimes size. As someone more accustomed to PC parts, I still do need a bit more intuition about what each memory capacity can actually fit.
 
 As for programming, my intense hatred for setting up development environments was yet again enforced further but I did get everything to work in the end and am relatively proud of my minimalistic reaction game. Due to running out of time, I unfortunately did not get to build anything too interesting with MicroPython but I am looking forward to using it more in the future. Thonny is very clean and minimal, which I liked, but the interface is in lightmode by default and it is not nearly as powerful as VS Code, which is a shame. Nevertheless, looking forward to input and output devices weeks!
+
 
 
 
