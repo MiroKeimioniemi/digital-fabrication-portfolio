@@ -5,7 +5,6 @@ date: "2024-02-15"
 description: "Week 5"
 tags: 
   - "CAD"
-  - "software"
   - "2D modeling"
   - "3D modeling"
   - "vector"
@@ -229,6 +228,7 @@ It was a lot of work too and a lot was learned. Mainly about double-checking thi
 Creativity is tough when you have to summon it on a tight schedule but pressure also makes diamonds. The opportunity cost of brainstorming, which sometimes results in gold and other times in gravel, is difficult to compare against more linear courses, where you just have to solve a set amount of problems and are then ready. In a way, I am thus looking forward to next week's electronics production, where Neil Gershenfeld warned that there will be almost no creativity as then I get to catch up a little on my three other courses and maybe catch my breath a bit otherwise too. 
 
 Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it always feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. It is like a scrum sprint with a two-week period but where you immediately switch projects instead of iterating. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
+
 
 
 

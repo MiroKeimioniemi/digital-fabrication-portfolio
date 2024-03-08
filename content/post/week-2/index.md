@@ -5,7 +5,6 @@ date: "2024-02-09"
 description: "Week 4"
 tags: 
   - "CAD"
-  - "software"
   - "2D modeling"
   - "3D modeling"
   - "vector"
@@ -585,6 +584,7 @@ Quite a packed week. I definitely learned a lot about 3D-modeling and rendering 
 In terms of specifics, I learned not to use default parts in Ondsel/FreeCAD. They are annoying to deal with and difficult to customize especially with respect to parameters. I also learned to go far around the "Draft" workbench where next to nothing seemed to work. I also learned what portable software is and how to run it on Windows. I got a lot more experience with various workflows in 3D and learned that if I want to do it on any more serious level, I might want to invest in a proper PC with a powerful graphics card, which is something I have been looking for a good excuse for for long now. Every other part I could justify as an investment as producing music is one of the most CPU and RAM intensive tasks out there but a graphics card I could not justify as an investment, even though it might really be for the games... Too bad [Cyberpunk 2077](https://www.cyberpunk.net/) is one of my favorite franchises out there... But now this might be a convenient excuse. And it is only a small leap from Blender to [Unreal Engine](https://www.unrealengine.com/en-US), where I could make my more complex game ideas come to life, now with assets and renders I can make myself.
 
 In conclusion, the two most important takeaways for this week were, however, that I can easily crash any program and that free, open-source software is pretty damn advanced and cool in 2024! The barrier to entry in almost anything that can be done digitally seems to nowadays only be the learning curve for [FOSS](ttps://en.wikipedia.org/wiki/Free_and_open-source_software). In fact, [Fab Academy's](https://fabacademy.org/) most valuable resource might just be the [exhaustive list of software and hardware](https://fabacademy.org/2024/schedule.html) for each of the weekly topics that Neil Gershenfeld walks us through every Wednesday on the global lectures.
+
 
 
 
