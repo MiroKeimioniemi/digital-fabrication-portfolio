@@ -16,8 +16,18 @@ CRGB leds[NUM_LEDS];
 // Button pin
 #define BTN D1
 
-// Maximum delay value
+// Maximum button press delay value in ms
 #define MAX_DELAY 600
+// Lower bound for random delay in ms
+#define RANDOM_DELAY_LOW 500
+// Upper bound for random delay in ms
+#define RANDOM_DELAY_HIGH 5000
+
+// Number of successes required to win
+#define WIN_COUNT 5
+
+// Number of failure required to lose
+#define LOSS_COUNT 5
 
 // LED states
 bool w_LED_state = LOW;
@@ -92,7 +102,7 @@ void setup() {
 void loop() {
 
   // Random delay before one of the LEDs turns on
-  int random_delay = random(500, 5000);
+  int random_delay = random(RANDOM_DELAY_LOW, RANDOM_DELAY_HIGH);
   time_taken = timeUntilButtonPress(random_delay);
   // If the button is pressed before the target LED lights up, the
   // feedback LED flashes red and the player gets a failure point
@@ -160,9 +170,9 @@ void loop() {
     }
   }  
 
-  // If the player has 10 victory points, they win the game, indicated 
+  // If the player has WIN_COUNT victory points, they win the game, indicated 
   // by the final scoreboard and green LEDs that stay on
-  if (victory_count >= 5) {
+  if (victory_count >= WIN_COUNT) {
     Serial.println("You win with a score of " + String(victory_count) + " victories and " + String(failure_count) + " failures!");
     digitalWrite(PIN_LED_G, LOW);
     leds[0] = CRGB::Green;
@@ -170,9 +180,9 @@ void loop() {
     delay(ULONG_MAX);
   }
 
-  // If the player has 10 failure points, they lose the game, indicated
+  // If the player has LOSS_COUNT failure points, they lose the game, indicated
   // by the final scoreboard and red LEDs that stay on
-  if (failure_count >= 5) {
+  if (failure_count >= LOSS_COUNT) {
     Serial.println("You lose with a score of " + String(victory_count) + " victories and " + String(failure_count) + " failures!");
     digitalWrite(PIN_LED_R, LOW);
     leds[0] = CRGB::Red;
@@ -182,4 +192,3 @@ void loop() {
 
   delay(10);
 }
-

@@ -615,7 +615,7 @@ Below is the result: the RGB orange is not even near the other LEDs' orange but 
 
 {{< video src="program2.mp4" loop="true" >}}
 
-Below is the code for a reaction game to be explained when I have the time.
+I then opened a new file and created a reaction time game, the code for which is shown below. The idea is to improve the players' reflexes by forcing them to overcome their previous best reaction time for, in this case, five times in a row. The game is entirely configurable, however, meaning that this, along with many other features, can be changed by altering the single `WIN_COUNT` variable. Below is the code for the game, which is explained both in the comments as well as below.
 
 ```C
 #include <Arduino.h>
@@ -636,8 +636,18 @@ CRGB leds[NUM_LEDS];
 // Button pin
 #define BTN D1
 
-// Maximum delay value
+// Maximum button press delay value in ms
 #define MAX_DELAY 600
+// Lower bound for random delay in ms
+#define RANDOM_DELAY_LOW 500
+// Upper bound for random delay in ms
+#define RANDOM_DELAY_HIGH 5000
+
+// Number of successes required to win
+#define WIN_COUNT 5
+
+// Number of failure required to lose
+#define LOSS_COUNT 5
 
 // LED states
 bool w_LED_state = LOW;
@@ -712,7 +722,7 @@ void setup() {
 void loop() {
 
   // Random delay before one of the LEDs turns on
-  int random_delay = random(500, 5000);
+  int random_delay = random(RANDOM_DELAY_LOW, RANDOM_DELAY_HIGH);
   time_taken = timeUntilButtonPress(random_delay);
   // If the button is pressed before the target LED lights up, the
   // feedback LED flashes red and the player gets a failure point
@@ -780,9 +790,9 @@ void loop() {
     }
   }  
 
-  // If the player has 10 victory points, they win the game, indicated 
+  // If the player has WIN_COUNT victory points, they win the game, indicated 
   // by the final scoreboard and green LEDs that stay on
-  if (victory_count >= 10) {
+  if (victory_count >= WIN_COUNT) {
     Serial.println("You win with a score of " + String(victory_count) + " victories and " + String(failure_count) + " failures!");
     digitalWrite(PIN_LED_G, LOW);
     leds[0] = CRGB::Green;
@@ -790,9 +800,9 @@ void loop() {
     delay(ULONG_MAX);
   }
 
-  // If the player has 10 failure points, they lose the game, indicated
+  // If the player has LOSS_COUNT failure points, they lose the game, indicated
   // by the final scoreboard and red LEDs that stay on
-  if (failure_count >= 10) {
+  if (failure_count >= LOSS_COUNT) {
     Serial.println("You lose with a score of " + String(victory_count) + " victories and " + String(failure_count) + " failures!");
     digitalWrite(PIN_LED_R, LOW);
     leds[0] = CRGB::Red;
@@ -804,25 +814,109 @@ void loop() {
 }
 ```
 
-Point of the game is to overcome yourself consecutively multiple times
+As already mentioned, the point of the game is to improve your reflexes by having to overcome yourself consecutively for five times in order to win. When started, the game gives a visual countdown with the RGB LED and starts soon after it flashes green. It then flashes either the target LED or a decoy LED at random intervals ranging from 0.5 to 5 seconds. 
+
+The player has to react to the target LED flashing by quickly pressing the button. If they did this in under `MAX_DELAY` and faster than their previous best (or `ULONG_MAX` denoting a very large long number in the case of the first press), they get a point, which is indicated by the RGB LED flashing green and a message in the Serial terminal with the new best time. If they fail to press the button faster, the RGB LED will flash yellow and neither positive nor negative points are given. 
+
+If, however, the player presses the button when they are not supposed to, i.e. when either the decoy LED is on or no LED is on, they get a strike, 5 of which lead to failure in the current configuration. A failure is indicated by the on-board LEDs turning semi-permanently red and victory is indicated similarly but with green. In order to start a new game, just press the reset button on the lower left corner of the XIAO board, denoted by "R".
+
+ Below is a video of me playing the game and eventually deliberately losing in order to show all message variants and to not make the video too long.
 
 {{< video src="reaction-game.mp4" loop="true" >}}
 
+[Rosa](https://www.linkedin.com/in/rosa-linke/) actually managed to beat the game by covering the decoy LED and getting predictively lucky a couple of times on top of her blazing fast reaction time. This once more demonstrates the importance of having playtesters!
 
+Overall, once I finally got it working, the development experience with PlatformIO was vastly superior to Arduino IDE mostly thanks to the very capable autofill function and copilot suggestions that knew to, for example, invert the actions and flash the LED as red upon failure cases after writing a success case, and helped generate the comments a lot faster.
 
-Much nicer in VS Code with PlatformIO thanks to autocomplete and copilot suggestions that knew to, for example, invert the actions and flash the LED as red upon failure cases and helped generate the comments a lot faster
-
-VS Code match case and whole word are pretty cool functions when searching for text
+In addition, the ability to create multiple cursors with `Shift + Alt + Mouse left click` and to select text in multiple places at once with `Ctrl + D`, making for a much swifter workflow (I am not sure if Arduino IDE has these but the shortcuts at least are not the same to which I have now gotten highly accustomed to). The ability to select multiple words, variables or sentences in multiple places is made all the more powerful in VS Code by the "Match Case" and "Match Whole Word" options.
 
 ### MicroPython
 
-Serial communication using micropython, e.g. change the color of led using english messages 
+[MicroPython](https://micropython.org/) is a lean implementation of [Python 3](https://www.python.org/) that fits on a chip with 256kB of code space and 16kB of RAM, thus allowing one to do embedded programming with Python instead of C. This is very attractive as Python is a higher level language than C, allowing for a lot more concise code and faster development.
+
+I had heard that MicroPython could be used with VS Code as well and thus first searched for how to do it. I found [this](https://www.youtube.com/watch?v=O6lkYTfcMEg) video but there was no direct tutorial for my specific board and with my little experience with electronics, I have learned to avoid straying too far from the established paths if I want to get something done in a reasonable time interval. Anything and everything is of course possible but I don't yet possess the experience and confidence to go exploring too far beyond on my onw given how often even well documented setups end up not being quite as straightforward as advertised, see [PlatformIO section](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/p/embedded-programming/#platformio) above.
+
+PlatformIO support for MicroPython has also been [discussed since 2016](https://github.com/platformio/platformio-core/issues/728) but has not been implemented for 8 years now. There was a direct tutorial for [using MicroPython with the XIAO RP2040](https://wiki.seeedstudio.com/XIAO-RP2040-with-MicroPython/) using [Thonny](https://thonny.org/), however, and so I decided to follow that. 
+
+This process was delightfully straightforward as compared to above. First, simply download and install the recommended version of [Thonny](https://thonny.org/) for your operating system. Second, appreciate the quote in the below screenshot of the finished installer - although I do not necessarily agree with the implication that you should not always have to document your code nevertheless.
+
+![Finished Thonny installer](thonny-installer.webp)
+
+Then, launch Thonny and navigate to "Tools" > "Options" > "Interpreter", choose "MicroPython (Raspberry Pi Pico)" and leave the port as "Try to detect port automatically". Then take the [Seeed Studio XIAO RP2040](https://wiki.seeedstudio.com/XIAO-RP2040-with-MicroPython/) and press and hold the "BOOT" button on the bottom right, labeled with "B", while connecting it to your computer with a USB-C cable. Click "Install or update MicroPython", choose the "Raspberry Pi Pico / Pico H" variant and click "Install". 
+
+Before this, I had to check whether the process was easily reversible for peace of mind and I found out first from [Reddit](https://www.reddit.com/r/esp32/comments/9urif9/remove_micropython_and_factory_reset/) and then from experience that it indeed is: flashing MicroPython onto a board does not remove the original firmware and is thus a safe, reversible operation. When one wants to use something different such as C code with PlatformIO, the board must be connected in bootloader mode (holding "B" button while connecting) for the first time after which it will continue working normally.
+
+![Initializing MicroPython with Thonny](init-micropython.webp)
+
+After that, the board is ready for use, which works by writing Python code and clicking the green play icon to "Run current script". I tried out the MicroPython Blink example, which worked nicely immediately. To use the NeoPixel RGB LED requires an additional step of downloading and saving the [ws2812.py library](https://files.seeedstudio.com/wiki/XIAO-RP2040/img/micropython/ws2812.py) onto the board by navigating to "File" > "Save as", selecting "Raspberry Pi Pico" and naming it "ws2812.py".
+
+![Save onto the board](save-on-board.webp)
+![Save error](save-error.webp)
+
+I got a peculiar error at first when trying to save the `ws2812.py` after the upload dialogue being stuck for minutes and then canceling it, but this was fixed by reconnecting the board and restarting Thonny. I then ran the example code and it worked wonderfully, although the LED was once more way too bright for my taste, so I lowered that by adding `0.01` as the third argument to the `WS2812` class instantiation. This was easy to do even in the absence of documentation thanks to the very short and easily readable library that took approximately a minute to figure out in its entirety.
+
+The python scripts can be saved both on board as well as on the computer and they can be similarly run in the REPL environment regardless of where the script is saved. The on-board files can be managed from "File" > "Open" similarly to the ones on the computer.
+
+I then stole the imports and variable definitions from the RGB LED example in the [XIAO RP2040 with MicroPython article](https://wiki.seeedstudio.com/XIAO-RP2040-with-MicroPython/) and wrote the following program that changes the RGB LED color based on textual user input.
+
+```Python
+from ws2812 import WS2812
+import utime
+import machine
+
+# Toggle NEOPIXEL_POWER pin on to power the NeoPixel LED
+power = machine.Pin(11,machine.Pin.OUT)
+power.value(1)
+
+# Define recognized colors
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 150, 0)
+GREEN = (0, 255, 0)
+CYAN = (0, 255, 255)
+BLUE = (0, 0, 255)
+PURPLE = (180, 0, 255)
+WHITE = (255, 255, 255)
+
+# Map strings to colors
+color_dict = {
+    "black": BLACK,
+    "red": RED,
+    "yellow": YELLOW,
+    "green": GREEN,
+    "cyan": CYAN,
+    "blue": BLUE,
+    "purple": PURPLE,
+    "white": WHITE
+}
+
+# Instantiate the WS2812 class with
+# pin_num = PIN_NEOPIXEl, led_count = 1 and brightness = 0.01
+led = WS2812(12,1,0.01)
+
+# Create an infinite loop for the body of the program
+while True:
+    # Wait for serial input and convert it to lowercase
+    color = input("Name a color: ").lower()
+    # If the given color exists in the dictionary,
+    # change the LED color to it and print it
+    if color in color_dict:
+        led.pixels_fill(color_dict[color])
+        led.pixels_show()
+        print(f"LED color: {color}")
+    else:
+        print("Color not recognized.")
+```
+
+Below is a video of the program in action.
+
+{{< video src="micropython-program.mp4" >}}
 
 ## Reflections
 
-What was actually relevant from datasheet? Never need to read one so closely again
+Having now read a datasheet perhaps a bit too closely (although still nowhere near fully) I will never have to do it again. I learned a lot about how to approach reading one, what is the relevant information and where to find it. I got familiar with the RP2040 architecture specifically but also learned a lot about, for example, I/O communication protocols in general as well. The most relevant data of course depends on the type of the part in question, but for microprocessors they are software compatibility, memory, speed, number, layout and descriptions of pins, types of interfaces, cost and sometimes size. As someone more accustomed to PC parts, I still do need a bit more intuition about what each memory capacity can actually fit.
 
-Need intuition on what fits in what capacity memories
+As for programming, my intense hatred for setting up development environments was yet again enforced further but I did get everything to work in the end and am relatively proud of my minimalistic reaction game. Due to running out of time, I unfortunately did not get to build anything too interesting with MicroPython but I am looking forward to using it more in the future. Thonny is very clean and minimal, which I liked, but the interface is in lightmode by default and it is not nearly as powerful as VS Code, which is a shame. Nevertheless, looking forward to input and output devices weeks!
 
 
 
