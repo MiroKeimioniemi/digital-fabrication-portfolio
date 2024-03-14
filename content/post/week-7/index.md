@@ -36,7 +36,9 @@ I feel that this week had the highest stakes thus far. Not only could the machin
 
 As the assignment was to make something big at approximately meter-scale as specified on the [Fab Academy page](https://academy.cba.mit.edu/classes/computer_machining/index.html), I had to immediately discard many ideas such as organizer boxes and a stand for our [portable projector](https://us.xgimi.com/products/halo-plus) to mount it on the bedhead. I had to think bigger, which naturally led to seats, tables and bookcases but our apartment was already filled with those. Something which we had talked about for a while now, however, was to get shelves for a corner of our kitchen - shown below - where we could put jars of dried goods in order to gain more storage space and add a bit of color.
 
-![](before-shelves.webp)
+![Kitchen corner before shelves](before-shelves.webp)
+
+The jars were placed on the counter for reference. The idea would be to have two shelves on top of each other so that the lower one fits the larger jars (height: ~31cm, diameter: ~9.2-11cm) on the left and the upper one would fit the smaller jars (height: ~24-28cm, diameter: ~6.5-10.5cm) on the right. The wall area is approximately 69.4cm wide and 78cm tall. Given a thickness of 15mm for the plywood, the height would theoretically not be an issue with a naive approach of simply summing up all heights. However, a shelf obviously needs some sort of a support structure that can either be internal, such as in the case of thicker floating shelves, or external, which is necessary for such thin material as this. 
 
 Browsed skyline silhouettes of Tampere and Munich with the search "Tampere/Munich skyline" and found these: https://sndp.mediadelivery.fi/img/468/200572301.png, https://image.shutterstock.com/image-vector/munich-skyline-silhouette-black-city-260nw-1890802744.jpg 
 
@@ -108,6 +110,8 @@ Initially 1900, now 2100
 
 ![alt text](dog-bone.webp)
 
+![alt text](cut-preview.webp)
+
 ![alt text](cnc-software.webp)
 
 ![](control.webp)
@@ -149,4 +153,5 @@ Inkscape break path and join
 
 
 Fix dxfs by deleting overlapping lines, joining the rest to form a closed shape etc etc.
+
 
