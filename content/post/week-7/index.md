@@ -19,8 +19,24 @@ categories:
   - "Machining"
 series: 
   - "Weekly Assignments"
-image: "city-skyline-shelf-fusion360-render.webp"
+image: "all-parts.webp"
 ---
+
+I feel that this week had the highest stakes thus far. Not only could the machine actually kill you, for which there is actual [precedent](https://www.nytimes.com/2011/04/14/nyregion/yale-student-dies-in-machine-shop-accident.html), we were also given a strictly limited 120cm x 120cm x 1.5cm sheet of plywood and our assignment was to create something large, meaning that it could not be easily hidden. This meant that the project had to be large and complex enough to pass the assignment criteria but also something that we genuinely needed and wanted to have in our apartment.
+
+## Assignment
+
+- Document the safety introduction details and general flow of using the machine.
+- Make (design+mill+assemble) something big using a 15 mm thick and 120x120 cm big soft plywood sheet.
+- Do a fitting test with a simple design first so that your parts are snug fit when assembling them and to avoid spoiling material. You will get one plywood sheet.
+- Make sure you choose the right depth of cut (1/2 diameter of tool is safe) and calculate the feed rate (FR = SS * CL * NF) accordingly to avoid breaking the tool.
+- Document your process in a new page on your website.
+
+## Design
+
+As the assignment was to make something big at approximately meter-scale as specified on the [Fab Academy page](https://academy.cba.mit.edu/classes/computer_machining/index.html), I had to immediately discard many ideas such as organizer boxes and a stand for our [portable projector](https://us.xgimi.com/products/halo-plus) to mount it on the bedhead. I had to think bigger, which naturally led to seats, tables and bookcases but our apartment was already filled with those. Something which we had talked about for a while now, however, was to get shelves for a corner of our kitchen - shown below - where we could put jars of dried goods in order to gain more storage space and add a bit of color.
+
+![](before-shelves.webp)
 
 Browsed skyline silhouettes of Tampere and Munich with the search "Tampere/Munich skyline" and found these: https://sndp.mediadelivery.fi/img/468/200572301.png, https://image.shutterstock.com/image-vector/munich-skyline-silhouette-black-city-260nw-1890802744.jpg 
 
@@ -133,3 +149,4 @@ Inkscape break path and join
 
 
 Fix dxfs by deleting overlapping lines, joining the rest to form a closed shape etc etc.
+
