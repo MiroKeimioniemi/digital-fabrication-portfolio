@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Computer-Controlled Machining"
-date: "2024-03-10"
+date: "2024-03-16"
 description: "Week 9"
 tags: 
   - "CAD"
@@ -180,3 +180,4 @@ fusion constraints are better
 
 
 Fix dxfs by deleting overlapping lines, joining the rest to form a closed shape etc etc.
+
