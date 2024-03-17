@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Computer-Controlled Machining"
-date: "2024-03-16"
+date: "2024-03-18"
 description: "Week 9"
 tags: 
   - "CAD"
@@ -136,40 +136,73 @@ I wanted to again display it as a 3D model using modelviewer as well but no `.gl
 
 ## CNC Milling
 
-Our lab had the [Recontech 1312](https://www.cnc.fi/recontech-1312.html) CNC machine, which I used to mill the parts. We each had 2-hour slots for machining, which barely got me started - likely because I was the very first one who had booked a slot and the process might not have been established and streamlined properly yet. Additionally, we managed to bump into many software issues that even the instructors had not previously encountered. I will document my particular process below but once more [Aalto FabLab Wiki](https://wiki.aalto.fi/display/AF/Aalto+Fablab+Home?src=sidebar) has great documentation for [2D milling with recontech 1312](https://wiki.aalto.fi/display/AF/2D+Milling+with+Recontech+1312) in addition to which there is an 80-minute video for an even more exhaustive overview of the entire process, which can be found [here](https://www.youtube.com/watch?v=mRKgx9oFAFw).
+Our lab had the [Recontech 1312](https://www.cnc.fi/recontech-1312.html) CNC machine, which I used to mill the parts. We each had 2-hour slots for machining, which barely got me started - likely because I was the very first one who had booked a slot and the process might not have been established and streamlined properly yet. Additionally, we managed to bump into many software issues that even the instructors had not previously encountered. I will document my particular process below but once more [Aalto FabLab Wiki](https://wiki.aalto.fi/display/AF/Aalto+Fablab+Home?src=sidebar) has great documentation for [2D milling with recontech 1312](https://wiki.aalto.fi/display/AF/2D+Milling+with+Recontech+1312) in addition to which there is an 80-minute video for an even more exhaustive overview of the entire process [here](https://www.youtube.com/watch?v=mRKgx9oFAFw).
 
-![](fully-cut.webp)
+![Recontech 1312 CNC milling machine](fully-cut.webp)
 
+### Safety
 
-dxf exports include fusion guidelines 
+Use of gloves is recommended with materials that might splinter but explicitly not when using the machine, as they might get tangled up and pulled in. The emergency stop can be found in the control box in the top left corner of the control unit below. The vacuum bed is very loud and thus ear protection is also highly recommended. Additionally, there is a first aid kit in the workshop if needed. Make sure to have long hair tied up and avoid loose clothing and only run the machine from outside of the room but monitor it through the window in the door. Calculating an appropriate feed rate and being aware of the cut area if using clamps is also crucial.
 
-![alt text](import-dxf-vcarve.webp)
+![Recontech 1312 control unit](control.webp)
+![](cnc-room.webp)
 
-![alt text](join-vectors.webp)
+### Creating toolpaths
 
-Initially 1900, now 2100
+I exported the sketches in `.dxf` format by individually selecting them from the tree view in Fusion 360 one by one and choosing "Save As DXF" from the context menu brought up by a right-click. Those can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-7). I then uploaded them onto a USB stick and carried that over to the computer used with the machine. I imported the `.dxf` files into [VCarve Pro](https://www.vectric.com/products/vcarve-pro) and discovered some difficulties with that. The exported `.dxf` files included the sketch guidelines in addition to which they had accumulated some duplicate lines other than those too. This then resulted in various different types of unintended behavior such as a warning in creating the toolpaths in the milder end and setting the toolpaths on the inside even when outside was selected in the more baffling, annoying end.
 
-![alt text](tool-settings.webp)
+![Warning about open contours upon trying to create toolpaths](open-contours.webp)
 
-![alt text](tabs.webp)
+This could be solved by using the "Interactive Trim" tool to cut out the undesirable guidelines as well as the intersecting and overlapping lines. In theory this is as simple as just clicking on the lines to be deleted and merged but in reality it sometimes felt like the computer bits had to be flipped just right by sunrays penetrating and hitting them at a particular angle because of how fiddly deleting particularly the overlapping lines was. I did manage eventually, after which I could then join the vectors using "Join" once all overlapping lines were certainly deleted. One way to detect them was to ungroup the vectors and then just select each of the faces if the entire thing did not get highlighted when doing so. A successful join operation can be inferred from the number of open vectors being 0 after the operation.
 
-![alt text](open-contours.webp)
+![DXF imported to VCarve](import-dxf-vcarve.webp)
+![Trimmed lines](join-vectors.webp)
+![Join vectors](join-triangle.webp)
 
-![alt text](pocket.webp)
+I created a "2D Profile Toolpath", set the cut depth to 15.4mm, which was recommended to us by our instructor, given that we had a sacrificial layer beneath the material, and input the below tool settings: 
 
-![alt text](join-triangle.webp)
+- Diameter: 6mm
+- No. Fluters: 2
+- Pass Depth: 3 mm
+- Stepover: 2.4 mm 40%
+- Spindle Speed: 16000 r.p.m
+- Feed Rate: 2100 mm/min
+- Plunge Rate: 500 mm/min
 
-![alt text](fillet.webp)
+Most of settings were set correctly by default and only needed verifying, which could be done by referring to the Aalto FabLab wiki entry on [2D milling with recontech 1312](https://wiki.aalto.fi/display/AF/2D+Milling+with+Recontech+1312). Due to the limited time slot, the milling bit was pre-installed for us but it can be changed by moving the vacuum tube to the side and changing both the collet and the bit as shown [here](https://www.youtube.com/watch?v=mRKgx9oFAFw). The particular tool we were using had 2 flutes (the cutting edges) and a diameter of 6 mm. We were told that the optimal pass depth would be equal to the radius of the tool and a stepover of 2.4 mm made it fast to move the tool around when not milling with enough of a margin of safety. The Recontech 1312 is rated for a spindle speed of upto 20 000 revolutions per minute but we were instructed to use 16 000 r.p.m with a plunge rate of 500 mm/min for safety. The feed rate could be calculated using the following formula:
 
-![alt text](dog-bone.webp)
+```Feedrate (mm/sec) = Number of Flutes X Tooth feed (mm) X RPM (mm/s)```
 
-![alt text](cut-preview.webp)
+Tooth feed for the above equation is dependent on the cutter diameter and the type of material to be milled. A lookup table can be found [here](https://www.sorotec.de/webshop/Datenblaetter/fraeser/schnittwerte_en.pdf), which gives a value of 0.060 for 6 mm and soft wood. This results in 1920, which we initially rounded down to 1900. After my time was starting to run out, [Solomon Embafrash](https://fabacademy.org/2018/labs/fablabaalto/students/solomon-embafrash/index.html), Aalto FabLab's manager told me it was fine to increase it to 2100 mm/min due to how soft the plywood was and most of my parts were milled with that setting with a decent outcome.
+
+![Tool settings](tool-settings.webp)
+
+I then added 10 mm wide and 2 mm thick tabs to the nearest straight paths at regular intervals and close to critical points to keep the milled part in contact with the rest of the sheet to avoid vibration, which might cause splintering and non-optimal cutting.
+
+![Adding tabs](tabs.webp)
+
+I then added a pocket 1.875mm (thickness / 8) deep to correctly align the components under the shelf using the "Pocket Toolpath".
+
+![Creating a pocket toolpath](pocket.webp)
+
+I had forgotten to add "Dog-Bone" fillets for the first test city background slits to compensate for the mill bit's roundness when trying to fit the components together. Having realized this, I did remember to add them to the rest of the parts by navigating to "Fillet", choosing "'Dog-Bone' Fillet" and clicking the corners I wanted one to be added for. Removing them was also simple by clicking the arcs if one were misplaced.
+
+![Fillet tool](fillet.webp)
+![Creating "Dog-Bone" fillets](dog-bone.webp)
+
+The paths could then be previewed by selecting the desired ones and clicking usually "Reset Preview" first and then "Preview Visible Toolpaths" to show the updated ones. Here it is good to check for everything necessary getting cut or engraved and that the tabs are created correctly.
+
+To save the toolpaths, navigate to "Save Toolpaths" and save them at any location. For a single path, the saving mode does not matter but for multiple paths one must be very careful. The checkmark in the box next to the toolpaths in the lower right corner means that they are visible, whereas the blue overlay of the text indicates selection, of which there can only be one. If one wants save multiple but not all toolpaths, make all visible by ensuring they have checkmarks next to them and choose "Visible toolpaths to one file" and then save with machine set to "Recontech 1312" and post processor to "Mach2/3 Arcs (mm) (*.txt)". Neither I nor Solomon realized to do this for the second city background and thus only the outlines were milled. I decided that it was easier just to re-mill it using the correct toolpaths as I still had material left.
+
+![Save toolpaths](cut-preview.webp)
+
+The saved toolpath file could then be opened in [Mach3](https://www.machsupport.com/software/mach3/)
+
+"Load G-Code"
+
+"Reset" > "Soft Limits" on > "Ref All Home"
 
 ![alt text](cnc-software.webp)
-
-![](control.webp)
-
-![](cnc-room.webp)
 
 ![](cnc-cutting.webp)
 
@@ -178,18 +211,3 @@ Initially 1900, now 2100
 ![](separated.webp)
 
 ![](all-parts.webp)
-
-
-
-Switched back to Fusion with scaling of Tampere: 3.778233, Munich: 3.7795275
-
-fusion constraints are better
-
-
-
-
-
-
-Fix dxfs by deleting overlapping lines, joining the rest to form a closed shape etc etc.
-
-
