@@ -56,6 +56,8 @@ The limited space and (literally) heavy requirements did certainly provide its o
 
 After consulting with my partner to get her opinion on what she would be willing to look at in the kitchen for the rest of our stay in the apartment, we mutually decided to go with the city backdrop design. As for the cities themselves, we chose Tampere and Munich as we are both originally from the former and she has lived a year in the latter as well. I could have made something abstract too but for something that is already custom in the first place it makes more sense to go all the way. Thinking of another alternative, it would be pretty cool to make silhouttes of one's favorite fictional cities too.
 
+### Vectors
+
 I then proceeded to browse skyline silhouttes of both Tampere and Munich with searches like "Tampere/Munich skyline silhouette vector" and found the following [this one](https://sndp.mediadelivery.fi/img/468/200572301.png) for Tampere and [this one](https://image.shutterstock.com/image-vector/munich-skyline-silhouette-black-city-260nw-1890802744.jpg) for Munich. I also used [this](https://media.licdn.com/dms/image/C4D16AQHuzMTjrQYcfw/profile-displaybackgroundimage-shrink_200_800/0/1592293143501?e=2147483647&v=beta&t=ZKE729V-MwQuIzHG-s6nCrEIPGbMoybx5kuUVhBlo34) as another reference for Tampere. 
 
 As the Tampere image was not a vector and it did not contain everything I wanted, I created my own silhouette based on it. I imported it to Inkscape, traced the outline using "Path" > "Trace Bitmap" with rather extreme settings (Threshold: 0.881 and Optimize: 5.000) and deleted the unwanted nodes such as the clouds and the fish. I then added a grid overlay with 1mm spacing in the "Document Properties" > "Grids" to aid with precision editing of individual nodes. With it enabled, I proceeded to fix the trace by making everything symmetrical that should be so and adjusting the spacing between the buildings. I also merged the different components of [Näsinneula](https://fi.wikipedia.org/wiki/N%C3%A4sinneula) (the highest tower) by positioning them so that they overlap slightly and clicking "Path" > "Union". 
@@ -80,6 +82,8 @@ I did the same for Munich but with much smaller modifications, only making sure 
 Below is the resulting, refined 690mm x 230mm (reduced for the webpage) vector.
 
 <svg width="100%" height="100%" viewBox="0 0 690 230" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><path style="display:inline;fill:var(--pre-text-color)" d="m629 3-1 22-1 20-2 10v5h-2c-.957.028-2 1.043-2 2 .028 1.042 1.043 1.972 2 2h2v6l-6 2v10l6 2v6h-6v2c2 0 2 3 2 3s0 3-2 3v2c2 0 2 3 2 3s0 3-2 3v2h6l-1 32h-7v28c0 6 6 14 13 14h-22.913v-42L599 136l8.181-4L607 85h-12l-.096-15H587c0 6.927-7 5-7 5V63h-10v2h-6v-2h-11v2h-6v-2h-10v12s-7.08 1.85-7-5h-8l-.009 14.78H510V132l8 4-8 4v7h-41v-20h-6V85l-4-15h-3V60h-2l-1-18s-.885-4.54-2 0l-1 18h-2v10h-3l-4 15v42h-6v20h-37v-3s-2-.199-2-4h-1l-2-20s-.462-2.31-1 0l-2 20h-1c-.084 4.055-2 4-2 4v8h-1s-1 .014-1 1v2c.056 1.042.977 1 .977 1H387v7h-1s-.972.014-1 1v3c.028.986.92 1 .92 1H387v6.915L375 175v-60l-1-40 1-9.81s.013-7.5-5-7.613L366 57l-.744-7s-.094-.215-.224-.241c-.079-.016-.17.035-.262.241l-.77 7-4 .55c-5.012 0-5 7.45-5 7.45-.043 4.01 1.015 6.036 1 10-.046 12.483-.908 27.729-1 40-.033 5.333 0 4.667 0 10h-20v-10l-1-40 1-9.81s.012-7.5-5-7.613L326 57l-.744-7s-.24-.55-.487 0l-.77 7-3.999.55c-5.012 0-5 7.45-5 7.45-.044 4.011 1.015 6.036 1 10-.05 13.5-1.046 26.722-1 40 .068 19.804.077 39.623 0 60h-10v-35c-1.294-1.71 0-3-5.052-5.008L300 135s1.274-2.492 0-5c0 0-1-1-3-1-.415 0-1.056-7.307-2-9-.688-1.233-1.379-1.2-2 0-.282.542-1.472 8.978-2 9-2.552.104-3 1-3 1-.896 1.75-.036 4.726 0 5-1 0-8 0-8-5v-30l-5-.04c-1.952 0-2-4.96-2-4.96V85s-2.043-2.972-5-3V71c-3.363-6.77-2.696-6.564-6 0v11c-2.985.028-5 3-5 3v10s.03 5-2 5h-5c-.006 2.504 0 18.908 0 30 0 5-7 5-8 5 0 0 1.275-2.491 0-5 0 0-1-1-3-1-.415 0-1.056-7.307-2-9-.687-1.232-1.378-1.2-2 0-.281.542-1.472 8.978-2 9-2.552.104-3 1-3 1-1.24 2.421 0 5 0 5-4.956 2.056-5 5-5 5 .048 11.14.225 22.283 0 33.422h-7.096L217 22c.04-1.951-2-2-2-2l-43 .003s-2.04-.034-2 1.997l-.054 146h-7l.054-44h-5v-4h-5v3.783h-5.922L147 77h-9v5h-13V70h-12l-.086 116H106v-11h-4v-27l-3-18-3 18v5.92h-6.033L90 148h-2v-3h-2v-3h-2v-3h-2v-3h-2v-3h-2v-3h-2v-3h-2l-3-33h-1l-3 33h-2l.05 3H63v3h-2v3h-2v3h-2v3h-2v3h-2v3h-2v6h-6v-6l-3-18-3 18v27h-7l.002-43-2.497-9L27 132h-5v-19l1-4-7-22-7 22 1 4v19H5l-2.493-9L0 132v98h690v-40h-19.636v-7.284C680 182 687 175 690 168v-23h-35v-5h-19l-1-32h6v-2c-2-.01-2-3-2-3s0-3.035 2-3.035V98c-2-.019-2-3-2-3s0-3 2-3v-2h-6v-6l6-2V72l-6-2v-6h2c.975 0 2.093-1.025 2.093-2 0-1.042-1-2-2-2H635v-5l-2-10-1-20-1-22c-1-6.743-2 0-2 0"/></svg>
+
+### 3D modeling
 
 I then attempted to use Ondsel for designing the actual shelf by importing the SVG, extruding it and adding joints to it. The importing was pleasantly straightforward with correct scaling as well but I found it rather peculiar that the SVG was not similarly straight across the "Part Design" and " Draft" workbenches. I wet to adjust the grid size in order to envelope the entire shape and tried to troubleshoot it but later I realized that the bottom and side nodes had not perfectly snapped to the grid in Inkscape. I had practically fully designed the first verion of the shelf when Ondsel betrayed me and all 18 backups of the project that I had spent the entirety of Sunday exploratorily making were corrupted. I suspect this might have something to do with the fact that I edited the city vector as a sketch and forgot to use the lock constraint on the non-adjusting parts but that should still not happen. I lost practically all my work and so Ondsel/FreeCAD lost me as a user, at least for the rest of the course and complex projects.
 
@@ -130,6 +134,15 @@ I wanted to again display it as a 3D model using modelviewer as well but no `.gl
 
 {{< 3DModel "textured-city-skyline-shelves.glb" >}}
 
+## CNC Milling
+
+Our lab had the [Recontech 1312](https://www.cnc.fi/recontech-1312.html) CNC machine, which I used to mill the parts. We each had 2-hour slots for machining, which barely got me started - likely because I was the very first one who had booked a slot and the process might not have been established and streamlined properly yet. Additionally, we managed to bump into many software issues that even the instructors had not previously encountered. I will document my particular process below but once more [Aalto FabLab Wiki](https://wiki.aalto.fi/display/AF/Aalto+Fablab+Home?src=sidebar) has great documentation for [2D milling with recontech 1312](https://wiki.aalto.fi/display/AF/2D+Milling+with+Recontech+1312) in addition to which there is an 80-minute video for an even more exhaustive overview of the entire process, which can be found [here](https://www.youtube.com/watch?v=mRKgx9oFAFw).
+
+![](fully-cut.webp)
+
+
+dxf exports include fusion guidelines 
+
 ![alt text](import-dxf-vcarve.webp)
 
 ![alt text](join-vectors.webp)
@@ -164,8 +177,6 @@ Initially 1900, now 2100
 
 ![](separated.webp)
 
-![](fully-cut.webp)
-
 ![](all-parts.webp)
 
 
@@ -180,4 +191,5 @@ fusion constraints are better
 
 
 Fix dxfs by deleting overlapping lines, joining the rest to form a closed shape etc etc.
+
 
