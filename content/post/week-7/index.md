@@ -27,7 +27,7 @@ image: "all-parts.webp"
 
 I feel that this week had the highest stakes thus far. Not only could the machine actually kill you, for which there is actual [precedent](https://www.nytimes.com/2011/04/14/nyregion/yale-student-dies-in-machine-shop-accident.html), we were also given a strictly limited 120cm x 120cm x 1.5cm sheet of plywood and our assignment was to create something large, meaning that it could not be easily hidden. This meant that the project had to be large and complex enough to pass the assignment criteria but also something that we genuinely needed and wanted to have in our apartment.
 
-## Assignment
+## Assignments
 
 - Document the safety introduction details and general flow of using the machine.
 - Make (design+mill+assemble) something big using a 15 mm thick and 120x120 cm big soft plywood sheet.
@@ -211,3 +211,4 @@ The saved toolpath file could then be opened in [Mach3](https://www.machsupport.
 ![](separated.webp)
 
 ![](all-parts.webp)
+

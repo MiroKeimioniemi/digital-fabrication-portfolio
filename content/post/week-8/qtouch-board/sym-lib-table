@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Seeeduino XIAO")(type "Legacy")(uri "C:/Users/Miro/Documents/KiCad/8.0/additional-libraries/Seeeduino XIAO KICAD/Seeeduino XIAO.lib")(options "")(descr ""))
+)
