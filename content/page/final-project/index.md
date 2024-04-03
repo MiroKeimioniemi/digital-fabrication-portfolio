@@ -84,6 +84,17 @@ Potential components:
 
 
 
+Notes:
+
+Potential processes for making the cover:
+- Vacuum forming is the most promising
+  - possible materials:
+    - Polystyrene (+sikablock)
+    - Acrylic (pmma translucent acrylic)
+- 3D printing
+- Molding & casting (3D-printed mold?)
+
+
 
 
 

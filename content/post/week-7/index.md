@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Computer-Controlled Machining"
-date: "2024-03-18"
+date: "2024-04-01"
 description: "Week 9"
 tags: 
   - "CAD"
@@ -142,14 +142,14 @@ Our lab had the [Recontech 1312](https://www.cnc.fi/recontech-1312.html) CNC mac
 
 ### Safety
 
-Use of gloves is recommended with materials that might splinter but explicitly not when using the machine, as they might get tangled up and pulled in. The emergency stop can be found in the control box in the top left corner of the control unit below. The vacuum bed is very loud and thus ear protection is also highly recommended. Additionally, there is a first aid kit in the workshop if needed. Make sure to have long hair tied up and avoid loose clothing and only run the machine from outside of the room but monitor it through the window in the door. Calculating an appropriate feed rate and being aware of the cut area if using clamps is also crucial.
+Use of gloves is recommended with materials that might splinter but explicitly not when using the machine, as they might get tangled up and pulled in. The large, red emergency stop can be found in the control box in the top left corner of the control unit below. The vacuum bed is very loud and thus ear protection is also highly recommended. Additionally, there is a first aid kit in the workshop in the lower, grey cabinet with sliding doors next to the blue cabinet by the second entrance if needed. Make sure to have long hair tied up and avoid loose clothing and only run the machine from outside of the room but monitor it through the window in the door. Calculating an appropriate feed rate and being aware of the cut area if using clamps is also crucial.
 
 ![Recontech 1312 control unit](control.webp)
-![](cnc-room.webp)
+![CNC room through door](cnc-room.webp)
 
 ### Creating toolpaths
 
-I exported the sketches in `.dxf` format by individually selecting them from the tree view in Fusion 360 one by one and choosing "Save As DXF" from the context menu brought up by a right-click. Those can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-7). I then uploaded them onto a USB stick and carried that over to the computer used with the machine. I imported the `.dxf` files into [VCarve Pro](https://www.vectric.com/products/vcarve-pro) and discovered some difficulties with that. The exported `.dxf` files included the sketch guidelines in addition to which they had accumulated some duplicate lines other than those too. This then resulted in various different types of unintended behavior such as a warning in creating the toolpaths in the milder end and setting the toolpaths on the inside even when outside was selected in the more baffling, annoying end.
+I exported the sketches in `.dxf` format by individually selecting them from the tree view in Fusion 360 one by one and choosing "Save As DXF" from the context menu brought up by a right-click, which, however, is not necessarily the smartest way as discussed in the reflections at the bottom of the page. Those can be found in the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-7). I then uploaded them onto a USB stick and carried that over to the computer used with the machine. I imported the `.dxf` files into [VCarve Pro](https://www.vectric.com/products/vcarve-pro) and discovered some difficulties with that. The exported `.dxf` files included the sketch guidelines in addition to which they had accumulated some duplicate lines other than those too. This then resulted in various different types of unintended behavior such as a warning in creating the toolpaths in the milder end and setting the toolpaths on the inside even when outside was selected in the more baffling, annoying end.
 
 ![Warning about open contours upon trying to create toolpaths](open-contours.webp)
 
@@ -196,19 +196,46 @@ To save the toolpaths, navigate to "Save Toolpaths" and save them at any locatio
 
 ![Save toolpaths](cut-preview.webp)
 
-The saved toolpath file could then be opened in [Mach3](https://www.machsupport.com/software/mach3/)
+### Milling
 
-"Load G-Code"
+Turn on the machine by rotating the black main switch to "ON" position and pressing the red "Power On" button on the control unit. To use the entire vacuum bed, make sure that both handles in the front controlling their respective sides of the machine are pointing down. To turn it on, press the white button in the upper right corner of the control panel. You can tell if it worked by the noise but you can wait until you have finished the entire setup before you turn it on.
 
-"Reset" > "Soft Limits" on > "Ref All Home"
+![Recontech 1312 control unit](control.webp)
+![Recontech 1312 CNC machine](recontech-1312.webp)
 
-![alt text](cnc-software.webp)
+The saved toolpath file could then be opened in the very retro-looking [Mach3](https://www.machsupport.com/software/mach3/) software via "Load G-Code". Every time you open the software, make sure to begin by clicking "Reset" as the very first thing you do. Then, enable "Soft Limits" to enable software limits to make sure that you are notified if the toolpath exceeds the milling area. Finally, click "Ref All Home" to bring the tool to the origin in the front left corner. The tool can be moved manually using the arrow keys on the keyboards of both the computers inside and outside the room. You can then open the `.txt` toolpath file using the "Load G-Code" button.
 
-![](cnc-cutting.webp)
+![Mach3 CNC software](cnc-software.webp)
 
-![](chisel.webp)
+You can change the tool by first un-attaching the red dust shoe at the mouth of the large tube by loosening its two locking screws while holding it and swivelling it around the toolholder to get some space. Place the cushion found in the cabin immediately to the right of the door - where also the tools and collets are - under the toolholder to protect the tool in case it falls and change the collet by unscrewing the nut from the toolholder and screwing in another that is of appropriate size for the tool to be used. Insert the milling bit about 2cm in and tighten it by simultaneously using a spanner on the top of the shaft and a key wrench inserted from the bottom of the toolholder, bring back the dust shoe and remove the cushion.
 
-![](separated.webp)
+![Collets and tools](tools.webp)
+![Fixtures](fixtures.webp)
 
-![](all-parts.webp)
+To load the material, prepare the vacuum bed by unplugging the vacuum holes under the area to be covered and set rubber strips underneath to prevent the air from escaping. Place the sacrificial, breathable MDF layer on top and blow off potential dust with the air compressor on the left wall. If using the whole bed, open both vacuum valves and then place your material on top of the sacrificial layer. Turn on the vacuum and check that the suction is adequate by trying to push the corners of the materials and checking that the pressure gauge is on the green zone. If the suction is inadequate or the material has a risk of warping or vibrating or you just want to be sure otherwise, you can additionally fixture the material using clamps in the cabin that attach to the rails or by using screws/nails, glue/tape, weights or encapsulation depending on the material and your needs. Make sure, however, that these do not intersect the toolpath on any of the X-, Y- or Z-axis to not damage the tool.
+
+To calibrate X, Y and Z, turn on the vacuum bed to suck in the material for an accurate height measurement and place the yellow, conical Z-axis calibrator magnetically attached to the left side of the machine on the sheet of material. Move the machining bit over it and click the "Terän mittaus" button in the Mach3 software, which slowly lowers the bit on it until it barely touches it and so automatically sets the Z-axis. Then move the toolhead into the desired XY position, which defines the bottom leftmost corner of the milling area, and click both "Zero X" and "Zero Y".
+
+Once the tool and vacuum bed are set and tested and the material is loaded along with the sacrificial layer, you can step out of the room, close the door, load the G-code if you had not yet done so on the laptop outside next to the door, preview the toolpaths in the top right corner of the Mach3 software and press the green button next to the door to launch the process. The green light signifies that the spindle is not spinning whereas the red light warns of a spinning spindle. Opening the door causes the milling to immediately stop so do not ever do so without stopping it first or waiting for it to finish. Do, however, monitor the cutting outside. Wait for the milling to finish, clean up after yourself by performing the steps in reverse, always leaving the room better than you found it and take your freshly milled pieces with you.
+
+![CNC cutting](cnc-cutting.webp)
+
+## Processing and assembly 
+
+I carried the cut sheet of material to the woodworking space and used a chisel and a hammer to remove the tabs keeping the cut pieces attached to the sheet and the outcome was quite satisfying, even though particularly Tampere had some chipped details in Näsinneula and haulitorni. 
+
+![Freshly milled sheet of material](chisel.webp)
+![Separated city backboard](separated.webp)
+
+As mentioned above already, I forgot the dog-bones from the Munich joints and the first version of Tampere missed the center one entirely and I had to re-mill it. The Munich joints would have to be processed a bit more but hurry from various sources forced me to wrap up my work for a while before I got the time to return to it. Below are the products of the day of milling.
+
+![Milled parts](all-parts.webp)
+
+
+
+## Reflections
+
+Much smarter ways exist than exporting individual dxfs, for example, create a sketch of a surface of a material sheet with all the components laid out on it or just create the toolpaths entirely in Fusion 360
+
+
 

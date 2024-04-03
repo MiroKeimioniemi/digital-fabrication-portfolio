@@ -431,6 +431,258 @@
 				)
 			)
 		)
+		(symbol "fab:Conn_Header_JST_PH_1x04_P2mm_Vertical_SMD"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_Header_JST_PH_1x04_P2mm_Vertical_SMD"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "fab:Header_JST_PH_1x04_P2mm_Vertical_SMD"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Male JST PH 4 pin connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "male header JST PH"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*Header*JST*PH*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_Header_JST_PH_1x04_P2mm_Vertical_SMD_0_1"
+				(rectangle
+					(start -2.54 6.35)
+					(end 2.54 -6.35)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "Conn_Header_JST_PH_1x04_P2mm_Vertical_SMD_1_1"
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Connector pin header 2.54mm pitch vertical tht"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*PinHeader*1x01*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm_1_1"
+				(rectangle
+					(start -1.27 0.635)
+					(end 1.27 -0.635)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "fab:Conn_PinSocket_1x02_P2.54mm_Vertical_SMD"
 			(pin_names hide)
 			(exclude_from_sim no)
@@ -1270,6 +1522,127 @@
 				)
 			)
 		)
+		(symbol "fab:MountingHole_M3"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole_M3"
+				(at 0 -3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "fab:MountingHole_M3"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting hole M3"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "M3 mounting hole hardware"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_M3_0_1"
+				(polyline
+					(pts
+						(xy -2.54 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
 		(symbol "fab:PWR_3V3"
 			(power)
 			(pin_names
@@ -2074,12 +2447,8 @@
 		(uuid "064da87d-ccc7-4d66-b514-a14d8ea04285")
 	)
 	(no_connect
-		(at 219.71 68.58)
-		(uuid "1a066c7b-eb70-48e7-abb6-aae85693b860")
-	)
-	(no_connect
-		(at 110.49 93.98)
-		(uuid "1b21ce53-ffe8-4364-b54e-12751141dd33")
+		(at 222.25 58.42)
+		(uuid "0e69a4a6-468f-4e69-897d-92eb0159c703")
 	)
 	(no_connect
 		(at 25.4 91.44)
@@ -2092,6 +2461,10 @@
 	(no_connect
 		(at 25.4 83.82)
 		(uuid "76735a46-962d-4f89-8341-05fe998e4ceb")
+	)
+	(no_connect
+		(at 114.3 83.82)
+		(uuid "8b3551c0-fbeb-4e59-ada4-c3b7f4b23435")
 	)
 	(no_connect
 		(at 25.4 80.01)
@@ -2133,16 +2506,6 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 63.5) (xy 222.25 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1311c86c-cd01-4345-81fd-1d947fbe6ef0")
-	)
-	(wire
-		(pts
 			(xy 142.24 72.39) (xy 139.7 72.39)
 		)
 		(stroke
@@ -2150,6 +2513,16 @@
 			(type default)
 		)
 		(uuid "1ed48d4f-4966-4ac6-9f60-22e0a56f4a12")
+	)
+	(wire
+		(pts
+			(xy 105.41 115.57) (xy 99.06 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2443a08d-01eb-46a5-83af-31ab96cbea1d")
 	)
 	(wire
 		(pts
@@ -2203,16 +2576,6 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 88.9) (xy 114.3 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "45b0d88b-fbb1-4f2a-86c5-cec75122b2af")
-	)
-	(wire
-		(pts
 			(xy 142.24 57.15) (xy 139.7 57.15)
 		)
 		(stroke
@@ -2230,6 +2593,26 @@
 			(type default)
 		)
 		(uuid "525a03df-2f2b-4ea6-a285-e592e9a6aec8")
+	)
+	(wire
+		(pts
+			(xy 210.82 60.96) (xy 212.09 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "532cad60-e570-4657-abe3-0489004c3a86")
+	)
+	(wire
+		(pts
+			(xy 115.57 113.03) (xy 99.06 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6950bb4b-a745-41c9-890c-120cdc249f08")
 	)
 	(wire
 		(pts
@@ -2383,6 +2766,16 @@
 	)
 	(wire
 		(pts
+			(xy 104.14 86.36) (xy 100.33 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8205e39-f8b2-4af8-8f98-70eab3dab683")
+	)
+	(wire
+		(pts
 			(xy 168.91 67.31) (xy 166.37 67.31)
 		)
 		(stroke
@@ -2467,7 +2860,7 @@
 	)
 	(global_label "D3_SDA"
 		(shape input)
-		(at 100.33 91.44 180)
+		(at 100.33 86.36 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2477,7 +2870,7 @@
 		)
 		(uuid "214ca7fa-a093-43ee-8db8-584e49fa5021")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 90.3296 91.44 0)
+			(at 90.3296 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2487,9 +2880,9 @@
 			)
 		)
 	)
-	(global_label "D4_SCL"
+	(global_label "QT1_DAC"
 		(shape input)
-		(at 100.33 120.65 0)
+		(at 43.18 179.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2497,9 +2890,9 @@
 			)
 			(justify left)
 		)
-		(uuid "26b1af11-431d-4eff-b586-01c4e89bba3b")
+		(uuid "32b4b9c0-04a4-40a7-b338-d23a321d54f3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 110.2699 120.65 0)
+			(at 54.269 179.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2509,31 +2902,9 @@
 			)
 		)
 	)
-	(global_label "D3_SDA"
-		(shape input)
-		(at 90.17 118.11 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "45ea776b-3085-47cf-9799-f9afe12da85b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 80.1696 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "QT5_SCK"
 		(shape input)
-		(at 106.68 147.32 90)
+		(at 106.68 144.78 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2543,7 +2914,7 @@
 		)
 		(uuid "4bc4de7e-0cf5-4dd0-8f87-4e25cb5bed97")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 106.68 136.1101 90)
+			(at 106.68 133.5701 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2577,7 +2948,7 @@
 	)
 	(global_label "D4_SCL"
 		(shape input)
-		(at 209.55 66.04 180)
+		(at 210.82 60.96 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2587,7 +2958,7 @@
 		)
 		(uuid "5213ca40-2b64-46dd-a86a-c01cdbb70c75")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 199.6101 66.04 0)
+			(at 200.8801 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2615,6 +2986,50 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "QT2"
+		(shape input)
+		(at 52.07 185.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "731376ae-0043-41d2-96a0-18407fb69e3a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 58.5628 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "QT4_RX"
+		(shape input)
+		(at 83.82 182.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "74a109fa-2588-4191-87dc-5d2a733f8ca1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 93.7599 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -2659,6 +3074,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "QT3_TX"
+		(shape input)
+		(at 72.39 176.53 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7feaf507-5b8f-45f5-a3b4-9296422b592a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 82.0275 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -2709,7 +3146,7 @@
 	)
 	(global_label "QT3_TX"
 		(shape input)
-		(at 101.6 147.32 90)
+		(at 101.6 144.78 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2719,7 +3156,29 @@
 		)
 		(uuid "9eb279b4-653e-4291-8ca3-efaabc7d54f6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 101.6 137.6825 90)
+			(at 101.6 135.1425 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "D3_SDA"
+		(shape input)
+		(at 99.06 118.11 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b1e542ff-2235-4c8a-8ef3-4677085a8bdb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 109.0604 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2775,7 +3234,7 @@
 	)
 	(global_label "QT4_RX"
 		(shape input)
-		(at 104.14 157.48 270)
+		(at 104.14 154.94 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2785,7 +3244,7 @@
 		)
 		(uuid "c10248ca-1691-4b8f-a3c3-036b511059fb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 104.14 167.4199 90)
+			(at 104.14 164.8799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2819,7 +3278,7 @@
 	)
 	(global_label "QT2"
 		(shape input)
-		(at 99.06 157.48 270)
+		(at 99.06 154.94 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2829,12 +3288,56 @@
 		)
 		(uuid "c8694b8c-8bd9-4ac7-8cbd-4bd470e2a960")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 99.06 163.9728 90)
+			(at 99.06 161.4328 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "QT6_MISO"
+		(shape input)
+		(at 124.46 185.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d103758b-f0c8-4f38-894a-7e73c6be6799")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 136.5166 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "QT7_MOSI"
+		(shape input)
+		(at 156.21 182.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d329c46f-5307-4d5f-9167-8654c5e82c98")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 168.2666 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -2863,7 +3366,7 @@
 	)
 	(global_label "QT7_MOSI"
 		(shape input)
-		(at 111.76 147.32 90)
+		(at 111.76 144.78 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2873,7 +3376,7 @@
 		)
 		(uuid "e0987184-079f-41f9-a060-b914986b3114")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 111.76 135.2634 90)
+			(at 111.76 132.7234 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2905,9 +3408,31 @@
 			)
 		)
 	)
+	(global_label "D4_SCL"
+		(shape input)
+		(at 99.06 120.65 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e4266174-5f4f-4663-b2ad-1379e034fd8a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 108.9999 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "QT1_DAC"
 		(shape input)
-		(at 96.52 147.32 90)
+		(at 96.52 144.78 90)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2917,7 +3442,29 @@
 		)
 		(uuid "ea5d1083-d8dc-49f1-a3d9-f5a8dbd4cabc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.52 136.231 90)
+			(at 96.52 133.691 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "QT5_SCK"
+		(shape input)
+		(at 114.3 180.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "eecaaef5-c167-4bef-bafd-89ee58fbdc56")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 125.5099 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2929,7 +3476,7 @@
 	)
 	(global_label "QT6_MISO"
 		(shape input)
-		(at 109.22 157.48 270)
+		(at 109.22 154.94 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2939,13 +3486,77 @@
 		)
 		(uuid "f4732cf1-e88d-4b40-8944-1e9f0ac1d41b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 109.22 169.5366 90)
+			(at 109.22 166.9966 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:MountingHole_M3")
+		(at 226.06 22.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "07c0e1bd-27f3-45ee-bc9f-3354a83580cf")
+		(property "Reference" "H3"
+			(at 229.87 21.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_M3"
+			(at 229.87 24.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "fab:MountingHole_M3"
+			(at 226.06 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M3"
+			(at 226.06 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "H3")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -3037,7 +3648,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R_1206"
+		(property "Value" "R_1206_40"
 			(at 116.967 44.831 90)
 			(effects
 				(font
@@ -3220,6 +3831,79 @@
 			(project "qtouch-board"
 				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
 					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_Header_JST_PH_1x04_P2mm_Vertical_SMD")
+		(at 93.98 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "504592a1-56af-427d-85da-9e303dbcbcab")
+		(property "Reference" "J5"
+			(at 93.98 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_Header_JST_PH_1x04_P2mm_Vertical_SMD"
+			(at 93.98 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:Header_JST_PH_1x04_P2mm_Vertical_SMD"
+			(at 93.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+			(at 93.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Male JST PH 4 pin connector"
+			(at 93.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a900e22e-b405-4dc2-9f39-306d643270fa")
+		)
+		(pin "3"
+			(uuid "332b2563-18a6-4405-8027-69c846b1c409")
+		)
+		(pin "2"
+			(uuid "795b4bdb-2830-4aca-9163-2181bae7d674")
+		)
+		(pin "4"
+			(uuid "f77b507c-9fdb-4bc7-a32a-aab7817ff616")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J5")
 					(unit 1)
 				)
 			)
@@ -3583,7 +4267,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R_1206"
+		(property "Value" "R_1206_40"
 			(at 116.713 67.691 90)
 			(effects
 				(font
@@ -3771,6 +4455,71 @@
 		)
 	)
 	(symbol
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 119.38 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "72f6ac14-3ab9-476c-a36e-c5dd2e33f97c")
+		(property "Reference" "J10"
+			(at 119.38 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 119.38 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 119.38 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 119.38 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 119.38 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b7884681-c0dc-41a5-a4f4-f8c2f9e3db08")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "fab:R_1206")
 		(at 245.11 63.5 90)
 		(unit 1)
@@ -3788,7 +4537,7 @@
 				)
 			)
 		)
-		(property "Value" "R_1206"
+		(property "Value" "R_1206_80"
 			(at 245.11 59.69 90)
 			(effects
 				(font
@@ -3840,7 +4589,7 @@
 	)
 	(symbol
 		(lib_id "fab:Switch_Slide_Top_CnK")
-		(at 105.41 91.44 0)
+		(at 109.22 86.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3848,7 +4597,7 @@
 		(dnp no)
 		(uuid "871a2a30-6567-4161-afa3-fe1b0d037c95")
 		(property "Reference" "SW2"
-			(at 105.41 83.82 0)
+			(at 109.22 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3856,7 +4605,7 @@
 			)
 		)
 		(property "Value" "Switch_Slide_Top_CnK"
-			(at 105.41 86.36 0)
+			(at 109.22 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3864,7 +4613,7 @@
 			)
 		)
 		(property "Footprint" "fab:Switch_Slide_Top_CnK_JS102011JCQN_8.5x3.5mm"
-			(at 105.41 91.44 0)
+			(at 109.22 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3873,7 +4622,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ckswitches.com/media/1422/js.pdf"
-			(at 105.41 91.44 0)
+			(at 109.22 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3882,7 +4631,7 @@
 			)
 		)
 		(property "Description" "Slide Switch SPDT Surface Mount"
-			(at 105.41 91.44 0)
+			(at 109.22 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3926,7 +4675,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "R_1206"
+		(property "Value" "R_1206_40"
 			(at 116.713 91.567 90)
 			(effects
 				(font
@@ -3972,6 +4721,71 @@
 			(project "qtouch-board"
 				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
 					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 78.74 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8d28bfc7-0452-4910-9b93-23f7a19578cc")
+		(property "Reference" "J8"
+			(at 78.74 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 78.74 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 78.74 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 78.74 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 78.74 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7218a134-309d-4901-a461-482df4d9c9ef")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J8")
 					(unit 1)
 				)
 			)
@@ -4050,7 +4864,7 @@
 	)
 	(symbol
 		(lib_id "fab:Switch_Slide_Top_CnK")
-		(at 214.63 66.04 0)
+		(at 217.17 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4058,7 +4872,7 @@
 		(dnp no)
 		(uuid "a351a6f2-68d0-4566-bcdb-ad7b9afda52f")
 		(property "Reference" "SW1"
-			(at 214.63 58.42 0)
+			(at 217.17 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4066,7 +4880,7 @@
 			)
 		)
 		(property "Value" "Switch_Slide_Top_CnK"
-			(at 214.63 60.96 0)
+			(at 217.17 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4074,7 +4888,7 @@
 			)
 		)
 		(property "Footprint" "fab:Switch_Slide_Top_CnK_JS102011JCQN_8.5x3.5mm"
-			(at 214.63 66.04 0)
+			(at 217.17 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4083,7 +4897,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ckswitches.com/media/1422/js.pdf"
-			(at 214.63 66.04 0)
+			(at 217.17 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4092,7 +4906,7 @@
 			)
 		)
 		(property "Description" "Slide Switch SPDT Surface Mount"
-			(at 214.63 66.04 0)
+			(at 217.17 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4242,7 +5056,7 @@
 	)
 	(symbol
 		(lib_id "fab:Conn_PinSocket_1x02_P2.54mm_Vertical_SMD")
-		(at 97.79 152.4 270)
+		(at 97.79 149.86 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4250,7 +5064,7 @@
 		(dnp no)
 		(uuid "b0154a5f-22b2-4e46-aeee-4b2ee11b7892")
 		(property "Reference" "J2"
-			(at 70.612 152.908 90)
+			(at 70.612 150.368 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4258,7 +5072,7 @@
 			)
 		)
 		(property "Value" "Conn_PinSocket_1x02_P2.54mm_Vertical_SMD"
-			(at 72.898 151.13 90)
+			(at 72.898 148.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4266,7 +5080,7 @@
 			)
 		)
 		(property "Footprint" "fab:PinSocket_1x02_P2.54mm_Vertical_SMD"
-			(at 97.79 152.4 0)
+			(at 97.79 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4275,7 +5089,7 @@
 			)
 		)
 		(property "Datasheet" "https://media.digikey.com/pdf/Data%20Sheets/Sullins%20PDFs/NPxCxx1KFXx-RC%2010487-D.pdf"
-			(at 97.79 152.4 0)
+			(at 97.79 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4284,7 +5098,7 @@
 			)
 		)
 		(property "Description" "2 Position Header, Top or Bottom Entry Connector 0.100\" (2.54mm) Surface Mount Tin"
-			(at 97.79 152.4 0)
+			(at 97.79 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4302,6 +5116,202 @@
 			(project "qtouch-board"
 				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
 					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 46.99 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b4f53a0f-9e6c-4168-8032-41aff04b7764")
+		(property "Reference" "J6"
+			(at 46.99 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 46.99 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 46.99 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 46.99 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 46.99 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "58c0bbbf-9bbd-4493-8d8a-8f8599080963")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 151.13 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b868ca52-7ede-43a5-bf25-5c6aa6aed2e3")
+		(property "Reference" "J11"
+			(at 151.13 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 151.13 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 151.13 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 151.13 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 151.13 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "64914f2e-563f-41cc-99ca-b40adc06b1f9")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:PWR_GND")
+		(at 115.57 113.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bad0527b-d8a4-4fb2-969a-c08e05fc5e22")
+		(property "Reference" "#PWR08"
+			(at 115.57 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_GND"
+			(at 115.57 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 115.57 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 115.57 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 115.57 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8b0bc054-814a-4605-86fe-59bc340bd747")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -4368,6 +5378,200 @@
 			(project "qtouch-board"
 				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
 					(reference "#PWR04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 38.1 179.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "beab8c44-6f87-4487-8b77-c150fc55016a")
+		(property "Reference" "J4"
+			(at 38.1 173.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 38.1 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 38.1 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 38.1 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 38.1 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "521afb47-91d6-42ee-a33d-509aa6d68467")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 109.22 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c49e26eb-b4b1-41ff-8c4d-ecb99b653fb8")
+		(property "Reference" "J9"
+			(at 109.22 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 109.22 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 109.22 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 109.22 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 109.22 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8f305894-323a-410a-9f52-13c076346cf7")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "J9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:MountingHole_M3")
+		(at 203.2 22.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c7784997-8678-41ae-ad24-2e52ff6c4b17")
+		(property "Reference" "H2"
+			(at 207.01 21.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_M3"
+			(at 207.01 24.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "fab:MountingHole_M3"
+			(at 203.2 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M3"
+			(at 203.2 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -4511,6 +5715,72 @@
 		)
 	)
 	(symbol
+		(lib_id "fab:PWR_3V3")
+		(at 105.41 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dcd71dd3-0d47-4649-ba09-ad6f7b16d281")
+		(property "Reference" "#PWR09"
+			(at 105.41 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_3V3"
+			(at 105.41 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.41 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 105.41 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7097b5a1-482a-4ab0-ae6e-ce096c242c24")
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "fab:PWR_FLAG")
 		(at 36.83 66.04 90)
 		(unit 1)
@@ -4645,42 +5915,33 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinSocket_1x02_P2.54mm_Vertical_SMD")
-		(at 95.25 119.38 0)
-		(mirror y)
+		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm")
+		(at 67.31 176.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ec5c762d-5674-4985-8cf8-0e41987bbb8f")
-		(property "Reference" "J4"
-			(at 95.25 111.76 0)
+		(fields_autoplaced yes)
+		(uuid "f4b7ba21-837c-41d5-a28a-95086ee4ee20")
+		(property "Reference" "J7"
+			(at 67.31 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "Conn_PinSocket_1x02_P2.54mm_Vertical_SMD"
-			(at 95.25 114.3 0)
+		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 67.31 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "fab:PinSocket_1x02_P2.54mm_Vertical_SMD"
-			(at 95.25 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://media.digikey.com/pdf/Data%20Sheets/Sullins%20PDFs/NPxCxx1KFXx-RC%2010487-D.pdf"
-			(at 95.25 119.38 0)
+		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Vertical_THT_D1mm"
+			(at 67.31 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4688,8 +5949,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "2 Position Header, Top or Bottom Entry Connector 0.100\" (2.54mm) Surface Mount Tin"
-			(at 95.25 119.38 0)
+		(property "Datasheet" "~"
+			(at 67.31 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector pin header 2.54mm pitch vertical tht"
+			(at 67.31 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4698,15 +5968,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "4accec4c-db2c-4494-a11a-b3937ac45cfa")
-		)
-		(pin "2"
-			(uuid "d6f6eb66-c475-480b-9588-a8e47b244297")
+			(uuid "fffd8639-59f6-4553-b57d-909bde0447cb")
 		)
 		(instances
 			(project "qtouch-board"
 				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
-					(reference "J4")
+					(reference "J7")
 					(unit 1)
 				)
 			)
@@ -4714,7 +5981,7 @@
 	)
 	(symbol
 		(lib_id "fab:Conn_PinSocket_1x05_P2.54mm_Vertical_SMD")
-		(at 106.68 152.4 90)
+		(at 106.68 149.86 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4722,7 +5989,7 @@
 		(dnp no)
 		(uuid "f97eb158-b3a2-4476-af11-24bbc0022b7f")
 		(property "Reference" "J1"
-			(at 140.716 154.432 90)
+			(at 140.716 151.892 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4730,7 +5997,7 @@
 			)
 		)
 		(property "Value" "Conn_PinSocket_1x05_P2.54mm_Vertical_SMD"
-			(at 137.414 152.4 90)
+			(at 137.414 149.86 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4738,7 +6005,7 @@
 			)
 		)
 		(property "Footprint" "fab:PinSocket_1x05_P2.54mm_Vertical_SMD"
-			(at 106.68 152.4 0)
+			(at 106.68 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4747,7 +6014,7 @@
 			)
 		)
 		(property "Datasheet" "https://media.digikey.com/pdf/Data%20Sheets/Sullins%20PDFs/NPxCxx1KFXx-RC%2010487-D.pdf"
-			(at 106.68 152.4 0)
+			(at 106.68 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4756,7 +6023,7 @@
 			)
 		)
 		(property "Description" "Top or Bottom Entry Connector 0.100\" (2.54mm) Surface Mount Tin"
-			(at 106.68 152.4 0)
+			(at 106.68 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4849,6 +6116,70 @@
 			(project "qtouch-board"
 				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
 					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:MountingHole_M3")
+		(at 180.34 22.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fb2b4f82-3658-4d33-aa35-b0dbffab48bc")
+		(property "Reference" "H1"
+			(at 184.15 21.5899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_M3"
+			(at 184.15 24.1299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "fab:MountingHole_M3"
+			(at 180.34 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 180.34 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting hole M3"
+			(at 180.34 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "qtouch-board"
+				(path "/c7b047f4-7a15-4dc8-999e-0f1190282419"
+					(reference "H1")
 					(unit 1)
 				)
 			)
