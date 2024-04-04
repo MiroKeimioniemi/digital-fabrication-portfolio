@@ -141,9 +141,23 @@ At this point, I started over with my design as it felt easier and safer to save
 
 I then added the rest of the components, those being a total of 7 LEDs with [1206 footprints](https://eepower.com/resistor-guide/resistor-standards-and-codes/resistor-sizes-and-packages/#), where 1206 refers to the size and dimensions of the [surface-mounted device (SMD)](https://en.wikipedia.org/wiki/Surface-mount_technology) in [imperial units](https://en.wikipedia.org/wiki/Imperial_units), 4 1206 resistors, 4 different vertical connectors, 2 switches, 7 through-hole connectors and 3 mounting holes, some of which were really added afterwards while drawing the PCB but mentioned here already as the below image shows them all. 
 
-![alt text](image-2.webp)
+![XIAO SAMD21 QTouch controller schematic](QTouch-schematic.webp)
 
+The connector in the upper left corner breaks out the power and ground pins, meaning that they are easily accessible to wires. The other three connectors that can be recognized by their names, starting with `Conn_` are for enabling an I2C connection and extending the QTouch connections. The mess at the bottom is a pile of through-hole connectors for each of the touch pads to keep my connectivity options open. 
 
+The naming scheme of the components largely follows the template: `TypeOfComponent_NameOfComponent_FeaturesOfComponent` except for when the type and name are essentially the same. For example, `Conn_PinSocket_1x05_P2.54mm_Vertical_SMD` means that it is a vertical, surface mount pin socket connector with 5 sockets that are spaced 2.54mm apart.
+
+The majority of the LEDs are connected in a [charlieplexing](https://en.wikipedia.org/wiki/Charlieplexing) configuration, about the existence of which I learned about on the [output devices lecture](https://vimeo.com/925582461). This is very convenient as it allows you to control multiple LEDs with a proportionally decreasing number of pins, where 3 pins can already control 6 pins and 11 can control 110 according to the formula N * (N - 1), where N is the number of pins used and the product is the number of LEDs that can be controlled. Do note, however, that the cost of charlieplexing is that you can only have 1 LED on at a time. In order to create the illusion of multiple ones being on simultaneously i.e. "virtually lit", you have to  refresh all of them at least 60 times per second, meaning that the processing power of the microcontroller will become a problem with enough LEDs. For reference, an Arduino programmed on a low level can just about reach 240 according to [this article](https://www.instructables.com/Charlieplexing-Made-Easy-and-What-It-Even-Means/).
+
+ In my research about charlieplexing I found [this video](https://www.youtube.com/watch?v=b44VGTaCSk8) and [this article](https://www.instructables.com/Charlieplexing-Made-Easy-and-What-It-Even-Means/) to be very helpful. For my schematic, I pretty much just replicated the 6 LED configuration using actual wires for clarity. The general idea is always to connect two LEDs in parallel in opposite orientations so that only one will ever be on at a time. As shown in the image below, the logic by which the LEDs are controlled is to make the pins connected to the ends of the LED one wants to turn on and set them to high and low output accordingly to the direction of the light-emitting *diode*, while disconnecting all other pins by setting them to input (/ high impedance) mode so that no current can flow in or out of that pin.
+
+ ![Illustration of charlieplexing with 6 LEDs borrowed from instructables.com](charlieplexing.webp)
+ 
+ For the resistor values I calculated 40 Ohms each as, according to the [datasheet of the LEDs](https://optoelectronics.liteon.com/upload/download/DS-22-98-0002/LTST-C150CKT.pdf), their forward voltage is `1.8V` and the maximum DC forward current is `40mA`, which results in `5V - 1.8V = 3.2V` for the resistor to sink after the LED. Solving for resistance in `V = IR`, where V is voltage, I is current and R is resistance, gives `R = V/I`, which gives `R = 3.2 / 0.04 = 80` with the above values. However, as mentioned in the [Instructables article](https://www.instructables.com/Charlieplexing-Made-Easy-and-What-It-Even-Means/), "resistors should have half the resistance for driving a single LED because current flows through two resistors" and therefore I chose 40 Ohms as the three resistor values.
+
+ Finally, I added one more LED in the standard way with an 80 Ohm resistor to complete the row. I did, however, add switches before it and the last charlieplexing pin as they use the SDA and SCL pins, which are used to implement the [I2C protocol](https://learn.sparkfun.com/tutorials/i2c/all). The same pins are connected to the [Qwiic](https://www.sparkfun.com/qwiic) compatible header connector, which allows me to choose whether to use them for communication or for the indicator LEDs. [Qwiic](https://www.sparkfun.com/qwiic) on the other hand is like an interface standard, which ensures consistency between interfaces and enables inter-board communication with standardized cable. After our instructor's feedback as I had not finished it by our review session either, I implemented it for the I2C breakout connector, except in reverse and with too large of a header but at least I had a connection.
+
+### Creating the PCB layout
 
 
 
@@ -225,5 +239,6 @@ In pcb editor press "D" for the traces to follow
 ![alt text](image-5.webp)
 
 ![alt text](image-4.webp)
+
 
 
