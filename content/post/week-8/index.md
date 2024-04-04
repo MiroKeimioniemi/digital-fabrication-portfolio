@@ -21,7 +21,7 @@ categories:
   - "CAD"
 series: 
   - "Weekly Assignments"
-image: "pcb-gerber.png"
+image: "pcb-gerber.webp"
 ---
 
 I am now writing this approximately two weeks late - three if we count from the start of the week - and therefore the latest learnings might now be very mixed across the electronics design and output devices weeks. This is of course due to a multitude of reasons as always, such as hurry with [Miitti App](https://miitti.app) and other courses. Primarily though, it is because how damn hard these electronics weeks have been. I have barely had time to produce the boards, let alone document the process or even properly test them.
@@ -225,4 +225,5 @@ In pcb editor press "D" for the traces to follow
 ![alt text](image-5.webp)
 
 ![alt text](image-4.webp)
+
 
