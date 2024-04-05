@@ -60,9 +60,9 @@ Our group documentation was done by [Tomi Monahan](https://tomimonahan.gitlab.io
 
 The power supply is good for testing if components such as, for example, motors work and how they respond to different amounts of current or voltage. Howevere, never connet anything without checking the voltage and amperage first as either one being too high might break the component or circuit. An oscillator can be used to investigate the elctronic signals traveling between points in the circuit and are thus often used for debugging purposes. A logic analyzer is an even more sophisticated version of this with support for multiple channels, increased resolution and an easier-to-use software interface but both seem a bit overkill for many small and simple boards even though their research and repair utility is undoubtedly great.
 
-## Design
+## Design using KiCad
 
-This electronics design week provided a prime opportunity for testing out the QTouch capabilities of the [XIAO SAMD21](https://wiki.seeedstudio.com/Seeeduino-XIAO/), which could likely be used for the gesture controls of my [final project]({{< relref "page/final-project/index.md" >}}). Some of its most important specs are listed below.
+This electronics design week provided a prime opportunity for testing out the [QTouch capabilities](https://ww1.microchip.com/downloads/en/DeviceDoc/atmel-42195-qtouch-library-peripheral-touch-controller_user-guide.pdf) of the [XIAO SAMD21](https://wiki.seeedstudio.com/Seeeduino-XIAO/), which could likely be used for the gesture controls of my [final project]({{< relref "page/final-project/index.md" >}}). Some of its most important specs are listed below.
 
 [Seeed Studio XIAO SAMD21](https://wiki.seeedstudio.com/Seeeduino-XIAO/)
 
@@ -114,7 +114,7 @@ In KiCad, schematics are created in the "Schematic Editor" usually with just a f
 <li value="12">Add global labels (shortcut: "CTRL + L")</li>
 </ol>
 
-"Add symbols" is used for, as its name suggests, adding symbols, which are representations of components and their interfaces. The image below has the symbol selection menu open, which displays the symbol and the footprint of the component on the right and the library of components as well as the selected component's description usually also containing its data sheet on the left.
+"Add symbols" is used for, as its name suggests, adding symbols, which are representations of components and their interfaces. The image below has the symbol selection menu open, which displays the symbol and the footprint of the component on the right and the library of components as well as the selected component's description usually also containing its datasheet on the left, which can be brought up at any time with the keboard shortcut `D` with the component of interest selected.
 
 ![KiCad schematic editor](schematic-editor.webp)
 
@@ -194,9 +194,52 @@ You can also change pad size and other attributes by double-clicking one or righ
 ![Paste pad properties](paste-pad-properties.webp)
 ![Pad connection](pad-connection.webp)
 
+The workflow is then generally the following: position the components with the grid spacing that makes the most sense (located next to zoom dropdown and I usually used everything between 1,0000 to 0,0100) and route tracks using the similarily named tool. The route follows your cursor by autogenerating a path up to it according to some logic but it is often quite suboptimal and therefore it is advisable to left-click to set the trace up until that point and then extend it. To stop drawing, press "End" or choose it from the context menu. It is also advisable to avoid 90° angles, and make tracks with sensitive signals as short and insulated as possible. The traces can also be edited easily by dragging its parts or changing their properties using the context menu.
+
+Some useful shortcuts for the PCB editor: 
+
+- **U**: Select the entire track
+- **D**: Move component or a section of a track while maintaining its connections
+- **F**: Autocomplete the currently drawn track
+- **E**: Edit any item your cursor is hovering over
+
+(Inclusion of the above was inspired by [Mika Järvi's documentation](https://mikajarvi.gitlab.io/digital-fabrication/10-electronics-design.html) which features even more useful shortcuts and tips)
+
+To finish the PCB layout, select the Edge.Cuts layer and draw its shape using any of the shape tools. Fillet lines are apparently quite a new and long awaited option but are now available via "Shape Modification" > "Fillet Lines..." in the context menu. [CopperCAM](https://www.galaad.net/coppercam-eng.html) handles the milling of both types of gerber files similarly but "Add a filled zone" can be used to fill the copper area of the board, which can also be connected to a net, such as ground, which is often used. If no net is selected, it will be an isolated copper island, meaning that it has no connections but it will not be milled away either. One can also decide how uniformly they want the zone to be connected to pads by selecting the appropriate pad connection type. When using the shape and fill tools, make sure you have the correct layer selected for which you want it to apply.
+
+![Copper zone properties](copper-zone-properties.webp)
+
+Finally, perform the design rules check using the Design Rules Checker (DRC) found right next to the "Update PCB with changes made to the schematic icon (shortcut: F8). Once again, you do not want to see errors but warnings regarding the silkscreen can safely be ignored as our copper sheets do not feature such a layer at all. They can also be hidden similarly to how it was done with the ERC. Running the DRC is also the simplest way I have discovered to refresh the filled-in zones in the PCB editor.
+
+![Design Rules Checker](drc.webp)
+
+After abandoning the NeoPixel design due to how crowded and convoluted the wiring threatened to get, my initial design using charlieplexing that I presented in our review session looked as shown below. Our instructor suggested that I should add power and ground to the I2C connector for future proofness and warned of the long tracks to the capacitance-sensing pads.
+
+![Initial PCB design](initial-pcb-design.webp)
+
+I forced the tracks to bend to my will and I managed to add the power and 3.3V to the 4-pin JST header between the XIAO socket and the two switches. I left the longer traces, however, as I liked the look and quite frankly, could not bother re-routing after the struggle it had already been to get to that point. I also decided to experiment on whether the capacitance readings would actually interfere or not with the other traces. To mitigate against this a little bit, I separated the tracks more, which also made the design look better. 
+
+I then added 3mm mounting holes and drew the outline on the Edge.Cuts layer. To connect the touchpads to the QTouch pins, I drew them as rectangles, filled them in by changing their properties to "Filled shape" and made them share the corresponding nets so that the tracks could be drawn in them. I also added simple, single through-hole connectors to each, to which I connected the tracks. After adding some text as well, the resulting gerber preview looked as below on the right.
+
+![Fill in rectangles and connect to pins](fill-and-connect-rectangles.webp)
+![First gerber preview](gerber-1.webp)
+
+As can be seen, the above gerber preview was close but not quite what I wanted still as the pads were not properly connected. I drew zone fills over the rectangles as well as the entire board and made sure all areas, tracks and connectors shared the correct nets and then changed both the areas' and pads' pad connections to solid, which then finally resulted in what I ultimately wanted. Below on the left is the design in the PCB editor and on the right are its exported gerber files in KiCad's gerber viewer, which can be used to preview the `.grb` files before milling.
+
+![XIAO SAMD21 QTouch controller board in PCB editor](pcb-gerber.webp)
+![XIAO SAMD21 QTouch controller board in gerber viewer](image.webp)
+
+### Export PCB design
+
+To export the design files as `.grb` files, click "Plot" (rightmost of the two printer looking icons in the horizontal toolbar). This brings about the below window on the left. You can unselect everything else except for "F.Cu" for the front copper layer in the "Include Layers" menu, "Edge.Cuts" for the shape for all layers of the board in the "Plot on All Layers" menu and "Use extended X2 format (recommended) for export settings. Click "Save" to choose a folder where to save the gerber files (I created one called "gerbers" in my KiCad project folder) and then click "Plot" to export. Be advised, however, "Plot" asks for no confirmation and pre-existing files with the same name are overwritten. To generate drill files, click "Generate Drill Files...", select "Gerber X2" under "Drill File Format", "Gerber X2" under "Map File Format" and "Absolute" under "Drill Origin" in the resulting dialogue and click "Generate Drill File", which generates two files where usually only the one with "-PTH-" in its name is of interest.
+
+![Export ("Plot") gerbers](export-gerbers.webp)
+
+## Making the board
+
+Manually adding paths in CopperCAM
 
 
-Make sure to have the right layer selected with e.g. zone tool
 
 
 
@@ -204,79 +247,23 @@ Make sure to have the right layer selected with e.g. zone tool
 
 
 
-
-As I was late with the design, I also attended our own local lecture with only a partial design and a ton of questions and was told that 
-
+The capacitance pads do not have to be connected to anything else 
 
 
 
 
-
-https://learn.adafruit.com/adafruit-cap1188-breakout/overview
-
-Made it qwiic compatible for future proofness.
-
-Due inertia finsihed the non-optimal one
-
-https://www.sparkfun.com/qwiic
-
-D can also be used to modify the tracks themselves
-
-Running DRC colors in the filled areas
-
-Selecting the nets corresponding to the QTouch pins for the filled in areas got them connected to the wires
-
-Make sure to have edge cuts layer selected when drawing them
-
-First gerber was not correct
-
-![alt text](image.webp)
-
-![alt text](image-1.webp)
-
-DRC must be ran for changes to become visible
 
 Broke my bit due to forgetting to readjust Z after it did not initially cut at all
 
 
 
 
-Download KiCAD file for Seeeduino XIAO
-
-Had to import library and link footprint separately
-
-
-
-
-![alt text](image-2.webp)
-
-https://www.youtube.com/watch?v=3MkWZ38WY5U
-
-"D" brings up documentation
-
-![alt text](image-3.webp)
-
 104 capacitor refers to 0.1uF
 
-https://www.makerforge.tech/posts/neopixel-intro/
-
-Much faster to copypaste stuff
-
-https://www.seeedstudio.com/blog/2020/04/23/use-seeeduino-xiao-in-kicad-pcb-design-like-a-components/
-
-https://www.instructables.com/Charlieplexing-Made-Easy-and-What-It-Even-Means/
-
-Documentation for QTouch
-https://ww1.microchip.com/downloads/en/DeviceDoc/atmel-42195-qtouch-library-peripheral-touch-controller_user-guide.pdf
-
-In pcb editor press "D" for the traces to follow
-
-[Group Documentation](https://tomimonahan.gitlab.io/digital-fabrication/electronics-design-group-assignment.html)
 
 
-![alt text](image-5.webp)
 
-![alt text](image-4.webp)
+
 
 
 
