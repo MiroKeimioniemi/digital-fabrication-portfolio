@@ -104,7 +104,6 @@ The schematic of a circuit board specifies the components used on the board and 
 
 In KiCad, schematics are created in the "Schematic Editor" usually with just a few simple tools, which can be found from the right sidebar. The most important / frequently used tools are:
 
-
 <ol>
 <li value="1">Select item(s)</li>
 <li value="3">Add symbols (shortcut: "A")</li>
@@ -159,6 +158,45 @@ The majority of the LEDs are connected in a [charlieplexing](https://en.wikipedi
 
 ### Creating the PCB layout
 
+The schematic defines the functionality and connectivity of the board but the traces have to be laid out in the PCB editor for it to actually be producable and usable. Considerations include as little overlap as possible for ease of manufacturing, closseness of components for strong signals and fast communication, shape and size of the printed circuit board for ease of mounting, encasability and integrability, and length and closeness as well as thickness and angles of traces for signal integrity and support for varying amounts of current.
+
+In KiCad, PCB layouts are created in the "PCB Editor" usually based on a schematic, mostly using a few simple tools, again found in the right sidebar:
+
+<ol>
+<li value="1">Select item(s)</li>
+<li value="4">Route tracks (shortcut: "X")</li>
+<li value="7">Add a filled zone (shortcut: "Ctrl + Shift + Z")</li>
+<li value="9">Draw a line (shortcut: "Ctrl + Shift + L")</li>
+<li value="11">Draw a rectangle</li>
+<li value="15">Add a text item (shortcut: "Ctrl + Shift + T")</li>
+</ol>
+
+![KiCad PCB editor](pcb-editor.webp)
+
+In order to import the footprints or generally update the relationship between the schematic and the PCB layout after changes in the former, click on the fourth icon from the right in the horizontal toolbar that looks like a half anf half matchup of the schematic editor and the PCB editor with an arrow leading from the former to the latter. This brings up the dialogue below, where clicking "Update PCB", indeed, updates the PCB and gives a report of the operation.
+
+![Update PCB from schematic](update-pcb.webp)
+![Imported footprints](imported-footprints.webp)
+
+In the above report, the errors about missing pads can be ignored as I made the deliberate choice of using the XIAO SocketSMD footprint with the XIAO Seeeduino microcontroller, which contains more connections than the socket footprint. The correct footprint is shown in the "Imported footprints" image above on the right as it is an earlier picture from when I had not realized the trick just yet. In it, it can be seen that it has six more pads in addition to the pins but these are unaccounted for in the socket footprint, thus resulting in the errors. If no such unconventional tricks are necessary, no errors should occur. 
+
+A successful first import looks like the above image with a set of footprints of the components defined in the schematic. As the view is rather cluttered, it is often advisable to move the components around to create a bit more space and to toggle off the visibility of the F.Fab layer to hide the component names if there are only few compnents and they are sufficiently distinct-looking. The components can also be identified by the letter and number combinations on the silkscreen, which is the layer on top of some PCB stock where things can be written. This is not relevant for our simple FR2 copper stock however and thus all warnings related to silkscreen can be ignored. In more advanced boards it is likely a good idea to take full advantage of the silkscreen though.
+
+The blue lines between pads are called ratsnests and they indicate which footprints share the same net, i.e. *possible* connections between components. When visible, they always show the shortest path from the bird's eye view between the pads nearest to each other that share the same net. This means that moving a component around might change which pad and component the ratsnest points to but ultimately they will all be connected to each other. The order of the connections might still matter though, such as when some components should be closer to the microcontroller and others, such as connectors in certain cases, might be just fine a bit further. To troubleshoot crossed ratsnests you can move the components around and go back to edit the connections in the schematic so that they do not overlap. In the worst case scenario, you can also jump connections by adding 0 Ohm resistors or by using two-sided copper sheets and rivets to connect them at certain places.
+
+The finest precision our milling machines can reliably achieve was given to be 0.4mm by our instructor. The default in KiCad is 0.2mm but this can be changed by navigating to the dropdown in the upper left corner that reads "Track: use netclass width", clicking it and then selecting "Edit Pre-definced Sizes...", which brings up the menu below. Select "Net Classes" under "Design Rules" in the left menu and change both "Clearance" and "Track Width" to 0.4mm. You can also create multiple netclasses with different values for, for example, thicker traces for sections that may take more current and select that from the dropdown whenever drawing such tracks. 
+
+![Default net classes settings](net-settings.webp)
+
+You can also change pad size and other attributes by double-clicking one or right-clicking and either pressing "E" or choosing "Properties". By enlargening the pads, you can make the components easier to solder. You can then select multiple pads and use "Paste Default Pad Properties to Selected" to apply the changes to multiple pads at once. Additionally, if you wish the pad to connect fully to the nearby copper zone with the same net class, you can navigate to the "Connections" tab in "Pad Properties" and choose "Pad connection: Solid" as shown below in the third picture where the left through-hole connector has this and the right one has the default "From parent footprint", which causes it not to be fully connected.
+
+![Pad properties](pad-properties.webp)
+![Paste pad properties](paste-pad-properties.webp)
+![Pad connection](pad-connection.webp)
+
+
+
+Make sure to have the right layer selected with e.g. zone tool
 
 
 
@@ -239,6 +277,7 @@ In pcb editor press "D" for the traces to follow
 ![alt text](image-5.webp)
 
 ![alt text](image-4.webp)
+
 
 
 
