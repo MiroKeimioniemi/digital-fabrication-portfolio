@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Electronics Design"
-date: "2024-04-04"
+date: "2024-04-07"
 description: "Week 10"
 tags: 
   - "electronics"
@@ -217,14 +217,14 @@ After abandoning the NeoPixel design due to how crowded and convoluted the wirin
 
 ![Initial PCB design](initial-pcb-design.webp)
 
-I forced the tracks to bend to my will and I managed to add the power and 3.3V to the 4-pin JST header between the XIAO socket and the two switches. I left the longer traces, however, as I liked the look and quite frankly, could not bother re-routing after the struggle it had already been to get to that point. I also decided to experiment on whether the capacitance readings would actually interfere or not with the other traces. To mitigate against this a little bit, I separated the tracks more, which also made the design look better. 
+I forced the tracks to bend to my will and I managed to add the power and 3.3V to the 4-pin JST header between the XIAO socket and the two switches. I left the longer traces, however, as I liked the look and quite frankly, could not bother re-routing after the struggle it had already been to get to that point. I also decided to experiment on whether the capacitance readings would actually interfere or not with the other traces. To mitigate against this a little bit, I separated the tracks more, which also made the design look better. The pads do not have to be connected to anything other than the QTouch pins as ground goes through what- or whoever changes the capacitance.
 
 I then added 3mm mounting holes and drew the outline on the Edge.Cuts layer. To connect the touchpads to the QTouch pins, I drew them as rectangles, filled them in by changing their properties to "Filled shape" and made them share the corresponding nets so that the tracks could be drawn in them. I also added simple, single through-hole connectors to each, to which I connected the tracks. After adding some text as well, the resulting gerber preview looked as below on the right.
 
 ![Fill in rectangles and connect to pins](fill-and-connect-rectangles.webp)
 ![First gerber preview](gerber-1.webp)
 
-As can be seen, the above gerber preview was close but not quite what I wanted still as the pads were not properly connected. I drew zone fills over the rectangles as well as the entire board and made sure all areas, tracks and connectors shared the correct nets and then changed both the areas' and pads' pad connections to solid, which then finally resulted in what I ultimately wanted. Below on the left is the design in the PCB editor and on the right are its exported gerber files in KiCad's gerber viewer, which can be used to preview the `.grb` files before milling.
+As can be seen, the above gerber preview was close but not quite what I wanted still as the pads were not properly connected. I drew zone fills over the rectangles as well as the entire board and made sure all areas, tracks and connectors shared the correct nets and then changed both the areas' and pads' pad connections to solid, which then finally resulted in what I ultimately wanted, after also toggling on "Knockout" for the larger text in "Text Properties". Below on the left is the design in the PCB editor and on the right are its exported gerber files in KiCad's gerber viewer, which can be used to preview the `.grb` files before milling.
 
 ![XIAO SAMD21 QTouch controller board in PCB editor](pcb-gerber.webp)
 ![XIAO SAMD21 QTouch controller board in gerber viewer](image.webp)
@@ -237,7 +237,37 @@ To export the design files as `.grb` files, click "Plot" (rightmost of the two p
 
 ## Making the board
 
-Manually adding paths in CopperCAM
+I then milled and soldered the board similarly to the process already documented [here]({{< relref "post/week-4/index.md" >}}). There were, however, a couple of additional bumps on the road. Firstly, the text was not properly carved when calculating contours in CopperCAM. I fixed this by manually adding contour segments by drawing them so that also "A", "X", "2" and the empty space around the "QTouch controller" were properly cut as well.
+
+![Add contour segments](coppercam-add-contours.webp)
+![Final contour segments](added-contours.webp)
+
+Secondly, I had completely novel issues with milling the board. I followed the procedure I had documented on [electronics production week]({{< relref "post/week-4/index.md" >}}) precisely by placing a paper under the tip, loosening it and carefully lowering it and then re-tightening again but when I started milling, no traces were produced on the board even after a couple of minutes of the tool spinning and moving around.
+
+I aborted the process by pressing "Quit Cutting" on the controlling laptop and inspected the board to find no traces whatsoever. I had been very careful of following the procedure exactly and continued to do so by resetting the Z-axis again, this time without a paper in between. Still no result. 
+
+On the third attempt, however, I must have forgotten to reset the Z-axis in the software as now when I ran it, the machine smashed my tool bit deep into the board and used it to cut through what was supposed to be the first trace. I quickly aborted the operation again and inspected the damage to the bit, frustrated. It had retained its general shape at least but it did look a bit duller and so I cursingly decided to play it safe and use the same bit I had used during the electronics production week, before having gotten my own. If you read this Kris and I owe the fablab something for it, let me know.
+
+I tried being extra<sup>2</sup> careful this time and also tried resetting the Z-axis at a different spot to compensate for possible unevennes. This time it worked, but as can be seen below, it had not quite cut through even still (this time using my own 0.8mm tool which I managed not to ruin). I made absolutely certain that the tape was perfectly even when applying it so my suspicions are directed towards the copper sheet, especially as this happened during the output week too.
+
+![Freshly milled QTouch board](milled-board.webp)
+![Backside of the freshly milled QTouch board](milled-board-backside.webp)
+
+I only later realized that there were different kinds of vertical sockets available in the blue cabinet, which required no processing but for the connections on this board, I grabbed a stick of connectors, cut it and bent the connectors to fit the shape of the footprint. They felt a bit too large, which aroused my suspicion, but could still be soldered on when placed just right. 
+
+I then soldered on the components, which went mostly relatively smoothly except for me ripping out a trace again when trying to adjust the levitating LED in the rightmost picture below, which has become somewhat of a trademark of mine at this point. I did, however, manage to fix it with patience and extra care, soldering it much further along the trace than normal. I also spilled the solder every now and then but could destroy the bridges I accidentally created by tracing the nearby clearances with the soldering iron, which resulted in a not pretty but functional splitting of the solder onto the two sides.
+
+![All the components making up the board](before-soldering.webp)
+![Cutting socket connectors](cutting-socket.webp)
+![Bending the connections](modifying-socket.webp)
+![LED levitating on a disconnected copper trace](levitating-led.webp)
+
+The resistors closest to 40 and 80 I could find were 49.9 and 100 and so I used those. I then tested for the connectivity of the board and noticed that you cannot test for connectivity with a resistor in between, which was slightly inconvenient but still doable by making sure they were well soldered and everything around them was well connected. After ensuring that all the connections worked, to the degree I could, I finally had a ready board. The result can be seen below.
+
+![Testing connectivity](testing-connectivity.webp)
+![Finished XIAO SAMD21 QTouch controller board](xiao-samd21-qtouch-board.webp)
+
+## Testing the board
 
 
 
@@ -247,18 +277,9 @@ Manually adding paths in CopperCAM
 
 
 
-The capacitance pads do not have to be connected to anything else 
 
 
 
-
-
-Broke my bit due to forgetting to readjust Z after it did not initially cut at all
-
-
-
-
-104 capacitor refers to 0.1uF
 
 
 

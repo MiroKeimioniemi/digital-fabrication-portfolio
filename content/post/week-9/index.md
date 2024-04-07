@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Output Devices"
-date: "2024-04-04"
+date: "2024-04-07"
 description: "Week 11"
 tags: 
   - "electronics"
@@ -62,6 +62,7 @@ Resistor markings: 4990 means 499 and 0 zeros
 
 Struggled even more here than last week with my arch nemesis: NeoPixel LED strips
 
+104 capacitor refers to 0.1uF
 
 
 
