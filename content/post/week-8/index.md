@@ -289,3 +289,4 @@ The resistors closest to 40 and 80 I could find were 49.9 and 100 and so I used 
 
 
 
+
