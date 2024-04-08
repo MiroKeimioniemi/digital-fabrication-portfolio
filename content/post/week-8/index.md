@@ -217,7 +217,9 @@ After abandoning the NeoPixel design due to how crowded and convoluted the wirin
 
 ![Initial PCB design](initial-pcb-design.webp)
 
-I forced the tracks to bend to my will and I managed to add the power and 3.3V to the 4-pin JST header between the XIAO socket and the two switches. I left the longer traces, however, as I liked the look and quite frankly, could not bother re-routing after the struggle it had already been to get to that point. I also decided to experiment on whether the capacitance readings would actually interfere or not with the other traces. To mitigate against this a little bit, I separated the tracks more, which also made the design look better. The pads do not have to be connected to anything other than the QTouch pins as ground goes through what- or whoever changes the capacitance.
+I forced the tracks to bend to my will and I managed to add the power and 3.3V to the 4-pin JST header between the XIAO socket and the two switches. I left the longer traces, however, as I liked the look and quite frankly, could not bother re-routing after the struggle it had already been to get to that point. I also decided to experiment on whether the capacitance readings would actually interfere or not with the other traces. To mitigate against this a little bit, I separated the tracks more, which also made the design look better. 
+
+The pads do not have to be connected to anything other than the QTouch pins as ground goes through what- or whoever changes the capacitance. This I gathered from [this tutorial](https://www.seeedstudio.com/blog/2020/07/20/how-to-make-a-fruit-piano-on-seeeduino-xiaos-q-touch-function-m/) on how to make a fruit piano using the XIAO SAMD21 by observing that each fruit was directly connected to the QTouch pins with only a single wire.
 
 I then added 3mm mounting holes and drew the outline on the Edge.Cuts layer. To connect the touchpads to the QTouch pins, I drew them as rectangles, filled them in by changing their properties to "Filled shape" and made them share the corresponding nets so that the tracks could be drawn in them. I also added simple, single through-hole connectors to each, to which I connected the tracks. After adding some text as well, the resulting gerber preview looked as below on the right.
 
@@ -269,6 +271,9 @@ The resistors closest to 40 and 80 I could find were 49.9 and 100 and so I used 
 
 ## Testing the board
 
+## Reflections
+
+For prototyping I still much prefer breadboards
 
 
 
