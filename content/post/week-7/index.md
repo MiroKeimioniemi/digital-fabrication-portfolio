@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Computer-Controlled Machining"
-date: "2024-04-01"
+date: "2024-04-09"
 description: "Week 9"
 tags: 
   - "CAD"
@@ -16,13 +16,16 @@ tags:
   - "Fusion 360"
   - "CNC"
   - "Recontech1312"
+  - "wood"
+  - "plywood"
+  - "woodworking"
 categories: 
   - "CAD"
   - "Parametric Modeling"
   - "Machining"
 series: 
   - "Weekly Assignments"
-image: "all-parts.webp"
+image: "ready-munich-shelf.webp"
 ---
 
 I feel that this week had the highest stakes thus far. Not only could the machine actually kill you, for which there is actual [precedent](https://www.nytimes.com/2011/04/14/nyregion/yale-student-dies-in-machine-shop-accident.html), we were also given a strictly limited 120cm x 120cm x 1.5cm sheet of plywood and our assignment was to create something large, meaning that it could not be easily hidden. This meant that the project had to be large and complex enough to pass the assignment criteria but also something that we genuinely needed and wanted to have in our apartment.
@@ -231,11 +234,47 @@ As mentioned above already, I forgot the dog-bones from the Munich joints and th
 
 ![Milled parts](all-parts.webp)
 
+After a couple of weeks I finally got the time to go back and assemble the parts. I took Rosa with me as she was the one who wanted two and so we assembled one each with a bit of cooperation in drilling. I did Tampere and she did Munich. We sanded the parts to get rid of splinters, smoothen all corners and make them fit nice and tight.
 
+![Sanding the parts](sanding.webp)
+
+As already mentioned above, I forgot to add the dog-bones to the Munich background and thus the shelf part would not fit to it. We thus used the [Dremel 4000](https://www.dremel.com/fi/fi/p/dremel-4000-f0134000ja) rotary-tool to add them afterwards. We changed the tool to the smallest sanding one available, although this was still quite a bit larger than the pre-existing dog-bones in the other parts. The tool could be changed by pressing the lock button and loosening the collet as shown below on the left. 
+
+Using it was then as straightforward as plugging the power cable in, selecting the rotation speed from the bottom and pushing the blue switch up. Props to the designers for color-coordinating all controls blue nicely! The speed had to be set high enough so that the tool would not bounce and then I just gently pushed it into the corners where I wanted to create the dog-bones. The result can be seen in the rightmost image below, where the ones created with the Dremel are above and the pre-existing ones of the second Tampere background are on the bottom.
+
+![Changing the dremel tool](dremel-tool.webp)
+![Using the dremel to add dog-bones](dremel.webp)
+![Additional dog-bones in the top corners, CNC ones in all the lower corners](added-dog-bones.webp)
+
+Rosa was actually faster than I, even though she had to make more additional dog-bones than I, and while I still sanded my pieces, she had gotten hers to fit already and was hammering them into place with the rubber mallet. The fit was really snug but she faced another issue, which was that the shelf part did not go all the way in, even with the hammering and there remained a small gap between the joints of the background and the shelf as the shelf part did not have dog-bones either, which we had overlooked. We tried further sanding it a tiny bit and then just pounding it in as far as it goes as it was so tightly and deeply in already that pulling it out would have been very difficult and likely loosened the fit for the next time and the result can be seen below on the right. It's not perfect but close enough, particularly for the upper, less load-bearing shelf.
+
+![Hammering the parts together using a rubber mallet](bang-into-place.webp)
+![Gaps between background and shelf part](gaps.webp)
+
+Trying to learn from this, I made sure to try and sand the corners of the shelf part so that they make true 90° angles. I tried to avoid creating dog-bones by only using sandpaper and the block as I wanted the fit to look perfect but in retrospective, it would have been easier to just create those as the gaps were not still quite perfectly closed although a bit better than without.
+
+![Sanding the shelf joint with a sanding block](sanding-block.webp)
+![Sanding the shelf jount with sanding paper](sanding-paper.webp)
+![Assembled Tampere shelf](assembled-tampere-shelf.webp)
+![Gaps in Tampere shelf](gaps-2.webp)
+
+My parts slipped right in and while snuggish, not nearly as tight as Rosa's. This meant that they were easier to work with but perhaps slightly less reliable in terms of staying together. To play it safe with both shelves, we decided to still tighten the shelve parts to the backboards with some screws, which provide just a bit of additional support and ensure that the parts cannot be pulled apart. The thin screws, chosen to avoid splintering, sunk in like butter to the very soft wood and could be nicely hidden on the backside.
+ 
+![Fastening screws](drilling.webp)
+![Ready Munich shelf from behind](screwed.webp)
+![Ready Munich shelf from the front](ready-munich-shelf.webp)
 
 ## Reflections
 
-Much smarter ways exist than exporting individual dxfs, for example, create a sketch of a surface of a material sheet with all the components laid out on it or just create the toolpaths entirely in Fusion 360
+This was an intense week during which I learned not to trust Ondsel with vectors but also how to create more complex parametric designs, mill them and how to save as much headache as possible in the post-processing and assembly phase.
+
+Firstly, one must be very deliberate with their choice of parameters and their relationships. It would be a good idea to note the possible ranges where the parameters can lie or to define only a very small number of base parameters from which all others are derived in a way so that they can range from 0 to infinity without interfering with the others. Intuitively, the maximum number of such parameters would be 3 for width, height and depth. If there are any more, they will by necessity break down eventually, which might also be desired such as in this case with a fixed thickness, but this should be noted. 
+
+Once the design is made, there exists far smarter ways of exporting than exporting the dxfs individually. Next time, I would most likely create the toolpaths in Fusion 360 too or, at the very least, create a sketch of the surface of the material sheet with fixed dimensions and all the components laid out on it. I could then export this as a singular `.dfx` file, which would save all the headache in VCarve Pro, including both overlapping lines and accidentally not exporting inner paths.
+
+Finally, the importance of Dog-Bones cannot be overestimated. Adding them to all the relevant corners upon creating the toolpaths saves a ton of effort from the post-processing and assembly phase. Also, be prepared for splinters, particularly with thin parts of the design and cheap wood.
+
+Overall, however, I am proud of the result, which hopefully holds well we have gotten them on the wall...
 
 
 

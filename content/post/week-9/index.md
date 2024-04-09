@@ -28,7 +28,7 @@ categories:
   - "CAD"
 series: 
   - "Weekly Assignments"
-image: "output-board.jpg"
+image: "output-board.webp"
 ---
 
 This week I faced my old nemesis once again; the NeoPixel LED strip. Nothing in electronics has caused me nearly as much headache as them. When creating the [networking bracelet prototypes](https://www.linkedin.com/posts/miro-keimi%C3%B6niemi_now-that-school-is-over-for-the-year-ill-activity-7143994838173089792-r3KP?utm_source=share&utm_medium=member_desktop), we could not find a single small development board in the entire [Aalto school of electrical engineering](https://www.aalto.fi/en/school-of-electrical-engineering) that would support both FastLED or NeoPixel arduino libraries and bluetooth communications. Both Arduino Nano 33 BLE and Nano 33 IoT lacked the former whereas we apparently had the only esp32s (ESP 32-S2) that lacked the latter, forcing us eventually to opt for an Arduino Micro with a separate, external Bluetooth module. 
@@ -66,11 +66,19 @@ I connected the XIAO to my laptop and uploaded the [`SimpleTone.ino` example cod
 
 Since the last time I had edited a video for documentation, Microsoft had made it mandatory to register to [Clipchamp](https://clipchamp.com/en/) and so the above video was edited with [kdenlive](https://kdenlive.org/en/), which is an open-source video editing application that Neil Gershenfeld had recommended on the very first lecture if I remember correctly. The very basic operations and navigation felt pleasantly similar to [Adobe Premiere Pro](https://www.adobe.com/products/premiere.html), with which I am already intimately familiar with, although exporting was found under "Project" > "Render..." which caught me a bit off guard. Overall, however, I am much happier with it than Clipchamp. The tone produced by the contraption depicted above was again very quiet and hence I increased the gain of the audio in the clip to 1000%.
 
+## Testing the LEDs
+
+I tried testing the LED strip similarly for probably hours without result. I could not fathom what could possibly be wrong until I did some further research 
+
+
+Similarly I tested the LEDs and broke them
+
 ## Design
 
 XIAO ESP32 board
 
 
+initially with power supply but left it out
 
 Started with esp32 and audio
 
@@ -118,6 +126,7 @@ Struggled even more here than last week with my arch nemesis: NeoPixel LED strip
 104 capacitor refers to 0.1uF
 
 hole clearance issue was ignored with no problem
+
 
 
 
