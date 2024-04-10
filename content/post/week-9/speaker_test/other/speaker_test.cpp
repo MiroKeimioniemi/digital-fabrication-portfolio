@@ -1,3 +1,4 @@
+#include <Arduino.h>
 /*
  This example generates a square wave based tone at a specified frequency
  and sample rate. Then outputs the data using the I2S interface to a

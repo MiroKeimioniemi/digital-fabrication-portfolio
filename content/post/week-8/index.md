@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Electronics Design"
-date: "2024-04-07"
+date: "2024-04-10"
 description: "Week 10"
 tags: 
   - "electronics"
@@ -237,6 +237,8 @@ To export the design files as `.grb` files, click "Plot" (rightmost of the two p
 
 ![Export ("Plot") gerbers](export-gerbers.webp)
 
+All the `.grb` files and KiCad project files can be found from the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-8/qtouch-board?ref_type=heads) under `content/post/week-8/qtouch-board`.
+
 ## Making the board
 
 I then milled and soldered the board similarly to the process already documented [here]({{< relref "post/week-4/index.md" >}}). There were, however, a couple of additional bumps on the road. Firstly, the text was not properly carved when calculating contours in CopperCAM. I fixed this by manually adding contour segments by drawing them so that also "A", "X", "2" and the empty space around the "QTouch controller" were properly cut as well.
@@ -274,6 +276,7 @@ The resistors closest to 40 and 80 I could find were 49.9 and 100 and so I used 
 ## Reflections
 
 For prototyping I still much prefer breadboards
+
 
 
 

@@ -274,7 +274,9 @@ Once the design is made, there exists far smarter ways of exporting than exporti
 
 Finally, the importance of Dog-Bones cannot be overestimated. Adding them to all the relevant corners upon creating the toolpaths saves a ton of effort from the post-processing and assembly phase. Also, be prepared for splinters, particularly with thin parts of the design and cheap wood.
 
-Overall, however, I am proud of the result, which hopefully holds well we have gotten them on the wall...
+Overall, however, I am proud of the result, which hopefully holds well when we have gotten them fastened on the wall...
+
+![Visualizing the end result](eyeballing-layout.webp)
 
 
 
