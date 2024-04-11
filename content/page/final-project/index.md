@@ -97,13 +97,21 @@ Potential processes for making the cover:
 - Molding & casting (3D-printed mold?)
 
 
+## Plan, progress and timeline
+
+I have utilized the electronics design week and output devices week for getting acquinted with the [XIAO SAMD21](https://wiki.seeedstudio.com/Seeeduino-XIAO/) and [XIAO ESP32C3](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/) boards that I can use for gesture input and wireless communication respectively, although the latter capabilities I have not yet further explored. Below are the two boards I have designed thus far and used for testing the input and output capabilities:
+
+![XIAO SAMD21 QTouch controller board](xiao-samd21-qtouch-board.webp)
+
+Upon quick testing, the QTouch sensors resolve touch nicely and they do register a slight change in capacitance under a 2mm sheet of acrylic as well. I will still have to conduct more testing by connecting different capacitive materials to the board and I am planning to take the programming much further as my main mission for input devices week. Thus far I have only checked that input is received and the readings change even with material in between but I will have to figure out how to detect the small changes. They also did not seem uniform across sessions, so absolute thresholds might not work for multiple reasons. One possible approach to solving this would be to initialize the capacitance readings during the first second of turning on and then detecting sufficiently large changes (e.g. > 5) so that it does not pick up on noise but works through most materials.
+
+![XIAO ESP32C3 output board](output-board.webp)
+
+For the output board I tested four different ways of controlling WS2812B strips but only two of them lit the LEDs up in the first place but none displayed the right colors, likely because the strip was not what I thought it was. I have not resolved the issue yet but this is obviously of key importance and high on the priority list. I could not make it work with 5V power input directly nor with using MOSFETSs to try to step up the logic voltage and we have no level shifters in the lab. Therefore, for powering on the LEDs on the final board, I will likely use the voltage divider to reduce the voltage from 5V to around 4.5V so that it is well within the spec but can also be reliably controlled with 3.3V logic. The board also has audio output but it was miswired such that the 3.5mm jack ground connection and right channel were the wrong way around. 
+
 Use vacuum forming to create the cover from acrylic
 Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and communicating wirelessly and (XIAO) SAMD21 as the secondary one to detect touch input
 --> Order WS2812B strips and 74AHCT125 level converter(s)?
-
-
-
-
 
 
 
