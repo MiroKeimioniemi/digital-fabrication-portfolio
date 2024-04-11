@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Output Devices"
-date: "2024-04-09"
+date: "2024-04-11"
 description: "Week 11"
 tags: 
   - "electronics"
@@ -80,6 +80,14 @@ Herein lies the problem. I was initially trying to power them on with 5V and con
 
 ![Lighting up a single LED](lit-led.webp)
 
+The interesting part was then to see how this would look behind semi-transparent acrylic and whether it would be bright enough to be used as an actual lamp. After a quick test with just a single LED, this seemed indeed to be the case and I could feel good about proceeding with the NeoPixels - at least in terms of their brightness...
+
+![NeoPixel through acrylic](light-through-acrylic.webp)
+
+There were a few highly peculiar observations when testing. In order of increasing weirdness: the stick would light up momentarily every time the power wire was plugged to it even though it did not light up otherwise, my laptop occasionally complained about power surges on the USB port when testing the LEDs, even though they never lit up, and finally, every time this happened, my Bluetooth mouse stopped working until I put the laptop to sleep and reopened it while turning the mouse off and on. Most weirdly, however, my [Dexcom G6 glucose sensor's](https://www.dexcom.com/en-us/g6-cgm-system) transmitter, which was only connected to my phone via Bluetooth, was also disconnected and it never recovered. I had to prematurely change it to a new one because of the EMP I had somehow managed to create. It might of course be a weird coincidence but it would be quite weird indeed...
+
+![Power surge when testing the LEDs](power-surge.webp)
+
 Using a lower voltage seemed to work but this felt wrong. One would imagine that RGB LEDs are still one of the simplest output devices out there. Why should you have to drive them out of spec on so many microcontrollers? There had to be a better way. The question was then: how to step up the input voltage?
 
 ### Level shifting exploration
@@ -156,51 +164,217 @@ As already mentioned above, this week I used the [XIAO ESP32C3](https://wiki.see
 
 ![XIAO ESP32C3 pinout](xiao-esp32c3-pinout.webp)
 
+For the board design, I decided to just try as many ways of driving the LED strips as possible, while also integrating the audio interface as the latter was relatively straightforward, hopefully giving me some sense of accomplishment even if none of the ways to drive the LEDs would work. I opened KiCad and got to work similarly to [last week]({{< relref "post/week-8/index.md" >}}).
+
+This time, after struggling with the research for securing parts before the Fablab would be deserted again, I got access to the blue cabin after-hours too and so did not have to stock up on components as frantically as last week. This was really good as it allowed me not to have to rush my research. Ultimately it lead me to many places but few conclusions. I ended up with more questions than I started with and so, taking Kris's advice after getting a green light for the single-MOSFET configuration, I decided to just experiment with all the most promising ones.
+
+I had also originally planned on integrating a power source too with the help of [this](https://www.temposlighting.com/guides/power-any-ws2812b-setup) tutorial. The 150 NeoPixels for which the power consumption is calculated seems like a reasonable starting point for me too. I was very surprised to see it adding up to 9 Amps though! With a bit of a safety margin, each individual LED color consumes approximately 20mA of current, adding up to a maximum of 60mA per pixel, which does add up quite quickly. The same number of LEDs can, however, be run at a slighlty lesser brightness as well, which quickly decreases power consumption. The initial power delivery system using a Schottky diode as recommended in the [XIAO wiki](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/) and a 500µF capacitor between the terminals as recommended in the [Best Practices](https://learn.adafruit.com/adafruit-neopixel-uberguide/best-practices) section of the Adafruit NeoPixel Überguide is depicted below. I eventually scrapped it for the final board as I wanted to use it for programming the LEDs and testing out the connections with the 5V pin as the source without the risk of damaging my computer.
+
+![Power delivery draft](power-delivery.webp)
+
+Below is the final schematic without the power solution. It can be found [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-9/program_leds/xiao_esp32c3?ref_type=heads) under `content/post/week-9/program_leds/xiao_esp32c3` as opposed to `content/post/week-9/xiao_esp32c3` which contains the schematic with power delivery but without the PCB layout.
+
+![Final output board schematic](output-schematic.webp)
+
+In the left bottom corner, there is the microcontroller, a vertical SMD header for an I2C connection, everything related to the audio output and a couple of 0 resistance resistors for jumping over wires in the PCB layout, which could not be avoided this time. On the right there are four horizontal connectors for LED strips with circuits of decreasing complexity preceding them from top to bottom. 
+
+The top one attempts to be a non-inverting level shifter inspired by the circuits under level shifting exploration. by combining two allegedly inverting circuits in series. The next one is a single level shifter as I wanted to see whether it would really invert anything, and if it did, how would it look like? Would there be software remedies? The second-to-lowest one has a voltage divider before it, aiming to to reduce the voltage to around 5 * 4500 / (4500 + 500) = 4.5V using 500 and 4500 Ohm resistors so that the control logic threshold for a 1 bit is less than 3.3V at 0.7 * 4.5 = 3.15 but the power voltage is still within spec. The last one uses a 3.3V power input as well as the final failsafe. The resistance values for the level shifters were simply copied from the first circuit I saw as many of the later ones had simply omitted concrete values.
+
+Below is the kind of cool looking PCB layout for the board. The thick power track was created a design exercise in anticipation of the power source and 150 NeoPixels drawing 9A of current. The trackwidth required for each level of current can be looked up from [the table here](https://www.multi-circuit-boards.eu/en/pcb-design-aid/surface/conductor-ampacity.html), where 3.0mm can easily handle the 9A current. 
+
+![Final output board PCB layout](output-pcb.webp)
+
+Even though the power track is wide, there is an issue in that the ground is not equally so uniformly in all places. This is hopefully alleviated by the fact that the entire copper area is ground and there are thus many places to go and lots of surface area for heat to dissipate but the ground connections should also at least add up to being sufficiently wide too. Not a problem for this board but for future ones that actually draw significantly more current. If I would also use "only" 100 NeoPixels, the thickness required would already drop to 1.5mm which is a lot more manageable and if I don't run them at maximum brightness, it will decrease a lot more.
+
+## Milling and soldering
+
+I used the same copper sheet as last week, with different double-sided tape and again I faced issues with milling. It started out fin in the corner but as it neared the center of the sheet, it did no mill deep enough. I fixed this by moving the bit to the area where it had not properly milled, set it down in there and then lifted it up with a couple hundreths of a millimeter and I ended up with a nicely milled board and still a whole, functioning bit this time.
+
+![Uneven milling](milling-problems.webp)
+![Freshly milled board](freshly-milled.webp)
+
+The PCB design rules checker (DRC) had complained about an error with the description of "Annular width (board setup contraints min annular width 0,1000 mm; actual 0,01)". I had ignored this as it was just about extrusions at the bottom of the [3.5mm audio jack](https://www.cuidevices.com/product/resource/sj-352x-smt.pdf) and I had checked that the drill bit fits inside it. And indeed, they were successfully drilled through, although the irrelevant copper border had not survived, and the jack fit fine.
+
+I then soldered on the components and was quite proud about managing to do so even with the MOSFETs as their footprints were ridiculously small. They aren't the cleanest joints of all time but they were relatively smooth and well constrained to their infinitesimally small footprints. I have a memory of possibly breaking a leg in both of the top MOSFETs upon slightly turning them but I managed to add the best solder at those points exactly so they should not cause trouble.
+
+I also learned to not save the flux but actually push the pen in a bit, which releases more. Then, making sure my solder iron stayed impeccably clean and glowing at all times, I pre-heated the pads a bit and then steadily pushed the solder against the pad and the soldering iron at an approximately 45° angle which created beautiful joints every time it worked.
+
+![Applying flux](apply-flux.webp)
+![Resistor values](resistors.webp)
+![Cleaning the solder iron tip](clean-solder-iron.webp)
+
+One more note of interest which I learned is also the numbering scheme of the SMD resistors, where the first three digits give the first three digits of the resistance value and the final fourth digit gives the number of zeroes after them, translating 4990 into 499 and 4991 into 4990 for example. The only resistors which had the exact value I had specified were the 0 bridges. For all the others, I chose the next closest one: 500 -> 499, 4500 -> 4990 and 2200 -> 2940.
 
 
+## Testing the board
 
-initially with power supply but left it out
+### LED strip connectors
 
-Started with esp32 and audio
+I tested all the four LED connectors by plugging in the LED strip and uploading the following modified blink test code onto the XIAO ESP32C3 with the `DATA_PIN` redefined separately for each:
 
+```C
+#include <Arduino.h>
+#include <FastLED.h>
+ 
+#define NUM_LEDS 6
+ 
+#define DATA_PIN D8
+#define CLOCK_PIN 13
+ 
+CRGB leds[NUM_LEDS];
+ 
+void setup() {
+    Serial.begin(9600);
+    FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); 
+    FastLED.setBrightness(5);
+}
+ 
+void loop() { 
+  leds[0] = CRGB::Red;
+  leds[1] = CRGB::Red;
+  leds[2] = CRGB::Red;
+  leds[3] = CRGB::Red;
+  leds[4] = CRGB::Red;
+  leds[5] = CRGB::Red;
+  FastLED.show();
+  delay(500);
 
-SLEEVE & TIP for 3.5mm jack - NOT SLEEVE AND RING
+  leds[0] = CRGB::Black;
+  leds[1] = CRGB::Black;
+  leds[2] = CRGB::Black;
+  leds[3] = CRGB::Black;
+  leds[4] = CRGB::Black;
+  leds[5] = CRGB::Black;
+  FastLED.show();
+  delay(500);
 
+  Serial.println("Hello World");
+}
+```
 
+Two of the connectors with the simplest circuits, those being the 3.3V power input + 3.3V logic and 5V voltage divider + 3.3V logic, worked such that the LED strips actually lit up, whereas neither one of the mosfet circuits worked. The pins were not also mapped so that `0` would be the same as `D0`, which I figured out by just iterating them throuhg until the 5V voltage divider one did light up after all. The same did not happen with the MOSFETs however. I also realized that I can actually use the `D` pin definitions in the code but this did not help either.
 
-Create a XIAO breakout board with a I2C connection to communicate with another board, an integrated speaker connection and connectors for LEDs
+![WS2812B strip lighting up with 3.3V logic and power input](christmas-tree.webp)
 
-Capacitors, diode, voltage regulator, 
+As said, the two simplest circuits worked but there was a very peculiar issue with them both. Can you see what is wrong in the picture? All LEDs are supposed to be red but only a couple of them actually are. The only explanation I can come up with is that I don't have the correct LED strip variant selected. I tried a few, including NeoPixel and WS2812B and this changed the colors a bit, they were not correct for either. I also noticed that some LEDs seemed to address the individual LEDs inside the pixel instead of the pixel as a whole, which gives another clue to this puzzle that I unfortunately don't have the time to solve right now. 
 
+The most important test and the very purpose of this week's board, however, was to see whether the light from the NeoPixels could actually look good through the acrylic. While the colorscheme may not be exactly coherent possibly due to the issues pondered above, there is certainly great potential. The below picture is captured at a brightness level of 220/255 with the weird color pattern that is produced when setting all pixels red.
 
-https://www.temposlighting.com/guides/how-to-add-custom-leds-to-any-project
+![](spectrum.webp)
 
-Running with 3.3V works!!!
+### Audio output
 
-https://learn.adafruit.com/adafruit-neopixel-uberguide/best-practices
+Even though the audio output was supposed to be the easy, straightforward part, it appears I had miswired it. I had wired it according to the diagram below, which claims the tip to be left audio, the ring (middle) to be right audio and the sleeve (bottom) to be ground. 
 
+![Headphone jack diagram](headphone-jack.webp)
 
+I had wired the components according to this without questioning but it turned out during testing that, for my speaker at least, one of the wires should be wired to the tip and the other to the sleeve, not the ring. This I discovered by the below code producing no sound when the speaker was plugged into the socket. However, when I touched the abovementioned parts with the wires separately, the expected noise was produced. This means that either someone has wired the jack funnily or then one should not blindly believe everything they read on the internet, no matter how simple seeming. Next time I shall remember to conduct even more testing, even on the seemingly easy and straightforward parts.
 
+The code used for the audio test was the following, modified for the board, from Kris's example repository:
 
-Two inverters in series?
+```C
+#include <Arduino.h>
+/*
+ This example generates a square wave based tone at a specified frequency
+ and sample rate. Then outputs the data using the I2S interface to a
+ MAX08357 I2S Amp Breakout board.
 
+ I2S Circuit:
+ * XIAO ESP32C3 (https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2s.html)
+ * MAX08357:
+   * GND connected GND
+   * VIN connected 5V
+   * LRC connected to pin D7 (GPIO20)
+   * BCLK connected to pin D6 (GPIO21)
+   * DIN connected to pin D5 (GPIO7)
 
-Shortcircuiting esp32 caused an emp that knocked out my bluetooth devices? Even my glucose sensor connected to my phone
+ created 17 November 2016
+ by Sandeep Mistry
+ For ESP extended
+ Tomas Pilny
+ 2nd September 2021
+ For XIAO ESP32C3
+ Krisjanis Rijnieks
+ 21 April 2023
+ */
 
-https://www.multi-circuit-boards.eu/en/pcb-design-aid/surface/conductor-ampacity.html
+#include <I2S.h>
+const int frequency = 440; // frequency of square wave in Hz
+const int amplitude = 500; // amplitude of square wave
+const int sampleRate = 8000; // sample rate in Hz
+const int bps = 16;
 
-push the flux pen
+const int halfWavelength = (sampleRate / frequency); // half wavelength of square wave
 
-Resistor markings: 4990 means 499 and 0 zeros
+int32_t sample = amplitude; // current sample value
+int count = 0;
 
-Struggled even more here than last week with my arch nemesis: NeoPixel LED strips
+i2s_mode_t mode = I2S_PHILIPS_MODE; // I2S decoder is needed
+// i2s_mode_t mode = ADC_DAC_MODE; // Audio amplifier is needed
 
-104 capacitor refers to 0.1uF
+// Mono channel input
+// This is ESP specific implementation -
+//   samples will be automatically copied to both channels inside I2S driver
+//   If you want to have true mono output use I2S_PHILIPS_MODE and interlay
+//   second channel with 0-value samples.
+//   The order of channels is RIGH followed by LEFT
+//i2s_mode_t mode = I2S_RIGHT_JUSTIFIED_MODE; // I2S decoder is needed
 
-hole clearance issue was ignored with no problem
+void setup() {
 
+  Serial.begin(9600);
+  Serial.println("I2S simple tone");
 
+  if (!I2S.setDataPin(D3)) {
+    Serial.println("failed to set DATA, DATA OUT pin");
+  }
 
+  if (!I2S.setSckPin(D6)) {
+    Serial.println("Failed to set SCK pin");
+  }
 
+  if (!I2S.setFsPin(D7)) {
+    Serial.println("Failed to set FRAME SELECT pin");
+  }
 
+  if (!I2S.setSimplex()) {
+    Serial.println("Failed to enter SIMPLEX mode");
+  }
 
+  // start I2S at the sample rate with 16-bits per sample
+  if (!I2S.begin(mode, sampleRate, bps)) {
+    Serial.println("Failed to initialize I2S!");
+    while (1); // do nothing
+  }
+}
+
+void loop() {
+    if (count % halfWavelength == 0 ) {
+      // invert the sample every half wavelength count multiple to generate square wave
+      sample = -1 * sample;
+    }
+
+    if(mode == I2S_PHILIPS_MODE || mode == ADC_DAC_MODE){ // write the same sample twice, once for Right and once for Left channel
+      I2S.write(sample); // Right channel
+      I2S.write(sample); // Left channel
+    }else if(mode == I2S_RIGHT_JUSTIFIED_MODE || mode == I2S_LEFT_JUSTIFIED_MODE){
+      // write the same only once - it will be automatically copied to the other channel
+      I2S.write(sample);
+    }
+
+    // increment the counter for the next sample
+    count++;
+}
+```
+
+As a side-note, there have been even more mysterious errors than "just" an unexplained emp with my file explorer crashing multiple times and VS Code throwing Git errors upon trying to sync repositories. I am not quite sure who is at fault with the error but it has luckily gone away with the usually quite ineffective strategy of just waiting.
+
+![Git error upon syncing repositories](git-error.webp)
+
+## Reflections
+
+Finally caught up! Mostly anyway. And only for a little while before I will again be late due to the coming exam week. Documenting afterwards majorly sucks but it is also the only way I could get the circuits done in time. For this week, the main takeaway is really just frustration at how such seemingly trivial things can be so damn difficult. As the MOSFET level shifters did not work, I will likely go with the voltage divider strategy for my final project, which allows me to use a 5V power supply. For that, I still have to learn how to program such circuits without risk to my laptop or any wireless devices in the vicinity.
+
+The speaker test was a bit underwhelming too because I did not really get to try out the amplification and hear how loud it could get. The NeoPixels, however, look decent enough when positioned further from the acrylic so that I can proceed with the current plan of creating an ellipsoid out of acrylic with vacuum forming, processing it for even better light dispersion and "cloudy" look and using NeoPixels inside.
+
+Takeaways of the week include: simplicity is key and do rapid prototyping more rapidly but still make sure to double-check and thoroughly test everything. Gotta embrace the contradictions! It is unfortunate how I did not have any time for programming but I hope to get a bit more time now that in the next period I will have only 2 courses instead of these 4. 

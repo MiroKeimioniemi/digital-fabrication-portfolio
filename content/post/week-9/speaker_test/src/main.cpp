@@ -63,11 +63,11 @@ void setup() {
 void loop() { 
   // Turn the LED on, then pause
   leds[0] = CRGB::Red;
-  // leds[1] = CRGB::Red;
-  // leds[2] = CRGB::Red;
+  leds[1] = CRGB::Red;
+  leds[2] = CRGB::Red;
   leds[3] = CRGB::Red;
-  // leds[4] = CRGB::Red;
-  // leds[5] = CRGB::Red;
+  leds[4] = CRGB::Red;
+  leds[5] = CRGB::Red;
   FastLED.show();
   delay(500);
   // Now turn the LED off, then pause
@@ -75,8 +75,8 @@ void loop() {
   leds[1] = CRGB::Black;
   leds[2] = CRGB::Black;
   leds[3] = CRGB::Black;
-  // leds[4] = CRGB::Black;
-  // leds[5] = CRGB::Black;
+  leds[4] = CRGB::Black;
+  leds[5] = CRGB::Black;
   FastLED.show();
   delay(500);
 
