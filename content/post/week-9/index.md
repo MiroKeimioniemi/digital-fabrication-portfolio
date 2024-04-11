@@ -378,3 +378,4 @@ Finally caught up! Mostly anyway. And only for a little while before I will agai
 The speaker test was a bit underwhelming too because I did not really get to try out the amplification and hear how loud it could get. The NeoPixels, however, look decent enough when positioned further from the acrylic so that I can proceed with the current plan of creating an ellipsoid out of acrylic with vacuum forming, processing it for even better light dispersion and "cloudy" look and using NeoPixels inside.
 
 Takeaways of the week include: simplicity is key and do rapid prototyping more rapidly but still make sure to double-check and thoroughly test everything. Gotta embrace the contradictions! It is unfortunate how I did not have any time for programming but I hope to get a bit more time now that in the next period I will have only 2 courses instead of these 4. 
+
