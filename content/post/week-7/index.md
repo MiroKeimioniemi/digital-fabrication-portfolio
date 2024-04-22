@@ -25,7 +25,7 @@ categories:
   - "Machining"
 series: 
   - "Weekly Assignments"
-image: "installed-shelves.jpg"
+image: "installed-shelves.webp"
 ---
 
 I feel that this week had the highest stakes thus far. Not only could the machine actually kill you, for which there is actual [precedent](https://www.nytimes.com/2011/04/14/nyregion/yale-student-dies-in-machine-shop-accident.html), we were also given a strictly limited 120cm x 120cm x 1.5cm sheet of plywood and our assignment was to create something large, meaning that it could not be easily hidden. This meant that the project had to be large and complex enough to pass the assignment criteria but also something that we genuinely needed and wanted to have in our apartment.
@@ -307,3 +307,4 @@ Once the design is made, there exists far smarter ways of exporting than exporti
 Finally, the importance of Dog-Bones cannot be overestimated. Adding them to all the relevant corners upon creating the toolpaths saves a ton of effort from the post-processing and assembly phase. Also, be prepared for splinters, particularly with thin parts of the design and cheap wood.
 
 Overall, however, I am proud of the result, which still holds its load well after a couple of weeks!
+
