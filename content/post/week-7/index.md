@@ -25,7 +25,7 @@ categories:
   - "Machining"
 series: 
   - "Weekly Assignments"
-image: "ready-munich-shelf.webp"
+image: "installed-shelves.jpg"
 ---
 
 I feel that this week had the highest stakes thus far. Not only could the machine actually kill you, for which there is actual [precedent](https://www.nytimes.com/2011/04/14/nyregion/yale-student-dies-in-machine-shop-accident.html), we were also given a strictly limited 120cm x 120cm x 1.5cm sheet of plywood and our assignment was to create something large, meaning that it could not be easily hidden. This meant that the project had to be large and complex enough to pass the assignment criteria but also something that we genuinely needed and wanted to have in our apartment.
@@ -264,6 +264,38 @@ My parts slipped right in and while snuggish, not nearly as tight as Rosa's. Thi
 ![Ready Munich shelf from behind](screwed.webp)
 ![Ready Munich shelf from the front](ready-munich-shelf.webp)
 
+Below is a visualization of what the shelves would look like on the wall. I placed the lower Tampere shelf on top of the metal trim of the kitchen backsplash for a bit more of additional support as the contents of the shelf were to be quite heavy. I aligned the visible ends to be parallel to the edges of the wall and placed the shelves quite far apart to make sure there would be space for the tall containers on the lower shelf, although when actually fastening them, I brought the upper one lower. 
+
+![Visualizing the end result](eyeballing-layout.webp)
+
+To then install the shelves, I marked spots for pre-drilling holes into the backboards of the shelves for the screws used to fasten the shelf with excess plates from assembling IKEA furniture - of which there were precisely the right amount. The backboard was made to be elongated precisely so that most screws could be "hidden" under it but for extra stability and safety, I added ones above as well, centering them on the buildings closest to the edges high enough to significantly increase stability but low enough not to look too out of place. 
+
+I measured them carefully and did the same for the ones under the shelf as well until I realized that it was a lot simpler and faster just to set the drill perpendicularly against the backboard as close to the underside of the shelf and its supports as allowed by the drill's shape and just drill straight through with a thin drill bit. Here it was important to be as close as possible to the shelf and support components to impart as little stress on the wood as possible from future loads but this was limited by the drill's shape and size.
+
+![Positioning screw plates](support-plates.webp)
+![Marking drill holes](marking-holes.webp)
+![Drilling by eyeballing / feel](drilling.webp)
+
+The wall where the shelves were to be installed was drywall and thus required drywall anchors for safety and stability.
+Rosa held up the first shelf while I marked the spots for the centers of the anchors by drawing through the holes with a 0.5 pencil lead as they were the only things slim enough to fit through. It worked neatly after cleaning the splinters on the backside and I then installed the drywall anchors by first hammering them in a bit and then tightening with a basic screwdriver. Many anchors broke inside the wall so that their tips had to be carved out with a smaller flat-tipped screwdriver before inserting a new one in their place and continuing from where they were left off but we had enough for this to not be a major issue.
+
+![Marking the spots through the holes (the scratch on my hand is from bouldering and thus unrelated)](mark-holes-on-wall.webp)
+![Hammering the drywall anchors into place](hammering-drywall.webp)
+![Drywall anchors for the first shelf](drywall-screws.webp)
+
+We then drilled the screws in with the backplates, which went surprisingly smoothly without any major trouble. To position the second shelf above the first one, I placed the tallest container that the lower one was meant to carry on it and left a couple of centimeters of space between its top and the bottom of the next shelf. Simultaneously we had a leveler on the second shelf and once it was both at the right height and perfectly level, we drew a long line under the backboard to mark this and then Rosa marked the holes while I held the shelf still. Having been careful in the design phase paid off as the tip of Näsinneula avoided a collision with the support of the upper shelf nicely.
+
+Drilling the second shelf to the wall was a lot scarier as we could not properly tell whether the holes were exactly on top of the anchors but we figured out that we could stick thin hammering nails through both the holes in the shelf as well as the anchors on the wall. We stuck ones through every hole we were not currently drilling in and so ensured that the shelf stayed level and in place while drilling. Starting from the far ends and moving towards the center, we soon had both shelves installed.
+
+![Drilling the shelf to the wall](drilling-to-wall.webp)
+![Leveling the shelf](leveler.webp)
+![Pinning the shelf to the wall with nails](pinning-to-wall.webp)
+
+Below are the shelves in everyday usage. Not much of the city backgrounds can actually be seen outside of a tea ceremony when all our tea varieties and Rosa's self-painted teapot + mug combination are offloaded from the shelf but they fulfill their functional purpose perfectly and presented a nice challenge in making them. I was very relieved after they easily carried all the weight of the full large containers.
+
+![Fully loaded lower shelf](loaded-shelf.webp)
+![Both shelves fully loaded](fully-loaded-shelves.webp)
+
 ## Reflections
 
 This was an intense week during which I learned not to trust Ondsel with vectors but also how to create more complex parametric designs, mill them and how to save as much headache as possible in the post-processing and assembly phase.
@@ -274,19 +306,4 @@ Once the design is made, there exists far smarter ways of exporting than exporti
 
 Finally, the importance of Dog-Bones cannot be overestimated. Adding them to all the relevant corners upon creating the toolpaths saves a ton of effort from the post-processing and assembly phase. Also, be prepared for splinters, particularly with thin parts of the design and cheap wood.
 
-Overall, however, I am proud of the result, which hopefully holds well when we have gotten them fastened on the wall...
-
-![Visualizing the end result](eyeballing-layout.webp)
-
-
-
-
-
-
-
-
-
-
-
-
-
+Overall, however, I am proud of the result, which still holds its load well after a couple of weeks!
