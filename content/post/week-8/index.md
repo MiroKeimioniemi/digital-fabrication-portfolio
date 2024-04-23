@@ -237,7 +237,7 @@ To export the design files as `.grb` files, click "Plot" (rightmost of the two p
 
 ![Export ("Plot") gerbers](export-gerbers.webp)
 
-All the `.grb` files and KiCad project files can be found from the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-8/qtouch-board?ref_type=heads) under `content/post/week-8/qtouch-board`.
+All the `.grb` files and KiCad project files can be found from the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-8/qtouch-board?ref_type=heads) under [`content/post/week-8/qtouch-board`](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-8/qtouch-board?ref_type=heads).
 
 ## Making the board
 
@@ -273,9 +273,12 @@ The resistors closest to 40 and 80 I could find were 49.9 and 100 and so I used 
 
 ## Testing the board
 
+More on input devices week - I assume this is legal as it was for design and output too? I would create a similar board anyway
+
 ## Reflections
 
 For prototyping I still much prefer breadboards
+
 
 
 

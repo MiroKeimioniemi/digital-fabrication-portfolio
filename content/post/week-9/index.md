@@ -184,7 +184,9 @@ Below is the kind of cool looking PCB layout for the board. The thick power trac
 
 ![Final output board PCB layout](output-pcb.webp)
 
-Even though the power track is wide, there is an issue in that the ground is not equally so uniformly in all places. This is hopefully alleviated by the fact that the entire copper area is ground and there are thus many places to go and lots of surface area for heat to dissipate but the ground connections should also at least add up to being sufficiently wide too. Not a problem for this board but for future ones that actually draw significantly more current. If I would also use "only" 100 NeoPixels, the thickness required would already drop to 1.5mm which is a lot more manageable and if I don't run them at maximum brightness, it will decrease a lot more.
+Even though the power track is wide, there is an issue in that the ground is not equally uniform in terms of width in all places. This is hopefully alleviated by the fact that the entire copper area is ground and there are thus many places to go and lots of surface area for heat to dissipate but the ground connections should also at least add up to being sufficiently wide too. Not a problem for this board but for future ones that actually draw significantly more current this has to be considered. Also, if I would "only" use 100 NeoPixels, the thickness required would already drop to 1.5mm which is a lot more manageable and if I don't run them at maximum brightness, it will quickly decrease a lot more.
+
+All the `.grb` files and KiCad project files can be found from the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-9/program_leds/xiao_esp32c3) under [`content/post/week-9/program_leds/xiao_esp32c3`](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-9/program_leds/xiao_esp32c3).
 
 ## Milling and soldering
 
@@ -256,11 +258,13 @@ Two of the connectors with the simplest circuits, those being the 3.3V power inp
 
 ![WS2812B strip lighting up with 3.3V logic and power input](christmas-tree.webp)
 
-As said, the two simplest circuits worked but there was a very peculiar issue with them both. Can you see what is wrong in the picture? All LEDs are supposed to be red but only a couple of them actually are. The only explanation I can come up with is that I don't have the correct LED strip variant selected. I tried a few, including NeoPixel and WS2812B and this changed the colors a bit, they were not correct for either. I also noticed that some LEDs seemed to address the individual LEDs inside the pixel instead of the pixel as a whole, which gives another clue to this puzzle that I unfortunately don't have the time to solve right now. 
+As said, the two simplest circuits worked but there was a very peculiar issue with them both. Can you see what is wrong in the picture? All LEDs are supposed to be red but only a couple of them actually are. The only explanation I can come up with is that I don't have the correct LED strip variant selected. I tried a few, including NeoPixel, WS2812B, WS2812 and WS2811 and although these sometimes changed the colors a bit, they were not correct either. I also noticed that some LEDs seemed to address the individual LEDs inside the pixel instead of the pixel as a whole, which gives another clue to this puzzle. 
+
+Another peculiar occurence was that sometimes the LEDs flash at the correct brightness and sometimes as much brighter. Due to the lack of time and this not being the final output board anyway due to excess complexity and broken parts, I decided to not debug the software further now. Instead, I would order a couple of meters of 60-LEDs-per-meter strip and then work with that when I would know what exactly I was actually working with.
 
 The most important test and the very purpose of this week's board, however, was to see whether the light from the NeoPixels could actually look good through the acrylic. While the colorscheme may not be exactly coherent possibly due to the issues pondered above, there is certainly great potential. The below picture is captured at a brightness level of 220/255 with the weird color pattern that is produced when setting all pixels red.
 
-![](spectrum.webp)
+![LED strip through acrylic](spectrum.webp)
 
 ### Audio output
 
@@ -268,7 +272,7 @@ Even though the audio output was supposed to be the easy, straightforward part, 
 
 ![Headphone jack diagram](headphone-jack.webp)
 
-I had wired the components according to this without questioning but it turned out during testing that, for my speaker at least, one of the wires should be wired to the tip and the other to the sleeve, not the ring. This I discovered by the below code producing no sound when the speaker was plugged into the socket. However, when I touched the abovementioned parts with the wires separately, the expected noise was produced. This means that either someone has wired the jack funnily or then one should not blindly believe everything they read on the internet, no matter how simple seeming. Next time I shall remember to conduct even more testing, even on the seemingly easy and straightforward parts.
+I had wired the components according to this without questioning but it turned out during testing that, for my speaker at least, one of the wires should be wired to the tip and the other to the sleeve (which in the above picture is labeled "Ground"), not the ring (labeled "Right Audio"). This I discovered by the below code producing no sound when the speaker was plugged into the socket. However, when I touched the abovementioned parts with the wires separately, the expected noise was produced. This means that either someone has wired the jack funnily or then one should not blindly believe everything they read on the internet, no matter how simple seeming. Next time I shall remember to conduct even more testing, even on the seemingly easy and straightforward parts.
 
 The code used for the audio test was the following, modified for the board, from Kris's example repository:
 
@@ -367,18 +371,14 @@ void loop() {
 }
 ```
 
-As a side-note, there have been even more mysterious errors than "just" an unexplained emp with my file explorer crashing multiple times and VS Code throwing Git errors upon trying to sync repositories. I am not quite sure who is at fault with the error but it has luckily gone away with the usually quite ineffective strategy of just waiting.
+As a side-note, there have been even more mysterious errors than "just" an unexplained EMP with my file explorer crashing multiple times and VS Code throwing Git errors upon trying to sync repositories. I am not quite sure who is at fault with the error but it has luckily gone away with the otherwise usually quite ineffective strategy of just waiting.
 
 ![Git error upon syncing repositories](git-error.webp)
 
 ## Reflections
 
-Finally caught up! Mostly anyway. And only for a little while before I will again be late due to the coming exam week. Documenting afterwards majorly sucks but it is also the only way I could get the circuits done in time. For this week, the main takeaway is really just frustration at how such seemingly trivial things can be so damn difficult. As the MOSFET level shifters did not work, I will likely go with the voltage divider strategy for my final project, which allows me to use a 5V power supply. For that, I still have to learn how to program such circuits without risk to my laptop or any wireless devices in the vicinity.
+Finally caught up! Mostly anyway. And only for a little while before I will again be late due to the coming exam week. Documenting afterwards majorly sucks but it is also the only way I could get the circuits done in time. For this week, the main takeaway is really just frustration at how such seemingly trivial things can be so damn difficult. As the MOSFET level shifters did not work, I was first inclined to go with the voltage divider strategy for my final project, which would allow me to use a common 5V power supply. In the review session, however, our instructor mentioned that it might be risky with high currents as the resistors might give out. He then showed an [alternative level shifting circuit](https://karlpalo.gitlab.io/fablab2022/weekly/week14/), which was based on [his logic level shifting circuit](https://fabacademy.org/2018/labs/barcelona/students/krisjanis-rijnieks/assignments/week14/) that he had been hiding all this time. He said that he would also order some logic level shifter components, which sound the most interesting for me. I will still have to learn how to program circuits with power supplies without risk to my laptop or any wireless devices in the vicinity though.
 
 The speaker test was a bit underwhelming too because I did not really get to try out the amplification and hear how loud it could get. The NeoPixels, however, look decent enough when positioned further from the acrylic so that I can proceed with the current plan of creating an ellipsoid out of acrylic with vacuum forming, processing it for even better light dispersion and "cloudy" look and using NeoPixels inside.
 
-Takeaways of the week include: simplicity is key and do rapid prototyping more rapidly but still make sure to double-check and thoroughly test everything. Gotta embrace the contradictions! It is unfortunate how I did not have any time for programming but I hope to get a bit more time now that in the next period I will have only 2 courses instead of these 4. 
-
-
-
-
+Takeaways of the week include: simplicity is key and do rapid prototyping more rapidly but still make sure to double-check and thoroughly test everything. Gotta embrace the contradictions! It is unfortunate how I did not have any time for further programming but I hope to get a bit more time in the next period when I will have only 2 courses instead of these 4. 
