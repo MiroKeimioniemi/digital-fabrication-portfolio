@@ -19,6 +19,11 @@ void setup() {
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
 
+  pinMode(2, INPUT);
+  pinMode(3, INPUT);
+  pinMode(4, INPUT);
+  pinMode(5, OUTPUT);
+
   if (! qt_1.begin())
     Serial.println("Failed to begin qt");
   if (! qt_2.begin())
@@ -50,65 +55,129 @@ void loop() {
   digitalWrite(PIN_LED_TXL, HIGH);
 
   qt1 = qt_1.measure();
-  Serial.println("qt1");
-  Serial.print(qt1);
+  Serial.print("qt1: ");
+  Serial.println(qt1);
   
 
   qt2 = qt_2.measure();
-  Serial.println("qt2");
-  Serial.print(qt2);
+  Serial.print("qt2: ");
+  Serial.println(qt2);
   
 
   qt3 = qt_3.measure();
-  Serial.println("qt3");
-  Serial.print(qt3);
+  Serial.print("qt3: ");
+  Serial.println(qt3);
   
 
   qt4 = qt_4.measure();
-  Serial.println("qt4");
-  Serial.print(qt4);
+  Serial.print("qt4: ");
+  Serial.println(qt4);
   
 
   qt5 = qt_5.measure();
-  Serial.println("qt5");
-  Serial.print(qt5);
+  Serial.print("qt5: ");
+  Serial.println(qt5);
   
 
   qt6 = qt_6.measure();
-  Serial.println("qt6");
-  Serial.print(qt6);
+  Serial.print("qt6: ");
+  Serial.println(qt6);
   
 
   qt7 = qt_7.measure();
-  Serial.println("qt7");
-  Serial.print(qt7);
-  
+  Serial.print("qt7: ");
+  Serial.println(qt7);
 
 
   if (qt1 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  if (qt2 >= qt_Threshold) {
+  else if (qt2 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  if (qt3 >= qt_Threshold) {
+  else if (qt3 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  if (qt4 >= qt_Threshold) {
+  else if (qt4 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  if (qt5 >= qt_Threshold) {
+  else if (qt5 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  if (qt6 >= qt_Threshold) {
+  else if (qt6 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  if (qt7 >= qt_Threshold) {
+  else if (qt7 >= qt_Threshold) {
     digitalWrite(LED_BUILTIN, LOW);
   }
   else {
     digitalWrite(LED_BUILTIN, HIGH);
   }
 
-  delay(1000);
+
+  int qts[] = {qt_Threshold, qt1, qt2, qt3, qt4, qt5, qt6, qt7};
+  int maxIndex = 0;
+
+  for (int i = 0; i <= 7; i++) {
+      if (qts[i] > qts[maxIndex]) {
+          maxIndex = i;
+      }
+  }
+
+  Serial.print("maxIndex: ");
+  Serial.println(maxIndex);
+
+
+  switch(maxIndex) {
+    case 0:
+      pinMode(2, INPUT);
+      pinMode(3, INPUT);
+      pinMode(4, INPUT);
+      digitalWrite(5, LOW);
+      break;
+    case 1:
+      pinMode(2, OUTPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, INPUT);
+      digitalWrite(2, LOW);
+      digitalWrite(3, HIGH);
+      break;
+    case 2:
+      pinMode(2, OUTPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, INPUT);
+      digitalWrite(2, HIGH);
+      digitalWrite(3, LOW);
+      break;
+    case 3:
+      pinMode(2, INPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      break;
+    case 4:
+      pinMode(2, INPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      break;
+    case 5:
+      pinMode(2, OUTPUT);
+      pinMode(3, INPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(2, LOW);
+      digitalWrite(4, HIGH);
+      break;
+    case 6:
+      pinMode(2, OUTPUT);
+      pinMode(3, INPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(2, HIGH);
+      digitalWrite(4, LOW);
+      break;
+    case 7:
+      digitalWrite(5, HIGH);
+  }
 }

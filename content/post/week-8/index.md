@@ -15,6 +15,12 @@ tags:
   - "CopperCAM"
   - "Roland VPanel"
   - "soldering"
+  - "QTouch"
+  - "XIAO"
+  - "SAMD21"
+  - "programming"
+  - "debugging"
+  - "charlieplexing"
 categories: 
   - "Electronics"
   - "Milling"
@@ -259,7 +265,7 @@ I tried being extra<sup>2</sup> careful this time and also tried resetting the Z
 
 I only later realized that there were different kinds of vertical sockets available in the blue cabinet, which required no processing but for the connections on this board, I grabbed a stick of connectors, cut it and bent the connectors to fit the shape of the footprint. They felt a bit too large, which aroused my suspicion, but could still be soldered on when placed just right. 
 
-I then soldered on the components, which went mostly relatively smoothly except for me ripping out a trace again when trying to adjust the levitating LED in the rightmost picture below, which has become somewhat of a trademark of mine at this point. I did, however, manage to fix it with patience and extra care, soldering it much further along the trace than normal. I also spilled the solder every now and then but could destroy the bridges I accidentally created by tracing the nearby clearances with the soldering iron, which resulted in a not pretty but functional splitting of the solder onto the two sides.
+I then soldered on the components, which went mostly relatively smoothly except for me ripping out a trace again when trying to adjust the levitating LED in the rightmost picture below, which has become somewhat of a trademark of mine at this point. I did, however, manage to fix it with patience and extra care, soldering it much further along the trace than normal. I also spilled the solder every now and then but could destroy the bridges I accidentally created by tracing the nearby clearances with the soldering iron, which resulted in a not pretty but functional splitting of the solder onto the two sides. A major tip for helping to keep the soldering iron's tip clean (very important!) was to actually wet the sponges in the soldering stations.
 
 ![All the components making up the board](before-soldering.webp)
 ![Cutting socket connectors](cutting-socket.webp)
@@ -273,37 +279,211 @@ The resistors closest to 40 and 80 I could find were 49.9 and 100 and so I used 
 
 ## Testing the board
 
-More on input devices week - I assume this is legal as it was for design and output too? I would create a similar board anyway
+To test the board, I adapted the code from the [fruit piano example](https://www.seeedstudio.com/blog/2020/07/20/how-to-make-a-fruit-piano-on-seeeduino-xiaos-q-touch-function-m/) and modified it as shown below:
+
+```C
+#include <Arduino.h>
+#include "Adafruit_FreeTouch.h"
+
+Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(A0, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_2 = Adafruit_FreeTouch(A1, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_3 = Adafruit_FreeTouch(A6, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_4 = Adafruit_FreeTouch(A7, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_5 = Adafruit_FreeTouch(A8, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_6 = Adafruit_FreeTouch(A9, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_7 = Adafruit_FreeTouch(A10, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("FreeTouch test");
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(PIN_LED_RXL, OUTPUT);
+  pinMode(PIN_LED_TXL, OUTPUT);
+
+  digitalWrite(PIN_LED_RXL, HIGH);
+  digitalWrite(PIN_LED_TXL, HIGH);
+
+  pinMode(2, INPUT);
+  pinMode(3, INPUT);
+  pinMode(4, INPUT);
+  pinMode(5, OUTPUT);
+
+  if (! qt_1.begin())
+    Serial.println("Failed to begin qt");
+  if (! qt_2.begin())
+    Serial.println("Failed to begin qt");
+  if (! qt_3.begin())
+    Serial.println("Failed to begin qt");
+  if (! qt_4.begin())
+    Serial.println("Failed to begin qt");
+  if (! qt_5.begin())
+    Serial.println("Failed to begin qt");
+  if (! qt_6.begin())
+    Serial.println("Failed to begin qt");
+  if (! qt_7.begin())
+    Serial.println("Failed to begin qt");
+}
+
+int qt_Threshold = 850;
+
+void loop() {
+  int qt1 = 0;
+  int qt2 = 0;
+  int qt3 = 0;
+  int qt4 = 0;
+  int qt5 = 0;
+  int qt6 = 0;
+  int qt7 = 0;
+
+  digitalWrite(PIN_LED_RXL, HIGH);
+  digitalWrite(PIN_LED_TXL, HIGH);
+
+  qt1 = qt_1.measure();
+  Serial.print("qt1: ");
+  Serial.println(qt1);
+  
+
+  qt2 = qt_2.measure();
+  Serial.print("qt2: ");
+  Serial.println(qt2);
+  
+
+  qt3 = qt_3.measure();
+  Serial.print("qt3: ");
+  Serial.println(qt3);
+  
+
+  qt4 = qt_4.measure();
+  Serial.print("qt4: ");
+  Serial.println(qt4);
+  
+
+  qt5 = qt_5.measure();
+  Serial.print("qt5: ");
+  Serial.println(qt5);
+  
+
+  qt6 = qt_6.measure();
+  Serial.print("qt6: ");
+  Serial.println(qt6);
+  
+
+  qt7 = qt_7.measure();
+  Serial.print("qt7: ");
+  Serial.println(qt7);
+
+
+  if (qt1 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else if (qt2 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else if (qt3 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else if (qt4 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else if (qt5 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else if (qt6 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else if (qt7 >= qt_Threshold) {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  else {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+
+
+  int qts[] = {qt_Threshold, qt1, qt2, qt3, qt4, qt5, qt6, qt7};
+  int maxIndex = 0;
+
+  for (int i = 0; i <= 7; i++) {
+      if (qts[i] > qts[maxIndex]) {
+          maxIndex = i;
+      }
+  }
+
+  Serial.print("maxIndex: ");
+  Serial.println(maxIndex);
+
+
+  switch(maxIndex) {
+    case 0:
+      pinMode(2, INPUT);
+      pinMode(3, INPUT);
+      pinMode(4, INPUT);
+      digitalWrite(5, LOW);
+      break;
+    case 1:
+      pinMode(2, OUTPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, INPUT);
+      digitalWrite(2, LOW);
+      digitalWrite(3, HIGH);
+      break;
+    case 2:
+      pinMode(2, OUTPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, INPUT);
+      digitalWrite(2, HIGH);
+      digitalWrite(3, LOW);
+      break;
+    case 3:
+      pinMode(2, INPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(3, LOW);
+      digitalWrite(4, HIGH);
+      break;
+    case 4:
+      pinMode(2, INPUT);
+      pinMode(3, OUTPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, LOW);
+      break;
+    case 5:
+      pinMode(2, OUTPUT);
+      pinMode(3, INPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(2, LOW);
+      digitalWrite(4, HIGH);
+      break;
+    case 6:
+      pinMode(2, OUTPUT);
+      pinMode(3, INPUT);
+      pinMode(4, OUTPUT);
+      digitalWrite(2, HIGH);
+      digitalWrite(4, LOW);
+      break;
+    case 7:
+      digitalWrite(5, HIGH);
+  }
+}
+```
+
+The `qt_x` pins correspond to the QTouch pins initialized as instances of `Adafruit_FreeTouch`. These did not have to be modified as the example uses the same board. The setup, however, required a few alterations. I did not use a speaker and could thus delete all references to one. Instead, I needed to define some more pins. First the ones controlling the builtin LEDs and later the pins used for charlieplexing and the one extra LED. In the loop part, I first modified the Serial output to be better formatted and then changed the if block to light up the orange onboard LED upon registering QTouch input over the threshold. These are inverted with respect to Arduino and have to thus be pulled low instead of high to light up. 
+
+This worked perfectly. The QTouch pins registered capacitances between 400 and 650 when not touched and over 1000 when touched. Furthermore, these values were stable. They vary quite significantly between pins - particularly when not touched - but the measurements of a single pin typically varied only by 1. Every time I touched a pad, the orange onboard LED lit up. However, it was overshadowed by a very bright blue serial indicator LED, which prompted me to add the `digitaWrite(PIN_LED_RXL, HIGH)` and `digitalWrite(PIN_LED_TXL, HIGH)` statements to turn them off.
+
+To then test the charlieplexed LEDs, I wrote a loop that iterates over all the values read in by the QTouch pins with the threshold value included. It then finds the index of the highest measurement, which is the threshold if none of them are touched, and matches it to the corresponding case: 0 means no touch and thus turns off all LEDs, whereas 1 to 7 correspond to the respective QTouch pins. To turn on a given charlieplexed LED, simply assign the pins connected to the anode and cathode to `OUTPUT` with the former `HIGH` and the latter `LOW` and set all other pins as `INPUT` as explained [here](https://www.instructables.com/Charlieplexing-Made-Easy-and-What-It-Even-Means/). The last, regularly connected LED is turned on with a `digitalWrite()` to `HIGH`.
+
+The charlieplexed LEDs did not work so smoothly in the beginning. Only four of them lit up in the first place and they did so only in pairs with a non-lit LED in between. The first two did not light up at all. I first tried to extensively debug the software both by manually modifying it as well as by trying different ways of doing it such as [this](https://circuitdigest.com/microcontroller-projects/charlieplexing-arduino-to-control-12-leds-with-4-gpio-pins) but the issues persisted, leading me to conclude that it must be a hardware issue.
+
+ I tried to debug it with a multimeter checking for connectivity and found that the four LEDs that lit up with the code did so with the multimeter too, depending on which way they were prodded. The first two, however, did not light up but beeped instead, indicating that they were connected but that something was not quite right. It turned out that some of the solder on one of the LEDs had overflowed slightly to just barely touch one trace too far. This went entirely unnoticed by me until our instructor, Krisjanis, spotted it. After a quick resoldering the problem was gone and the board worked beautifully just as intended! This can be seen in the video below where each QTouch pad corresponds to a separate LED that gets lit up when touching the corresponding pad:
+
+{{< video src="xiao-samd21-qtouch-board-demo.mp4" loop="true" muted="true" >}}
 
 ## Reflections
 
-For prototyping I still much prefer breadboards
+Electronics are tough. Not only because debugging becomes exponentially more difficult but because every choice you make locks you in further and further and it feels like there is no going back from most things. Once I got the components from the cabinet and everyone else had left the lab, those were what I had to work with. Once the traces were milled, there was no bringing back the copper or adding new traces (although the latter could be solved by soldering wires even if they would make the board quite ugly). Once a more complex component with more than two pads was soldered on, it was as good as permanent for me, who is not experienced in removing them (luckily no issues with this though).
 
+This meant that prototyping electronics by way of designing and producing PCBs was very slow for me as I wanted to ensure that everything would work down the line with certainty. This was quite agonizing as there were no definite answers to anything either. I like tinkering but this process was very far from iterative for me, as due to my lack of experience, designing and producing a board to testing took tens and tens of hours. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+That being said, when things worked, KiCad was quite pleasant to use and I liked the meditative soldering while listening to [Lex Fridman](https://lexfridman.com/podcast). The board finally responding to touch fully as intended also felt very rewarding but I would personally stick with breadboards for a lot longer for iteration to develop the necessary intuition and functionality of the design before committing it onto a PCB, which is a very lengthy process for a novice. This could probably be largely substituted with playing around on virtual breadboards such as [TinkerCAD](https://www.tinkercad.com/learn/circuits), [Virtual Breadboard](https://www.virtualbreadboard.com/) or [fritzing](https://fritzing.org/) although these 
+might likely miss many component-specific features and I am not sure about how precise their simulations are. 
