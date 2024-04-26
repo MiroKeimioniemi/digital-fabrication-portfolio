@@ -386,3 +386,4 @@ The speaker test was a bit underwhelming too because I did not really get to try
 
 Takeaways of the week include: simplicity is key and do rapid prototyping more rapidly but still make sure to double-check and thoroughly test everything. Gotta embrace the contradictions! It is unfortunate how I did not have any time for further programming but I hope to get a bit more time in the next period when I will have only 2 courses instead of these 4. 
 
+
