@@ -16,7 +16,7 @@ categories:
   - "Casting"
 series: 
   - "Weekly Assignments"
-image: "dg-lightsaber-render-horizontal.png"
+image: "dg-lightsaber-render-horizontal.webp"
 ---
 
 The last official entirely creative week! What I mean by this is that this was likely the last entirely self-contained project week - independent of the final project and not contributing to it - where I had to first learn a new process, then come up with an idea for what to do with it, design the project and use the process to create it - all within a single week. It's almost making me kind of nostalgic already but it is also a major relief as now I get to focus my efforts on the final project without having to be so all over the place. This is further helped by the fact that instead of having three other different courses in parallel, now I only have [linear algebra](https://www.aalto.fi/fi/avoimen-yliopiston-kurssit/linear-algebra). Being the last full project week puts a lot of pressure on keeping up the track record, however, and so I could not make just anything. Luckily, yet another shower thought struct and allowed me to do three things at once; make something cool for our absolutely amazing [Data Guild](https://dataguild.fi/), make something cool for this week and have it take the form of a lightsaber hilt, which I have wanted to design for ages.
@@ -77,5 +77,6 @@ I like Prusa more
 ### Molding
 
 ## Casting
+
 
 

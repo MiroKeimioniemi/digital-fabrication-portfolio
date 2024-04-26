@@ -488,3 +488,4 @@ This meant that prototyping electronics by way of designing and producing PCBs w
 That being said, when things worked, KiCad was quite pleasant to use and I liked the meditative soldering while listening to [Lex Fridman](https://lexfridman.com/podcast). The board finally responding to touch fully as intended also felt very rewarding but I would personally stick with breadboards for a lot longer for iteration to develop the necessary intuition and functionality of the design before committing it onto a PCB, which is a very lengthy process for a novice. This could probably be largely substituted with playing around on virtual breadboards such as [TinkerCAD](https://www.tinkercad.com/learn/circuits), [Virtual Breadboard](https://www.virtualbreadboard.com/) or [fritzing](https://fritzing.org/) although these 
 might likely miss many component-specific features and I am not sure about how precise their simulations are. 
 
+
