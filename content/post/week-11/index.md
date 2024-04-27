@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Molding & Casting"
-date: "2024-04-25"
+date: "2024-04-29"
 description: "Week 13"
 tags: 
   - "CAD"
@@ -108,12 +108,10 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 ![Test filament](prusa-color-check.webp)
 ![Print master mold](prusa-print.webp)
 
+
+
 ### Molding
 
 ## Casting
 
-
-
-
-
-
+## Reflections
