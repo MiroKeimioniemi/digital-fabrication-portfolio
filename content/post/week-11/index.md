@@ -80,7 +80,7 @@ After having a ready 3D model of the lightsaber, I then had to make both a negat
 
 I then added a sketch onto the saber surface and drew two alignment pins, two holes, a rectangle and a rectangular hole, which can be seen as the blue highlights on the negative center mold in the middle in the above image. I extruded the ones on the left, except for the bottom one, which I moved onto the other side and inset the corresponding ones on opposite sides with an additional margin of 0.25 mm on both sides of all slots as recommended by our instructor. I then created another, yet larger 3D rectangle and subtracted the negative mold from it to acquire the positive mold on the right above. I made it with the dimensions of the [Ultimaker S3](https://ultimaker.com/3d-printers/s-series/ultimaker-s3/) in mind, those being 215mm width, 215mm depth and 200mm height. Thus, I limited the master mold size to 215mm in height, with around 100mm in width and 45mm in depth so that it would just fit lying on its back. I also added more space above to make it easier to remove the silicone mold from under the protrusions.
 
-Below is the positive master mold I 3D printed:
+Due to approaching the modeling from a rapid prototyping angle, I had used only the bare minimum of the most essential constraints with both the original 3D model as well as the molds and the result is thus not parametric at all. This is not much of an issue, however, as it could still be done rather easily afterwards but also because the mold was made for an object of this exact size. Below is the positive master mold I 3D printed:
 
 {{< 3DModel "dg-lightsaber-super-mold.glb" >}}
 
@@ -96,21 +96,22 @@ I was instantly won over. I really appreciate [their open-source ethos](https://
 
 The working printer at Aalto FabLab had ran out of filament but it was an easy process to change a new spool: navigate to "Settings" and make sure "Filament Sensor" is enabled, then navigate to "Filament" and press "Unload Filament" by pressing the navigation knob. Wait for the nozzle to heat up and then pull out the filament. Open the new roll, cut its end at a 45° angle, press "Load Filament" and gently push the end into the nozzle. It then purges a little bit of the filament to get rid of whatever might be left from the previous one and to make sure the nozzle works. If everything works as expected, you are done and may begin to 3D print, which works pretty much exactly like with Ultimakers as documented on [week 7]({{< relref "post/week-5/index.md" >}}): slice, transfer file with a USB stick and print.
 
-![](prusa-home.webp)
-![](prusa-filament-sensor.webp)
-![](prusa-unload-filament.webp)
+![Home screen](prusa-home.webp)
+![Settings](prusa-filament-sensor.webp)
+![Filament settings](prusa-unload-filament.webp)
 
-![](prusa-unloading-filament.webp)
-![](prusa-remove-filament.webp)
-![](cut-filament.webp)
-![](prusa-load-filament.webp)
-![](prusa-loading-filament.webp)
-![](prusa-color-check.webp)
-![](prusa-print.webp)
+![Unload filament](prusa-unloading-filament.webp)
+![Remove filament](prusa-remove-filament.webp)
+![Cut filament](cut-filament.webp)
+![Filament settings](prusa-load-filament.webp)
+![Load filament](prusa-loading-filament.webp)
+![Test filament](prusa-color-check.webp)
+![Print master mold](prusa-print.webp)
 
 ### Molding
 
 ## Casting
+
 
 
 
