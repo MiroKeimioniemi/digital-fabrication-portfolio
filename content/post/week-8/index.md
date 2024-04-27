@@ -489,3 +489,4 @@ That being said, when things worked, KiCad was quite pleasant to use and I liked
 might likely miss many component-specific features and I am not sure about how precise their simulations are. 
 
 
+
