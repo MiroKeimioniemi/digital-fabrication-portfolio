@@ -136,7 +136,6 @@ void loop() {
   if (previousMaxIndex == 0 && maxIndex != 0) {
     tapStart = millis();
   }
-
   if (tapStart != 0 && ( maxIndex == 0 || ((millis() - tapStart) > 500))) {
     tap = true;
     tapStart = 0;

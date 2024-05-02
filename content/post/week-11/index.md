@@ -112,7 +112,14 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 
 ### Molding
 
+
+
+![Ready molds](ready-molds.webp)
+
 ## Casting
 
+![](test-casts.webp)
+
 ## Reflections
+
 
