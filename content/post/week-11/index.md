@@ -112,7 +112,7 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 
 ### Molding
 
-
+mold took a total of 600g, 360 first and then 240 more -> 300g of each A and B respectively
 
 ![Ready molds](ready-molds.webp)
 
@@ -121,5 +121,6 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 ![](test-casts.webp)
 
 ## Reflections
+
 
 

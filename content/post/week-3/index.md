@@ -89,19 +89,57 @@ On the computer sitting next to the machine, the workflow was theoretically very
 
 In the picture, I mirrored the Tampereen Lyseon Lukio vector logo by selecting "Object > Mirror", so that it would be the correct way around for heat pressing as that requires cutting the other side of the material. This, as I already mentioned, I also first did wrong, wasting the only white piece of scrap material, forcing me to use another color for the final test.
 
-Before that, however, I wanted to make sure that the small and thin Times New Roman letters would be properly cut. I experimentally cut a few of what I thought to be the most difficult letters (this eventually turned out to be "E") to see if the cut was accurate enough and if I could peel off the excess vinyl. This weeding process turned out to be very delicate, especially with the weak adhesive between the back and front sides of the material. I did, however, succeed to peel of the excess - even though "A" moved around a little - and to stick it to my laser-cut prototype pieces using transfer tape as shown below
+Before that, however, I wanted to make sure that the small and thin Times New Roman letters would be properly cut. I experimentally cut a few of what I thought to be the most difficult letters (this eventually turned out to be "E") by importing them to CutStudio and pressing "Cutting", ensuring Roland GX-24 is selected and pressing "OK", in order to see if the cut was accurate enough and if I could peel off the excess vinyl. This weeding process turned out to be very delicate, especially with the weak adhesive between the back and front sides of the material. I did, however, succeed to peel of the excess - even though "A" moved around a little - and to stick it to my laser-cut prototype pieces using transfer tape as shown below
 
 ![Wedging the vinyl](wedging-vinyl.webp)
 ![Weeding the vinyl](weeding-vinyl.webp)
 ![Ready vinyl sticker](vinyl-sticker.webp)
 
-Luckily, the adhesive in the heat transfer vinyl was a lot stronger, so that the weeding process was a lot easier and faster. After having failed with the white scrap piece, I made sure to pick a large enough next, place it the right way and to mirror the logo. This resulted in the following:
+Luckily, the adhesive in the heat transfer vinyl was a lot stronger, so that the weeding process was a lot easier and faster. After having failed with the cutting of the white scrap piece, I made sure to pick a large enough next, place it the right way and to mirror the logo. This resulted in the following:
 
 ![Full vinyl cut test with the Rellu logo](vinyl-cut-full-test.webp)
 
-I ordered the hoodie a few days ago already but it has not arrived yet. I will update a heat pressing section here when I have cut both designs and heat pressed them onto it.
+### Heat pressing
 
+The hoodie was ordered soon after and when it finally arrived and I got a bit of time, we went down to the lab with Rosa to cut both the smaller Rellu logo as well as the larger custom graphic of our IB class and heat press them onto it. I loaded some scrap material to work out the margins necessary, which turned out to be approximately 6cm for length and 5cm for width. As we wanted the larger graphic to have a height of approximately 27-28cm similarly to my hoodie, I cut 35cm of the near 50cm wide roll, which gave us the dimensions of 453mm of width and 291mm of length to work with. I resized the vectors in Illustrator and imported the Illustrator EPS 3 files into Roland CutStudio, mirrored them and placed them so that should something go wrong, I would still have space to cut it again as shown below. Luckily this was not necessary and I only cut the two leftmost logos.
 
+![Measuring hoodie's graphic's height](measure-hoodie-logo.webp)
+![Cutting dimensions](hoodie-logo-dimensions.webp)
+![Placing graphics in CutStudio](htv-placement.webp)
+
+The heat press in Aalto FabLab is [The MAXX® Clam Heat Press by Stahls'](https://www.stahls.com/maxx-clam-heat-press), the [operation](https://assets.stahls.com/stahls/content/pdf/HeatPressManuals/Hotronix-MAXX-Digital-Clam-Press-Operators-Manual.pdf) of which is relatively simple: 
+
+- Plug it in to a wall outlet or a maximally short heavy duty extension cord.
+- Power it on from the power switch on the right side of the control panel.
+- Press "MODE" once to set the target temperature in celsius using "+" or "-".
+- Press "MODE" again to set the time in seconds using "+" or "-".
+- Press "MODE" again to view the current temperature, which only shows readings above 93°C.
+- Wait until the target temperature is reached.
+- Set fabric or clothing item on the platform and align the heat transfer vinyl (HTV).
+- Cover both the heat transfer vinyl and the fabric with baking paper or similar to prevent damage to the vinyl.
+- Push down the clamp so that it gets locked down and the clock countdown starts.
+- Wait until the time has passed and lift up the clamp.
+- Turn off the heat press and disconnect it from the outlet.
+- Remove the vinyl backside and witness the vinyl sticking to the fabric.
+
+![Temperature reading](see-temperature.webp)
+![Set temperature](set-temperature.webp)
+![Set time](set-time.webp)
+
+We did a trial run with the orange logo on old dirty jeans that are no longer used, but this turned out to be a miserable failure as seen below. This is likely due to a multitude of reasons having to do with incorrect placement of a difficult fabric and incorrect use of the heat press. We were not certain about the material, the jeans had lots of thick seams, we had the baking paper on the wrong side and I failed to press it down fully so that there was not enough pressure. As a result, only some of the vinyl stuck.
+
+![First heat pressing attempt](first-press.webp)
+![Result of the first press](test-press.webp)
+
+We decided to take these lessons and proceed to the hoodie. This time we made sure to be very careful about how we positioned it in the clamp. We essentially made the lower one wear it so that only the backside is exposed. We then pre-heated it the fabric by pressing it down for around 15 seconds. We then put the baking paper on top and pressed the vinyl's adhesive side meticulously on the hoodie. Now that we also knew exactly the material we could set the temperature and time accordingly. The [STAHLS SPORTSFILM WHITE 001](https://www.lamtekno.fi/p14679-stahls-sportsfilm-white-001-fi.html) material was to be pressed in 130°C to 150°C for 10 or 5 seconds depending on the temperature. As we had observed that no meaningful damage had occurred to either the jeans nor the vinyl in the previous pressing, we decided to play it safe and press it for 15 seconds at 140°C so that it would certainly stick properly.
+
+![Preparing the hoodie](prepare-hoodie.webp)
+![Successful heat press result](removing-backside.webp)
+
+Below are the results of the successful heat pressing. As can be seen, however, both of the graphics unfortunately ended up being quite low, but it is still usable and the process overall was successful.
+
+![Heat pressed hoodie front](ready-hoodie-front.webp)
+![Heat pressed hoodie back](ready-hoodie-back.webp)
 
 ## Laser cutting
 
@@ -228,6 +266,7 @@ It was a lot of work too and a lot was learned. Mainly about double-checking thi
 Creativity is tough when you have to summon it on a tight schedule but pressure also makes diamonds. The opportunity cost of brainstorming, which sometimes results in gold and other times in gravel, is difficult to compare against more linear courses, where you just have to solve a set amount of problems and are then ready. In a way, I am thus looking forward to next week's electronics production, where Neil Gershenfeld warned that there will be almost no creativity as then I get to catch up a little on my three other courses and maybe catch my breath a bit otherwise too. 
 
 Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it always feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. It is like a scrum sprint with a two-week period but where you immediately switch projects instead of iterating. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
+
 
 
 
