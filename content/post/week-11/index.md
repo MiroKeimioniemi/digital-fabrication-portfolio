@@ -110,6 +110,10 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 
 
 
+![Fresh 3D-printed super mold](fresh-3d-print.webp)
+![Sanding 3D-printed overhangs](processing-3d-print.webp)
+![Ready 3D-printed super mold](ready-super-mold.webp)
+
 ### Molding
 
 mold took a total of 600g, 360 first and then 240 more -> 300g of each A and B respectively
@@ -121,6 +125,7 @@ mold took a total of 600g, 360 first and then 240 more -> 300g of each A and B r
 ![](test-casts.webp)
 
 ## Reflections
+
 
 
 

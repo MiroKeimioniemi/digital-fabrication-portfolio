@@ -141,6 +141,19 @@ Below are the results of the successful heat pressing. As can be seen, however, 
 ![Heat pressed hoodie front](ready-hoodie-front.webp)
 ![Heat pressed hoodie back](ready-hoodie-back.webp)
 
+Not being quite satisfied, we decided to take a risk with trying to remove the vinyl and heat pressing them again on the same hoodie so that it would either look like an original or at least we would learn a lot more. I researched how to do this and discovered [this blog post](https://nelidesign.com/how-to-easily-remove-heat-transfer-vinyl/) on the topic, which instructed us to heat the fabric up to the same temperature used for applying the vinyl, using tweezers to rip the the vinyl off and then getting rid of the glue residues using heated paper.
+
+![Placing iron under the back of the hoodie](iron-under.webp)
+![Removing vinyl from heated back with tweezers](removing-vinyl.webp)
+![Glue residue before ironing over paper](glue-stains-before.webp)
+![Ironing through paper](ironing-stains.webp)
+![Glue residue after ironing over paper](glue-stains-after.webp)
+![Soaking the hoodie in hot water with fairy](soaking-hoodie.webp)
+
+As we tried to do the removal process at home, we had to use a clothing iron but it did not have explicit temperature settings, only a spectrum from low to high temperature for different kinds of fabrics. In order to figure out which setting to use, I consulted a table in the [Wikipedia article for "ironing"](https://en.wikipedia.org/wiki/Ironing), which implied that 140°C should be around 2 stars, but as the hoodie was cotton, we decided to position the switch between 2 and 3 stars, eventually sliding it upwards for increased efficacy.
+
+We placed the iron on the other side of the fabric, under the area from which the vinyl were to be removed and pulled the fabric taut. We waited for a while and soon began removing the vinyl. Eventually I became quite quick at this by sticking the sharpest corner of the tweezers under the largest continuous area of the vinyl currently being removed and pulling steadily. This left some glue residues but according to the [blog post](https://nelidesign.com/how-to-easily-remove-heat-transfer-vinyl/), these could be gotten rid of using copy paper, which we tried by covering the stains with a paper and heating it up with the clothing iron for around a minute or so. After pulling away the paper and repeating this a couple of times, we managed to get rid of most of it so that it was only more visible at certain angles anymore. To try to get rid of it fully, we left it overnight in hot water with a lot of fairy. 
+
 ## Laser cutting
 
 ### Safety and documentation
@@ -266,6 +279,7 @@ It was a lot of work too and a lot was learned. Mainly about double-checking thi
 Creativity is tough when you have to summon it on a tight schedule but pressure also makes diamonds. The opportunity cost of brainstorming, which sometimes results in gold and other times in gravel, is difficult to compare against more linear courses, where you just have to solve a set amount of problems and are then ready. In a way, I am thus looking forward to next week's electronics production, where Neil Gershenfeld warned that there will be almost no creativity as then I get to catch up a little on my three other courses and maybe catch my breath a bit otherwise too. 
 
 Too much freedom often leads me to overshoot my projects a little bit but on the other hand, it always feels fantastic to be on the other side of them afterwards. But I would definitely say that this alternating pace of highly creative work every other week and learning a new skill on more solid guardrails every other week sounds pretty good. It is like a scrum sprint with a two-week period but where you immediately switch projects instead of iterating. All in all, it might take a little while but I already can't wait to build my next dragon and a laser cutter will definitely be something found from my garage one day!
+
 
 
 
