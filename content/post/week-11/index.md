@@ -108,7 +108,7 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 ![Test filament](prusa-color-check.webp)
 ![Print master mold](prusa-print.webp)
 
-
+The 3D-printed suped mold came out very nicely, although, upon going to check its progress just before the fablab would close for the weekend, I heard from Solomon that it had had to be restarted.
 
 ![Fresh 3D-printed super mold](fresh-3d-print.webp)
 ![Sanding 3D-printed overhangs](processing-3d-print.webp)
@@ -125,6 +125,7 @@ mold took a total of 600g, 360 first and then 240 more -> 300g of each A and B r
 ![](test-casts.webp)
 
 ## Reflections
+
 
 
 
