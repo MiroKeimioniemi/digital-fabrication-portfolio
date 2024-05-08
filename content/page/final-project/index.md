@@ -164,3 +164,4 @@ During the [input week]({{< relref "post/week-10/index.md" >}}), I programmed th
 Use vacuum forming to create the cover from acrylic
 Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and communicating wirelessly and (XIAO) SAMD21 as the secondary one to detect touch input
 --> Order WS2812B strips and 74AHCT125 level converter(s)?
+
