@@ -67,7 +67,7 @@ void setup() {
     }
 }
 
-int qt_Threshold = 8;
+int qt_threshold = 8;
 int maxIndex = 4;
 unsigned long tapStart = 0;
 
@@ -113,7 +113,7 @@ void loop() {
   Serial.println(qt7);
 
 
-  int qts[] = {qt_Threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
+  int qts[] = {qt_threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
   int previousMaxIndex = maxIndex;
   maxIndex = 0;
 

@@ -24,6 +24,10 @@ series:
 image: "interboard-communication-attempt.webp"
 ---
 
+https://docs.arduino.cc/learn/communication/wire/
+
+https://www.arduino.cc/reference/en/language/functions/communication/wire/
+
 ```C
 #include <Arduino.h>
 #include <Wire.h>
@@ -306,3 +310,4 @@ void requestEvent() {
 [1147793][E][Wire.cpp:513] requestFrom(): i2cRead returned Error 263
 ```
 ![](interboard-communication-attempt.webp)
+

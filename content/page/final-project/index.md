@@ -60,7 +60,7 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
   <br>
   <li value="6">Light animations can be programmed among the last tasks when the lamp is already assembled so that they look as intended.</li>
   <br>
-  <li value="9">Likely need to purchase a 5V power source capable of 9A as I could not find one at the lab.</li>
+  <li value="9">Likely need to purchase a 5V power source capable of 9A as I could not find one at the lab. ESP32C3 can be powere on from its 5V pin with a diode but SAMD21 must be considered separately.</li>
   <br>
   <li value="15">3/4D mill a sikablock to produce half an ellipsoid diffuser by vacuum forming 3mm transparent (or white) acrylic already available at the lab. 
   
@@ -70,6 +70,8 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
   <li value="14">Design a separate 3D-printable framework that safely suspends the circuit in the middle of the lamp from supports whose lengths correspond to the exact radius of the ellipsoid at the given positions. The circuit board can be fastened to it with screws and it can be fastened to the lamp cover with some kind of adhesive. With good design and little transportation, it might not have to be fastened at all. It is also obviously highly important to leave a hole for the power cable.</li>
   <br>
   <li value="16">Flexible copper strips soldered to jumper cables can be attached to the underside of the diffuser from their adhesive sides as seven looped stripes around the long axis. The internal frame can be fastened to one half with a strong adhesive and to the other with a slow one upon closing the ellipsoid. Alternatively, it does not have to be fastened to the other side at all. In this case, I could make the cover openable with some sort of a snapping mechanism, which is likely much harder to make but would make the lamp easily repairable.</li>
+  <br>
+  <li value="17">3D mill a wood block.</li>
   <br>
   <li value="20">Make it behave like a luminous pet or a spren (from The Stormlight Archive) that turns on dimly when detecting proximity and might occasionally want attention, which it communicates by changing its hue until acknowledged with, for example, a long touch to which it might respond with some different light pattern. It could be made to track, for example, a habit or whether one had a good day. It could also be linked with another similar lamp such that if it is being touched for long, the other lamp lights up the area that is being touched and one can thus, for example, say a personal good night with it. In the long run it could even be made to talk and listen with additional hardware capabilities but those are definitely beyonf the current scope.</li>
 </ol>
@@ -164,5 +166,6 @@ During the [input week]({{< relref "post/week-10/index.md" >}}), I programmed th
 Use vacuum forming to create the cover from acrylic
 Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and communicating wirelessly and (XIAO) SAMD21 as the secondary one to detect touch input
 --> Order WS2812B strips and 74AHCT125 level converter(s)?
+
 
 
