@@ -108,7 +108,7 @@ The working printer at Aalto FabLab had ran out of filament but it was an easy p
 ![Test filament](prusa-color-check.webp)
 ![Print master mold](prusa-print.webp)
 
-The 3D-printed suped mold came out very nicely, although, upon going to check its progress just before the fablab would close for the weekend, I heard from Solomon that it had had to be restarted.
+The 3D-printed suped mold came out very nicely, although, upon going to check its progress just before the fablab would close for the weekend, I heard from Solomon that it had had to be restarted. On the second attempt it came out quite beautifully and after sanding the backs of the protrusions that were printed as overhangs a bit to flatten them, it was ready for use as as the master mold.
 
 ![Fresh 3D-printed super mold](fresh-3d-print.webp)
 ![Sanding 3D-printed overhangs](processing-3d-print.webp)
@@ -116,17 +116,41 @@ The 3D-printed suped mold came out very nicely, although, upon going to check it
 
 ### Molding
 
+I filled the super mold with water to get a rough approximation of the volume / weight required to fill up the mold. As can be seen below, it took almost two of the largest single use cups available at the lab as the mold was rather large.
+
+![Super mold filled with water](water-filled-super-mold.webp)
+![Cups filled with the volume of water taken to fill up the mold](drying-super-mold.webp)
+
+For making the negative silicone molds, I used [Mold Star 15 SLOW](https://www.smooth-on.com/products/mold-star-15-slow/), which has a 1:1 mixing ratio both by volume and by weight between its A and B components with a pot life of 50 minutes and a cure time of 4 hours. Pot life refers to the time beginning immediately upon mixing during which the mix remains lower viscosity and does not yet harden. Cure time on the other hand refers to the time it takes for the mold to harden after the pot life is over. Using Mold Star 15, one can thus create a fully functioning mold in approximately 5 hours.
+
+![Mold Star 15 SLOW datasheet and parts A (yellow) and B (blue)](mold-star-15-slow.webp)
+
+Before using any chemical products, reading their [datasheet](https://www.smooth-on.com/tb/files/MOLD_STAR_15_16_30_TB.pdf) is of utmost importance and absolutely mandatory. In addition to the abovementioned properties and a lot of other data ranging from hardness to tensile strength and usable temperature range, it contains information on its safe and optimal use. The only safety note is that the material might be irritating to the eyes and should thus be used only in a properly ventilated area with safety glasses, long sleeves and vinyl rubber gloves to minimize contamination risk.
+
+The process of creating the molds was initially a bit intimidating due to how much of the mixture I needed and how it could get really messy. There was a limited amount of the materials and I felt bad about using as much as I did already so I could not afford a failed attempt. I like to think that I really only used one set properly as the other that I supplemented the first with felt a lot more clumpy and high viscosity but was no problem for the non-detailed parts of my large mold.
+
+Luckily the process was simple and straightforward and I succeeded perfectly on the first try. I put on a lab coat and some gloves and stirred both parts A and B separately using separate wooden mixing sticks. I then checked the time and poured both parts in the same cup and mixed thoroughly for about 5 minutes or so.
+
+![Mixing Mold Star 15 parts A and B](mixing-mold-star-15.webp)
+![Pouring the mixture into the super mold](pouring-mold-star-15.webp)
+![Degassing the mixture](degassing.webp)
+![Curing](mold-curing.webp)
+
+
 mold took a total of 600g, 360 first and then 240 more -> 300g of each A and B respectively
 
 ![Ready molds](ready-molds.webp)
 
 ## Casting
 
+smooth cast was hardened shut
+
 ![](test-casts.webp)
 
 ![](ready-sabers.webp)
 
 ## Reflections
+
 
 
 
