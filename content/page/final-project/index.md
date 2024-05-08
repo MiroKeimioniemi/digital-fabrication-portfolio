@@ -40,7 +40,7 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
 | 8. Program intra-board communication  | To be done  | 8.5.2024  |
 | 9. Design power delivery circuit  | [1st iteration complete]({{< relref "post/week-9/index.md" >}}), 2nd needed  | 19.5.2024  |
 | 10. Combine circuits and produce the result  | To be done  | 20.5.2024  |
-| 11. Design mobile app  | To be done  | 8.5.2024  |
+| 11. Design mobile app  | [Done]({{< relref "post/week-13/index.md" >}})  | 8.5.2024  |
 | 12. Implement mobile app with Flutter  | To be done  | 17.5.2024  |
 | 13. Program wireless networking with mobile app  | To be done  | 17.5.2024  |
 | 14. Design the internals and the ellipsoid lamp cover  | To be done  | 10.5.2024  |
@@ -164,4 +164,5 @@ During the [input week]({{< relref "post/week-10/index.md" >}}), I programmed th
 Use vacuum forming to create the cover from acrylic
 Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and communicating wirelessly and (XIAO) SAMD21 as the secondary one to detect touch input
 --> Order WS2812B strips and 74AHCT125 level converter(s)?
+
 

@@ -1,58 +1,3 @@
----
-author: "Miro Keimiöniemi"
-title: "Networking and Communications"
-date: "2024-05-07"
-description: "Week 13"
-tags: 
-  - "electronics"
-  - "microcontroller"
-  - "circuit board"
-  - "PCB"
-  - "networking"
-  - "QTouch"
-  - "capacitance"
-  - "sensor"
-  - "LED"
-  - "XIAO"
-  - "SAMD21"
-  - "debugging"
-categories: 
-  - "Electronics"
-  - "Programming"
-series: 
-  - "Weekly Assignments"
-image: "interboard-communication-attempt.webp"
----
-
-```C
-#include <Arduino.h>
-#include <Wire.h>
-
-void setup() {
-  Wire.begin(); // join i2c bus (address optional for master)
-  Serial.begin(9600);  // start serial for output
-}
-
-void loop() {
-  Wire.requestFrom(8, 2);    // request 2 bytes from slave device #8
-
-  if(Wire.available() >= 2) {
-    bool boolValue = Wire.read(); // receive a byte as boolean
-    Serial.print("Boolean value: ");
-    Serial.println(boolValue);
-
-    int intValue = Wire.read(); // receive a byte as integer
-    Serial.print("Integer value: ");
-    Serial.println(intValue);
-  }
-
-  delay(500);
-}
-```
-
--
-
-```C
 #include <Arduino.h>
 #include <Wire.h>
 #include "Adafruit_FreeTouch.h"
@@ -298,11 +243,3 @@ void requestEvent() {
   Wire.write((uint8_t)powerOn); // send bool as byte
   Wire.write((uint8_t)brightness);  // send int as byte
 }
-```
-
--
-
-```
-[1147793][E][Wire.cpp:513] requestFrom(): i2cRead returned Error 263
-```
-![](interboard-communication-attempt.webp)
