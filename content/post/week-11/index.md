@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Molding & Casting"
-date: "2024-04-29"
+date: "2024-05-07"
 description: "Week 13"
 tags: 
   - "CAD"
@@ -16,7 +16,7 @@ categories:
   - "Casting"
 series: 
   - "Weekly Assignments"
-image: "dg-lightsaber-render-horizontal.webp"
+image: "cover.jpg"
 ---
 
 The last official entirely creative week! What I mean by this is that this was likely the last entirely self-contained project week - independent of the final project and not contributing to it - where I had to first learn a new process, then come up with an idea for what to do with it, design the project and use the process to create it - all within a single week. It's almost making me kind of nostalgic already but it is also a major relief as now I get to focus my efforts on the final project without having to be so all over the place. This is further helped by the fact that instead of having three other different courses in parallel, now I only have [linear algebra](https://www.aalto.fi/fi/avoimen-yliopiston-kurssit/linear-algebra). Being the last full project week puts a lot of pressure on keeping up the track record, however, and so I could not make just anything. Luckily, yet another shower thought struct and allowed me to do three things at once; make something cool for our absolutely amazing [Data Guild](https://dataguild.fi/), make something cool for this week and have it take the form of a lightsaber hilt, which I have wanted to design for ages.
@@ -123,9 +123,11 @@ I filled the super mold with water to get a rough approximation of the volume / 
 
 For making the negative silicone molds, I used [Mold Star 15 SLOW](https://www.smooth-on.com/products/mold-star-15-slow/), which has a 1:1 mixing ratio both by volume and by weight between its A and B components with a pot life of 50 minutes and a cure time of 4 hours. Pot life refers to the time beginning immediately upon mixing during which the mix remains lower viscosity and does not yet harden. Cure time on the other hand refers to the time it takes for the mold to harden after the pot life is over. Using Mold Star 15, one can thus create a fully functioning mold in approximately 5 hours.
 
-![Mold Star 15 SLOW datasheet and parts A (yellow) and B (blue)](mold-star-15-slow.webp)
+![Mold Star 15 SLOW overview and parts A (yellow) and B (blue)](mold-star-15-slow.webp)
 
-Before using any chemical products, reading their [datasheet](https://www.smooth-on.com/tb/files/MOLD_STAR_15_16_30_TB.pdf) is of utmost importance and absolutely mandatory. In addition to the abovementioned properties and a lot of other data ranging from hardness to tensile strength and usable temperature range, it contains information on its safe and optimal use. The only safety note is that the material might be irritating to the eyes and should thus be used only in a properly ventilated area with safety glasses, long sleeves and vinyl rubber gloves to minimize contamination risk.
+Before using any chemical products, reading their [instructions](https://www.smooth-on.com/tb/files/MOLD_STAR_15_16_30_TB.pdf) and the [safety data sheet](https://www.smooth-on.com/msds/files/BD_DS_Eco_Equ_EZB_EZS_Psy_MS_OOMOO_Reb_ST_SS_Soma_Sol_Sorta.pdf) is of utmost importance and absolutely mandatory. In addition to the abovementioned properties and a lot of other data ranging from hardness to tensile strength and usable temperature range, the overview contains information on its safe and optimal use. The only safety note in that is that the material might be irritating to the eyes and should thus be used only in a properly ventilated area with safety glasses, long sleeves and vinyl rubber gloves to minimize contamination risk. 
+
+The safety data sheet is much more extensive and so would make even water sound dangerous due to 15 sections of potential hazards, but reading through it reveals nothing more alarming than what was already discussed. Most points are merely common sense written down. As the substances and their mixture are not classified as hazardous, it is safe to assume this is the case for all the other points that are not detailed in the [overview](https://www.smooth-on.com/tb/files/MOLD_STAR_15_16_30_TB.pdf).
 
 The process of creating the molds was initially a bit intimidating due to how much of the mixture I needed and how it could get really messy. There was a limited amount of the materials and I felt bad about using as much as I did already so I could not afford a failed attempt. I like to think that I really only used one set properly as the other that I supplemented the first with felt a lot more clumpy and high viscosity but was no problem for the non-detailed parts of my large mold.
 
@@ -158,6 +160,7 @@ I tried to be just as careful with the protrusions as the first time but because
 ![Loosening the mold with a utility knife](utility-knife.webp)
 ![Pulling out the snapped protrusions with pliers](pull-out-protrusions.webp)
 ![Pulling out the snapped protrusions with pliers](pulled-out-protrusions.webp)
+![Pulling out extra material with pliers](pliers-processing.webp)
 
 The positives of a much more rigid mold at the removal phase were that all details had been reproduced almost perfectly. The DG logo came out looking very good and did not require any restoration work. Even the tiny curves between the square brackets and the gears, the reproduction of which I did not dream about for the first model, came out perfectly on the left side - although not quite as perfectly on the right, but still better than in the first one. As can be seen below, the right side gear also had some extra material, which I just pulled out with some small, sharp pliers as these would be the make it or break it details. Below are the ready molds with the first one on the right and the second in the middle.
 
@@ -167,17 +170,75 @@ In addition to the level of detail, another curious detail is the difference in 
 
 ## Casting
 
-smooth cast was hardened shut
+The making of the molds was highly successful but actually casting the lightsabers using the molds did not seem nearly as promising. We had been taught the process using [Smooth-Cast 305](https://www.smooth-on.com/products/smooth-cast-305/), which had a pot life of 7 minutes and a cure time of 30 minutes. However, there was only very little left of it so that I was not sure whether it would be enough for a full lightsaber. The second material available at the lab that there was more of, was [Smooth-Cast 325](https://www.smooth-on.com/products/smooth-cast-325/), which had a pot life of 2.5 minutes, a cure time of 10 minutes and was semi-translucent.
 
-![](test-casts.webp)
+My entire design had assumed the white, opaque material and its size required a longer pot life. Regardless, I made few test casts with it to first try out the casting process in general and secondly to see how they would look. The upside of such short pot life and curing time was that it was very fast to make those few test casts with the instruction session molds but I had trouble with those already. The object was so small that the mold filled very fast so that it was hard to judge what was the right amount to pour in them as a millimeter too much made it impossible to close the mold whereas a millimeter too little might not fill up the entire mold. Below are the second and third test casts. The first one was so horrendous that I threw it away even before taking a picture.
 
-![](ready-sabers.webp)
+![Translucent test casts using Smooth-Cast 325](test-casts.webp)
+
+Above are two of the test casts, which can be observed to be the ugliest and most opaque translucent I have seen, even when the rightmost one looks decent shapewise. Furthermore, they had a lot of air bubbles even though I tried to stir them as carefully and thoroughly as possible within the 2.5min pot life. 
+
+I asked our instructor if there were any other materials remaining at the lab with a longer pot life, as I was certain that I could not cast an entire lightsaber with the Smooth-Cast 325 - and even if I could, it would look very ugly, defeating the point of having created a nice, elaborate design. He initially dismissed the inquiry with a no but seeing the molds in our review session mentioned that he would have to double check. Upon that second check, we discovered [Smooth-Cast 300](https://www.smooth-on.com/products/smooth-cast-300/), which had a pot life of 3 minutes. I decided that it would be my best bet as every second was precious. 
+
+![Smooth-Cast 300 overview and parts A (yellow) and B (blue)](smooth-cast-300.webp)
+
+Smooth-Cast 300 has a pot life of 3 minutes and a curing time of 10 minutes and upon making a quick test cast, it was a nice, opaque bright white, which made all the details stand out nicely. These have a lot more elaborate [safety sheets](https://www.smooth-on.com/msds/files/SC_300_300Q_320_380_45D_60D_61D_65D_66D_ONYX.pdf) with hazards for skin corrosion/irritation, skin sensitization, eye damage/irritation, acute toxicity upoin inhalation, respiratory sensitization, carcinogenicity and a couple different types of "specific target organ toxicity" one of which is written with title capitalization. 
+
+This does not really translate to any different usage instructions however - only to more severe consequences for failing to follow them. The protocol is to still use chemical-resistant gloves, safety glasses, a long sleeved lab coat while handling it in a very well ventilated room, which is very important to avoid breathing in the fumes, which can actually be dangerous in this case. The combination of the parts A and B can also heat up up to 100°C, which must be taken into account when handling it. 
+
+As an additional general note on procedure, it is good practice to rather change gloves and mixing sticks rather too often than not often enough, as evident from me having to literally wrench open one of the Smooth-Cast 325 bottles for the previous test casts as a little bit of the material had presumably mixed in the lid. Below are test casts of the Smooth-Cast 300.
+
+![2 Smooth-Cast 300 test casts curing](sc-300-test-casts.webp)
+![3 Smooth-Cast 325 test casts from oldest to newest and a Smooth-Cast 300 test cast on the right](more-test-casts.webp)
+
+After having practiced a bit with the Smooth-Cast 325 first, the test cast for Smooth-Cast 300 came out very nicely on the first try with no bubbles whatsoever. Furthermore, the details and the surface finish are very visible and the color is very pleasant to look at as compared to the test casts on the left in the picture on the right above. An additional welcome feature was that the curing process is highly visible, with the mixture turning white from the center upon starting to cure. 
+
+A many times larger, highly detailed object was still a daunting task but at least now it would look good should it prove to be successful. I pressed play on the recently bought and downloaded old episodes of one of my favorite podcasts - [Dan Carlin's Hardcore History](https://www.dancarlin.com/hardcore-history-series/) - and got to work with intense focus by first measuring the amount of Smooth-Cast 300 needed.
+
+![Filling the mold with water to measure volume and weight needed](watering-the-mold.webp)
+![Weighing the water used to fill the mold](measuring-necessary-material.webp)
+
+The mold held approximately 51 grams of water when filled but in terms of weight, it took a bit more Smooth-Cast at around 56g of the combined mixture. The mixing ratio of the parts A and B was by volume 1A:1B but 100A:90B by weight. Thus, eyeballing it on the spot, I aimed to pour approximately 29g of part A and 27g of part B but often went a bit over that due to trying to hurry up with the process. Then I just tried to make sure I had a tad more of part A before moving on to quickly stirring the mixture in a plastic cup, which was recommended by the [overview](https://www.smooth-on.com/tb/files/Smooth-Cast_300q,_300,_305___310.pdf), first aggressively - but level - and then more slowly and thoroughly before carefully pouring it into the mold, starting with the DG logo that required the highest quality detail and thus most care when pouring.
+
+![Bending the mold to open the DG logo to ensure its proper filling](bending-mold.webp)
+
+On my first failed attempt I bent the bottom of the mold over the table's edge with one hand while pouring with the other in order to open up the DG logo to ensure its proper filling but forgot to push the mold back on the table before it already started curing, which resulted in ugly overflow on the bottom as seen below. Due to the hassle I did not have time to do the same for the other side, the result of which can be seen in the rightmost picture, where the gears of the logo are as they should be but everything else is practically almost flat. On subsequent attempts, I employed a similar strategy but remembered to push the mold so that it is fully horizontal on the table. 
+
+![](overflowing-saber-mold.webp)
+![](first-cast-in-mold.webp)
+![](first-saber-cast.webp)
+
+Timing-wise my strategy was to try finish filling up one mold in the 3-minute pot life time after which I immediately redo the process for the other mold with new cups and sticks waiting right next to me so that when I had poured the new mixture in the other mold, the first one was already halfway cured and could thus be lifted already on top of the second mold which only just started curing. This way I could complete the entire process in about 15 minutes still within the cure times of both, which I further enhanced by placing a lot of weight on top of the molds.
+
+![Perfectly filled molds with the left one far into curing and the right freshly poured](perfectly-filled-molds.webp)
+![Combined molds finishing curing under weight](weight.webp)
+
+Below is a posthumous picture of my most spectacularly failed attempt, where I was just a little bit too slow and the mixture cured while I was still pouring it. Naturally, I do not have many pictures of the process due to the incredible time pressure but at least the fails could be nicely documented. 
+
+I managed to turn these into wins too, however, by processing the first one to be representative enough to convey the idea while being a bit malformed still so as to it not being a terrible shame if it were to break. Thus it can be used for actually playing Jungle Speed, whereas the actually succesful, good looking one can be used as a trophy or a statue. The second failure was so severe that I could not even combine the sides into a single object. Thus I sawed off the clump at the back of the other and sanded them flat to use as columns to frame a quick makeshift shrine for our [adult friendship book](https://www.suomalainen.com/products/aikuiset-ystavani-1), which, on a quick glance, looks like its framed by columns of classical architecture that prove to be lightsabers upon a closer inspection.
+
+![Second failed attempt](failed-cast.webp)
+![Friendship book shrine framed by antique style lightsaber columns](shrine.webp)
+
+Removing the freshly cured lightsaber jungle speed totem from the molds was as simple as opening the mold from the right (bottom) end and simultaneously lifting and horizontally sliding it off the below mold and then pulling the finished mold free.
+
+![Removing the top mold](opening-mold.webp)
+![Pulling out the lightsaber](pull-out-cured.webp)
+![Unprocessed but fully cured lightsaber](unprocessed-ready-saber.webp)
+
+I processed them by twisting off the excess material at the seams using pliers and sanding down what remained, which extra care applied to the bottom so that they would be as stable as possible. The front and back protrusions came out a bit shorter and irregular so I sanded them down too but as this fault was symmetric, it looks more like design rather than a mistake. 
+
+Below are two of the processed whole casts and a 3D-print for reference.
+
+![3D-printed lightsaber on the left, successful cast in the middle, first failed cast after processing on the right](ready-sabers.webp)
 
 ## Reflections
 
+This "week" that was really more like 3 was quite long, demanding and convoluted but ultimately highly rewarding! I am very happy with the outcome in terms of both design and how they turned out as real physical objects. In addition, I learned a tremendous amount of highly valuable information, both figuratively and literally as so much of modern production is molding and casting based.
 
+The cast lightsabers are more weighty at around 110 grams than the 3D-printed one at around 60g with 20% infill density, making them feel a bit more premium with just the right amount of weight. They are also easier to process with a smoother surface partially thanks to the horizontally printed mold and the bright white looks great compared to the slightly pinkish 3D-print, which took between 4 and 5 hours to print with normal settings, where it took double to print the master mold but after which new sabers could be cast practically every 20 minutes, although their processing takes a bit of time too.
 
-
+Overall, I am baffled by how all of this has been crammed into one week in the [Fab Academy](https://fabacademy.org/) with 3/4D milling on top of it too but I am also very grateful for the opportunity to do and learn all this and get a cool relic out of it too. I cannot wait to gift these to Data Guild at our guild room opening ceremony! 
 
 
 

@@ -62,7 +62,7 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
   <br>
   <li value="9">Likely need to purchase a 5V power source capable of 9A as I could not find one at the lab. ESP32C3 can be powere on from its 5V pin with a diode but SAMD21 must be considered separately.</li>
   <br>
-  <li value="15">3/4D mill a sikablock to produce half an ellipsoid diffuser by vacuum forming 3mm transparent (or white) acrylic already available at the lab. 
+  <li value="15">3/4D mill a sikablock to produce half an ellipsoid diffuser by vacuum forming 3mm translucent (or white) acrylic already available at the lab. 
   
   Using Roland Modela MDX-40 might require a more elaborate design, where the piece to be vacuum formed might have to be produced in several layers. It, however, might not have sufficient length dimension either so 3D-axis milling with the larger CNC might be the best idea. It is a good idea to account for the fillet at the base of the mold by making it a bit higher than what the vacuum formed product should be. Remember to measure the height possible for a 3D-milled ellipsoid.
   </li>
@@ -166,6 +166,7 @@ During the [input week]({{< relref "post/week-10/index.md" >}}), I programmed th
 Use vacuum forming to create the cover from acrylic
 Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and communicating wirelessly and (XIAO) SAMD21 as the secondary one to detect touch input
 --> Order WS2812B strips and 74AHCT125 level converter(s)?
+
 
 
 
