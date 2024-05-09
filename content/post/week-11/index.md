@@ -129,17 +129,41 @@ Before using any chemical products, reading their [datasheet](https://www.smooth
 
 The process of creating the molds was initially a bit intimidating due to how much of the mixture I needed and how it could get really messy. There was a limited amount of the materials and I felt bad about using as much as I did already so I could not afford a failed attempt. I like to think that I really only used one set properly as the other that I supplemented the first with felt a lot more clumpy and high viscosity but was no problem for the non-detailed parts of my large mold.
 
-Luckily the process was simple and straightforward and I succeeded perfectly on the first try. I put on a lab coat and some gloves and stirred both parts A and B separately using separate wooden mixing sticks. I then checked the time and poured both parts in the same cup and mixed thoroughly for about 5 minutes or so.
+Luckily the process was simple and straightforward and I succeeded perfectly on the first try. I put on a lab coat and some gloves and stirred both parts A and B separately using different wooden mixing sticks before checking the time and pouring both parts in the same cup, which I mixed thoroughly for about 5 minutes trying my best to avoid air bubbles by only moving the stick horizontally and occasionally scraping the bottom and sides. 
+
+I then poured the mixture into the super mold, attempting to keep the stream uniform and small to avoid air bubbles in the pouring phase. Technically, one should apparently also start from the lowest point of the mold and pour it more or less in the same place but I wanted to make sure that all the details such as the alignment pins and especially the DG logo were properly filled and so I made sure to pour some on them with an extra fine stream to make sure they were fully filled before pouring more with a larger stream to really push the mixture into them. I also moved the stream around the lightsaber to make it rise in a more uniform matter. Once all the fine detail was covered, I poured the rest with a larger stream and scraped everything off with a wooden stick in order to get to the second cup, as I needed almost two to entirely cover it.
+
+I then degassed the poured mixture by placing it in the vacuum chamber, turning on the compressor and occasionally removing the plug in the cover. This did not do much but then again there were not many air bubbles for me in the first place. I then lifted it up onto a shelf to cure for around 4.5h for the first mold.
 
 ![Mixing Mold Star 15 parts A and B](mixing-mold-star-15.webp)
 ![Pouring the mixture into the super mold](pouring-mold-star-15.webp)
 ![Degassing the mixture](degassing.webp)
 ![Curing](mold-curing.webp)
 
+The mold took a total of 600g of the material with 300g of parts A and B each. The first cup fit approximately 360g and a further 240g was needed to fill the mold pretty much perfectly. After 4.5h of [Wappu](https://wappu.fi/) activities I returnedd to the FabLab to remove the fully cured mold, which had overflowed a bit when lifting it up on the shelf but as the spill had also cured, it was quite satisfying to remove. 
 
-mold took a total of 600g, 360 first and then 240 more -> 300g of each A and B respectively
+I started loosening the mold by carefully pulling its sides and corners towards the center until I could slip one of the wooden sticks in there, which I could use as a lever to pull out enough for me to get a grip of the mold. I was careful to start removing it from the right end, that being the bottom as the protrusions were at the top. I could identify the ends by the spill and the very slight irregularities on the outside of the 3D print but it would have been a great idea to properly mark this down somehow too. 
 
-![Ready molds](ready-molds.webp)
+I lifted the mold out slowly and carefully with one continuous move until was close to the top. Then I grabbed the buffer of the mold before the top part, bent it quite a bit and slid the mold out from under the protrusions, which, with a bit of force applied in the horizontal direction to overcome the friction, worked beautifully and gave me a nice mold without breaking either the 3D-printed master mold nor the new silicone mold. It looked really good too with barely noticable hints of the 3D-printed surface and mostly well produced details. Only the thin square brackets of the DG logo had closed up a bit during the removal, but these were easy to separate with a knife and a bit of careful courage.
+
+![The mold after 4.5h of curing](mold-after-4h.webp)
+![Loosening the mold](removing-mold.webp)
+![Removing the mold](removing-more-mold.webp)
+![Processing the mold](cutting-mold.webp)
+
+I then repeated the process to create the second mold using the same master mold, which I then left to cure overnight. Coming back the next day, the removal process was not quite as smooth as it had hardened a lot more than the first one had. This was clearly noticeable by it being much harder to loosen even from the edges. Having pulled out the first one carefully and observed how quite a lot of bending, stretching and poking had not really damaged it at all, I adapted a much more aggressive technique for the second mold by first separating its sides from the master mold using a utility knife and then practically just ramming a wooden stick in there, again using it as a lever and pulling it out, but a lot less delicately than the first time. 
+
+I tried to be just as careful with the protrusions as the first time but because of the additional stiffness of the mold, I had to use a bit more force to grab a hold of the buffer, which soon resulted in a crack sound. After getting the mold out, I noticed that the protrusions had indeed snapped and were stuck inside the mold. They were easy to pull out with some sharp pliers but the master mold was finished. Looking back on it now, it snapped kind of perfectly and it might actually be a perfectly valid strategy to glue it on with a very weak adhesive so that it is actually supposed to come out for every mold and then glued back. I do not know how good this would look mold-wise however... The bottom of the saber was not quite perfectly smooth either but this I decided to address in the post production phase of the casted sabers so as to not risk damage to the mold.
+
+![Loosening the mold with a utility knife](utility-knife.webp)
+![Pulling out the snapped protrusions with pliers](pull-out-protrusions.webp)
+![Pulling out the snapped protrusions with pliers](pulled-out-protrusions.webp)
+
+The positives of a much more rigid mold at the removal phase were that all details had been reproduced almost perfectly. The DG logo came out looking very good and did not require any restoration work. Even the tiny curves between the square brackets and the gears, the reproduction of which I did not dream about for the first model, came out perfectly on the left side - although not quite as perfectly on the right, but still better than in the first one. As can be seen below, the right side gear also had some extra material, which I just pulled out with some small, sharp pliers as these would be the make it or break it details. Below are the ready molds with the first one on the right and the second in the middle.
+
+![Ready molds with the positive master mold on the left, the second overnight silicone mold in the middle and the first 4.5h silicone mold on the right](ready-molds.webp)
+
+In addition to the level of detail, another curious detail is the difference in texture and color. Both of the molds are roughly as hardened - only the second finished its complete curing in the mold whereas the first did so outside - but the second is also a bit lighter with white spots. The only explanation I can come up with for his is that the second one was not as well mixed although I find that hard to believe as I was just as carefuly if not more so with it than with the first one. Another might have something to do with it being in the mold for so long that somehow whatever the white parts are, somehow settled on the bottom. These could have something to do with the quality of the material used for the second one as it was a mix of the then freshly opened bottles used for the first mold and older bottles with a higher viscosity.
 
 ## Casting
 
@@ -150,6 +174,7 @@ smooth cast was hardened shut
 ![](ready-sabers.webp)
 
 ## Reflections
+
 
 
 
