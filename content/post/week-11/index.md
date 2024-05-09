@@ -16,7 +16,7 @@ categories:
   - "Casting"
 series: 
   - "Weekly Assignments"
-image: "cover.jpg"
+image: "cover.webp"
 ---
 
 The last official entirely creative week! What I mean by this is that this was likely the last entirely self-contained project week - independent of the final project and not contributing to it - where I had to first learn a new process, then come up with an idea for what to do with it, design the project and use the process to create it - all within a single week. It's almost making me kind of nostalgic already but it is also a major relief as now I get to focus my efforts on the final project without having to be so all over the place. This is further helped by the fact that instead of having three other different courses in parallel, now I only have [linear algebra](https://www.aalto.fi/fi/avoimen-yliopiston-kurssit/linear-algebra). Being the last full project week puts a lot of pressure on keeping up the track record, however, and so I could not make just anything. Luckily, yet another shower thought struct and allowed me to do three things at once; make something cool for our absolutely amazing [Data Guild](https://dataguild.fi/), make something cool for this week and have it take the form of a lightsaber hilt, which I have wanted to design for ages.
@@ -239,6 +239,7 @@ This "week" that was really more like 3 was quite long, demanding and convoluted
 The cast lightsabers are more weighty at around 110 grams than the 3D-printed one at around 60g with 20% infill density, making them feel a bit more premium with just the right amount of weight. They are also easier to process with a smoother surface partially thanks to the horizontally printed mold and the bright white looks great compared to the slightly pinkish 3D-print, which took between 4 and 5 hours to print with normal settings, where it took double to print the master mold but after which new sabers could be cast practically every 20 minutes, although their processing takes a bit of time too.
 
 Overall, I am baffled by how all of this has been crammed into one week in the [Fab Academy](https://fabacademy.org/) with 3/4D milling on top of it too but I am also very grateful for the opportunity to do and learn all this and get a cool relic out of it too. I cannot wait to gift these to Data Guild at our guild room opening ceremony! 
+
 
 
 
