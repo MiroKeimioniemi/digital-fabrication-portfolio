@@ -312,6 +312,14 @@ void requestEvent() {
 ![](interboard-communication-attempt.webp)
 
 
+Initialize wire as the last thing in setup!
+
+lightLED seems to be the issue?
+
+
+TIMING ISSUE!! Not calling lightLED works for a moment but then starts returning -1
+
+Cleaning code helped
 
 
 

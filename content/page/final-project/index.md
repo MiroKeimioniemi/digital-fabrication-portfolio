@@ -168,8 +168,37 @@ Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and com
 --> Order WS2812B strips and 74AHCT125 level converter(s)?
 
 
+https://www.digikey.fi/en/products/detail/texas-instruments/txb0104dr/1629101
+
+https://www.amazon.com/Supply-Adapter-100-240V-50-60Hz-Converter/dp/B0BZNQT6D4
 
 
+The device is designed to drive capacitive loads of up to 70 pF. The output drivers of the TXB0104 device have
+low dc drive strength. If pullup or pulldown resistors are connected externally to the data I/Os, their values must
+be kept higher than 50 kΩ to ensure that they do not contend with the output drivers of the TXB0104 device
 
 
+Power switch for safe programming using a laptop and for powering on neopixels after microcontroller
 
+Can everything share the same ground in this case?
+
+Connector cable for the existing header?
+
+Is it a good idea to just use basic jumper cables as connections for leds and capacitance?
+
+
+Add rivets to qtouch controller to make testing easier
+
+Break out the rest of the pins, add I2C connector?
+
+Take some more flexible copper and tape it to acrylic for a new controller
+
+Best way to connect VIN for Seeeduino just by a short jumper cable?
+
+
+rectangles for proper interpretation in coppercam, rounded rectangles don't work!
+
+
+https://www.ti.com/lit/ml/mpds177g/mpds177g.pdf?ts=1715608756899&ref_url=https%253A%252F%252Fwww.ti.com%252Fpackaging%252Fdocs%252Fsearchtipackages.tsp%253FpackageName%253DSO
+
+line indicates pin 1 (on the left)

@@ -10,27 +10,23 @@ Adafruit_FreeTouch qt_5 = Adafruit_FreeTouch(A8, OVERSAMPLE_4, RESISTOR_50K, FRE
 Adafruit_FreeTouch qt_6 = Adafruit_FreeTouch(A9, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_7 = Adafruit_FreeTouch(A10, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 
-int qt1_baseline = 0;
-int qt2_baseline = 0;
-int qt3_baseline = 0;
-int qt4_baseline = 0;
-int qt5_baseline = 0;
-int qt6_baseline = 0;
-int qt7_baseline = 0;
+short qt1_baseline = 0;
+short qt2_baseline = 0;
+short qt3_baseline = 0;
+short qt4_baseline = 0;
+short qt5_baseline = 0;
+short qt6_baseline = 0;
+short qt7_baseline = 0;
 
-int powerOn = true;
+bool power_on = true;
 bool slide = false;
 bool tap = false;
 
-int brightness = 0;
+char brightness_level = 4;
 
-void lightLED(int led);
 void requestEvent();
 
 void setup() {
-  Wire.begin(8);                // join i2c bus with address #8
-  Wire.onRequest(requestEvent); // register event
-
   Serial.begin(115200);
   Serial.println("FreeTouch test");
 
@@ -40,11 +36,6 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
-
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-  pinMode(4, INPUT);
-  pinMode(5, OUTPUT);
 
   if (! qt_1.begin())
     Serial.println("Failed to begin qt");
@@ -70,102 +61,77 @@ void setup() {
       qt6_baseline = max(qt6_baseline, qt_6.measure());
       qt7_baseline = max(qt7_baseline, qt_7.measure());
     }
+
+  Wire.begin(8);               
+  Wire.onRequest(requestEvent);
 }
 
-int qt_Threshold = 8;
-int maxIndex = 4;
-unsigned long tapStart = 0;
+short qt_threshold = 20;
+short max_index = 4;
+unsigned long tap_start = 0;
 
 void loop() {
 
-  int qt1 = 0;
-  int qt2 = 0;
-  int qt3 = 0;
-  int qt4 = 0;
-  int qt5 = 0;
-  int qt6 = 0;
-  int qt7 = 0;
+  short qt1 = 0;
+  short qt2 = 0;
+  short qt3 = 0;
+  short qt4 = 0;
+  short qt5 = 0;
+  short qt6 = 0;
+  short qt7 = 0;
 
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
 
   qt1 = qt_1.measure();
-  Serial.print("qt1: ");
-  Serial.println(qt1);
-
   qt2 = qt_2.measure();
-  Serial.print("qt2: ");
-  Serial.println(qt2);
-
   qt3 = qt_3.measure();
-  Serial.print("qt3: ");
-  Serial.println(qt3);
-
   qt4 = qt_4.measure();
-  Serial.print("qt4: ");
-  Serial.println(qt4);
-  
   qt5 = qt_5.measure();
-  Serial.print("qt5: ");
-  Serial.println(qt5);
-  
   qt6 = qt_6.measure();
-  Serial.print("qt6: ");
-  Serial.println(qt6);
-  
   qt7 = qt_7.measure();
-  Serial.print("qt7: ");
-  Serial.println(qt7);
 
-
-  int qts[] = {qt_Threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
-  int previousMaxIndex = maxIndex;
-  maxIndex = 0;
+  short qts[] = {qt_threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
+  short previous_max_index = max_index;
+  max_index = 0;
 
   for (int i = 0; i <= 7; i++) {
-      if (qts[i] > qts[maxIndex]) {
-          maxIndex = i;
+      if (qts[i] > qts[max_index]) {
+          max_index = i;
       }
   }
 
-  Serial.print("maxIndex: ");
-  Serial.println(maxIndex);
+  Serial.print("max_index: ");
+  Serial.println(max_index);
   
   // Detect a slide gesture
-  if (previousMaxIndex != 0 && maxIndex != 0 && previousMaxIndex != maxIndex) {
+  if (previous_max_index != 0 && max_index != 0 && previous_max_index != max_index) {
     slide = true;
-    tapStart = 0;
+    tap_start = 0;
   }
 
   // Detect a tap gesture
-  if (previousMaxIndex == 0 && maxIndex != 0) {
-    tapStart = millis();
+  if (previous_max_index == 0 && max_index != 0) {
+    tap_start = millis();
   }
-  if (tapStart != 0 && ( maxIndex == 0 || ((millis() - tapStart) > 500))) {
+  if (tap_start != 0 && ( max_index == 0 || ((millis() - tap_start) > 500))) {
     tap = true;
-    tapStart = 0;
+    tap_start = 0;
   }
 
-  if (tap && powerOn) {
+  if (tap && power_on) {
     digitalWrite(LED_BUILTIN, HIGH);
-    powerOn = false;
+    power_on = false;
     tap = false;
-    pinMode(2, INPUT);
-    pinMode(3, INPUT);
-    pinMode(4, INPUT);
-    digitalWrite(5, LOW);
-  } else if ((tap || slide) && !powerOn) {
+  } else if ((tap || slide) && !power_on) {
     digitalWrite(LED_BUILTIN, LOW);
-    powerOn = true;
+    power_on = true;
     tap = false;
-    lightLED(brightness);
   }
 
   if (slide) {
-    if (maxIndex != 0) {
-      lightLED(maxIndex);
-    } else {
-      lightLED(brightness);
+    if (max_index != 0) {
+      brightness_level = max_index;
     }
     slide = false;
   }
@@ -173,73 +139,7 @@ void loop() {
   delay(10);
 }
 
-void lightLED(int led) {
-  switch (led) {
-    case 1:
-      brightness = 1;
-      pinMode(2, OUTPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, INPUT);
-      digitalWrite(2, LOW);
-      digitalWrite(3, HIGH);
-      digitalWrite(5, LOW);
-      break;
-    case 2:
-      brightness = 2;
-      pinMode(2, OUTPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, INPUT);
-      digitalWrite(2, HIGH);
-      digitalWrite(3, LOW);
-      digitalWrite(5, LOW);
-      break;
-    case 3:
-      brightness = 3;
-      pinMode(2, INPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(3, LOW);
-      digitalWrite(4, HIGH);
-      digitalWrite(5, LOW);
-      break;
-    case 4:
-      brightness = 4;
-      pinMode(2, INPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(3, HIGH);
-      digitalWrite(4, LOW);
-      digitalWrite(5, LOW);
-      break;
-    case 5:
-      brightness = 5;
-      pinMode(2, OUTPUT);
-      pinMode(3, INPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(2, LOW);
-      digitalWrite(4, HIGH);
-      digitalWrite(5, LOW);
-      break;
-    case 6:
-      brightness = 6;
-      pinMode(2, OUTPUT);
-      pinMode(3, INPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(2, HIGH);
-      digitalWrite(4, LOW);
-      digitalWrite(5, LOW);
-      break;
-    case 7:
-      brightness = 7;
-      pinMode(2, INPUT);
-      pinMode(3, INPUT);
-      pinMode(4, INPUT);
-      digitalWrite(5, HIGH);
-      break;
-  }
-}
-
 void requestEvent() {
-  Wire.write((uint8_t)powerOn); // send bool as byte
-  Wire.write((uint8_t)brightness);  // send int as byte
+  Wire.write((uint8_t)power_on);
+  Wire.write((uint8_t)brightness_level);
 }

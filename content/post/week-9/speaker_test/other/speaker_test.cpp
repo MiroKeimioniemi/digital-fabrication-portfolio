@@ -9,7 +9,7 @@
  * MAX08357:
    * GND connected GND
    * VIN connected 5V
-   * LRC connected to pin D7 (GPIO20)
+   * LRC connected to pin D3 (GPIO20)
    * BCLK connected to pin D6 (GPIO21)
    * DIN connected to pin D5 (GPIO7)
 
@@ -50,7 +50,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("I2S simple tone");
 
-  if (!I2S.setDataPin(D5)) {
+  if (!I2S.setDataPin(D3)) {
     Serial.println("failed to set DATA, DATA OUT pin");
   }
 
