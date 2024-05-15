@@ -5,7 +5,7 @@ date: '2024-02-01'
 image: 'led-zeppelin-render.webp'
 aliases:
   - project
-lastmod: '2024-04-11'
+lastmod: '2024-05-16'
 menu:
     main: 
         weight: -99
@@ -150,7 +150,7 @@ The output board was really a major failure on its own. I could not make it work
 
 #### Design
 
-The final circuit board is a sort of combination but perhaps even more so a spiritual successor to the [input](({{< relref "post/week-8/index.md" >}})) and [output](({{< relref "post/week-9/index.md" >}})) boards. It became a roughly 96mm x 64mm board with power delivery, inter-board communication, audio output and four outputs for NeoPixel led strips all on a single board. It can be powered on with any 5V 5.5mm plug and supports up to 9 amps of total current for the LED strips. It also features a switch between the power circuit to the microcontrollers so that they can be powered on with the same power input when the project is ready but could also be programmed independently without having to worry about accidentally frying one's computer. Below are its schematic and PCB layout.
+The final circuit board is a sort of combination but perhaps even more so a spiritual successor to the [input](({{< relref "post/week-8/index.md" >}})) and [output]({{< relref "post/week-9/index.md" >}}) boards. It became a roughly 96mm x 64mm board with power delivery, inter-board communication, audio output and four outputs for NeoPixel led strips all on a single board with sockets for the microcontrollers and amplifier for repairability. It can be powered on with any 5V 5.5mm plug and supports up to 9 amps of total current for the LED strips. It also features a switch between the power circuit to the microcontrollers so that they can be powered on with the same power input when the project is ready but could also be programmed independently without having to worry about accidentally frying one's computer. Below are its schematic and PCB layout.
 
 ![Final circuit board schematic](final-board-schematic.webp)
 ![Final circuit board PCB layout](final-board-pcb-layout.webp)
@@ -165,67 +165,48 @@ The level shifting had been my most major headache during the [output devices we
 
 Integrating them to the board was also delightfully simple and straightforward. According to its [datasheet](https://www.ti.com/lit/ds/symlink/txb0104.pdf), the smaller voltage between 1.2V and 3.6V should be connected to port A and the larger voltage between 1.65V to 5.5V should be connected to port B. According to my reading, the OE pin controlling the output [impedances](https://en.wikipedia.org/wiki/Electrical_impedance) is optional, whereas ground is obviously mandatory. This leaves eight pins, with four of them on each side corresponding to the "4-Bit" component of the name. The ones on the A side input and output signals with the same voltage as is connected to port A and the ones on the B side do the same but with the higher B voltage. Hence, the 3.3V output of the XIAO is connected to port A along with the XIAO output pins on the same side and the 5V input power trace is connected to port B with the LED input pins on the same side. OE is connected to an otherwise unused XIAO pin and 0 Ohm resistors are used to jump over some traces or alternatively, the shared ground in order to match its thickness more closely with the input power trace.
 
+In my [output board]({{< relref "post/week-9/index.md" >}}), there was a thick trace for the power too in order to be able to tolerate high currents but ground was mostly ignored in terms of trying to match them. It was connected but much thinner, which Kris pointed out might cause problems. Hence, this time I paid attention to the thickness of the overall ground layer as well, adding some 0 Ohm resistors to increase its area especially near the LEDs. Additionally, a 220µF capacitor was added between the positive and negative terminals of the power jack to even out potential spikes. 
+
+A switch controls whether or not the microcontrollers are powered from the same source and a Schottky diode after it ensures that current only flows towards the microcontrollers, which also enables the usage of the 5V pin of the XIAO ESP32C3 as a voltage input as explained [here](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/). The same capability was not explicitly listed for the XIAO SAMD21 and hence I just drew a large power trace beneath its VIN pin on the bottom, which was utilized in a bit of an unorthodox manner as shown below.
+
 #### Assembly
 
-It was an effort to figure out which way around the capacitor goes, particularly when I could not find the specific capacitor model anywhere on the internet. Instead, I found [this datasheet](https://api.pim.na.industrial.panasonic.com/file_stream/main/fileversion/19806) for Panasonic capacitors, which indicated the dark streak on the wider side of the base to be the negative polarity marking. I then made the risky assumption of semi-standardized markings and soldered it accordingly, which worked delightfully.
+I tried to mill the board in what had already become routine fashion but was stopped in my tracks by [CopperCAM](https://www.galaad.net/coppercam-eng.html) not importing the gerber files properly. Instead of rectangles with a margin, it interpreted the level shifter footprint (imported from the general [KiCad](https://www.kicad.org/) library instead of the [fab library](https://gitlab.fabcloud.org/pub/libraries/electronics/kicad) used for all other parts) as having connected circular pads, which obviously would not do, even though KiCad's gerber previewer opened them just fine. As CopperCAM is so poorly documented with few issues anywhere on the entire internet, I quit very soon and opted to just ask Kris the next Monday, who pointed out that the footprint had rounded rectangle pads instead of regular rectangles, which caused the issue. Changing them to rectangles solved it.
 
-This, however, was the simplest orientation to figure out. The small Schottky diode ensuring one-way power delivery to its microcontrollers
+Otherwise, the milling went mostly well, except for the fact that the 0.8mm drilling tool had not drilled quite uniformly, so that board was more severely stuck to the stock than usual and all holes had not gone entirely through. This might also have something to do by me having accidentally picked the double sided material. It required significantly more force but I managed to carefully loosen it and I poked the holes through with a thin screwdriver, leaving me with a PCB that was not quite as crisp on the bottom but still looked great as any on the top. 
 
+![The freshly milled final board](freshly-milled-final-board.webp)
+
+Comparing the above picture to the PCB layout, it can be observed that they do not quite match perfectly. This is because I changed the KiCad PCB layout depicted further above to what I originally intended it to be. In the board that I produced, the power and ground to the amplifier (close to the top in the above image) are the wrong way around, which I only realized much later.
+
+It was also an effort to figure out which way around some of the components go, such as the capacitor, particularly when I could not find the specific capacitor model anywhere on the internet. Instead, I found [this datasheet](https://api.pim.na.industrial.panasonic.com/file_stream/main/fileversion/19806) for Panasonic capacitors, which indicated the dark streak on the wider side of the base to be the negative polarity marking. I then made the risky assumption of the markings being at least semi-standardized and soldered it accordingly, which worked delightfully.
+
+This, however, was the simplest orientation to figure out. The small Schottky diode ensuring one-way power delivery to the microcontrollers had such small, dark markings that it took a long while of angling it below some light to find any asymmetries whatsoever that would indicate its polarity. Eventually, I discovered that one end seemed to have slight line that seemed to be carved. With a quick Google search I found [this page](https://www.pcbonline.com/blog/smd-polarity-led-capacitor-diode-inductor-ic.html) which listed how polarity is indicated in most common surface mounted devices (SMD). For components with two pins, the strip or a coloring seems to usually indicate the negative electrode for polarized capacitors, LEDs and diodes. 
+
+This is not quite as straightforward for SMDs (or SMT - Surface-Mount Technology) with more than two pins. Generally pin 1 is indicated by a dot next to it but the TXB0104DR level shifter had none in sight. Instead, it had a thick line from the left to the right side as well. According to the [datasheet](https://www.ti.com/lit/ds/symlink/txb0104.pdf) it comes in 6 different packages, 3 of which seemed to have the indicator pin but the rest did not. The ones at our lab belonged to the latter category with 7 pins on two sides in a "D or PW Package, 14-Pin SOIC or TSSOP". I was quite clueless about this letter soup and with my (de)soldering skills there would be no second attempt on this board. 
+
+After scrolling the [Texas Instruments package page](https://www.ti.com/packaging/docs/searchtipackages.tsp?packageName=SO) for a while with the help of `CTRL + F`, I found [this document](https://www.ti.com/lit/ml/mpds177g/mpds177g.pdf?ts=1715608756899&ref_url=https%253A%252F%252Fwww.ti.com%252Fpackaging%252Fdocs%252Fsearchtipackages.tsp%253FpackageName%253DSO), which seemed to match my footprint closely enough. A few other [similar ones](https://www.ti.com/lit/ml/mpds033b/mpds033b.pdf?ts=1715608720974&ref_url=https%253A%252F%252Fwww.ti.com%252Fpackaging%252Fdocs%252Fsearchtipackages.tsp%253FpackageName%253DSO) seemed to have the same design rules with the line stretching from the first pin to the last with an ever so slightly more prononunced fillet on the pin 1 side. I decided this was as far as I would likely get, soldered it on and thankfully found it to be working! The second to lowest pins on both sides were entirely disconnected and merely a part of the specific package.
 
 ![Assembled final circuit board](assembled-final-board.webp)
 
-Polarity for diode and level shifter
+The bit of an unorthodox power delivery mechanism to the XIAO SAMD21 alluded to earlier in the design phase involved a bit of a riskier solder joint that is likely not quite as durable as many others but works just as well, provided it is not stressed too much at least. As can be seen in the below image, I soldered on a single male header to the XIAO's VIN pin perpendicularly to the rest of the board, which connects to a single female header soldered on the wider power trace on the board. This was done by first soldering the male header to the board whilst connected to the female header and then soldering the solitary female header to the board after soldering the corners of the longer headers. The result is perfectly stable and functional although I would avoid excessive stress to it. 
+
+![XIAO SAMD21 power input](unorthodox-power-delivery.webp)
+
+Upon testing it, the LEDs worked perfectly as did the mechanism of powering on the board and microcontrollers from both the same as well as two different sources. However, when trying to mount on the [MAX98357A Adafruit I2S 3W Class D Amplifier Breakout board](https://www.adafruit.com/product/3006), I noticed that I had accidentally connected the power and ground to its socket the wrong way. I did not have one near me when designing and KiCad obviously does not care about the orientation of components as long as they are wired correctly on a pin-to-pin level. 
+
+This was incredibly unfortunate and I went to correct the mistake immediately in the board design, hence the difference between the layout diagram and the actual board. To get quickly around it, at least for testing purposes, I simply connected the amplifier with wires but even then it did not work. After a bit of poking with a multimeter's continuity checker, I noticed that the BCLK pin's solder was touching ground, the removal of which caused faint noise from speaker when plugged in and running the [output week's speaker test code]({{< relref "post/week-9/index.md" >}}). The faintness of the sound was likely due to the very weak speaker and not the amplifier. It could also be made slightly louder by increasing the amplitude in the code but this was barely noticeable on the speaker. With wired earbuds, the difference was much more audible. The setup is unfortunately a bit ugly with all the extra wires as can be seen below but these could be made shorter and hidden inside the lamp if necessary.
+
+![Speaker plugged into the output board](speaker-plugged-in.webp)
 
 
 
+Power supply candidates:
 
-Power delivery according to uberguide
+https://www.amazon.de/s?k=5v+9a&crid=1TONCNEWX0ZYD&sprefix=5v+9a%2Caps%2C87&ref=nb_sb_noss_2
 
+https://www.amazon.de/-/en/Adapter-Transformer-Charger-Speakers-Electronics-5V-10A-50W/dp/B07PBNCFDG/ref=sr_1_5?crid=1TONCNEWX0ZYD&dib=eyJ2IjoiMSJ9.1MTTKQcmDjpmDzT800J5a1K2svOLYbL9zh0dKT2EJReYQ6LZ3EWxDp2Xmr2IAMlMSHme5kD4lKWHubLE4YDr3vB-4_fhyxig5ajiIhZ8GSswDBGIrKmrawVx-i9tSCccyb59iwKhId2Ommb-VWGC_-PqHwd__f2HtE1Y-viaozNZ3FQqEtYNu-SQR1PGukdeGdjwRiE8BuusGkJ1njRfsGTdx4TRhbJuv3vut8W50_p3i8kk_CggZ-UH5rQj-KohJrQAMn0-DrGdLi2myVMvQsJZVed3tA8j66W_Y5UXPFQ.c-Y3eZq1vVg3VAfEUJfmUoe6qRKMKAX189YsG-L6v2M&dib_tag=se&keywords=5v%2B9a&qid=1715816004&sprefix=5v%2B9a%2Caps%2C87&sr=8-5&th=1
 
+https://www.amazon.de/-/en/100-240V-Converter-Transformer-Wear-resistant-Interchanger/dp/B0B725XTH8/ref=sr_1_27?crid=1TONCNEWX0ZYD&dib=eyJ2IjoiMSJ9.1MTTKQcmDjpmDzT800J5a1K2svOLYbL9zh0dKT2EJReYQ6LZ3EWxDp2Xmr2IAMlMSHme5kD4lKWHubLE4YDr3vB-4_fhyxig5ajiIhZ8GSswDBGIrKmrawVx-i9tSCccyb59iwKhId2Ommb-VWGC_-PqHwd__f2HtE1Y-viaozNZ3FQqEtYNu-SQR1PGukdeGdjwRiE8BuusGkJ1njRfsGTdx4TRhbJuv3vut8W50_p3i8kk_CggZ-UH5rQj-KohJrQAMn0-DrGdLi2myVMvQsJZVed3tA8j66W_Y5UXPFQ.c-Y3eZq1vVg3VAfEUJfmUoe6qRKMKAX189YsG-L6v2M&dib_tag=se&keywords=5v+9a&qid=1715816004&sprefix=5v+9a%2Caps%2C87&sr=8-27
 
-
-
-Use vacuum forming to create the cover from acrylic
-Use XIAO ESP32C3 as the main controller board for driving WS2812B strips and communicating wirelessly and (XIAO) SAMD21 as the secondary one to detect touch input
---> Order WS2812B strips and 74AHCT125 level converter(s)?
-
-
-https://www.digikey.fi/en/products/detail/texas-instruments/txb0104dr/1629101
-
-https://www.amazon.com/Supply-Adapter-100-240V-50-60Hz-Converter/dp/B0BZNQT6D4
-
-
-The device is designed to drive capacitive loads of up to 70 pF. The output drivers of the TXB0104 device have
-low dc drive strength. If pullup or pulldown resistors are connected externally to the data I/Os, their values must
-be kept higher than 50 kΩ to ensure that they do not contend with the output drivers of the TXB0104 device
-
-
-Power switch for safe programming using a laptop and for powering on neopixels after microcontroller
-
-Can everything share the same ground in this case?
-
-Connector cable for the existing header?
-
-Is it a good idea to just use basic jumper cables as connections for leds and capacitance?
-
-
-Add rivets to qtouch controller to make testing easier
-
-Break out the rest of the pins, add I2C connector?
-
-Take some more flexible copper and tape it to acrylic for a new controller
-
-Best way to connect VIN for Seeeduino just by a short jumper cable?
-
-
-rectangles for proper interpretation in coppercam, rounded rectangles don't work!
-
-
-https://www.ti.com/lit/ml/mpds177g/mpds177g.pdf?ts=1715608756899&ref_url=https%253A%252F%252Fwww.ti.com%252Fpackaging%252Fdocs%252Fsearchtipackages.tsp%253FpackageName%253DSO
-
-line indicates pin 1 (on the left)
-
-Add final code 
-
-rounded rectangles
-
+https://discoland.fi/mw-power-5v-4a-virtalahde-led-nauhoille-tms-mitat-95-x-45-x-70mm
