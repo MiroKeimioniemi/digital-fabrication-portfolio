@@ -211,3 +211,4 @@ https://www.amazon.de/-/en/100-240V-Converter-Transformer-Wear-resistant-Interch
 
 https://discoland.fi/mw-power-5v-4a-virtalahde-led-nauhoille-tms-mitat-95-x-45-x-70mm
 
+
