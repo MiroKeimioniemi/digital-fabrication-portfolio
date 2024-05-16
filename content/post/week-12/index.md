@@ -2,7 +2,7 @@
 author: "Miro Keimiöniemi"
 title: "Networking and Communications"
 date: "2024-05-07"
-description: "Week 13"
+description: "Week 14"
 tags: 
   - "electronics"
   - "microcontroller"
@@ -31,27 +31,54 @@ https://www.arduino.cc/reference/en/language/functions/communication/wire/
 ```C
 #include <Arduino.h>
 #include <Wire.h>
+#include <FastLED.h>
+
+#define NUM_LEDS 120
+#define DATA_PIN D8
+
+CRGB leds[NUM_LEDS];
+
+bool boolValue;
+int intValue;
 
 void setup() {
-  Wire.begin(); // join i2c bus (address optional for master)
-  Serial.begin(9600);  // start serial for output
+  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+  FastLED.setBrightness(5);
+
+  Wire.begin();
+  Serial.begin(115200);
 }
 
 void loop() {
-  Wire.requestFrom(8, 2);    // request 2 bytes from slave device #8
+  Wire.requestFrom(8, 2);
 
-  if(Wire.available() >= 2) {
-    bool boolValue = Wire.read(); // receive a byte as boolean
+  while (Wire.available()) {
+    leds[0] = CRGB::Black;
+    leds[1] = CRGB::Black;
+    leds[2] = CRGB::Black;
+    leds[3] = CRGB::Black;
+    leds[4] = CRGB::Black;
+    leds[5] = CRGB::Black;
+    FastLED.show();
+
+    boolValue = Wire.read();
     Serial.print("Boolean value: ");
     Serial.println(boolValue);
 
-    int intValue = Wire.read(); // receive a byte as integer
+    intValue = Wire.read();
     Serial.print("Integer value: ");
     Serial.println(intValue);
   }
 
+  if (boolValue)
+  {
+    leds[intValue] = CRGB::Red;
+    FastLED.show();
+  }
+  
   delay(500);
 }
+
 ```
 
 -
@@ -69,27 +96,23 @@ Adafruit_FreeTouch qt_5 = Adafruit_FreeTouch(A8, OVERSAMPLE_4, RESISTOR_50K, FRE
 Adafruit_FreeTouch qt_6 = Adafruit_FreeTouch(A9, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_7 = Adafruit_FreeTouch(A10, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 
-int qt1_baseline = 0;
-int qt2_baseline = 0;
-int qt3_baseline = 0;
-int qt4_baseline = 0;
-int qt5_baseline = 0;
-int qt6_baseline = 0;
-int qt7_baseline = 0;
+short qt1_baseline = 0;
+short qt2_baseline = 0;
+short qt3_baseline = 0;
+short qt4_baseline = 0;
+short qt5_baseline = 0;
+short qt6_baseline = 0;
+short qt7_baseline = 0;
 
-int powerOn = true;
+bool power_on = true;
 bool slide = false;
 bool tap = false;
 
-int brightness = 0;
+char brightness_level = 4;
 
-void lightLED(int led);
 void requestEvent();
 
 void setup() {
-  Wire.begin(8);                // join i2c bus with address #8
-  Wire.onRequest(requestEvent); // register event
-
   Serial.begin(115200);
   Serial.println("FreeTouch test");
 
@@ -99,11 +122,6 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
-
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-  pinMode(4, INPUT);
-  pinMode(5, OUTPUT);
 
   if (! qt_1.begin())
     Serial.println("Failed to begin qt");
@@ -129,102 +147,77 @@ void setup() {
       qt6_baseline = max(qt6_baseline, qt_6.measure());
       qt7_baseline = max(qt7_baseline, qt_7.measure());
     }
+
+  Wire.begin(8);               
+  Wire.onRequest(requestEvent);
 }
 
-int qt_Threshold = 8;
-int maxIndex = 4;
-unsigned long tapStart = 0;
+short qt_threshold = 20;
+short max_index = 4;
+unsigned long tap_start = 0;
 
 void loop() {
 
-  int qt1 = 0;
-  int qt2 = 0;
-  int qt3 = 0;
-  int qt4 = 0;
-  int qt5 = 0;
-  int qt6 = 0;
-  int qt7 = 0;
+  short qt1 = 0;
+  short qt2 = 0;
+  short qt3 = 0;
+  short qt4 = 0;
+  short qt5 = 0;
+  short qt6 = 0;
+  short qt7 = 0;
 
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
 
   qt1 = qt_1.measure();
-  Serial.print("qt1: ");
-  Serial.println(qt1);
-
   qt2 = qt_2.measure();
-  Serial.print("qt2: ");
-  Serial.println(qt2);
-
   qt3 = qt_3.measure();
-  Serial.print("qt3: ");
-  Serial.println(qt3);
-
   qt4 = qt_4.measure();
-  Serial.print("qt4: ");
-  Serial.println(qt4);
-  
   qt5 = qt_5.measure();
-  Serial.print("qt5: ");
-  Serial.println(qt5);
-  
   qt6 = qt_6.measure();
-  Serial.print("qt6: ");
-  Serial.println(qt6);
-  
   qt7 = qt_7.measure();
-  Serial.print("qt7: ");
-  Serial.println(qt7);
 
-
-  int qts[] = {qt_Threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
-  int previousMaxIndex = maxIndex;
-  maxIndex = 0;
+  short qts[] = {qt_threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
+  short previous_max_index = max_index;
+  max_index = 0;
 
   for (int i = 0; i <= 7; i++) {
-      if (qts[i] > qts[maxIndex]) {
-          maxIndex = i;
+      if (qts[i] > qts[max_index]) {
+          max_index = i;
       }
   }
 
-  Serial.print("maxIndex: ");
-  Serial.println(maxIndex);
+  Serial.print("max_index: ");
+  Serial.println(max_index);
   
   // Detect a slide gesture
-  if (previousMaxIndex != 0 && maxIndex != 0 && previousMaxIndex != maxIndex) {
+  if (previous_max_index != 0 && max_index != 0 && previous_max_index != max_index) {
     slide = true;
-    tapStart = 0;
+    tap_start = 0;
   }
 
   // Detect a tap gesture
-  if (previousMaxIndex == 0 && maxIndex != 0) {
-    tapStart = millis();
+  if (previous_max_index == 0 && max_index != 0) {
+    tap_start = millis();
   }
-  if (tapStart != 0 && ( maxIndex == 0 || ((millis() - tapStart) > 500))) {
+  if (tap_start != 0 && ( max_index == 0 || ((millis() - tap_start) > 500))) {
     tap = true;
-    tapStart = 0;
+    tap_start = 0;
   }
 
-  if (tap && powerOn) {
+  if (tap && power_on) {
     digitalWrite(LED_BUILTIN, HIGH);
-    powerOn = false;
+    power_on = false;
     tap = false;
-    pinMode(2, INPUT);
-    pinMode(3, INPUT);
-    pinMode(4, INPUT);
-    digitalWrite(5, LOW);
-  } else if ((tap || slide) && !powerOn) {
+  } else if ((tap || slide) && !power_on) {
     digitalWrite(LED_BUILTIN, LOW);
-    powerOn = true;
+    power_on = true;
     tap = false;
-    lightLED(brightness);
   }
 
   if (slide) {
-    if (maxIndex != 0) {
-      lightLED(maxIndex);
-    } else {
-      lightLED(brightness);
+    if (max_index != 0) {
+      brightness_level = max_index;
     }
     slide = false;
   }
@@ -232,75 +225,9 @@ void loop() {
   delay(10);
 }
 
-void lightLED(int led) {
-  switch (led) {
-    case 1:
-      brightness = 1;
-      pinMode(2, OUTPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, INPUT);
-      digitalWrite(2, LOW);
-      digitalWrite(3, HIGH);
-      digitalWrite(5, LOW);
-      break;
-    case 2:
-      brightness = 2;
-      pinMode(2, OUTPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, INPUT);
-      digitalWrite(2, HIGH);
-      digitalWrite(3, LOW);
-      digitalWrite(5, LOW);
-      break;
-    case 3:
-      brightness = 3;
-      pinMode(2, INPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(3, LOW);
-      digitalWrite(4, HIGH);
-      digitalWrite(5, LOW);
-      break;
-    case 4:
-      brightness = 4;
-      pinMode(2, INPUT);
-      pinMode(3, OUTPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(3, HIGH);
-      digitalWrite(4, LOW);
-      digitalWrite(5, LOW);
-      break;
-    case 5:
-      brightness = 5;
-      pinMode(2, OUTPUT);
-      pinMode(3, INPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(2, LOW);
-      digitalWrite(4, HIGH);
-      digitalWrite(5, LOW);
-      break;
-    case 6:
-      brightness = 6;
-      pinMode(2, OUTPUT);
-      pinMode(3, INPUT);
-      pinMode(4, OUTPUT);
-      digitalWrite(2, HIGH);
-      digitalWrite(4, LOW);
-      digitalWrite(5, LOW);
-      break;
-    case 7:
-      brightness = 7;
-      pinMode(2, INPUT);
-      pinMode(3, INPUT);
-      pinMode(4, INPUT);
-      digitalWrite(5, HIGH);
-      break;
-  }
-}
-
 void requestEvent() {
-  Wire.write((uint8_t)powerOn); // send bool as byte
-  Wire.write((uint8_t)brightness);  // send int as byte
+  Wire.write((uint8_t)power_on);
+  Wire.write((uint8_t)brightness_level);
 }
 ```
 
@@ -309,6 +236,11 @@ void requestEvent() {
 ```
 [1147793][E][Wire.cpp:513] requestFrom(): i2cRead returned Error 263
 ```
+
+{{< video src="i2c-demo.mp4" loop="true" muted="true" >}}
+
+The demo is not too impressive in terms of accuracy both because of haphazard, quick random wiring and a lot of noise due to long wires and no calibration of sensitivity etc. but the demo clearly demonstrates the LED strip, which is connected to the XIAO ESP32C3 reacting to touch input from the XIAO SAMD21 which communicates with the ESP32C3 in real time over I2C.
+
 ![](interboard-communication-attempt.webp)
 
 
@@ -320,6 +252,7 @@ lightLED seems to be the issue?
 TIMING ISSUE!! Not calling lightLED works for a moment but then starts returning -1
 
 Cleaning code helped
+
 
 
 

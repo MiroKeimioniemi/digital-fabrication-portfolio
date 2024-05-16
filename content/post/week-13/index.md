@@ -2,7 +2,7 @@
 author: "Miro Keimiöniemi"
 title: "Interface and Application Programming"
 date: "2024-05-08"
-description: "Week 14"
+description: "Week 15"
 tags: 
   - "programming"
   - "software"
@@ -23,6 +23,7 @@ Next to the brightness slider is a color picker icon, the tapping of which bring
 The alarms section can be accessed by tapping the displayed time or the pen icon next to it. It has seven slots, one for each weekday, which allows the user to set automatically recurring alarms at any time. Tapping the time in this view opens a time picker, whereas tapping the animation next to it opens the animations view, where the user can select the desired animation.
 
 https://rydmike.com/flexcolorpicker/
+
 
 
 

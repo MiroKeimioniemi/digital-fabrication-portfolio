@@ -210,3 +210,4 @@ https://www.amazon.de/-/en/Adapter-Transformer-Charger-Speakers-Electronics-5V-1
 https://www.amazon.de/-/en/100-240V-Converter-Transformer-Wear-resistant-Interchanger/dp/B0B725XTH8/ref=sr_1_27?crid=1TONCNEWX0ZYD&dib=eyJ2IjoiMSJ9.1MTTKQcmDjpmDzT800J5a1K2svOLYbL9zh0dKT2EJReYQ6LZ3EWxDp2Xmr2IAMlMSHme5kD4lKWHubLE4YDr3vB-4_fhyxig5ajiIhZ8GSswDBGIrKmrawVx-i9tSCccyb59iwKhId2Ommb-VWGC_-PqHwd__f2HtE1Y-viaozNZ3FQqEtYNu-SQR1PGukdeGdjwRiE8BuusGkJ1njRfsGTdx4TRhbJuv3vut8W50_p3i8kk_CggZ-UH5rQj-KohJrQAMn0-DrGdLi2myVMvQsJZVed3tA8j66W_Y5UXPFQ.c-Y3eZq1vVg3VAfEUJfmUoe6qRKMKAX189YsG-L6v2M&dib_tag=se&keywords=5v+9a&qid=1715816004&sprefix=5v+9a%2Caps%2C87&sr=8-27
 
 https://discoland.fi/mw-power-5v-4a-virtalahde-led-nauhoille-tms-mitat-95-x-45-x-70mm
+
