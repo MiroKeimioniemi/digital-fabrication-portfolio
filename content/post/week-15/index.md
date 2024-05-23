@@ -11,7 +11,7 @@ categories:
   - "Integration"
 series: 
   - "Weekly Assignments"
-image: "system-integration-sketch.webp"
+image: "3d-internals.webp"
 ---
 
 This was a very interesting and highly important week, albeit timed a bit peculiarly with respect to other weeks. I would personally have it swap places with the wildcard week at the very least as many including me, at least in our lab, tend to use that for making covers and other highly visible parts of their final projects. It could be pushed much further too as we have needed at least an idea of it for long having been doing it on the side for many weeks. Regardless, it is valuable to be forced to write it down too - even this late. 
@@ -63,4 +63,5 @@ I can round up the XIAO ESP32C3's current consumption up to 100mA and multiply i
 transparent PLA?
 
 What kind of system diagram? UML of functions, electronics layout including but also beyond the PCB, 3D-design cross-section, above integration sketch?
+
 

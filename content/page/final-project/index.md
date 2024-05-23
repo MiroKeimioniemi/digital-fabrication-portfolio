@@ -207,3 +207,4 @@ A lot of experimentation with diffusion and avoiding shadows was done. The minim
 
 The internal design currently has straight rails for the LEDs that do not quite account for all 30 LEDs with their length and I am going to test how it would integrate into the lamp cover but an alternative design might have the LED rails be spirals in order to distribute the light more evenly.
 
+
