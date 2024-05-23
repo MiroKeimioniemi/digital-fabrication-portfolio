@@ -32,7 +32,7 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
 
 | Task | Status | Deadline |
 |----------|----------|----------|
-| 1. Design the lamp and a stand  | [1st iteration complete]({{< relref "post/week-2/index.md" >}})  | 9.2.2024 |
+| 1. Design the lamp and a stand  | [2nd iteration complete]({{< relref "post/week-2/index.md" >}})  | 9.2.2024 |
 | 2. Design touch detection circuit  | [Done]({{< relref "post/week-10/index.md" >}})  | 10.4.2024  |
 | 3. Program touch detection circuit  | [Done]({{< relref "post/week-10/index.md" >}})  | 27.4.2024  |
 | 4. Implement gesture detection  | [Done]({{< relref "post/week-10/index.md" >}})  | 27.4.2024  |
@@ -45,7 +45,7 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
 | 11. Design mobile app  | [Done]({{< relref "post/week-13/index.md" >}})  | 8.5.2024  |
 | 12. Implement mobile app with Flutter  | To be done  | 17.5.2024  |
 | 13. Program wireless networking with mobile app  | To be done  | 17.5.2024  |
-| 14. Design the internals and the ellipsoid lamp cover  | To be done  | 10.5.2024  |
+| 14. Design the internals and the ellipsoid lamp cover  | 1st iteration complete  | 10.5.2024  |
 | 15. Produce the lamp cover  | To be done  | 31.5.2024  |
 | 16. Assemble the lamp  | To be done  | 31.5.2024  |
 | 17. Produce the stand  | To be done  | 1.6.2024  |
@@ -197,18 +197,12 @@ Upon testing it, the LEDs worked perfectly as did the mechanism of powering on t
 
 This was incredibly unfortunate and I went to correct the mistake immediately in the board design, hence the difference between the layout diagram and the actual board. To get quickly around it, at least for testing purposes, I simply connected the amplifier with wires but even then it did not work. After a bit of poking with a multimeter's continuity checker, I noticed that the BCLK pin's solder was touching ground, the removal of which caused faint noise from speaker when plugged in and running the [output week's speaker test code]({{< relref "post/week-9/index.md" >}}). The faintness of the sound was likely due to the very weak speaker and not the amplifier. It could also be made slightly louder by increasing the amplitude in the code but this was barely noticeable on the speaker. With wired earbuds, the difference was much more audible. The setup is unfortunately a bit ugly with all the extra wires as can be seen below but these could be made shorter and hidden inside the lamp if necessary.
 
+Kris recommended potentially using Nail polish on the thick power traces to make them safer.
+
 ![Speaker plugged into the output board](speaker-plugged-in.webp)
 
+5V 7A power source was acquired. 3D milling toolpaths were produced but the sikablock glue took 5 hours to harden and hence the actual milling had to be postponed. Hoping to do it along with vacuum forming tomorrow at the latest. Space for a [speaker](https://www.digikey.com/en/products/detail/mallory-sonalert-products-inc/PSR-57N08A01-AQ/2071452) was also made in the internals. An example for the audio output: https://fabacademy.org/2020/labs/kochi/students/ranjit-menon/projects/final-project/
 
+A lot of experimentation with diffusion and avoiding shadows was done. The minimum distance between the diffuser and the LEDs should be at least 1.5cm for the light to appear fully uniform. Some shadows seem to be inevitable regardless of the type and thickness of the conductive material but the thin copper strips making up the internals of a power cable glued to the internal side of the cover seem to be the most promising approach currently as they can detect touch through the acrylic while leaving almost no or very little shadow if placed right with respect to the LEDs. I would likely be using multiple of them spaced apart for each QTouch pin to enhance and enlargen the touch detection area but make it as invisible as possible. [Transparent conductive film](https://www.digikey.fi/en/products/filter/films/965?s=N4IgTCBcDaIC4CcCGA7AzgByQgpiuABAMYD2KAJgK5FwCWAbjgQGa0A2AtiALoC%20QA) apparently [exists](https://www.digikey.fi/en/products/detail/tdk-corporation/AG-SHEETSAMPLE-10/9634767) too and might be interesting for further development but perhaps a bit overkill, especially in terms of price for this project. 
 
-Power supply candidates:
-
-https://www.amazon.de/s?k=5v+9a&crid=1TONCNEWX0ZYD&sprefix=5v+9a%2Caps%2C87&ref=nb_sb_noss_2
-
-https://www.amazon.de/-/en/Adapter-Transformer-Charger-Speakers-Electronics-5V-10A-50W/dp/B07PBNCFDG/ref=sr_1_5?crid=1TONCNEWX0ZYD&dib=eyJ2IjoiMSJ9.1MTTKQcmDjpmDzT800J5a1K2svOLYbL9zh0dKT2EJReYQ6LZ3EWxDp2Xmr2IAMlMSHme5kD4lKWHubLE4YDr3vB-4_fhyxig5ajiIhZ8GSswDBGIrKmrawVx-i9tSCccyb59iwKhId2Ommb-VWGC_-PqHwd__f2HtE1Y-viaozNZ3FQqEtYNu-SQR1PGukdeGdjwRiE8BuusGkJ1njRfsGTdx4TRhbJuv3vut8W50_p3i8kk_CggZ-UH5rQj-KohJrQAMn0-DrGdLi2myVMvQsJZVed3tA8j66W_Y5UXPFQ.c-Y3eZq1vVg3VAfEUJfmUoe6qRKMKAX189YsG-L6v2M&dib_tag=se&keywords=5v%2B9a&qid=1715816004&sprefix=5v%2B9a%2Caps%2C87&sr=8-5&th=1
-
-https://www.amazon.de/-/en/100-240V-Converter-Transformer-Wear-resistant-Interchanger/dp/B0B725XTH8/ref=sr_1_27?crid=1TONCNEWX0ZYD&dib=eyJ2IjoiMSJ9.1MTTKQcmDjpmDzT800J5a1K2svOLYbL9zh0dKT2EJReYQ6LZ3EWxDp2Xmr2IAMlMSHme5kD4lKWHubLE4YDr3vB-4_fhyxig5ajiIhZ8GSswDBGIrKmrawVx-i9tSCccyb59iwKhId2Ommb-VWGC_-PqHwd__f2HtE1Y-viaozNZ3FQqEtYNu-SQR1PGukdeGdjwRiE8BuusGkJ1njRfsGTdx4TRhbJuv3vut8W50_p3i8kk_CggZ-UH5rQj-KohJrQAMn0-DrGdLi2myVMvQsJZVed3tA8j66W_Y5UXPFQ.c-Y3eZq1vVg3VAfEUJfmUoe6qRKMKAX189YsG-L6v2M&dib_tag=se&keywords=5v+9a&qid=1715816004&sprefix=5v+9a%2Caps%2C87&sr=8-27
-
-https://discoland.fi/mw-power-5v-4a-virtalahde-led-nauhoille-tms-mitat-95-x-45-x-70mm
-
-
+The internal design currently has straight rails for the LEDs that do not quite account for all 30 LEDs with their length and I am going to test how it would integrate into the lamp cover but an alternative design might have the LED rails be spirals in order to distribute the light more evenly.

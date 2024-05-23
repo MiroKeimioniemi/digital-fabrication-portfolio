@@ -1,16 +1,40 @@
 ---
 author: "Miro Keimiöniemi"
-title: "System Integration"
+title: "3-Axis Milling & Vacuum Forming (Wildcard)"
 date: "2024-05-16"
 description: "Week 16"
 tags: 
+  - "3-axis milling"
+  - "vacuum forming"
+  - "acrylic"
+  - "sikablock"
+  - "diffuser"
+  - "lamp cover"
   - "system"
   - "integration"
 categories: 
-  - "Integration"
+  - "CAD"
+  - "3-Axis Milling"
+  - "Vacuum Forming"
 series: 
   - "Weekly Assignments"
-image: "system-integration-sketch.webp"
+image: "12mm-tool-paths.webp"
 ---
 
-![](system-integration-sketch.webp)
+## 3-axis milling
+
+![](measuring-milling-bit.webp)
+![](milling-bit.webp)
+
+![](cut-sikablock.webp)
+
+![Chocolate vanilla pudding](prolab-glue.webp)
+![Delicious looking pseudo chocolate cake](chocolate-cake.webp)
+
+![](making-a-monolith.webp)
+![](glue-setting.webp)
+
+![Tool paths](12mm-tool-paths.webp)
+
+
+plunge rate = 1/5 cutting rate (conservatively)
