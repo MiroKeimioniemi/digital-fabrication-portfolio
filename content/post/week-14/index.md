@@ -38,3 +38,4 @@ image: "12mm-tool-paths.webp"
 
 
 plunge rate = 1/5 cutting rate (conservatively)
+
