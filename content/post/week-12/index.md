@@ -257,8 +257,18 @@ Cleaning code helped
 
 
 
+https://docs.arduino.cc/learn/communication/wire/
+
+https://www.arduino.cc/reference/en/language/functions/communication/wire/
+
+https://www.arduino.cc/reference/en/language/functions/communication/wire/setclock/
+
+https://www.arduino.cc/reference/en/language/functions/communication/wire/write/
 
 
 
+https://playground.arduino.cc/Code/Time/
 
+
+WiFi and REST API was not a good fit in the end as it could not be configured flexibly enough with various routers and networks in various places. Bluetooth, however, enables direct connection with less energy consumption, making it significantly more sensible for this.
 

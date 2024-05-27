@@ -47,7 +47,9 @@ Cable management will be quite minimal as can be seen from the below diagram.
 
 The power cable will be connected to 5.5mm power connector and will be suspended in air as much as possible between the hole and the board so that it obstructs light minimally. The speaker will be connected via a 3.5mm audio jack using the shortest possible wires fastened onto the mounting plate and the LED strips will be fastened onto their rails with zip ties, rubber bands or glue, whichever works best without obstructing the lights while also allowing for changing them should there be faults. The cables between them and the board will be cut short but otherwise likely suspended in air as well as both their ends are mounted.
 
-## Power
+There are standard 5.5mm and 3.5mm jack connectors for power and audio so that the speaker and power cable are easy to swap. The amplifier should be mounted on the board but has to be connected via short jumper cables in order to connect the power and ground properly. The LED strips are also connected with the standard connector that they come with as well as with jumper cables soldered onto them.
+
+## Power budget
 
 At my request, Kris acquired a [5V 7A 35W power supply](https://www.digikey.gr/en/products/detail/tt-electronics-power-partners-inc/PEAMD50-10-B2/15838859), giving me a power budget of 35 watts, which will be sufficient as long as I do not run the NeoPixels fully white at 100% full brightness, which would take 120 * 60mA = 7.2A. The [speaker's datasheet](https://www.mspindy.com/spec-sheets/PSR-57N08A01-AQ.pdf) rates it at 0.5W (max 1W) and the [MAX98357A Adafruit I2S 3W Class D Amplifier Breakout board](https://www.adafruit.com/product/3006) is said to be highly efficient so audio will not take any more than 1W. The XIAOs draw current in the order of magnitude of tens of milliamps, with the ESP32C consuming 74mA while using WiFi according to [this test](https://files.seeedstudio.com/wiki/XIAO_WiFi/Resources/Seeed_Studio_XIAO_ESP32C3_Power_Consumption_Tests.pdf). 
 
@@ -59,9 +61,20 @@ I can round up the XIAO ESP32C3's current consumption up to 100mA and multiply i
 
 ![Printed internals without supports](3d-printed-internals.webp)
 
+## Components
+
+The lamp cover diffuser and the stand as well as the internal framework will be produced via 3-axis milling and 3D-printing. The custom circuit board inside is milled from FR2 copper but all electronic components on it, which can be found on the [final project page]({{< relref "page/final-project/index.md" >}}), are bought from [DigiKey](https://www.digikey.com/) along with the speaker, power supply and the WS2812B LED strip.
+
+## Cover diffuser shadow tests
+
+
+
+
+
 
 transparent PLA?
 
 What kind of system diagram? UML of functions, electronics layout including but also beyond the PCB, 3D-design cross-section, above integration sketch?
+
 
 
