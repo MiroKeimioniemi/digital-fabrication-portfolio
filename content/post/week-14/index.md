@@ -41,3 +41,11 @@ plunge rate = 1/5 cutting rate (conservatively)
 
 
 
+Vacuum forming difficulties: 
+
+The covering tape would not come off fully - put it in there anyway
+
+The acrylic would get pulled out from underneath the frame so that the vacuum breaks and it forms into a dent instead of the shape
+
+
+

@@ -272,3 +272,16 @@ https://playground.arduino.cc/Code/Time/
 
 WiFi and REST API was not a good fit in the end as it could not be configured flexibly enough with various routers and networks in various places. Bluetooth, however, enables direct connection with less energy consumption, making it significantly more sensible for this.
 
+https://stackoverflow.com/questions/2397822/what-is-the-best-practice-for-dealing-with-passwords-in-git-repositories
+
+As an extension, Bluetooth could be used to setup wifi for further range and larger data throughput but is beyond this project
+
+Flutter installation: https://docs.flutter.dev/get-started/install/windows/mobile
+
+I remember there being some issues when I orginally did it, but it has been a few months and therefore I cannot recall them. The instructions are quite comprehensive however.
+
+Need VS code extensions: https://docs.flutter.dev/get-started/test-drive
+
+
+Plug-and-play working solution: https://wiki.seeedstudio.com/XIAO_ESP32C3_Bluetooth_Usage/  
+
