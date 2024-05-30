@@ -52,4 +52,22 @@ The acrylic would get pulled out from underneath the frame so that the vacuum br
 Toolpaths for stand as well
 
 
+![](milled-foam.webp)
 
+![](fastening-sikablock.webp)
+![](milling-sikablock.webp)
+![](milled-sikablock.webp)
+
+![](sanding-sikablock.webp)
+![](removing-1.webp)
+![](removing-2.webp)
+![](removing-3.webp)
+![](removing-4.webp)
+
+![](removed.webp)
+![](wet-paper.webp)
+![](spraykit.webp)
+![](sprayed.webp)
+
+![](preparing-model.webp)
+![](first-vacuum-attempt.webp)
