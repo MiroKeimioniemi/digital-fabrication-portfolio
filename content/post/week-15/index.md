@@ -67,14 +67,20 @@ The lamp cover diffuser and the stand as well as the internal framework will be 
 
 ## Cover diffuser shadow tests
 
+![](shadow-closer-distance.webp)
+![](shadow-longer-distance.webp)
 
+![](shadow-thin-strips.webp)
 
+![](thin-wire-conductivity.webp)
+![](very-thin-wire-conductivity.webp)
 
-
+![](thin-wire-shadow.webp)
 
 transparent PLA?
 
 What kind of system diagram? UML of functions, electronics layout including but also beyond the PCB, 3D-design cross-section, above integration sketch?
+
 
 
 

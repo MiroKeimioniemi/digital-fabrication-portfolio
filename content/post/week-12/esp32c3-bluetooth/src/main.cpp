@@ -149,6 +149,28 @@ void loop() {
     leds[12] = color;
     leds[13] = color;
     leds[14] = color;
+    leds[15] = color;
+    leds[16] = color;
+    leds[17] = color;
+    leds[18] = color;
+    leds[19] = color;
+    leds[20] = color;
+    leds[21] = color;
+    leds[22] = color;
+    leds[23] = color;
+    leds[24] = color;
+    leds[25] = color;
+    leds[26] = color;
+    leds[27] = color;
+    leds[28] = color;
+    leds[29] = color;
+    leds[30] = color;
+    leds[31] = color;
+    leds[32] = color;
+    leds[33] = color;
+    leds[34] = color;
+    leds[35] = color;
+    leds[36] = color;
 
     FastLED.setBrightness(brightness);
     FastLED.show();

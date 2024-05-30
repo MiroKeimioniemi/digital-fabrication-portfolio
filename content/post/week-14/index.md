@@ -49,4 +49,7 @@ The acrylic would get pulled out from underneath the frame so that the vacuum br
 
 
 
+Toolpaths for stand as well
+
+
 
