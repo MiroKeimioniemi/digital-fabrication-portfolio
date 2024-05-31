@@ -391,3 +391,5 @@ I am looking forward to acquiring a lot more experience with soldering and lucki
 
 
 
+
+

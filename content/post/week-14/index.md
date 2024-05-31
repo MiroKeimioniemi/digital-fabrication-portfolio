@@ -34,6 +34,8 @@ image: "12mm-tool-paths.webp"
 ![](making-a-monolith.webp)
 ![](glue-setting.webp)
 
+More images here
+
 ![Tool paths](12mm-tool-paths.webp)
 
 
@@ -71,3 +73,30 @@ Toolpaths for stand as well
 
 ![](preparing-model.webp)
 ![](first-vacuum-attempt.webp)
+![](second-attempt.webp)
+![](fourth-attempt.webp)
+![](thin-acrylic.webp)
+
+![](sawing-acrylic.webp)
+![](sanding-acrylic.webp)
+![](loaded-material.webp)
+
+![](first-success.webp)
+![](heat-gunning.webp)
+![](acute-processing.webp)
+![](blowing-air.webp)
+![](first-success-out.webp)
+
+![](bigger-setup.webp)
+![](big-success.webp)
+![](small-success.webp)
+![](great-fillets.webp)
+
+transparent stuff started boiling around 720 seconds.
+
+![](heat-monitor.webp)
+![](risky-margin.webp)
+![](vacuum-former-settings.webp)
+
+![](evolution-of-vacuum-pressed.webp)
+

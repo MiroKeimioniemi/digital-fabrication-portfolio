@@ -480,3 +480,5 @@ void loop() {
 
 {{< video src="bluetooth-demo.mp4" loop="true" muted="true" >}}
 
+https://wiki.seeedstudio.com/XIAO_ESP32C3_Bluetooth_Usage/
+
