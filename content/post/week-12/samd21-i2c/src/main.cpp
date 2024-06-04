@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <deque>
+#include <numeric>
 #include "Adafruit_FreeTouch.h"
 
 // Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(A0, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
@@ -20,6 +22,7 @@ short qt7_baseline = 0;
 
 bool slide = false;
 bool tap = false;
+std::deque<short> previous_max_indices(50, 0);
 
 bool power_on = true;
 const char BRIGHTNESS_INCREMENT = 47;
@@ -27,6 +30,7 @@ char brightness = BRIGHTNESS_INCREMENT * 2;
 
 void receiveEvent(int howMany);
 void requestEvent();
+int roundedAverage(const std::deque<short>& data);
 
 void setup() {
   Serial.begin(115200);
@@ -69,7 +73,7 @@ void setup() {
   Wire.onRequest(requestEvent);
 }
 
-short qt_threshold = 10;
+short qt_threshold = 14;
 short max_index = 4;
 unsigned long tap_start = 0;
 
@@ -98,6 +102,9 @@ void loop() {
   // Less pins because I broke the board connections and wonky order because I connected them in a weird order
   short qts[] = {qt_threshold, qt6 - qt6_baseline, qt4 - qt4_baseline, qt3 - qt3_baseline, qt5 - qt5_baseline, qt7 - qt7_baseline};
   short previous_max_index = max_index;
+  // Maintain a rolling average using the previous 10 max indices
+  previous_max_indices.pop_front();
+  previous_max_indices.push_back(previous_max_index);
   max_index = 0;
 
   for (int i = 0; i <= 5; i++) {
@@ -115,11 +122,13 @@ void loop() {
     tap_start = 0;
   }
 
+  Serial.print(roundedAverage(previous_max_indices));
+
   // Detect a tap gesture
-  if (previous_max_index == 0 && max_index != 0) {
+  if (roundedAverage(previous_max_indices) == 0 && max_index != 0) {
     tap_start = millis();
   }
-  if (tap_start != 0 && ( max_index == 0 || ((millis() - tap_start) > 500))) {
+  if (tap_start != 0 && ((max_index == 0 && ((millis() - tap_start) > 50)) || ((millis() - tap_start) > 500))) {
     tap = true;
     tap_start = 0;
   }
@@ -141,7 +150,7 @@ void loop() {
     slide = false;
   }
 
-  delay(16);
+  delay(1);
 }
 
 void requestEvent() {
@@ -154,4 +163,8 @@ void receiveEvent(int howMany) {
     power_on = Wire.read();
     brightness = Wire.read();
   }
+}
+
+int roundedAverage(const std::deque<short>& data) {
+    return round(std::accumulate(data.begin(), data.end(), 0.0) / data.size());
 }

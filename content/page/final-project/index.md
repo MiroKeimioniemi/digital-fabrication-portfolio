@@ -211,6 +211,9 @@ The internal design currently has straight rails for the LEDs that do not quite 
 
 Inside connection is broken
 
+It might be better to properly separate gestures and state but it was faster not to do so
+
+
 
 
 
