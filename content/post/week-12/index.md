@@ -482,3 +482,4 @@ void loop() {
 
 https://wiki.seeedstudio.com/XIAO_ESP32C3_Bluetooth_Usage/
 
+

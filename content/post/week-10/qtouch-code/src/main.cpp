@@ -67,7 +67,7 @@ void setup() {
     }
 }
 
-int qt_threshold = 8;
+int qt_threshold = 5;
 int maxIndex = 4;
 unsigned long tapStart = 0;
 

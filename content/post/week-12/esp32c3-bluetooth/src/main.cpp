@@ -4,6 +4,7 @@
 #include <BLEUtils.h>
 #include <BLEServer.h>
 #include <FastLED.h>
+#include <Wire.h>
 
 // Define the UUIDs for the Bluetooth Low Energy (BLE) peripheral service and its characteristics
 #define SERVICE_UUID        "6932598e-c4fe-4855-9701-240a78abc000"
@@ -13,10 +14,17 @@
 #define ANIMATION_CHARACTERISTIC_UUID "0d72cbb7-742f-4030-b4ec-3aefb8c1eb1a"
 
 // Define the LED strips and the data pins used to control them
-#define NUM_LEDS 120
-#define DATA_PIN D8
+#define NUM_LEDS_1 38
+#define NUM_LEDS_2 17
+#define DATA_PIN_1 D0
+#define DATA_PIN_2 D1
+#define DATA_PIN_3 D2
+#define DATA_PIN_4 D8
 
-CRGB leds[NUM_LEDS];
+CRGB longLEDs1[NUM_LEDS_1];
+CRGB veryLongLEDs1[NUM_LEDS_1 + NUM_LEDS_2];
+CRGB shortLEDs1[NUM_LEDS_2];
+// CRGB shortLEDs2[NUM_LEDS_2];
 
 // Define lamp state variables
 int isOn = true;
@@ -47,9 +55,18 @@ class NumberCallback: public BLECharacteristicCallbacks {
     public:
       NumberCallback(int *number): number(number) {}
 
+      void onRead(BLECharacteristic *pCharacteristic) {
+        pCharacteristic->setValue(std::to_string(*number));
+      }
+
       void onWrite(BLECharacteristic *pCharacteristic) {
         std::string value = pCharacteristic->getValue();
         *number = std::stoi(value);
+
+        Wire.beginTransmission(8);
+        Wire.write(isOn);
+        Wire.write(brightness);
+        Wire.endTransmission();
       }
 };
 
@@ -58,12 +75,17 @@ class NumberCallback: public BLECharacteristicCallbacks {
 // }
 
 void setup() {
-  // Initialize the LED strip
-  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-  FastLED.setBrightness(250);
+  // Initialize the LED strips
+  FastLED.addLeds<NEOPIXEL, DATA_PIN_1>(shortLEDs1, NUM_LEDS_2);
+  FastLED.addLeds<NEOPIXEL, DATA_PIN_2>(longLEDs1, NUM_LEDS_1);
+  // FastLED.addLeds<NEOPIXEL, DATA_PIN_3>(longLEDs2, NUM_LEDS_1);
+  FastLED.addLeds<NEOPIXEL, DATA_PIN_4>(veryLongLEDs1, (NUM_LEDS_1 + NUM_LEDS_2));
+  FastLED.setBrightness(brightness);
 
   // Initialize the serial communication
   Serial.begin(115200);
+
+  Wire.begin();
 
   // Initialize the BLE server
   BLEDevice::init("LED Zeppelin");
@@ -133,44 +155,49 @@ void setup() {
 
 void loop() {
 
+  if (Wire.requestFrom(8, 2) == 2) {
+
+  while (Wire.available()) {
+    int newIsOn = Wire.read();
+    int newBrightness = Wire.read();
+
+    // Sync values 
+    if (newIsOn != isOn) {
+      isOn = newIsOn;
+
+      Wire.beginTransmission(8);
+      Wire.write(isOn);
+      Wire.write(brightness);
+      Wire.endTransmission();
+    }
+
+    if (newBrightness != brightness) {
+      brightness = newBrightness;
+
+      Wire.beginTransmission(8);
+      Wire.write(isOn);
+      Wire.write(brightness);
+      Wire.endTransmission();
+    }
+  }
+
+  }
+
   if (isOn == 0) {
     FastLED.clear();
     FastLED.show();
   } else {
-    leds[3] = color;
-    leds[4] = color;
-    leds[5] = color;
-    leds[6] = color;
-    leds[7] = color;
-    leds[8] = color;
-    leds[9] = color;
-    leds[10] = color;
-    leds[11] = color;
-    leds[12] = color;
-    leds[13] = color;
-    leds[14] = color;
-    leds[15] = color;
-    leds[16] = color;
-    leds[17] = color;
-    leds[18] = color;
-    leds[19] = color;
-    leds[20] = color;
-    leds[21] = color;
-    leds[22] = color;
-    leds[23] = color;
-    leds[24] = color;
-    leds[25] = color;
-    leds[26] = color;
-    leds[27] = color;
-    leds[28] = color;
-    leds[29] = color;
-    leds[30] = color;
-    leds[31] = color;
-    leds[32] = color;
-    leds[33] = color;
-    leds[34] = color;
-    leds[35] = color;
-    leds[36] = color;
+    for(int i = 0; i < NUM_LEDS_1; i++) {
+      longLEDs1[i] = color;
+      // longLEDs2[i] = color;
+    }
+    for(int i = 0; i < NUM_LEDS_2; i++) {
+      shortLEDs1[i] = color;
+      // shortLEDs2[i] = color;
+    }
+    for(int i = 0; i < (NUM_LEDS_1 + NUM_LEDS_2); i++) {
+      veryLongLEDs1[i] = color;
+    }
 
     FastLED.setBrightness(brightness);
     FastLED.show();
@@ -183,5 +210,5 @@ void loop() {
   Serial.println("Animation:");
   Serial.println(animation);
 
-  delay(1000);
+  delay(100);
 }

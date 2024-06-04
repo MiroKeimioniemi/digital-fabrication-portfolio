@@ -2,28 +2,30 @@
 #include <Wire.h>
 #include "Adafruit_FreeTouch.h"
 
-Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(A0, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
-Adafruit_FreeTouch qt_2 = Adafruit_FreeTouch(A1, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+// Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(A0, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+// Adafruit_FreeTouch qt_2 = Adafruit_FreeTouch(A1, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_3 = Adafruit_FreeTouch(A6, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_4 = Adafruit_FreeTouch(A7, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_5 = Adafruit_FreeTouch(A8, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_6 = Adafruit_FreeTouch(A9, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 Adafruit_FreeTouch qt_7 = Adafruit_FreeTouch(A10, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
 
-short qt1_baseline = 0;
-short qt2_baseline = 0;
+// short qt1_baseline = 0;
+// short qt2_baseline = 0;
 short qt3_baseline = 0;
 short qt4_baseline = 0;
 short qt5_baseline = 0;
 short qt6_baseline = 0;
 short qt7_baseline = 0;
 
-bool power_on = true;
 bool slide = false;
 bool tap = false;
 
-char brightness_level = 4;
+bool power_on = true;
+const char BRIGHTNESS_INCREMENT = 47;
+char brightness = BRIGHTNESS_INCREMENT * 2;
 
+void receiveEvent(int howMany);
 void requestEvent();
 
 void setup() {
@@ -37,10 +39,10 @@ void setup() {
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
 
-  if (! qt_1.begin())
-    Serial.println("Failed to begin qt");
-  if (! qt_2.begin())
-    Serial.println("Failed to begin qt");
+  // if (! qt_1.begin())
+  //   Serial.println("Failed to begin qt");
+  // if (! qt_2.begin())
+  //   Serial.println("Failed to begin qt");
   if (! qt_3.begin())
     Serial.println("Failed to begin qt");
   if (! qt_4.begin())
@@ -53,8 +55,8 @@ void setup() {
     Serial.println("Failed to begin qt");
 
   for (int i = 0; i < 100; i++) {
-      qt1_baseline = max(qt1_baseline, qt_1.measure());
-      qt2_baseline = max(qt2_baseline, qt_2.measure());
+      // qt1_baseline = max(qt1_baseline, qt_1.measure());
+      // qt2_baseline = max(qt2_baseline, qt_2.measure());
       qt3_baseline = max(qt3_baseline, qt_3.measure());
       qt4_baseline = max(qt4_baseline, qt_4.measure());
       qt5_baseline = max(qt5_baseline, qt_5.measure());
@@ -62,18 +64,19 @@ void setup() {
       qt7_baseline = max(qt7_baseline, qt_7.measure());
     }
 
-  Wire.begin(8);               
+  Wire.begin(8);         
+  Wire.onReceive(receiveEvent);      
   Wire.onRequest(requestEvent);
 }
 
-short qt_threshold = 4;
+short qt_threshold = 10;
 short max_index = 4;
 unsigned long tap_start = 0;
 
 void loop() {
 
-  short qt1 = 0;
-  short qt2 = 0;
+  // short qt1 = 0;
+  // short qt2 = 0;
   short qt3 = 0;
   short qt4 = 0;
   short qt5 = 0;
@@ -83,19 +86,21 @@ void loop() {
   digitalWrite(PIN_LED_RXL, HIGH);
   digitalWrite(PIN_LED_TXL, HIGH);
 
-  qt1 = qt_1.measure();
-  qt2 = qt_2.measure();
+  // qt1 = qt_1.measure();
+  // qt2 = qt_2.measure();
   qt3 = qt_3.measure();
   qt4 = qt_4.measure();
   qt5 = qt_5.measure();
   qt6 = qt_6.measure();
   qt7 = qt_7.measure();
 
-  short qts[] = {qt_threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
+  // short qts[] = {qt_threshold, qt1 - qt1_baseline, qt2 - qt2_baseline, qt3 - qt3_baseline, qt4 - qt4_baseline, qt5 - qt5_baseline, qt6 - qt6_baseline, qt7 - qt7_baseline};
+  // Less pins because I broke the board connections and wonky order because I connected them in a weird order
+  short qts[] = {qt_threshold, qt6 - qt6_baseline, qt4 - qt4_baseline, qt3 - qt3_baseline, qt5 - qt5_baseline, qt7 - qt7_baseline};
   short previous_max_index = max_index;
   max_index = 0;
 
-  for (int i = 0; i <= 7; i++) {
+  for (int i = 0; i <= 5; i++) {
       if (qts[i] > qts[max_index]) {
           max_index = i;
       }
@@ -131,15 +136,22 @@ void loop() {
 
   if (slide) {
     if (max_index != 0) {
-      brightness_level = max_index;
+      brightness = max_index * BRIGHTNESS_INCREMENT;
     }
     slide = false;
   }
 
-  delay(10);
+  delay(16);
 }
 
 void requestEvent() {
   Wire.write((uint8_t)power_on);
-  Wire.write((uint8_t)brightness_level);
+  Wire.write((uint8_t)brightness);
+}
+
+void receiveEvent(int howMany) {
+  while (Wire.available()) { 
+    power_on = Wire.read();
+    brightness = Wire.read();
+  }
 }

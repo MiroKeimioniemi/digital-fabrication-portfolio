@@ -27,14 +27,24 @@ https://rydmike.com/flexcolorpicker/
 
 
 
+Make sure which widget's parameters are needed
+
+CTRL + SHIFT + P brings out all useful commands:
+- Toggle Debug Painting is highly useful
+- Get packages if they are not recognized even when imported ( https://stackoverflow.com/questions/44909653/visual-studio-code-target-of-uri-doesnt-exist-packageflutter-material-dart )
+- Select device
+
+SHIFT + ALT + F automatically formats the document nicely
 
 
+SVG viewbox has nothing to do with the actual size of the svg, it is merely a coordinate system
 
 
+CTRL + . to wrap with widget (1000x faster than without)
 
+Gradient appeared grey but it seems that debug painting added other overlay stuff too
 
-
-
+https://greymag.medium.com/flutter-orientation-lock-portrait-only-c98910ebd769
 
 
 
