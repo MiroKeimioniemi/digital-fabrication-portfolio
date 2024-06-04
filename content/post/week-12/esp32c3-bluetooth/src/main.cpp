@@ -30,9 +30,12 @@ CRGB shortLEDs1[NUM_LEDS_2];
 int isOn = true;
 int brightness = 100;
 CRGB color = CRGB::White;
-int animation = 0;
+int animation = 1;
 // int nextAlarm = 0;
 // int time = 0;
+int animationStep = 0;
+
+bool brightening(int i);
 
 // Define the callback classes for the BLE characteristics
 
@@ -187,20 +190,26 @@ void loop() {
     FastLED.clear();
     FastLED.show();
   } else {
-    for(int i = 0; i < NUM_LEDS_1; i++) {
-      longLEDs1[i] = color;
-      // longLEDs2[i] = color;
-    }
-    for(int i = 0; i < NUM_LEDS_2; i++) {
-      shortLEDs1[i] = color;
-      // shortLEDs2[i] = color;
-    }
-    for(int i = 0; i < (NUM_LEDS_1 + NUM_LEDS_2); i++) {
-      veryLongLEDs1[i] = color;
-    }
+    
+    if (animation == 1) {
+      brightening(animationStep) ? animationStep = 0 : animationStep++;
+    } else {
 
-    FastLED.setBrightness(brightness);
-    FastLED.show();
+      for(int i = 0; i < NUM_LEDS_1; i++) {
+        longLEDs1[i] = color;
+        // longLEDs2[i] = color;
+      }
+      for(int i = 0; i < NUM_LEDS_2; i++) {
+        shortLEDs1[i] = color;
+        // shortLEDs2[i] = color;
+      }
+      for(int i = 0; i < (NUM_LEDS_1 + NUM_LEDS_2); i++) {
+        veryLongLEDs1[i] = color;
+      }
+
+      FastLED.setBrightness(brightness);
+      FastLED.show();
+    }
   }
 
   Serial.println("On:");
@@ -209,6 +218,23 @@ void loop() {
   Serial.println(brightness);
   Serial.println("Animation:");
   Serial.println(animation);
-
-  delay(100);
 }
+
+bool brightening(int i) {
+    for(int j = 0; j < NUM_LEDS_1; j++) {
+      longLEDs1[j] = CRGB(i, i, i);
+      // longLEDs2[j] = CRGB(i, i, i);
+    }
+    for(int j = 0; j < NUM_LEDS_2; j++) {
+      shortLEDs1[j] = CRGB(i, i, i);
+      // shortLEDs2[j] = CRGB(i, i, i);
+    }
+    for(int j = 0; j < (NUM_LEDS_1 + NUM_LEDS_2); j++) {
+      veryLongLEDs1[j] = CRGB(i, i, i);
+    }
+    FastLED.show();
+    delay(100);
+    
+    return (i >= 240) ? true : false;
+  }
+
