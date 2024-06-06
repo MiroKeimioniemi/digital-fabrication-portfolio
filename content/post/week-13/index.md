@@ -46,12 +46,53 @@ Gradient appeared grey but it seems that debug painting added other overlay stuf
 
 https://greymag.medium.com/flutter-orientation-lock-portrait-only-c98910ebd769
 
+flutter_reactive_ble is best supported https://www.linkedin.com/pulse/which-flutter-bluetooth-low-energy-library-choose-reinhold-quillen/ while old enough that copilot knows how to use it
 
 
 
 
 
+NEvermind, below doesn't do shit
+
+Avoid flutter_reactive_ble like the plague - even their example app doesn't work
+
+https://medium.com/@danielwolf.dev/get-started-with-bluetooth-low-energy-using-flutter-arduino-bdf5d790edc
+
+https://pub.dev/packages/flutter_reactive_ble
 
 
 
 
+
+package com.example.led_zeppelin_app
+
+import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.reactivex.exceptions.UndeliverableException
+import io.reactivex.plugins.RxJavaPlugins
+import com.polidea.rxandroidble2.exceptions.BleException
+
+class MainActivity: FlutterActivity() {
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        RxJavaPlugins.setErrorHandler { throwable: Throwable ->
+            if (throwable is UndeliverableException && throwable.cause is BleException) {
+                println("""Suppressed UndeliverableException: $throwable""")
+                return@setErrorHandler   // ignore BleExceptions as they were surely delivered at least once
+            }
+            throw RuntimeException("Unexpected Throwable in RxJavaPlugins error handler", throwable)
+        }
+    }
+}
+
+
+
+
+https://stackoverflow.com/questions/67578189/pub-failed-to-delete-entry-because-it-was-in-use-by-another-process
+
+
+re-advertise in the loop to stay discoverable
+https://forum.arduino.cc/t/unable-to-reconnect-to-ble-after-disconnection-when-working-with-one-central-and-multiple-peripherals/1127844/4
+
+
+Tanh managed to extract the solution from ChatGPT, which gave it using the deprecated Flutter Blue but I managed to migrate it to flutter blue plus and it worked

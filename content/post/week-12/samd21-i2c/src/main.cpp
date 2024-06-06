@@ -73,7 +73,7 @@ void setup() {
   Wire.onRequest(requestEvent);
 }
 
-short qt_threshold = 14;
+short qt_threshold = 16;
 short max_index = 4;
 unsigned long tap_start = 0;
 

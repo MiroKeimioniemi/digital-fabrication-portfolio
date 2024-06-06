@@ -214,6 +214,10 @@ Inside connection is broken
 It might be better to properly separate gestures and state but it was faster not to do so
 
 
+wood block: 0 - 15€ depending on contacts
+
+
+
 
 
 
