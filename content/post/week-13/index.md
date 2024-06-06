@@ -106,3 +106,4 @@ A fatal error occurred: No serial data received.
 
 https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_notify/BLE_notify.ino
 
+

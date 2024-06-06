@@ -216,6 +216,9 @@ It might be better to properly separate gestures and state but it was faster not
 
 wood block: 0 - 15€ depending on contacts
 
+![](presentation.webp)
+
+
 
 
 
