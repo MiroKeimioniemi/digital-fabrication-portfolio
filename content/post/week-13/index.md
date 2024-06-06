@@ -96,3 +96,12 @@ https://forum.arduino.cc/t/unable-to-reconnect-to-ble-after-disconnection-when-w
 
 
 Tanh managed to extract the solution from ChatGPT, which gave it using the deprecated Flutter Blue but I managed to migrate it to flutter blue plus and it worked
+
+
+Increased size and complexity of code led to 
+
+A fatal error occurred: No serial data received.
+*** [upload] Error 2
+
+
+https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_notify/BLE_notify.ino

@@ -5,6 +5,7 @@
 #include <BLEServer.h>
 #include <FastLED.h>
 #include <Wire.h>
+#include <BLE2902.h>
 
 // Define the UUIDs for the Bluetooth Low Energy (BLE) peripheral service and its characteristics
 #define SERVICE_UUID        "6932598e-c4fe-4855-9701-240a78abc000"
@@ -19,7 +20,7 @@
 #define NUM_LEDS_2 17
 #define DATA_PIN_1 D0
 #define DATA_PIN_2 D1
-#define DATA_PIN_3 D2
+#define DATA_PIN_3 D2 
 #define DATA_PIN_4 D8
 
 CRGB longLEDs1[NUM_LEDS_1];
@@ -37,6 +38,8 @@ time_t currentTime;
 
 int animationStep = 0;
 unsigned long lastAdvertisingTime = 0; // Keep track of the last time we started advertising
+bool deviceConnected = false;
+bool oldDeviceConnected = false;
 
 bool brightening(int i);
 
@@ -77,8 +80,6 @@ class NumberCallback: public BLECharacteristicCallbacks {
         Wire.write(brightness);
         Wire.endTransmission();
       }
-
-      pCharacteristic->notify();
     }
 };
 
@@ -109,13 +110,27 @@ class TimeCallback: public BLECharacteristicCallbacks {
     }
 };
 
+class ServerCallbacks: public BLEServerCallbacks {
+  void onConnect(BLEServer* pServer) {
+    deviceConnected = true;
+  }
+
+  void onDisconnect(BLEServer* pServer) {
+    deviceConnected = false;
+  }
+};
+
 BLEServer *pServer = nullptr;
+BLECharacteristic *pOnCharacteristic = nullptr;
+BLECharacteristic *pBrightnessCharacteristic = nullptr;
+BLECharacteristic *pColorCharacteristic = nullptr;
+BLECharacteristic *pAnimationCharacteristic = nullptr;
+BLECharacteristic *pNextAlarmCharacteristic = nullptr;
 
 void setup() {
   // Initialize the LED strips
   FastLED.addLeds<NEOPIXEL, DATA_PIN_1>(shortLEDs1, NUM_LEDS_2);
   FastLED.addLeds<NEOPIXEL, DATA_PIN_2>(longLEDs1, NUM_LEDS_1);
-  // FastLED.addLeds<NEOPIXEL, DATA_PIN_3>(longLEDs2, NUM_LEDS_1);
   FastLED.addLeds<NEOPIXEL, DATA_PIN_4>(veryLongLEDs1, (NUM_LEDS_1 + NUM_LEDS_2));
   FastLED.setBrightness(brightness);
 
@@ -127,40 +142,46 @@ void setup() {
   // Initialize the BLE server
   BLEDevice::init("LED Zeppelin");
   pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new ServerCallbacks());
 
   // Create the service
   BLEService *pService = pServer->createService(SERVICE_UUID);
 
   // Create the characteristics
-  BLECharacteristic *pOnCharacteristic = pService->createCharacteristic(
+  pOnCharacteristic = pService->createCharacteristic(
                                           ON_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
                                           BLECharacteristic::PROPERTY_WRITE |
-                                          BLECharacteristic::PROPERTY_NOTIFY
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pBrightnessCharacteristic = pService->createCharacteristic(
+  pBrightnessCharacteristic = pService->createCharacteristic(
                                           BRIGHTNESS_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
                                           BLECharacteristic::PROPERTY_WRITE |
-                                          BLECharacteristic::PROPERTY_NOTIFY
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pColorCharacteristic = pService->createCharacteristic(
+  pColorCharacteristic = pService->createCharacteristic(
                                           COLOR_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
                                           BLECharacteristic::PROPERTY_WRITE |
-                                          BLECharacteristic::PROPERTY_NOTIFY
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pAnimationCharacteristic = pService->createCharacteristic(
+  pAnimationCharacteristic = pService->createCharacteristic(
                                           ANIMATION_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
                                           BLECharacteristic::PROPERTY_WRITE |
-                                          BLECharacteristic::PROPERTY_NOTIFY
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pNextAlarmCharacteristic = pService->createCharacteristic(
+  pNextAlarmCharacteristic = pService->createCharacteristic(
                                           NEXT_ALARM_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
                                           BLECharacteristic::PROPERTY_WRITE |
-                                          BLECharacteristic::PROPERTY_NOTIFY
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
 
   // Set the callbacks for the characteristics
@@ -170,39 +191,47 @@ void setup() {
   pAnimationCharacteristic->setCallbacks(new NumberCallback(&animation));
   pNextAlarmCharacteristic->setCallbacks(new TimeCallback());
 
-  // Add user descriptions.
-  BLEDescriptor *pOnDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pOnDescriptor->setValue("On Characteristic");
+  // Add user descriptions
+  BLE2902 *pOnDescriptor = new BLE2902();
+  // pOnDescriptor->setValue("On Characteristic");
   pOnCharacteristic->addDescriptor(pOnDescriptor);
+  pOnDescriptor->setNotifications(true);
 
-  BLEDescriptor *pBrightnessDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pBrightnessDescriptor->setValue("Brightness Characteristic");
+  BLE2902 *pBrightnessDescriptor = new BLE2902();
+  // pBrightnessDescriptor->setValue("Brightness Characteristic");
   pBrightnessCharacteristic->addDescriptor(pBrightnessDescriptor);
+ pBrightnessDescriptor->setNotifications(true);
 
-  BLEDescriptor *pColorDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pColorDescriptor->setValue("Color Characteristic");
+  BLE2902 *pColorDescriptor = new BLE2902();
+  // pColorDescriptor->setValue("Color Characteristic");
   pColorCharacteristic->addDescriptor(pColorDescriptor);
+  pColorCharacteristic->setNotifyProperty(true);
 
-  BLEDescriptor *pAnimationDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pAnimationDescriptor->setValue("Animation Characteristic");
+  BLE2902 *pAnimationDescriptor = new BLE2902();
+  // pAnimationDescriptor->setValue("Animation Characteristic");
   pAnimationCharacteristic->addDescriptor(pAnimationDescriptor);
+  pAnimationCharacteristic->setNotifyProperty(true);
 
-  BLEDescriptor *pNextAlarmDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pNextAlarmDescriptor->setValue("Next Alarm Characteristic");
+  BLE2902 *pNextAlarmDescriptor = new BLE2902();
+  // pNextAlarmDescriptor->setValue("Next Alarm Characteristic");
   pNextAlarmCharacteristic->addDescriptor(pNextAlarmDescriptor);
+  pNextAlarmCharacteristic->setNotifyProperty(true);
 
   // Set the initial values for the characteristics
-  pOnCharacteristic->setValue("1");
-  pBrightnessCharacteristic->setValue("100");
-  pColorCharacteristic->setValue("FFFFFF");
-  pAnimationCharacteristic->setValue("0");
-  pNextAlarmCharacteristic->setValue("0");
+  pOnCharacteristic->setValue((uint8_t*)&isOn, 1);
+  pBrightnessCharacteristic->setValue((uint8_t*)&brightness, 1);
+  pColorCharacteristic->setValue((uint8_t*)&color, 4);
+  pAnimationCharacteristic->setValue((uint8_t*)&animation, 1);
+  pNextAlarmCharacteristic->setValue((uint8_t*)&nextAlarm, 4);
 
   // Start the service
   pService->start();
 
   // Start advertising
   BLEAdvertising *pAdvertising = pServer->getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->setScanResponse(false);
+  BLEDevice::startAdvertising();
   pAdvertising->start();
 }
 
@@ -245,6 +274,18 @@ void loop() {
     }
   }
 
+  }
+
+  if (deviceConnected ) {
+      uint8_t brightnessValue = (uint8_t)brightness;
+      pBrightnessCharacteristic->setValue(&brightnessValue, 1);
+      pBrightnessCharacteristic->notify();
+  }
+  // disconnecting
+  if (!deviceConnected && oldDeviceConnected) {
+      pServer->startAdvertising(); // restart advertising
+      Serial.println("start advertising");
+      oldDeviceConnected = deviceConnected;
   }
 
   if (isOn == 0) {
