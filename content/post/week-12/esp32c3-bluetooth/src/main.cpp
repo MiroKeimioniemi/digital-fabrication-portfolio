@@ -41,6 +41,9 @@ unsigned long lastAdvertisingTime = 0; // Keep track of the last time we started
 bool deviceConnected = false;
 bool oldDeviceConnected = false;
 
+bool fromApp = false;
+bool fromDevice = false;
+
 bool brightening(int i);
 
 // Define the callback classes for the BLE characteristics
@@ -66,6 +69,8 @@ class NumberCallback: public BLECharacteristicCallbacks {
 
     void onRead(BLECharacteristic *pCharacteristic) {
       pCharacteristic->setValue(*number);
+
+      fromApp = true;
     }
 
     void onWrite(BLECharacteristic *pCharacteristic) {
@@ -79,6 +84,8 @@ class NumberCallback: public BLECharacteristicCallbacks {
         Wire.write(isOn);
         Wire.write(brightness);
         Wire.endTransmission();
+
+        fromApp = true;
       }
     }
 };
@@ -235,6 +242,8 @@ void setup() {
   pAdvertising->start();
 }
 
+unsigned long lastSync = 0; // Keep track of the last  sync
+
 void loop() {
   unsigned long currentTimeElapsed = millis(); // Get the current time
 
@@ -244,8 +253,30 @@ void loop() {
     BLEAdvertising *pAdvertising = pServer->getAdvertising();
     pAdvertising->start();
 
-    // Update the last advertising time
-    lastAdvertisingTime = currentTimeElapsed;
+    // // Create a 32-bit color value in ARGB format
+    // uint32_t colorValue = 0xFF000000 | ((color.r & 0xFF) << 16) | ((color.g & 0xFF) << 8) | (color.blue & 0xFF);
+
+    // // Convert the color value to a 4-byte array in little-endian order
+    // uint8_t colorArray[4];
+    // colorArray[0] = colorValue & 0xFF;
+    // colorArray[1] = (colorValue >> 8) & 0xFF;
+    // colorArray[2] = (colorValue >> 16) & 0xFF;
+    // colorArray[3] = (colorValue >> 24) & 0xFF;
+
+    // // Set the characteristic value and send the notification
+    // pColorCharacteristic->setValue(colorArray, 4);
+    // pColorCharacteristic->notify();
+
+    // uint8_t animationValue = (uint8_t)animation;
+    // pAnimationCharacteristic->setValue(&animationValue, 1);
+    // pAnimationCharacteristic->notify();
+
+    // uint8_t nextAlarmValue = (uint8_t)nextAlarm;
+    // pNextAlarmCharacteristic->setValue(&nextAlarmValue, 1);
+    // pNextAlarmCharacteristic->notify();
+
+    // // Update the last advertising time
+    // lastAdvertisingTime = currentTimeElapsed;
   }
 
   if (Wire.requestFrom(8, 2) == 2) {
@@ -262,6 +293,12 @@ void loop() {
       Wire.write(isOn);
       Wire.write(brightness);
       Wire.endTransmission();
+
+      if (deviceConnected && !fromApp) {
+        uint8_t isOnValue = (uint8_t)isOn;
+        pOnCharacteristic->setValue(&isOnValue, 1);
+        pOnCharacteristic->notify();
+      }
     }
 
     if (newBrightness != brightness) {
@@ -271,16 +308,22 @@ void loop() {
       Wire.write(isOn);
       Wire.write(brightness);
       Wire.endTransmission();
+
+      if (deviceConnected && !fromApp) {
+      uint8_t brightnessValue = (uint8_t)brightness;
+        pBrightnessCharacteristic->setValue(&brightnessValue, 1);
+        pBrightnessCharacteristic->notify();
     }
   }
 
   }
 
-  if (deviceConnected ) {
-      uint8_t brightnessValue = (uint8_t)brightness;
-      pBrightnessCharacteristic->setValue(&brightnessValue, 1);
-      pBrightnessCharacteristic->notify();
   }
+  if (currentTimeElapsed - lastSync > 1000) {
+    fromApp = false;
+    lastSync = currentTimeElapsed;
+  }
+  
   // disconnecting
   if (!deviceConnected && oldDeviceConnected) {
       pServer->startAdvertising(); // restart advertising

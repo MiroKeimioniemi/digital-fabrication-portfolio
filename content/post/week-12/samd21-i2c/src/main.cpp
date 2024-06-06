@@ -22,7 +22,7 @@ short qt7_baseline = 0;
 
 bool slide = false;
 bool tap = false;
-std::deque<short> previous_max_indices(50, 0);
+std::deque<short> previous_max_indices(70, 0);
 
 bool power_on = true;
 const char BRIGHTNESS_INCREMENT = 47;
@@ -73,7 +73,7 @@ void setup() {
   Wire.onRequest(requestEvent);
 }
 
-short qt_threshold = 16;
+short qt_threshold = 17;
 short max_index = 4;
 unsigned long tap_start = 0;
 
