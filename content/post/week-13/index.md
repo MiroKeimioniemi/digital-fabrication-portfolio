@@ -107,5 +107,9 @@ A fatal error occurred: No serial data received.
 https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_notify/BLE_notify.ino
 
 
+Problem with syncing the values was likely the asyncrosity of BLE, which queues the requests 
+
+There is likely a bit of redundancy due to tired coding but as they say, don't touch it if it works
+
 
 
