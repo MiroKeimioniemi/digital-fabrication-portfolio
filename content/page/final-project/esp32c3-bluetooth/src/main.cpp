@@ -259,8 +259,6 @@ void loop() {
     BLEAdvertising *pAdvertising = pServer->getAdvertising();
     pAdvertising->start();
 
-    // Send the current values of the other characteristics to the connected device over BLE
-
     // // Create a 32-bit color value in ARGB format
     // uint32_t colorValue = 0xFF000000 | ((color.r & 0xFF) << 16) | ((color.g & 0xFF) << 8) | (color.blue & 0xFF);
 
