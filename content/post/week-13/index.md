@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Interface and Application Programming"
-date: "2024-05-08"
+date: "2024-06-17"
 description: "Week 15"
 tags: 
   - "programming"
@@ -139,3 +139,5 @@ Increased size and complexity of arduino code led to
 
 A fatal error occurred: No serial data received.
 *** [upload] Error 2
+
+

@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "System Integration"
-date: "2024-05-23"
+date: "2024-06-17"
 description: "Week 17"
 tags: 
   - "system"
@@ -80,6 +80,8 @@ The lamp cover diffuser and the stand as well as the internal framework will be 
 transparent PLA?
 
 What kind of system diagram? UML of functions, electronics layout including but also beyond the PCB, 3D-design cross-section, above integration sketch?
+
+
 
 
 

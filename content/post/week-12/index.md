@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Networking and Communications"
-date: "2024-05-07"
+date: "2024-06-16"
 description: "Week 14"
 tags: 
   - "electronics"
@@ -20,8 +20,10 @@ tags:
   - "Wi-Fi"
   - "Bluetooth Low Energy"
   - "BLE"
-  - "Ccmmunication"
+  - "communication"
   - "debugging"
+  - "Flutter"
+  - "FlutterBluePlus"
 categories: 
   - "Electronics"
   - "Programming"
@@ -668,18 +670,423 @@ Below is a demo video of connecting to the XIAO ESP32C3 via the [LightBlue app](
 
 ### Flutter
 
-For the lamp to be controllable from an app, it obviously does not suffice that the BLE capability is only implemented in one end. The functionalities of the central device thus have to be programmed in [Flutter](https://flutter.dev/) as well, which is Google's open source cross-platform framework for building applications on all devices from Android and iOS to Windows, macOS and the web, and my choice of framework for my Android application. More about flutter in the [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}) documentation.
+For the lamp to be controllable from an app, it obviously does not suffice that the BLE capability is only implemented in one end. The functionalities of the central device thus have to be programmed in [Flutter](https://flutter.dev/) as well, which is Google's open source cross-platform framework for building applications on all devices from Android and iOS to Windows, macOS and the web, and my choice of framework for my Android application. More about Flutter in the [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}) documentation.
 
 Below is a walkthrough of the parts of the final code running on my Pixel 6 that are relevant to interacting with the Bluetooth Low Energy (BLE) service using the central device. The full code can be found from the repository [here](https://gitlab.com/miro-keimioniemi/led-zeppelin-app).
 
 Because I practically had only a single night to implement the Bluetooth functionality on the app end, I had to rely quite heavily on GitHub Copilot and ChatGPT but both have knowledge cutoffs around 2023, which is quite difficult for such rapidly evolving frameworks. Hence, based on [this blog post](https://www.linkedin.com/pulse/which-flutter-bluetooth-low-energy-library-choose-reinhold-quillen/) and the original publication dates of the potential BLE libraries, those being [FlutterBlue](https://pub.dev/packages/flutter_blue) (deprecated), [FlutterBluePlus](https://pub.dev/packages/flutter_blue_plus) (last year) and [Flutter reactive BLE](https://pub.dev/packages/flutter_reactive_ble) (a few years old), I chose Flutter reactive BLE as it was still recently maintained but old enough that the LLMs should know its basic functionality. However, even after hours of tired trial and error, I did not manage to get it work, even when using [their own example](https://github.com/PhilipsHue/flutter_reactive_ble/tree/master/example/lib/src). 
 
-I switched to [FlutterBluePlus](https://pub.dev/packages/flutter_blue_plus) and tried my best to learn and apply it while heavily sleep deprived but I was still missing something. Eventually, [Thanh](https://0nitfans.com/) who also stayed up at the lab the whole night tried to help me in my frustration and managed to formulate the problem for ChatGPT in a way that I clearly had not been able to so that it came up with a working solution - well, almost. It seems that it wrote it using the no longer supported FlutterBlue library, but it was close enough such that I could migrate it to the well-supported FlutterBluePlus with the help of their [migration guide](https://github.com/boskokg/flutter_blue_plus/blob/master/MIGRATION.md). With that help at the very last moment when I was just about to give up, I managed to finally gain back momentum and implement the BLE functionality to the LampState class as follows.
+I switched to [FlutterBluePlus](https://pub.dev/packages/flutter_blue_plus) and tried my best to learn and apply it while heavily sleep deprived but I was still missing something. Eventually, [Thanh](https://0nitfans.com/) who also stayed up at the lab the whole night tried to help me in my frustration and managed to formulate the problem for ChatGPT in a way that I clearly had not been able to so that it came up with a working solution - well, almost. It seems that it wrote it using the no longer supported FlutterBlue library, but it was close enough such that I could migrate it to the well-supported FlutterBluePlus with the help of their [migration guide](https://github.com/boskokg/flutter_blue_plus/blob/master/MIGRATION.md). With that help at the very last moment when I was just about to give up, I managed to finally gain back momentum and implement the BLE functionality to the LampState class as follows. 
+
+Again, there is likely quite a bit of redundancy especially with the device scanning due to hurried last-minute crunch development but it works and having started my summer job at [Nokia](https://www.nokia.com/) soon after along with continued development of [Miitti](https://www.miitti.app/) I did not have time to go back to refactor, although it should be relatively straightforward in this case. Below is the final BLE related code that was used.
+
+Below libraries are used for implementing the `LampState` class. The most important ones are [FlutterBluePlus](https://pub.dev/packages/flutter_blue_plus) for implementing all the BLE functionality and provider, for which an example can be found [here](https://docs.flutter.dev/data-and-backend/state-mgmt/simple), for handling the app state, more about which is documented in [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}). 
+
+```Dart
+// Import the necessary libraries
+import 'dart:async';                // Asynchronous functions such as await and Future
+import 'dart:math';                 // Math functions such as sqrt and pow
+import 'dart:typed_data';           // Typed data structures such as ByteData and Uint8List for handling binary data
+import 'package:mutex/mutex.dart';  // Mutex for attempting the handling of concurrent access to shared resources
+
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';      // FlutterBluePlus for Bluetooth Low Energy (BLE) communication
+import 'package:provider/provider.dart';                        // Provider for managing the state of the app
+```
+
+Create a `LampState` class to store the app state variables, modify them in the app and render the resulting changes as well as synchronize them with the lamp over Bluetooth Low Energy (BLE). All code that follows below will be inside the `LampState` class unless otherwise stated.
+
+```Dart
+// LampState class to manage the state of the lamp
+class LampState extends ChangeNotifier {
+  // Initialize the state variables with default values ('_' denotes private variables and '?' denotes nullable variables)
+  bool _isOn = true;
+  double _brightness = 0.5;
+  Color _color = Colors.white;
+  int _selectedAnimation = 1;
+  DateTime? _nextAlarm;
+  BluetoothDevice? _connectedDevice;
+  bool? _isConnected;
+
+  ...
+```
+
+Initialize variables that can be used to access the BLE characteristics. 
+
+```Dart
+  // Initialize the Bluetooth Low Energy (BLE) characteristics with null values 
+  BluetoothCharacteristic? _isOnCharacteristic;
+  BluetoothCharacteristic? _brightnessCharacteristic;
+  BluetoothCharacteristic? _colorCharacteristic;
+  BluetoothCharacteristic? _selectedAnimationCharacteristic;
+  BluetoothCharacteristic? _nextAlarmCharacteristic;
+```
+
+Have the `LampState` start scanning for the lamp immediately upon instantiation. `startScanning()` function will be discussed below. 
+
+```Dart
+  // Constructor to initialize the state of the lamp, which starts immediately scanning for the LED Zeppelin device over BLE
+  LampState() {
+    startScanning();
+  }
+```
+
+A helper function to be called after a device has been connected to, to start rescanning if the connection is lost.
+
+```Dart
+  // Monitor the device BLE connection and start scanning if the device is disconnected
+  void monitorDeviceConnection() {
+    if (_connectedDevice != null && !_connectedDevice!.isConnected) {
+      startScanning();
+    }
+  }
+```
+
+A function to start scanning for a peripheral device named "LED Zeppelin" to be called upon app startup and every time the connection to the lamp is lost. Calls a different function to actually connect to the peripheral device.
+
+```Dart
+  // Start scanning for the LED Zeppelin device for 30 seconds or until the device is found and connected to
+  void startScanning() {
+    notifyListeners();
+    // print("scanning");
+    FlutterBluePlus.startScan(timeout: const Duration(seconds: 30));
+    FlutterBluePlus.scanResults.listen((results) {
+      for (ScanResult r in results) {
+        if (r.device.platformName == 'LED Zeppelin') {
+          FlutterBluePlus.stopScan();
+          _connectToDevice(r.device);
+          break;
+        }
+      }
+    });
+  }
+```
+
+A function to connect to the peripheral device, which keeps on attempting to connect until a connection is established. Once that is done, find the service corresponding to the lamp state variables, connect to it and assign each characteristic to the earlier declared variables so that they are accessible for further functions as well. Also call the helper function to subscribe to the characteristics and initialize the values of the state variables with those from the lamp.
+
+```Dart
+  // Connect to the LED Zeppelin device and discover the BLE services and characteristics it offers
+  Future<void> _connectToDevice(BluetoothDevice device) async {
+    _connectedDevice = device;
+    bool connected = false;
+    // Repeatedly attempt to connect to the device and start scanning again if the connection fails
+    for (int attempt = 0; attempt < 10; attempt++) {
+      try {
+        await device.connect();
+        connected = true;
+        break;
+      } catch (e) {
+        if (attempt == 4) startScanning();
+        await Future.delayed(const Duration(seconds: 1));
+      }
+    }
+
+    if (!connected) {
+      startScanning();
+      return;
+    }
+
+    // Discover the services offered by the device or start scanning again if the discovery fails
+    List<BluetoothService> services;
+    try {
+      services = await device.discoverServices();
+    } catch (e) {
+      startScanning();
+      return;
+    }
+
+    // Find the target service with the characteristics corresponding to the lamp state variables
+    BluetoothService? targetService;
+    for (BluetoothService service in services) {
+      if (service.uuid.toString() == '6932598e-c4fe-4855-9701-240a78abc000') {
+        targetService = service;
+        break;
+      }
+    }
+
+    // Subscribe to the characteristics and read their values
+    if (targetService != null) {
+      for (BluetoothCharacteristic characteristic in targetService.characteristics) {
+        switch (characteristic.uuid.toString()) {
+          case 'dfc1a400-3523-4626-bd77-3469dbed8b74':
+            _isOnCharacteristic = characteristic;
+            _subscribeToCharacteristic(_isOnCharacteristic!, _onIsOnReceived);
+            _isOnCharacteristic!.read().then(_onIsOnReceived);
+            break;
+          case '05f52bf8-4823-42c6-8647-dc89b76ad4e4':
+            _brightnessCharacteristic = characteristic;
+            // Skip subscribing to the brightness characteristic for now due to synchronization issues
+            // _subscribeToCharacteristic(_brightnessCharacteristic!, _onBrightnessReceived);
+            // _brightnessCharacteristic!.read().then(_onBrightnessReceived);
+            break;
+          case 'b2516e35-6917-43b7-8cad-c7065a9e0033':
+            _colorCharacteristic = characteristic;
+            _subscribeToCharacteristic(_colorCharacteristic!, _onColorReceived);
+            _colorCharacteristic!.read().then(_onColorReceived);
+            break;
+          case '0d72cbb7-742f-4030-b4ec-3aefb8c1eb1a':
+            _selectedAnimationCharacteristic = characteristic;
+            _subscribeToCharacteristic(_selectedAnimationCharacteristic!, _onAnimationReceived);
+            _selectedAnimationCharacteristic!.read().then(_onAnimationReceived);
+            break;
+          case '2b3e71d1-4c3e-418e-942b-67f28951c2d3':
+            _nextAlarmCharacteristic = characteristic;
+            _subscribeToCharacteristic(_nextAlarmCharacteristic!, _onNextAlarmReceived);
+            _nextAlarmCharacteristic!.read().then(_onNextAlarmReceived);
+            break;
+        }
+      }
+    }
+
+    // Set the connection state to true, start monitoring the device connection and notify the listeners about a state change
+    _isConnected = true;
+    monitorDeviceConnection();
+    notifyListeners();
+  }
+
+```
+
+A helper function for subscribing to the given characteristic by setting a listener callback function.
+
+```Dart
+  // Helper function for subscribing to the given characteristic and listening for data changes by setting the appropriate callback function
+  void _subscribeToCharacteristic(BluetoothCharacteristic characteristic, Function(List<int>) onDataReceived) {
+    final subscription = characteristic.lastValueStream.listen(onDataReceived);
+    _connectedDevice?.cancelWhenDisconnected(subscription);
+    characteristic.setNotifyValue(true);
+  }
+```
+
+Callback functions for handling the data received via notifications from the BLE characteristics. They broadly follow a template of first converting the incoming byte data to the desired data type, setting that as the value of the appropriate state variable and notifying the state listeners of this change so that the relevant UI widgets will be redrawn automatically to reflect the latest values of the state variables.
+
+`_onBrightnessReceived` is commented out because I could not quickly figure out how to properly synchronize the brightness value bidirectionally. Updating the brightness values works in either direction alone but makes the slider jumpy and laggy when updated both ways simultaneously. This likely results from the BLE updates getting buffered or queued at both ends so that a value sent out gets read in the peripheral with a delay of a few milliseconds and then sent back to the central in a similar manner, causing the slider to move on its own while waiting for the buffer/queue to empty. 
+
+I tried various ways of addressing this, ranging from delays and different types of boolean flags and checks to the [mutual exclusion](https://en.wikipedia.org/wiki/Lock_(computer_science)) (mutex) approach, the aim of which is to lock down the resources for the duration of an asynchronous operation but none of these worked. Some remnants of these attempts, such as the use of mutex in the Flutter code and a few boolean flags in the Arduino code, still remain.
+
+Ultimately, I decided to temporarily only have one-way brightness control and hence commented it out. A future fix would have to somehow avoid sending all the BLE updates and only send just enough for them to be smooth instead. 
+
+```Dart
+  // Functions for handling the received data from the BLE characteristics corresponding to the lamp state variables
+
+  // Interpret the received data as a boolean value, update the isOn state variable with it and notify the listeners about the change
+  void _onIsOnReceived(List<int> value) {
+    _isOn = value.isNotEmpty && value[0] == 1;
+    // print("isOn: $_isOn");
+    notifyListeners();
+  }
 
 
+  // Interpret the received data as a double value, update the brightness state variable with it and notify the listeners about the change
+  // Skip subscribing to the brightness characteristic for now due to synchronization issues
+  // void _onBrightnessReceived(List<int> value) async {
+  //   await _brightnessMutex.acquire();
+  //   try {
+  //     if (value.isNotEmpty) {
+  //       double newBrightness = value[0] / 250.0;
+  //       if (newBrightness != _brightness) {
+  //         _brightness = newBrightness;
+  //         print("brightness: $_brightness");
+  //       }
+  //     }
+  //   } finally {
+  //     _brightnessMutex.release();
+  //     notifyListeners();
+  //   }
+  // }
 
+  // Interpret the received data as a Color value, update the color state variable with it and notify the listeners about the change
+  void _onColorReceived(List<int> value) async {
+    await _colorMutex.acquire();
+    try {
+      if (value.length == 4) {
+        int colorValue = ByteData.view(Uint8List.fromList(value).buffer).getUint32(0, Endian.little);
+        _color = Color.fromARGB(255, (colorValue >> 16) & 0xFF, (colorValue >> 8) & 0xFF, colorValue & 0xFF);
+        notifyListeners();
+      }
+    } finally {
+      _colorMutex.release();
+    }
+  }
 
+  // Interpret the received data as an integer, update the selectedAnimation state variable with it and notify the listeners about the change
+  void _onAnimationReceived(List<int> value) {
+    if (value.isNotEmpty) {
+      _selectedAnimation = value[0];
+      notifyListeners();
+    }
+  }
 
+  // Interpret the received data as a DateTime value, update the nextAlarm state variable with it and notify the listeners about the change
+  void _onNextAlarmReceived(List<int> value) {
+    if (value.length == 5) {
+      int flag = value[0];
+      int timestamp = ByteData.view(Uint8List.fromList(value.sublist(1)).buffer).getUint32(0, Endian.little);
+      if (flag == 1) {
+        _nextAlarm = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+      } else if (flag == 0) {
+        // Update the current time if needed
+      }
+      notifyListeners();
+    }
+  }
+```
 
+Dart mandates the definition of getters for the variables for them to be accessible from the class instances. They are defined for the state variables as follows.
 
-See demo on [YouTube](https://www.youtube.com/watch?v=ouhtvRlAQOE).
+```Dart
+  // Getters for the lamp state variables
+  bool get isOn => _isOn;
+  double get brightness => _brightness;
+  Color get color => _color;
+  int get selectedAnimation => _selectedAnimation;
+  DateTime? get nextAlarm => _nextAlarm;
+  bool get isConnected => _isConnected ?? false;
+```
+
+Functions for updating the state variables upon actions in the app. They broadly follow a template of first updating the state variable with the new value, then converting the data to a byte array either explicitly or implicitly, writing it to the BLE characteristic and finally notifying the state listeners of this change so that the relevant UI widgets will be redrawn automatically to reflect the latest values of the state variables.
+
+For `brightness` and `color`, which can change continuously, helper threshold variables are introduced to achieve more responsive updates in the lamp. The likely buffering/queuing of tens, hundreds or even thousands of BLE data packets upon sliding the sliders causes a very noticeable delay in the lamp, where the brightness and color clearly lag behind the app. Introducing the thresholds significantly reduces the number of writes performed, reducing the lag noticeably. With the below values, it still exists but more as a nice effect rather than a jarring fault hampering the user experience. Regardless, there is plenty of room for further fine tuning still.
+
+```Dart
+  // Functions for updating the lamp state variables from the app
+
+  // Toggle the isOn state variable, write the updated value to the BLE characteristic and notify the listeners about the change
+  void toggle() {
+    _isOn = !_isOn;
+    if (_isOnCharacteristic != null && _connectedDevice != null && _connectedDevice!.isConnected) {
+      _isOnCharacteristic!.write([_isOn ? 1 : 0]);
+    } else {
+      startScanning();
+    }
+    notifyListeners();
+  }
+
+  // Helper variables to achieve responsive brightness updates in the lamp by reducing redundant data sent to the BLE characteristics, which can otherwise cause delays due to buffering or something
+  double _lastSentBrightness = -1.0;
+  final double _brightnessThreshold = 0.05;
+
+  // Set the brightness state variable, write the updated value to the BLE characteristic and notify the listeners about the change
+  void setBrightness(double brightness) async {
+    await _brightnessMutex.acquire();
+    try {
+      _brightness = brightness;
+      if (_brightnessCharacteristic != null && _connectedDevice != null && _connectedDevice!.isConnected &&
+          (brightness - _lastSentBrightness).abs() > _brightnessThreshold) {
+        _brightnessCharacteristic!.write([(brightness * 250).toInt()]);
+        _lastSentBrightness = brightness;
+      }
+    } finally {
+      _brightnessMutex.release();
+      notifyListeners();
+    }
+  }
+
+  // Helper variables to achieve responsive color updates in the lamp by reducing redundant data sent to the BLE characteristics, which can otherwise cause delays due to buffering or something
+  Color _lastSentColor = Colors.black;
+  final double _colorThreshold = 16.0;
+
+  // Set the color state variable, write the updated value to the BLE characteristic and notify the listeners about the change
+  void setColor(Color color) async {
+    await _colorMutex.acquire();
+    try {
+      _color = color;
+
+      double colorDifference = sqrt(
+        pow(color.red - _lastSentColor.red, 2) +
+        pow(color.green - _lastSentColor.green, 2) +
+        pow(color.blue - _lastSentColor.blue, 2)
+      );
+
+      if (_colorCharacteristic != null && _connectedDevice != null && _connectedDevice!.isConnected &&
+          colorDifference > _colorThreshold) {
+        int value = (color.red << 16) | (color.green << 8) | color.blue;
+        Uint8List data = Uint8List(4);
+        ByteData buffer = ByteData.view(data.buffer);
+        buffer.setUint32(0, value, Endian.little);
+        _colorCharacteristic!.write(data);
+        _lastSentColor = color;
+      } else {
+        startScanning();
+      }
+      notifyListeners();
+    } finally {
+      _colorMutex.release();
+    }
+  }
+
+  // Set the nextAlarm state variable, write the updated value to the BLE characteristic along with the current time for syncing and notify the listeners about the change
+  void setNextAlarm(DateTime? nextAlarm) {
+    _nextAlarm = nextAlarm;
+
+    if (_nextAlarmCharacteristic != null && _connectedDevice != null && _connectedDevice!.isConnected) {
+      // Sync the next alarm with the lamp signaled by the flag value 1
+      if (nextAlarm != null) {
+        int value = nextAlarm.millisecondsSinceEpoch ~/ 1000;
+        Uint8List data = Uint8List(5);
+        ByteData buffer = ByteData.view(data.buffer);
+        buffer.setUint8(0, 1);
+        buffer.setUint32(1, value, Endian.little);
+        _nextAlarmCharacteristic!.write(data);
+      } else {
+        _nextAlarmCharacteristic!.write([0, 0, 0, 0, 0]);
+      }
+
+      // Sync the current time with the lamp signaled by the flag value 0
+      DateTime now = DateTime.now();
+      int nowValue = now.millisecondsSinceEpoch ~/ 1000;
+      Uint8List nowData = Uint8List(5);
+      ByteData nowBuffer = ByteData.view(nowData.buffer);
+      nowBuffer.setUint8(0, 0);
+      nowBuffer.setUint32(1, nowValue, Endian.little);
+      _nextAlarmCharacteristic!.write(nowData);
+    } else {
+      startScanning();
+    }
+    notifyListeners();
+  }
+
+  // Bring up the time picker dialog to select the next alarm time or set it to null upon cancellation
+  Future<void> selectTime(BuildContext context) async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (pickedTime != null) {
+      final DateTime now = DateTime.now();
+      final DateTime pickedDateTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        pickedTime.hour,
+        pickedTime.minute,
+      );
+      if (pickedDateTime.isBefore(now)) {
+        pickedDateTime.add(const Duration(days: 1));
+      }
+      setNextAlarm(pickedDateTime);
+    } else {
+      setNextAlarm(null);
+    }
+  }
+
+  // Set the selectedAnimation state variable, write the updated value to the BLE characteristic and notify the listeners about the change
+  void setSelectedAnimation(int selectedAnimation) {
+    _selectedAnimation = selectedAnimation;
+    if (_selectedAnimationCharacteristic != null && _connectedDevice != null && _connectedDevice!.isConnected) {
+      _selectedAnimationCharacteristic!.write([selectedAnimation]);
+    } else {
+      startScanning();
+    }
+    notifyListeners();
+  }
+}
+```
+This concludes updating the application state variables, over BLE and otherwise. For documentation on how the user interface (UI) is built and redrawn based on the updates, see the documentation on [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}). A demo of the lamp being controlled via the Flutter app can be found on [YouTube](https://youtu.be/ouhtvRlAQOE?si=If1BKGss66gJotr-&t=50) or on the [final project page]({{< relref "page/final-project/index.md" >}}).
+
+## Reflections
+
+My longest continuous stay at the lab was from Wednesday 10:00 to Thursday 18:00 totaling at 32 consecutive hours, the majority of which was spent programming the Flutter end of the Bluetooth Low Energy (BLE) communication. It was also the closest to quitting that I came in any task. It might have been justifiable for the final project presentation, where the demo could have some [Wizard of Oz elements](https://www.nngroup.com/articles/wizard-of-oz/) if absolutely necessary, particularly because I unfortunately missed the live event due to having a linear algebra exam on top of it, but I am very glad that I did not have to, thanks to [Thanh](https://0nitfans.com/)'s prompt engineering.
+
+The [XIAO ESP32C3](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/) is an incredibly capable microcontroller, supporting all the necessary communication protocols and sporting plenty of memory for the code length never to be an issue, even though I did start getting a mysterious error: `A fatal error occurred: No serial data received. *** [upload] Error 2` as the code got more complex when I tried to implement the rest of the Bluetooth controls. This happening the morning of the day I was supposed to be done with the project in order to revise for the math exam was the deciding factor for not fully implementing the rest of the animations and their timely execution. This should be a relatively quick and straightforward addition as the values are already synchronized but changing the on/off state, brightness, color and immediately played animation suffices for the prototype demo.
+
+Implementing I2C communication between two microcontrollers was delightfully simple and straightforward while the ESP32C3 peripheral end of the Bluetooth communication was also rather pleasant and gratifying. The Flutter end, however, was incredibly frustrating with all the asynchronicity and other additional complexity. It was not exactly possible for me due to other aspects taking so much time but in the future for projects with such leeway, it would certainly be highly advisable to start studying the necessary technologies and their practical implementations earlier already while programming the other parts. 
+

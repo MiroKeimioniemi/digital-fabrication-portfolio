@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "3-Axis Milling & Vacuum Forming (Wildcard)"
-date: "2024-05-16"
+date: "2024-06-17"
 description: "Week 16"
 tags: 
   - "3-axis milling"
@@ -111,6 +111,8 @@ transparent stuff started boiling around 720 seconds.
 ![](vacuum-former-settings.webp)
 
 ![](evolution-of-vacuum-pressed.webp)
+
+
 
 
 
