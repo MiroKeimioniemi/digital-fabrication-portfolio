@@ -130,6 +130,8 @@ I grew very interested towards the last one "Oval blimp thingy" that I then rena
 
 {{< 3DModel "lamp-render.glb" >}}
 
+{{< 3DModel "lamp-final-see-through-render.glb" >}}
+
 It also provides the perfect range of scaling challenge. Its primary function would be to function as an alarm clock that simulates a sunrise with independently controllable LEDs inside. The alarm would be set in a simple app that communicates with the lamp over Bluetooth to set the times for the alarm (integration with native clock apps is also an interesting potential avenue for exploration). A built-in speaker could also play some noise that increases in volume with the brightness. The secondary functions would be gesture controls, where a whole palm touch would turn it on and off and sliding one's hand over it would increase brightness in one way and reduce it in the other. The tertiary function would be to control the colors from the app in some unified way and make the brightness control dynamic such that lower brightness levels are warmer and higher are cooler.
 
 An interesting addition would also be habit tracking, where, for example, a one fingered tap is a positive note, to which the lamp would react by a brief, gentle green blink and catalogue that in the app, where it could possibly be elaborated upon or just left as a positive mark. The ranking is based on which functionalities I would most need but it might be that 1 and 2 change places too. Achieving all of these would be perfect but there are also further expansion possibilites such as adding more long-distance proximity detection, adding mood lamp and connectivity functionality between other similar lamps, so that if two are connected and one is being touched, that is signaled to the other too. Also orientation detection for optimizing the light patterns based for each stand could be interesting. The possibilities are almost endless and the end product might be something like an expressive companion that would be similar to, for example, Alexa, but with light instead of voice.
@@ -234,4 +236,39 @@ Watch a less compressed version of the demo video on [YouTube](https://www.youtu
 
 
 
+1. Create a new page for the assignment on your documentation website.
+2. Answer the following questions related to your final project.
 
+         What will it do?
+         Who's done what beforehand?
+         What will you design?
+         What materials and components will be used?
+         Where will come from?
+         How much will they cost?
+         What parts and systems will be made?
+         What processes will be used?
+         What questions need to be answered?
+         How will it be evaluated?
+3. Make sure that...
+
+      Your project should incorporate 2D and 3D design,
+         additive and subtractive fabrication processes,
+         electronics design and production,
+         embedded microcontroller interfacing and programming,
+         system integration and packaging
+      Where possible, you should make rather than buy
+         the parts of your project
+      Projects can be separate or joint, but need to show individual 
+         mastery of the skills, and be independently operable 
+
+
+
+- Describe what you plan to do with your final project in the future.
+- Explore and compare 3 different open source licences.
+- Add copyright notice to your documentation website with a licence of your choice.
+- Prepare a 1 minute long video presenting your final project (1080p, 25fps, mp4, <10MB) and add it to your final project page as well as the root of your website.
+- Prepare a 1920x1080 px slide representing your final project and add it to your final project page as well as the root of your website.
+- Submit a link to your assignment page here.
+
+
+Tuned gesture detection a little bit from input week

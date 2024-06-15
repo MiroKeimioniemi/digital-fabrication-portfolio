@@ -27,7 +27,7 @@ categories:
   - "Programming"
 series: 
   - "Weekly Assignments"
-image: "final-pcb.jpg"
+image: "final-pcb.webp"
 ---
 
 This and much of the documentation of the following weeks apart from system integration, is written retroactively after the major crunch necessary to finish the final project in time. As a result, the extensiveness, detailedness and particularly the story beats relating to the details of the ups and downs might be a bit lacking in terms of detail in comparison to previous weeks. 
@@ -333,223 +333,348 @@ void loop() {
 }
 ```
 
-Even though it was warned about that the [ESPAsyncWebServer library's](https://github.com/lacamera/ESPAsyncWebServer/) source code might have to be modified due to some minor errors in it to run the example properly, this seemed to have been fixed when I ran it as for me it worked immediately. 
+Even though it was warned about that the [ESPAsyncWebServer library's](https://github.com/lacamera/ESPAsyncWebServer/) source code might have to be modified due to some minor errors in it to run the example properly, this seemed to have been fixed when I ran it as for me it worked immediately with no problem whatsoever. 
 
 I did not bother to learn the example too thoroughly because I knew I would not be implementing the wireless connectivity via Wi-Fi for my project due to it not being a good fit due to its inflexibility when changing places, routers and networks. It would either limit the usage of the lamp into a single network and therefore space, or the connected device's internet access unless I wanted to first configure it via Bluetooth and then use the Wi-Fi, which made no sense as I had to only sync a few small values for which Bluetooth Low Energy (BLE) was specifically made. 
 
 ## Bluetooth Low Energy
 
+[Bluetooth Low Energy](https://www.bluetooth.com/learn-about-bluetooth/tech-overview/) (BLE) is a modern wireless personal area network technology that utilizes 40 channels of the 2.4GHz [ISM Band](https://en.wikipedia.org/wiki/ISM_radio_band) to communicate with devices in close proximity, which in this case is usually less than or equal to about 10 meters. 
+
+Even though it uses the same radio frequencies, Bluetooth Low Energy is entirely distinct from classic Bluetooth, which works more like a wireless serial port. Instead, Bluetooth LE works by peripheral devices creating and advertising one or multiple different services with characteristics, such as the lamp state variables, which can be accessed by the central device by connecting to the services and reading, writing or subscribing to certain characteristics in the service(s). One can use it so that the peripheral services work mostly as notification boards and the central device just reads them when necessary, or the central device can subscribe to some of the characteristics so that it is notified any time they change so that this is the only time data transfer occurs. 
+
+This is highly energy efficient, making both devices consume very little energy, while also enabling them to stay connected to multiple devices at once. This, combined with relatively simple use makes it in every way superior to Wi-Fi for this use case, and is thus my choice for wireless connectivity for the project.
+
+### XIAO ESP32C3
+
+Below is a walkthrough of the parts of the final code running on the XIAO SAMD21 that are relevant to creating a Bluetooth Low Energy (BLE) service with the state variables as characteristics on the peripheral device. The full code can be found from the repository [here](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/esp32c3-bluetooth/src/main.cpp?ref_type=heads).
+
+Though relatively simple on a very high conceptual level, there is quite a bit of boilerplate that must be written, even when using the ESP32 compatible BLE libraries, documentation for which can be found [here](https://github.com/nkolban/esp32-snippets/blob/master/Documentation/BLE%20C%2B%2B%20Guide.pdf). Following [this](https://wiki.seeedstudio.com/XIAO_ESP32C3_Bluetooth_Usage/) tutorial to use the XIAO ESP32C3 as a Bluetooth server, include the following libraries:
+
 ```C
-// Include the necessary libraries
-#include <Arduino.h>
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEServer.h>
-#include <FastLED.h>
+#include <BLE2902.h>
+```
 
+Define the Universally Unique Identifiers (UUID) for each service and characteristic using an online UUID generator such as [uuidgenerator.net](https://www.uuidgenerator.net/).
+
+```C
 // Define the UUIDs for the Bluetooth Low Energy (BLE) peripheral service and its characteristics
 #define SERVICE_UUID        "6932598e-c4fe-4855-9701-240a78abc000"
 #define ON_CHARACTERISTIC_UUID "dfc1a400-3523-4626-bd77-3469dbed8b74"
 #define BRIGHTNESS_CHARACTERISTIC_UUID "05f52bf8-4823-42c6-8647-dc89b76ad4e4"
 #define COLOR_CHARACTERISTIC_UUID "b2516e35-6917-43b7-8cad-c7065a9e0033"
 #define ANIMATION_CHARACTERISTIC_UUID "0d72cbb7-742f-4030-b4ec-3aefb8c1eb1a"
+#define NEXT_ALARM_CHARACTERISTIC_UUID "2b3e71d1-4c3e-418e-942b-67f28951c2d3"
+```
 
-// Define the LED strips and the data pins used to control them
-#define NUM_LEDS 120
-#define DATA_PIN D8
+Define the state variables to hold the values transmitted over BLE. 
 
-CRGB leds[NUM_LEDS];
+```C
+// Define lamp state variables and set defaults
+int isOn = true;            // Boolean flag to indicate whether the LEDs should be on or off
+int brightness = 100;       // Brightness level of the LEDs (0-255)
+CRGB color = CRGB::White;   // Color of the LEDs as red, green and blue components (0-255)
+int animation = 1;          // Animation mode for the LEDs (0-3) 0 = static, 1 = breathing, 2 = rainbow, 3 = brightening
+time_t nextAlarm;           // Time for when to trigger the next alarm (in seconds since the Unix epoch)
+time_t currentTime;         // Current time (in seconds since the Unix epoch)
+```
 
-// Define lamp state variables
-int isOn = true;
-int brightness = 100;
-CRGB color = CRGB::White;
-int animation = 0;
-// int nextAlarm = 0;
-// int time = 0;
+Define callback classes for the BLE characteristics, which handle responses to reads and writes of the characteristic by the central device in an appropriate manner for the given data type. The data is sent over as a byte array and must therefore be interpreted the correct way, with which GitHub Copilot was quite helpful due to the operations being quite simple but a bit tedious to think through when sleep deprived. 
 
+All integers received via `NumberCallback` are mapped betwen 0 and 255 so that they can be interpreted as standalone 8-bit (= 1-byte) integers, whereas color is sent and received as a little-endian 32-bit unsigned integer, where the 8 most significant bits are unused, while the remaining 24 bits represent the red, green and blue components in 8-bit increments respectively. `TimeCallback` can receive both the current time for syncing purposes as well as the next alarm depending on the 1-byte flag in front of the 32-bit integer timestamp representing the number of seconds since the "[Unix epoch](https://en.wikipedia.org/wiki/Unix_time)" 1970-01-01T00:00:00Z (UTC). Below, under the Flutter section, it can be seen how the data is sent from the app side.
+
+```C
 // Define the callback classes for the BLE characteristics
 
-// Callback class for the color characteristic
 class ColorCallback: public BLECharacteristicCallbacks {
-    void onWrite(BLECharacteristic *pCharacteristic) {
-      std::string value = pCharacteristic->getValue();
+  void onWrite(BLECharacteristic *pCharacteristic) {    // Callback function for when the characteristic is written to
 
-      if (value.length() == 6) { // Check if the length of the value is 6 (length of a hex color code without '#')
-        long number = strtol(value.c_str(), NULL, 16); // Convert the hex color code to a long integer
-        color = CRGB((number >> 16) & 0xFF, (number >> 8) & 0xFF, number & 0xFF); // Create a CRGB color from the hex color code
+    uint8_t* data = pCharacteristic->getData();         // Get the data as a byte array
+    int length = pCharacteristic->getValue().length();  // Get the length of the data
+
+    if (length == 4) {  // Check if the data is a 32-bit integer (4 bytes)
+      uint32_t value = *((uint32_t*)data);  // Interpret the data as a 32-bit integer
+      color = CRGB((value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF);  // Create a CRGB color from the integer and set it as the new color
+    }
+  }
+};
+
+class NumberCallback: public BLECharacteristicCallbacks {
+  int *number;  // Pointer to the integer value that the characteristic represents
+
+  public:
+    NumberCallback(int *number): number(number) {}    // Constructor to set the pointer to the integer value
+
+    void onRead(BLECharacteristic *pCharacteristic) { // Callback function for when the characteristic is read
+      pCharacteristic->setValue(*number);             // Set the value of the characteristic to the integer value
+      fromApp = true;
+    }
+
+    void onWrite(BLECharacteristic *pCharacteristic) {
+      uint8_t* data = pCharacteristic->getData();
+      int length = pCharacteristic->getValue().length();
+
+      if (length == 1) {  // Check if the data is an 8-bit integer (1 byte)
+        *number = *data;  // Interpret the data as an 8-bit integer
+
+        Wire.beginTransmission(8);  // Begin the I2C transmission to the device with address 8
+        Wire.write(isOn);           // Write the isOn value to the connected device
+        Wire.write(brightness);     // Write the brightness value to the connected device
+        Wire.endTransmission();     // End the I2C transmission
+
+        fromApp = true;
       }
     }
 };
 
-// Callback class for the number characteristics
-class NumberCallback: public BLECharacteristicCallbacks {
-    int *number;
-
-    public:
-      NumberCallback(int *number): number(number) {}
-
-      void onWrite(BLECharacteristic *pCharacteristic) {
-        std::string value = pCharacteristic->getValue();
-        *number = std::stoi(value);
-      }
+// A helper function to convert a 4-byte data array to a 32-bit integer in little-endian order
+time_t toLittleEndian(uint8_t* data) {
+    time_t result = 0;
+    for (int i = 0; i < 4; i++) {
+        result |= ((time_t)data[i] << (8 * i));
+    }
+    return result;
 };
 
-// class TimeCallback: public BLECharacteristicCallbacks {
+class TimeCallback: public BLECharacteristicCallbacks {
+    void onWrite(BLECharacteristic *pCharacteristic) {
+        uint8_t* data = pCharacteristic->getData();
+        int length = pCharacteristic->getValue().length();
 
-// }
+        if (length == 5) {                            // Check if the length of the data is 5 (1 byte for the flag + 4 bytes for the timestamp)
+            uint8_t flag = data[0];                   // Interpret the first byte as a flag
+            time_t value = toLittleEndian(data + 1);  // Interpret the remaining 4 bytes as a 32-bit timestamp in little-endian order
 
+            // Set the appropriate time variable based on the flag
+            if (flag == 1) {
+                nextAlarm = value;
+            } else if (flag == 0) {
+                currentTime = value;
+            }
+        }
+    }
+};
+```
+
+Define a server callback for tracking when the central device is connected.
+
+```C
+class ServerCallbacks: public BLEServerCallbacks {
+  // Set the deviceConnected flag to true when a device connects to the server
+  void onConnect(BLEServer* pServer) {
+    deviceConnected = true;
+  }
+  // Set the deviceConnected flag to false when a device disconnects from the server
+  void onDisconnect(BLEServer* pServer) {  
+    deviceConnected = false;
+  }
+};
+```
+
+As the final step before setup, initialize the pointers to the characteristics and the server as null pointers outside the arduino functions, so that they are accessible in both the setup as well as the loop so that they can be updated at all times.
+
+```C
+// Initialize the BLE server and characteristics outside the setup to be globally accessible in the loop
+BLEServer *pServer = nullptr;
+BLECharacteristic *pOnCharacteristic = nullptr;
+BLECharacteristic *pBrightnessCharacteristic = nullptr;
+BLECharacteristic *pColorCharacteristic = nullptr;
+BLECharacteristic *pAnimationCharacteristic = nullptr;
+BLECharacteristic *pNextAlarmCharacteristic = nullptr;
+```
+
+In the Arduino setup function, initialize and name the device and create the server with its callbacks. Use the above pointers to create the service and characteristics with the desired properties, which allow the central device to read, write and subscribe to the characteristics. Set callbacks, initial values and descriptors for each, which enables the use of notifications so that the central device does not have to periodically read the characteristics but instead gets the latest updates in real time. Finally, start advertising the service so that it can be found by the central device.
+
+```C
 void setup() {
-  // Initialize the LED strip
-  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
-  FastLED.setBrightness(250);
+  
+  ...
 
-  // Initialize the serial communication
-  Serial.begin(115200);
-
-  // Initialize the BLE server
+  // Initialize the BLE server and name the device
   BLEDevice::init("LED Zeppelin");
-  BLEServer *pServer = BLEDevice::createServer();
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new ServerCallbacks());
 
-  // Create the service
+  // Create the BLE service
   BLEService *pService = pServer->createService(SERVICE_UUID);
 
-  // Create the characteristics
-  BLECharacteristic *pOnCharacteristic = pService->createCharacteristic(
+  // Create the BLE characteristics for the service with read, write, notify and indicate properties
+  pOnCharacteristic = pService->createCharacteristic(
                                           ON_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
-                                          BLECharacteristic::PROPERTY_WRITE
+                                          BLECharacteristic::PROPERTY_WRITE |
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pBrightnessCharacteristic = pService->createCharacteristic(
+  pBrightnessCharacteristic = pService->createCharacteristic(
                                           BRIGHTNESS_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
-                                          BLECharacteristic::PROPERTY_WRITE
+                                          BLECharacteristic::PROPERTY_WRITE |
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pColorCharacteristic = pService->createCharacteristic(
+  pColorCharacteristic = pService->createCharacteristic(
                                           COLOR_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
-                                          BLECharacteristic::PROPERTY_WRITE
+                                          BLECharacteristic::PROPERTY_WRITE |
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
-  BLECharacteristic *pAnimationCharacteristic = pService->createCharacteristic(
+  pAnimationCharacteristic = pService->createCharacteristic(
                                           ANIMATION_CHARACTERISTIC_UUID,
                                           BLECharacteristic::PROPERTY_READ |
-                                          BLECharacteristic::PROPERTY_WRITE
+                                          BLECharacteristic::PROPERTY_WRITE |
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
+                                        );
+  pNextAlarmCharacteristic = pService->createCharacteristic(
+                                          NEXT_ALARM_CHARACTERISTIC_UUID,
+                                          BLECharacteristic::PROPERTY_READ |
+                                          BLECharacteristic::PROPERTY_WRITE |
+                                          BLECharacteristic::PROPERTY_NOTIFY |
+                                          BLECharacteristic::PROPERTY_INDICATE
                                         );
 
-  // Set the callbacks for the characteristics
+  // Set the callbacks (event/request handlers) for the characteristics
   pOnCharacteristic->setCallbacks(new NumberCallback(&isOn));
   pBrightnessCharacteristic->setCallbacks(new NumberCallback(&brightness));
   pColorCharacteristic->setCallbacks(new ColorCallback());
   pAnimationCharacteristic->setCallbacks(new NumberCallback(&animation));
+  pNextAlarmCharacteristic->setCallbacks(new TimeCallback());
 
-  // Add user descriptions.
-  BLEDescriptor *pOnDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pOnDescriptor->setValue("On Characteristic");
+  // Add BLE descriptors to the characteristics to enable notifications
+  BLE2902 *pOnDescriptor = new BLE2902();
+  // pOnDescriptor->setValue("On Characteristic");
   pOnCharacteristic->addDescriptor(pOnDescriptor);
+  pOnDescriptor->setNotifications(true);
 
-  BLEDescriptor *pBrightnessDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pBrightnessDescriptor->setValue("Brightness Characteristic");
+  BLE2902 *pBrightnessDescriptor = new BLE2902();
+  // pBrightnessDescriptor->setValue("Brightness Characteristic");
   pBrightnessCharacteristic->addDescriptor(pBrightnessDescriptor);
+ pBrightnessDescriptor->setNotifications(true);
 
-  BLEDescriptor *pColorDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pColorDescriptor->setValue("Color Characteristic");
+  BLE2902 *pColorDescriptor = new BLE2902();
+  // pColorDescriptor->setValue("Color Characteristic");
   pColorCharacteristic->addDescriptor(pColorDescriptor);
+  pColorCharacteristic->setNotifyProperty(true);
 
-  BLEDescriptor *pAnimationDescriptor = new BLEDescriptor(BLEUUID((uint16_t)0x2901));
-  pAnimationDescriptor->setValue("Animation Characteristic");
+  BLE2902 *pAnimationDescriptor = new BLE2902();
+  // pAnimationDescriptor->setValue("Animation Characteristic");
   pAnimationCharacteristic->addDescriptor(pAnimationDescriptor);
+  pAnimationCharacteristic->setNotifyProperty(true);
+
+  BLE2902 *pNextAlarmDescriptor = new BLE2902();
+  // pNextAlarmDescriptor->setValue("Next Alarm Characteristic");
+  pNextAlarmCharacteristic->addDescriptor(pNextAlarmDescriptor);
+  pNextAlarmCharacteristic->setNotifyProperty(true);
 
   // Set the initial values for the characteristics
-  pOnCharacteristic->setValue("1");
-  pBrightnessCharacteristic->setValue("100");
-  pColorCharacteristic->setValue("FFFFFF");
-  pAnimationCharacteristic->setValue("0");
+  pOnCharacteristic->setValue((uint8_t*)&isOn, 1);
+  pBrightnessCharacteristic->setValue((uint8_t*)&brightness, 1);
+  pColorCharacteristic->setValue((uint8_t*)&color, 4);
+  pAnimationCharacteristic->setValue((uint8_t*)&animation, 1);
+  pNextAlarmCharacteristic->setValue((uint8_t*)&nextAlarm, 4);
 
   // Start the service
   pService->start();
 
-  // Start advertising
+  // Start advertising the server
   BLEAdvertising *pAdvertising = pServer->getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->setScanResponse(false);
+  BLEDevice::startAdvertising();
   pAdvertising->start();
-}
-
-void loop() {
-
-  if (isOn == 0) {
-    FastLED.clear();
-    FastLED.show();
-  } else {
-    leds[3] = color;
-    leds[4] = color;
-    leds[5] = color;
-    leds[6] = color;
-    leds[7] = color;
-    leds[8] = color;
-    leds[9] = color;
-    leds[10] = color;
-    leds[11] = color;
-    leds[12] = color;
-    leds[13] = color;
-    leds[14] = color;
-    leds[15] = color;
-    leds[16] = color;
-    leds[17] = color;
-    leds[18] = color;
-    leds[19] = color;
-    leds[20] = color;
-    leds[21] = color;
-    leds[22] = color;
-    leds[23] = color;
-    leds[24] = color;
-    leds[25] = color;
-    leds[26] = color;
-    leds[27] = color;
-    leds[28] = color;
-    leds[29] = color;
-    leds[30] = color;
-    leds[31] = color;
-    leds[32] = color;
-    leds[33] = color;
-    leds[34] = color;
-    leds[35] = color;
-    leds[36] = color;
-
-    FastLED.setBrightness(brightness);
-    FastLED.show();
-  }
-
-  Serial.println("On:");
-  Serial.println(isOn);
-  Serial.println("Brightness:");
-  Serial.println(brightness);
-  Serial.println("Animation:");
-  Serial.println(animation);
-
-  delay(1000);
 }
 ```
 
+In the loop, it is important to start readvertising the service if the device gets disconnected as this is what enables the device to be found again. Otherwise, it can only be connected to once until the whole device is restarted. The lamp state can change from both the app, which is handled by the callbacks set in the setup already, as well as from the I2C communication, which updates them according to the gestures detected. 
+
+If they change via callbacks, they can simply be read in the loop. If they change via the wire input, they must be explicitly updated via `pCharacteristic->setValue(pointer_to_data, size_of_data_in_bytes)` inside the loop with `pCharacteristic->notify()`, which notifies the central device about a change in the variable. Initially, I had a bit of issues with getting the notifications to work, but [this example](https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_notify/BLE_notify.ino) and [this video](https://www.youtube.com/watch?v=oCMOYS71NIU) helped with understanding the logic behind using the BLE2902 library necessary for it. 
+
+```C
+unsigned long lastSync = 0; // Initialize a variable to keep track of the last time the values were synced
+
+void loop() {
+  unsigned long currentTimeElapsed = millis();  // Get the current time
+
+  // Restart advertising every 5 seconds so that the device stays discoverable after being disconnected
+  if (currentTimeElapsed - lastAdvertisingTime >= 5000) {
+    BLEAdvertising *pAdvertising = pServer->getAdvertising();
+    pAdvertising->start();
+  }
+
+  // Check if there is data available on the I2C bus
+  if (Wire.requestFrom(8, 2) == 2) {
+
+    // Sync values from the conductance sensor via I2C
+    while (Wire.available()) {
+      int newIsOn = Wire.read();
+      int newBrightness = Wire.read();
+
+      // Update the values only if they have changed
+      if (newIsOn != isOn) {
+        isOn = newIsOn;
+
+        Wire.beginTransmission(8);
+        Wire.write(isOn);
+        Wire.write(brightness);
+        Wire.endTransmission();
+
+        // Rewrite and notify of the BLE characteristic change if the value was set based on the conductivity sensor
+        if (deviceConnected && !fromApp) {
+          uint8_t isOnValue = (uint8_t)isOn;
+          pOnCharacteristic->setValue(&isOnValue, 1);
+          pOnCharacteristic->notify();
+        }
+      }
+
+      if (newBrightness != brightness) {
+        brightness = newBrightness;
+
+        Wire.beginTransmission(8);
+        Wire.write(isOn);
+        Wire.write(brightness);
+        Wire.endTransmission();
+
+        if (deviceConnected && !fromApp) {
+        uint8_t brightnessValue = (uint8_t)brightness;
+          pBrightnessCharacteristic->setValue(&brightnessValue, 1);
+          pBrightnessCharacteristic->notify();
+        }
+      }
+    }
+  }
+  
+  // Restart advertising if a device was connected and then disconnected
+  if (!deviceConnected && oldDeviceConnected) {
+      pServer->startAdvertising();
+      Serial.println("start advertising");
+      oldDeviceConnected = deviceConnected;
+  }
+
+  ...
+
+}
+```
+
+There is a bit of redundancy with the periodical readvertising and doing so upon disconnecting the device and some other old code too, but as they say: "Don't touch it if it works" and hence they are still in there after the fully sleepless nigth, after which I did not touch the code anymore at all the moment after it finally worked. 
+
+Below is a demo video of connecting to the XIAO ESP32C3 via the [LightBlue app](https://play.google.com/store/apps/details?id=com.punchthrough.lightblueexplorer&hl=en&pli=1) and using it to control the lamp's on/off state, brightness and color. 
+
 {{< video src="bluetooth-demo.mp4" loop="true" muted="true" >}}
 
-https://wiki.seeedstudio.com/XIAO_ESP32C3_Bluetooth_Usage/
+### Flutter
 
+For the lamp to be controllable from an app, it obviously does not suffice that the BLE capability is only implemented in one end. The functionalities of the central device thus have to be programmed in [Flutter](https://flutter.dev/) as well, which is Google's open source cross-platform framework for building applications on all devices from Android and iOS to Windows, macOS and the web, and my choice of framework for my Android application. More about flutter in the [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}) documentation.
 
+Below is a walkthrough of the parts of the final code running on my Pixel 6 that are relevant to interacting with the Bluetooth Low Energy (BLE) service using the central device. The full code can be found from the repository [here](https://gitlab.com/miro-keimioniemi/led-zeppelin-app).
 
+Because I practically had only a single night to implement the Bluetooth functionality on the app end, I had to rely quite heavily on GitHub Copilot and ChatGPT but both have knowledge cutoffs around 2023, which is quite difficult for such rapidly evolving frameworks. Hence, based on [this blog post](https://www.linkedin.com/pulse/which-flutter-bluetooth-low-energy-library-choose-reinhold-quillen/) and the original publication dates of the potential BLE libraries, those being [FlutterBlue](https://pub.dev/packages/flutter_blue) (deprecated), [FlutterBluePlus](https://pub.dev/packages/flutter_blue_plus) (last year) and [Flutter reactive BLE](https://pub.dev/packages/flutter_reactive_ble) (a few years old), I chose Flutter reactive BLE as it was still recently maintained but old enough that the LLMs should know its basic functionality. However, even after hours of tired trial and error, I did not manage to get it work, even when using [their own example](https://github.com/PhilipsHue/flutter_reactive_ble/tree/master/example/lib/src). 
 
-WiFi and REST API was not a good fit in the end as it could not be configured flexibly enough with various routers and networks in various places. Bluetooth, however, enables direct connection with less energy consumption, making it significantly more sensible for this.
-
-https://stackoverflow.com/questions/2397822/what-is-the-best-practice-for-dealing-with-passwords-in-git-repositories
-
-As an extension, Bluetooth could be used to setup wifi for further range and larger data throughput but is beyond this project
-
-Flutter installation: https://docs.flutter.dev/get-started/install/windows/mobile
-
-I remember there being some issues when I orginally did it, but it has been a few months and therefore I cannot recall them. The instructions are quite comprehensive however.
-
-Need VS code extensions: https://docs.flutter.dev/get-started/test-drive
-
-
-Plug-and-play working solution: https://wiki.seeedstudio.com/XIAO_ESP32C3_Bluetooth_Usage/  
+I switched to [FlutterBluePlus](https://pub.dev/packages/flutter_blue_plus) and tried my best to learn and apply it while heavily sleep deprived but I was still missing something. Eventually, [Thanh](https://0nitfans.com/) who also stayed up at the lab the whole night tried to help me in my frustration and managed to formulate the problem for ChatGPT in a way that I clearly had not been able to so that it came up with a working solution - well, almost. It seems that it wrote it using the no longer supported FlutterBlue library, but it was close enough such that I could migrate it to the well-supported FlutterBluePlus with the help of their [migration guide](https://github.com/boskokg/flutter_blue_plus/blob/master/MIGRATION.md). With that help at the very last moment when I was just about to give up, I managed to finally gain back momentum and implement the BLE functionality to the LampState class as follows.
 
 
 
@@ -557,3 +682,4 @@ Plug-and-play working solution: https://wiki.seeedstudio.com/XIAO_ESP32C3_Blueto
 
 
 
+See demo on [YouTube](https://www.youtube.com/watch?v=ouhtvRlAQOE).

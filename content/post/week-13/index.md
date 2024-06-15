@@ -14,6 +14,23 @@ series:
 image: "cover.webp"
 ---
 
+## Assignments
+
+**Group assignment**
+
+- Join one of the introduction sessions.
+- Elect a group leader.
+- Document hands-on exercise with available interface examples.
+- Optionally discuss an additional example that you have used in the past or wish to explore.
+- 
+**Individual assignment**
+
+- Link to the group assignment page.
+- Describe what you learned from the group assignment on your documentation page briefly.
+- Write an application that interfaces a user with an input and/or output device that you made.
+- Include a hero video and source files of the application in your documentation.
+- Submit a link to your assignment page here.
+
 ![Figma UI draft](figma-ui-draft.webp)
 
 Sun/Moon shows the current color of the lamp. The brightness slider adjusts the lamps brightness, while illustrating this by the sun/moon either rising or lowering and the lighting of the scene adapting by becoming more or less bright. Initially the idea was for the moon and sun to swap places as the slider is being moved but now I am thinking that I might want to have it be either one based on the time of day and have it be draggable in the vertical axis for another way of adjusting the brightness.
@@ -91,17 +108,13 @@ class MainActivity: FlutterActivity() {
 https://stackoverflow.com/questions/67578189/pub-failed-to-delete-entry-because-it-was-in-use-by-another-process
 
 
-re-advertise in the loop to stay discoverable
-https://forum.arduino.cc/t/unable-to-reconnect-to-ble-after-disconnection-when-working-with-one-central-and-multiple-peripherals/1127844/4
+
 
 
 Tanh managed to extract the solution from ChatGPT, which gave it using the deprecated Flutter Blue but I managed to migrate it to flutter blue plus and it worked
 
 
-Increased size and complexity of code led to 
 
-A fatal error occurred: No serial data received.
-*** [upload] Error 2
 
 
 https://github.com/nkolban/ESP32_BLE_Arduino/blob/master/examples/BLE_notify/BLE_notify.ino
@@ -114,3 +127,15 @@ There is likely a bit of redundancy due to tired coding but as they say, don't t
 
 
 
+
+Flutter installation: https://docs.flutter.dev/get-started/install/windows/mobile
+
+I remember there being some issues when I orginally did it, but it has been a few months and therefore I cannot recall them. The instructions are quite comprehensive however.
+
+Need VS code extensions: https://docs.flutter.dev/get-started/test-drive
+
+
+Increased size and complexity of arduino code led to 
+
+A fatal error occurred: No serial data received.
+*** [upload] Error 2

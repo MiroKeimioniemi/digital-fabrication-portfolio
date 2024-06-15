@@ -21,6 +21,18 @@ series:
 image: "12mm-tool-paths.webp"
 ---
 
+## Assignments
+
+This week you will explore a digital manufacturing technology beyond the capability of a basic fab lab.
+
+Design and produce something with a digital process (incorporating computer-aided design and manufacturing) not covered in another assignment, documenting the requirements that your assignment meets, and including everything necessary to reproduce it.
+
+- Choose one of the proposed digital manufacturing technologies.
+- Create a digital design to be manufactured with the technology/machine of your choice.
+- Work together with the workshop master and document the process.
+- Publish the documentation on your course documentation page.
+- Submit a link to your documentation page here.
+
 ## 3-axis milling
 
 ![](measuring-milling-bit.webp)
@@ -99,6 +111,7 @@ transparent stuff started boiling around 720 seconds.
 ![](vacuum-former-settings.webp)
 
 ![](evolution-of-vacuum-pressed.webp)
+
 
 
 

@@ -100,7 +100,7 @@ time_t toLittleEndian(uint8_t* data) {
         result |= ((time_t)data[i] << (8 * i));
     }
     return result;
-}
+};
 
 class TimeCallback: public BLECharacteristicCallbacks {
     void onWrite(BLECharacteristic *pCharacteristic) {
