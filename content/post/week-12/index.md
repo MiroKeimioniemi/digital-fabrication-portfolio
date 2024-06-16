@@ -1,7 +1,7 @@
 ---
 author: "Miro Keimiöniemi"
 title: "Networking and Communications"
-date: "2024-06-16"
+date: "2024-06-15"
 description: "Week 14"
 tags: 
   - "electronics"
@@ -24,6 +24,9 @@ tags:
   - "debugging"
   - "Flutter"
   - "FlutterBluePlus"
+  - "Android"
+  - "application"
+  - "mobile app"
 categories: 
   - "Electronics"
   - "Programming"
@@ -693,7 +696,82 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';      // FlutterBluePl
 import 'package:provider/provider.dart';                        // Provider for managing the state of the app
 ```
 
-Create a `LampState` class to store the app state variables, modify them in the app and render the resulting changes as well as synchronize them with the lamp over Bluetooth Low Energy (BLE). All code that follows below will be inside the `LampState` class unless otherwise stated.
+To use Bluetooth on the phone, permissions for it have to be configured first. Furthermore, FlutterBluePlus is only compatible with Android SDK 21 and above. Thus, according to the [documentation](https://pub.dev/packages/flutter_blue_plus), the following files have to be edited in the following ways:
+
+Add the line `minSdkVersion = 21` to `android/app/build.gradle`.
+
+```Java
+android {
+    
+    ...
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.example.led_zeppelin_app"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdk = flutter.minSdkVersion
+        minSdkVersion = 21
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+    }
+
+    ...
+
+}
+```
+
+Add the necessary permissions for using Bluetooth on Android in `android/app/src/main/AndroidManifest.xml`.
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Tell Google Play Store that your app uses Bluetooth LE
+     Set android:required="true" if bluetooth is necessary -->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+
+    <!-- New Bluetooth permissions in Android 12
+    https://developer.android.com/about/versions/12/features/bluetooth-permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- legacy for Android 11 or lower -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30"/>
+
+    <!-- legacy for Android 9 or lower -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="28" />
+
+    ...
+
+</manifest>
+```
+
+Finally, create the file `project/android/app/proguard-rules.pro` and add the following line:
+
+```
+-keep class com.lib.flutter_blue_plus.* { *; }
+```
+
+For cross-platform compatibility, Bluetooth permissions for iOS can be added as simply as by adding the topmost key-string pair in `ios/Runner/Info.plist`.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>This app needs Bluetooth to function</string>
+
+    ...
+
+</dict>
+</plist>
+```
+
+Then, after configuring the Bluetooth permissions, create a `LampState` class to store the app state variables, modify them in the app and render the resulting changes as well as synchronize them with the lamp over Bluetooth Low Energy (BLE). All code that follows below will be inside the `LampState` class unless otherwise stated.
 
 ```Dart
 // LampState class to manage the state of the lamp
@@ -1089,4 +1167,5 @@ My longest continuous stay at the lab was from Wednesday 10:00 to Thursday 18:00
 The [XIAO ESP32C3](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/) is an incredibly capable microcontroller, supporting all the necessary communication protocols and sporting plenty of memory for the code length never to be an issue, even though I did start getting a mysterious error: `A fatal error occurred: No serial data received. *** [upload] Error 2` as the code got more complex when I tried to implement the rest of the Bluetooth controls. This happening the morning of the day I was supposed to be done with the project in order to revise for the math exam was the deciding factor for not fully implementing the rest of the animations and their timely execution. This should be a relatively quick and straightforward addition as the values are already synchronized but changing the on/off state, brightness, color and immediately played animation suffices for the prototype demo.
 
 Implementing I2C communication between two microcontrollers was delightfully simple and straightforward while the ESP32C3 peripheral end of the Bluetooth communication was also rather pleasant and gratifying. The Flutter end, however, was incredibly frustrating with all the asynchronicity and other additional complexity. It was not exactly possible for me due to other aspects taking so much time but in the future for projects with such leeway, it would certainly be highly advisable to start studying the necessary technologies and their practical implementations earlier already while programming the other parts. 
+
 

@@ -75,7 +75,7 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
   <br>
   <li value="17">3D mill a wood block.</li>
   <br>
-  <li value="20">Make it behave like a luminous pet or a spren (from The Stormlight Archive) that turns on dimly when detecting proximity and might occasionally want attention, which it communicates by changing its hue until acknowledged with, for example, a long touch to which it might respond with some different light pattern. It could be made to track, for example, a habit or whether one had a good day. It could also be linked with another similar lamp such that if it is being touched for long, the other lamp lights up the area that is being touched and one can thus, for example, say a personal good night with it. In the long run it could even be made to talk and listen with additional hardware capabilities but those are definitely beyonf the current scope.</li>
+  <li value="20">Make it behave like a luminous pet or a spren (from The Stormlight Archive) that turns on dimly when detecting proximity and might occasionally want attention, which it communicates by changing its hue until acknowledged with, for example, a long touch to which it might respond with some different light pattern. It could be made to track, for example, a habit or whether one had a good day. It could also be linked with another similar lamp such that if it is being touched for long, the other lamp lights up the area that is being touched and one can thus, for example, say a personal good night with it. In the long run it could even be made to talk and listen with additional hardware capabilities but those are definitely beyond the current scope.</li>
 </ol>
 
 ## Ideation
@@ -272,5 +272,6 @@ Watch a less compressed version of the demo video on [YouTube](https://www.youtu
 
 
 Tuned gesture detection a little bit from input week
+
 
 
