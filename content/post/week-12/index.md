@@ -774,7 +774,7 @@ For cross-platform compatibility, Bluetooth permissions for iOS can be added as 
 Then, after configuring the Bluetooth permissions, create a `LampState` class to store the app state variables, modify them in the app and render the resulting changes as well as synchronize them with the lamp over Bluetooth Low Energy (BLE). All code that follows below will be inside the `LampState` class unless otherwise stated.
 
 ```Dart
-// LampState class to manage the state of the lamp
+// Class to manage and synchronize the state of the lamp both in the app as well as physically, accepting input from the app as well as the lamp itself via Bluetooth Low Energy (BLE)
 class LampState extends ChangeNotifier {
   // Initialize the state variables with default values ('_' denotes private variables and '?' denotes nullable variables)
   bool _isOn = true;
@@ -1167,5 +1167,6 @@ My longest continuous stay at the lab was from Wednesday 10:00 to Thursday 18:00
 The [XIAO ESP32C3](https://wiki.seeedstudio.com/XIAO_ESP32C3_Getting_Started/) is an incredibly capable microcontroller, supporting all the necessary communication protocols and sporting plenty of memory for the code length never to be an issue, even though I did start getting a mysterious error: `A fatal error occurred: No serial data received. *** [upload] Error 2` as the code got more complex when I tried to implement the rest of the Bluetooth controls. This happening the morning of the day I was supposed to be done with the project in order to revise for the math exam was the deciding factor for not fully implementing the rest of the animations and their timely execution. This should be a relatively quick and straightforward addition as the values are already synchronized but changing the on/off state, brightness, color and immediately played animation suffices for the prototype demo.
 
 Implementing I2C communication between two microcontrollers was delightfully simple and straightforward while the ESP32C3 peripheral end of the Bluetooth communication was also rather pleasant and gratifying. The Flutter end, however, was incredibly frustrating with all the asynchronicity and other additional complexity. It was not exactly possible for me due to other aspects taking so much time but in the future for projects with such leeway, it would certainly be highly advisable to start studying the necessary technologies and their practical implementations earlier already while programming the other parts. 
+
 
 
