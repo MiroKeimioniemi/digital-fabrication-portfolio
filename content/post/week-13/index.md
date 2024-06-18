@@ -765,3 +765,4 @@ The full code can be found [here](https://gitlab.com/miro-keimioniemi/led-zeppel
 The app turned out great, even though I had to cut some of the features due to lack of time. The vast majority of that time was spent on trying to get the [Bluetooth Low Energy (BLE) communication]({{< relref "post/week-12/index.md" >}}), whereas the next most time consuming part was fine tuning the brightness and colors of the background elements. Everything else was really fast. What is unfortunate about having to cut the page for selecting multiple different alarms, however, is that I did not get the excuse to learn [routing](https://docs.flutter.dev/ui/navigation) in Flutter yet. I am sure I will get to it in no time with [Miitti](https://www.miitti.app/) though, now that I have gained a lot of confidence and familiarity with Flutter. Cannot wait to get to build more with it!
 
 
+

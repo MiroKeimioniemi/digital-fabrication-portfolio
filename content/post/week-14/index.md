@@ -165,6 +165,28 @@ Later I also 3D-milled the newly designed stand, which required a lot less post 
 
 ![3D-milled redesigned stand](stand.webp)
 
+## Vacuum forming
+
+The point of 3-axis milling the SikaBlock was to create the lamp cover halves by vacuum forming translucent 3mm thick acrylic. I first practiced with some cheap, white, opaque 0.5mm polystyrene to get the hang of it and then did a few tests with thicker throwaway material as the translucent stuff was a bit more expensive; first a transparent 2mm thick blue piece of acrylic and then some 3mm thick yellowish green transparent acrylic. 
+
+Operating the [Vacuum Former 750FLB](https://www.crclarke.co.uk/products/vacuum-formers/vacuum-former-750flb#1485279920347-7622c1c1-71fc) is very simple. It can be used with three different material sizes by changing the model platform and the plate with a rectangular hole, over which the material to be formed is placed. It is usually advisable to choose the smallest one that still leaves a healthy margin between your model and the borders of the hole. Put the model platform inside and pin the plate into place with the larger locking mechanism. For different suction characteristics, a fitted piece of plywood can be placed on the stand. 
+
+![Changing the "adapter" to Vacuum Former 750FLB](change-vacuum-former-adapter.webp)
+![Vacuum Former 750FLB with the smallest "adapter"](vacuum-former.webp)
+
+Place the model onto the platform, which can be brought up by pulling down the large lever on the left side of the machine. Pin the sheet of material under the locking mechanism of the plate and turn on the vacuum former from the white switch at the bottom left corner of its control panel. Turn the knobs to the right to the desired setting, which is usually full. The red areas on the yellow background show which heater elements it turns on but the convention is usually just to use all of them without thinking about it too much. The variable to be changed depending on the material is typically the time of how long it is heated up. This can be set at the bottom right corner, where each of the blue buttons corresponds to the digit under which they are placed.
+
+Once you have set up the model and the material, set the appropriate time for the material used (listed above the timer for some typical materials - otherwise ask the staff if you do not know), pull the yellow heater over it and wait until the timer sounds an alarm when reaching the set time. Push away the heater and then, simultaneously, push down the lever to bring the model up to the material and flip the vacuum switch (labeled "VAC PUMP") next to the power switch on. Let the material form and set on the model and then use the black button between the temperature knobs and the timer to carefully pump a bit of air between the model and the material so that you can push the lever up and bring down the platform. Turn off the vacuum pump.
+
+![Bring up model platform with lever](slot-machine.webp)
+![Fasten material sheet](loaded-vacuum-former.webp)
+![Heat up the material sheet](heating-vacuum.webp)
+![Counteracting the vacuum](inflating.webp)
+
+Wait for a minute or two before loosening the locking mechanism and remove the model from the material by blowing some compressed air in between them. The process is simple but requires developing a bit of a feel because exact temperatures are not displayed and though the lights in the grid above the temperature knobs seem to indicate which heaters are on, we are not sure if they communicate readiness in any way. The motions have to also be done relatively quickly before the material has cooled back down and you should be careful with the air pump button in order to not accidentally ruin the shape. Hence, practice is key. 
+
+### Forming 3mm acrylic
+
 ![](preparing-model.webp)
 ![](first-vacuum-attempt.webp)
 ![](second-attempt.webp)
@@ -210,6 +232,7 @@ The acrylic would get pulled out from underneath the frame so that the vacuum br
 
 
 Toolpaths for stand as well
+
 
 
 
