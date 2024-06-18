@@ -20,7 +20,7 @@ categories:
   - "Vacuum Forming"
 series: 
   - "Weekly Assignments"
-image: "12mm-tool-paths.webp"
+image: "lamp-externals.webp"
 ---
 
 Wildcard week! This is one of the freest weeks as we got to pick one out of three manufacturing processes: waterjet, 3/4-axis milling or ultrasonic welding for producing inflatables, with which we could do an entirely free-form project. For me, this meant exploring the processes for building my lamp physically. The trickiest part of that had always been the large ellipsoid diffuser. The intuitively interesting processes for it at our lab were molding and casting, 3D-printing and vacuum forming. 
@@ -76,7 +76,7 @@ The relevant tabs for configuring the tools are "General" where the tool can be 
 ![Measuring the overall length of the 6mm flat end mill with a caliper](measuring-milling-bit.webp)
 ![Configuring Cutter parameters (dimensions) of the 6mm flat end mill](flat-6mm-cutter-parameters.webp)
 
-The "Cutting data" parameters are set similarly to how it was done in the 2D case in [Computer-Controlled Machining]({{< relref "post/week-7/index.md" >}}) by using [this reference](https://www.sorotec.de/webshop/Datenblaetter/fraeser/schnittwerte_en.pdf). In Fusion 360, the principles are the same. All the fields with fx next to them below are automatically computed from those without. Thus, the only really modifiable parameters are "Spindle speed", which is how fast the tool rotates and is recommended to be set at 16 000 for our machine and "Cutting feedrate", which determines the "Feed per tooth", which could be targeted to be quite high at 0.0875 for SikaBlock from Jonas' experience and around 0.055 for hard wood. "Ramp feedrate" and "Plunge feedrate" can be set to be equal usually at approximately one fifth (1/5) of the "Cutting feedrate" as a rule of thumb. 
+The "Cutting data" parameters are set similarly to how it was done in the 2D case in [Computer-Controlled Machining]({{< relref "post/week-7/index.md" >}}) by using [this reference](https://www.sorotec.de/webshop/Datenblaetter/fraeser/schnittwerte_en.pdf). In Fusion 360, the principles are the same. All the fields with fx next to them below are automatically computed from those without. Thus, the only really modifiable parameters are "Spindle speed", which is how fast the tool rotates and is recommended to be set at 16 000 for our machine and "Cutting feedrate", which determines the "Feed per tooth", which could be targeted to be quite high at 0.0875 for SikaBlock from Jonas' experience and around 0.055 for hard wood. "Ramp feedrate" and "Plunge feedrate" can be set to be equal usually at approximately one fifth (1/5) of the "Cutting feedrate" as a conservative rule of thumb. 
 
 ![Physical tool vs virtual tool](milling-bit.webp)
 ![Configuring Cutting data of the 6mm flat end mill](flat-6mm-cutting-data.webp)
@@ -93,32 +93,60 @@ Then press "Accept" to add the tool configuration to the library and repeat the 
 ![6mm flat end mill cutting data for SikaBlock](ball-6mm-cutting-data.webp)
 ![6mm flat end mill cutting data for hard wood](ball-6mm-hard-cutting-data.webp)
 
+### Creating toolpaths
+
+The logic for creating the toolpaths is largely the same as with 2D-toolpaths, which were documented using VCarve Pro in [Computer-Controlled Machining]({{< relref "post/week-7/index.md" >}}). To create 3D-toolpaths in Fusion 360, navigate to the "Manufacture" workbench from the top left corner and click on "Setup" to set up the material as shown below. Here all the options are pretty much self-explanatory and the visual preview shows the effect of each parameter. It is important to set the origin ("Stock Point") identically in both Fusion and the CNC machine controller (In this case [Mach3](https://www.machsupport.com/software/mach3/)) so do pay particular attention to that. Then I just set the dimensions of the stock to match the cut pieces, which had a couple of centimeters of margin and clicked "OK" without touching the "Post Process" tab. 
+
+![Setting up the stock configuration for the toolpath](toolpath-setup.webp)
+![Stock dimensions](toolpath-stock-dimensions.webp)
+
+For the roughing pass, I used the adaptive clearing roughing strategy with the below settings. As the tools were already configured, I could simply select the 6mm flat end mill from the "Sikablock" library and proceed to the next parts of the setup, which was much more extensive and customizable than that of VCarve Pro.
+
+![Creating a toolpath using adaptive clearing](adaptive-clearing.webp)
+
+In the "Geometry" tab you can define the "Machining Boundary", which defines the horizontal software limits for how far the toolpath can go. "Stock Definition" intelligently looks at previous operations to determine how much of the stock is left to avoid excess work. I left these to defaults if I remember correctly. "Heights" defines the vertical software limits for the toolpath whereas "Passes" allows for finer control of the parameters of the toolpath and the tool while cutting. For most operations it suffices to leave these to their defaults as well. "Maximum Roughing Stepdown" is usually good to be kept to half of the diameter of the tool and climb "Direction" usually provides desired results. "Stock to Leave" does what it says. "Linking" I also left in its default state.
+
+![Toolpath geometry](geometry.webp)
+![Toolpath heights](heights.webp)
+![Toolpath passes](passes.webp)
+![Toolpath linking](linking.webp)
+
+Now clicking "OK" generates the toolpaths as seen below. On the left is the generated toolpath and on the right is a visualization of the result after running it. 
+
+![6mm adaptive clearing toolpath](6mm-rough-toolpath.webp)
+![6mm adaptive clearing result preview](6mm-rough-result.webp)
+
+As the roughing toolpath leaves a bit of material, I added a "2D Contour" to cut the model shape out entirely. I left everything else as default except that I chose the contour to be the outline of the remaining model. 
+
+![2D Contour to cut out the model from the remaining stock](2d-contour.webp)
+
+Finally, I added a finishing toolpath using "Scallop" where most of the settings were again either the same or left as defaults.
+
+![Finishing pass with Scallop](scallop.webp)
+
+For the stand, I went through the same exact steps with the only differences being the different tool configurations and a "Parallel" finishing toolpath instead of "Scallop". The stand was redesigned to be more sturdy and stable but primarily so that it would be easily producible via 3-axis milling. More about this in [system integration]({{< relref "post/week-15/index.md" >}}).
+
+![Finishing pass with Parallel](parallel.webp)
+
+### Exporting toolpaths
+
+Exporting the toolpaths was initially the most confusing part. To export toolpaths, generate an "NC Program", which represents a single "job" to be run on the target machine, by clicking the button next to "Setup". The confusing part was then trying to figure out what "Post" under "Machine and post" means. Eventually, we figured out that I should select "Artsoft"'s "Mach3Mill" from the "Post Library" that can be opened by clicking the folder icon next to the "Post" field. Everything else can be left as default, although it is a good idea to specify a filename and make sure where to find the output. Then, in the "Operations" tab, select the toolpaths that share the same tool and post them. The resulting files correspond to those generated in [Computer-Controlled Machining]({{< relref "post/week-7/index.md" >}}) but have the file extension `.tap` instead of `.txt`.
+
+![NC Program settings](image-2.webp)
+![NC Program post library](image-1.webp)
+![NC Program operations](image.webp)
+
+### CNC milling result
+
+I first tested the toolpath with some foam as I was a bit anxious about only having 60mm of the tool showing out of the collet for an 80mm tall model but I could soon see that the curvature mitigated this problem entirely. I then taped the SikaBlock onto the sacrificial layer, placed it carefully so that the tool could run directly parallel to its edge and then executed the `.tap` toolpaths as already documented in [Computer-Controlled Machining]({{< relref "post/week-7/index.md" >}}), producing the below results.
+
+![CNC milling foam](milled-foam.webp)
+![Fastening SikaBlock](fastening-sikablock.webp)
+![CNC milling SikaBlock](milling-sikablock.webp)
+![Freshly milled SikaBlock](milled-sikablock.webp)
 
 
-
-![Tool paths](12mm-tool-paths.webp)
-
-
-plunge rate = 1/5 cutting rate (conservatively)
-
-
-
-Vacuum forming difficulties: 
-
-The covering tape would not come off fully - put it in there anyway
-
-The acrylic would get pulled out from underneath the frame so that the vacuum breaks and it forms into a dent instead of the shape
-
-
-
-Toolpaths for stand as well
-
-
-![](milled-foam.webp)
-
-![](fastening-sikablock.webp)
-![](milling-sikablock.webp)
-![](milled-sikablock.webp)
+The 12mm toolpaths would have only taken a bit less than an hour combined but the 6mm tool took almost three hours for the roughing alone, even though I increased the feedrate slightly from Mach3 as it was running too. However, it was late on a Friday and I wagered that the result was already smooth enough for my purposes, thus deciding to forego the finishing pass entirely and only sand and coat it instead to make it smooth enough. As can be seen below, however, taping it to the sacrificial layer might have been a mistake after all as it was very difficult to separate. 
 
 ![](sanding-sikablock.webp)
 ![](removing-1.webp)
@@ -126,10 +154,16 @@ Toolpaths for stand as well
 ![](removing-3.webp)
 ![](removing-4.webp)
 
+I wiped the sanded model with wet paper after air gunning it to really make sure that all of the dust was gone. Then, following in [Vytautas' footsteps](https://timeritualslabour.gitlab.io/digital-fabrication/week14.html), I coated it with a spraykit made for smoothening models and then sanded it once more to obtain the very smooth but still not quite perfect model below on the right. I figured it should be sufficient for my thick translucent acrylic though as I doubted that the details would propagate onto the surface - which turned out to be correct.
+
 ![](removed.webp)
 ![](wet-paper.webp)
 ![](spraykit.webp)
 ![](sprayed.webp)
+
+Later I also 3D-milled the newly designed stand, which required a lot less post processing. I noticedd only after it was ready, that for some reason the finishing pass had only touched the inside of the stand but I decided that it merely added an intriguing detail, sanded the outside a little bit and left it be as it was.
+
+![3D-milled redesigned stand](stand.webp)
 
 ![](preparing-model.webp)
 ![](first-vacuum-attempt.webp)
@@ -167,6 +201,15 @@ transparent stuff started boiling around 720 seconds.
 
 
 
+Vacuum forming difficulties: 
+
+The covering tape would not come off fully - put it in there anyway
+
+The acrylic would get pulled out from underneath the frame so that the vacuum breaks and it forms into a dent instead of the shape
+
+
+
+Toolpaths for stand as well
 
 
 
