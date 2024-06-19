@@ -257,8 +257,9 @@ Having manually sanded for a couple of hours while listening to multiple episode
 ![Using the dremel](dremel-edges.webp)
 ![Improvised belt sander](improvised-belt-sander.webp)
 
-At some point I got the idea to watch some movies I had been tangentially interested in and would not likely otherwise watch but could now as I did not have anything better to do either. I sanded almost throughout the night, mostly manually and sometimes with the detail sander, finishing four or five movies during the time until finally the sides were even and I had the external components of my lamp ready as depicted below. 
+At some point I got the idea to watch some movies I had been tangentially interested in and would not likely otherwise watch but could now as I did not have anything better to do either. I sanded almost throughout the night, mostly manually and sometimes with the detail sander, finishing four or five movies during the time until finally the sides were even and I had the external components of my lamp ready as depicted below. As the very last thing, I carefully used the dremel to cut - or more like sand - a hole for the power cable at one end.
 
+![Hole for power cable](power-cable-hole.webp)
 ![External components of the lamp assembled](lamp-externals.webp)
 
 ## Reflections
@@ -266,6 +267,7 @@ At some point I got the idea to watch some movies I had been tangentially intere
 This week stretched and ballooned way beyond the original expected time due to a series of setbacks from unforeseen lengthy curing times to stubborn exploration, even when the sensible thing might have been to cut our losses and just go for a bigger sheet of acrylic immediately. Combine with that two days of waiting around, which was the vast majority of vacuum forming such thick materials and manually sanding for 10+ hours and it turns out to be quite a frustrating week - which in reality was more like two on top of that. 
 
 Regardless, it was also highly rewarding as this is how the lamp came into existence as a physical object. Sure, it was not quite a lamp just yet, lacking the internal structure and lights but the form had finally become tangible. The key takeaways of the week include even more careful planning in order to make sure that parts of processes do not get stuck because of some other steps that must be taken prior. Changing variables enough to justifiably expect different outcomes, avoiding sunk cost fallacy and a tad more rebelliousness might also have sped everything along substantially.
+
 
 
 
