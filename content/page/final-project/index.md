@@ -1,11 +1,11 @@
 ---
 title: Final Project
 description: Gesture controlled sunrise alarm clock lamp - LED Zeppelin
-date: '2024-02-01'
+date: '2024-06-21'
 image: 'led-zeppelin-render.webp'
 aliases:
   - project
-lastmod: '2024-05-16'
+lastmod: '2024-06-21'
 menu:
     main: 
         weight: -99
@@ -187,8 +187,6 @@ I grew very interested towards the last one "Oval blimp thingy" that I then rena
 
 {{< 3DModel "lamp-render.glb" >}}
 
-{{< 3DModel "lamp-final-see-through-render.glb" >}}
-
 It also provides the perfect range of scaling challenge. Its primary function would be to function as an alarm clock that simulates a sunrise with independently controllable LEDs inside. The alarm would be set in a simple app that communicates with the lamp over Bluetooth to set the times for the alarm (integration with native clock apps is also an interesting potential avenue for exploration). A built-in speaker could also play some noise that increases in volume with the brightness. The secondary functions would be gesture controls, where a whole palm touch would turn it on and off and sliding one's hand over it would increase brightness in one way and reduce it in the other. The tertiary function would be to control the colors from the app in some unified way and make the brightness control dynamic such that lower brightness levels are warmer and higher are cooler.
 
 An interesting addition would also be habit tracking, where, for example, a one fingered tap is a positive note, to which the lamp would react by a brief, gentle green blink and catalogue that in the app, where it could possibly be elaborated upon or just left as a positive mark. The ranking is based on which functionalities I would most need but it might be that 1 and 2 change places too. Achieving all of these would be perfect but there are also further expansion possibilites such as adding more long-distance proximity detection, adding mood lamp and connectivity functionality between other similar lamps, so that if two are connected and one is being touched, that is signaled to the other too. Also orientation detection for optimizing the light patterns based for each stand could be interesting. The possibilities are almost endless and the end product might be something like an expressive companion that would be similar to, for example, Alexa, but with light instead of voice.
@@ -278,9 +276,11 @@ An internal structure was iteratively designed and 3D-printed in [System Integra
 
 ![The internals of the fully assembled lamp](internals.webp)
 
+{{< 3DModel "lamp-final-see-through-render.glb" >}}
+
 ### Programming
 
-The [XIAO SAMD21 gesture detection code](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/samd21-i2c/src/main.cpp?ref_type=heads) written and documented in [Input Devices]({{< relref "post/week-10/index.md" >}}) was fine tuned for the assembled lamp and made to communicate with the [XIAO ESP32C3 code](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/esp32c3-bluetooth/src/main.cpp?ref_type=heads) responsible for controlling the LED strips and communicating over Bluetooth Low Energy (BLE) with the [Flutter mobile app](https://gitlab.com/miro-keimioniemi/led-zeppelin-app/-/tree/master?ref_type=heads), via I2C. The I2C and BLE communication are documented in [Networking and Communications]({{< relref "post/week-12/index.md" >}}) and the design and development of the Flutter mobile app is documented in [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}). It can be used to control the on/off state and brightness of the lamp, as well as change its color and set alarms with predefined animations in a dynamic user interface (UI) that responds to the selected color and brightness with changes to its background landscape.
+The [XIAO SAMD21 gesture detection code](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/samd21-i2c/src/main.cpp?ref_type=heads) originally written and documented in [Input Devices]({{< relref "post/week-10/index.md" >}}) was fine tuned for the assembled lamp and made to communicate with the [XIAO ESP32C3 code](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/esp32c3-bluetooth/src/main.cpp?ref_type=heads) responsible for controlling the LED strips and communicating over Bluetooth Low Energy (BLE) with the [Flutter mobile app](https://gitlab.com/miro-keimioniemi/led-zeppelin-app/-/tree/master?ref_type=heads), via I2C. The I2C and BLE communication are documented in [Networking and Communications]({{< relref "post/week-12/index.md" >}}) and the design and development of the Flutter mobile app is documented in [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}). It can be used to control the on/off state and brightness of the lamp, as well as change its color and set alarms with predefined animations in a dynamic user interface (UI) that responds to the selected color and brightness with changes to its background landscape.
 
 ![](app-1.webp)
 ![](app-2.webp)
@@ -300,73 +300,28 @@ The [XIAO SAMD21 gesture detection code](https://gitlab.com/miro.keimioniemi/dig
 
 ## License
 
+I decided to license the final project and this website, its contents and [the repository it lies in](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio) with the [Creative Commons Attribution-NonCommercial 4.0 International Public License](https://creativecommons.org/licenses/by-nc/4.0/legalcode.en) or [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) for short, as it is very permissive, allowing people to productively use the documentation and even replicate projects for personal use, but prevents commercial use to which I would very much like to be a party to, should someone find some of the projects that good. Do not hesitate to contact me via any of the links in the left sidebar if you are interested in using some of the projects commercially. Most likely I will be enthusiastic to get involved. 
 
+I found the license from the excellent [creative commons license chooser](https://chooser-beta.creativecommons.org/), which allows you to configure the basic properties as you wish and spits out a license notice, such as "[Miro's Digital Fabrication Portfolio](https://digital-fabrication-portfolio-miro-keimioniemi-a2f2c11a6e705b8f.gitlab.io/final-project/) © 2024 by [Miro Keimiöniemi](https://mirokeimioniemi.com/) is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1)" in this case. 
 
+I compared it to a few of the most popular open source licenses: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0), [MIT License](https://opensource.org/license/mit) and [GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.html). The Apache License 2.0 and the MIT License are very permissive licenses allowing essentially free usage, modification and distribution of code with varying attribution requirements, whereas GPL is a [copyleft](https://www.gnu.org/licenses/copyleft.en.html#:~:text=Copyleft%20is%20a%20general%20method,in%20the%20public%20domain%2C%20uncopyrighted.) license, which requires all derivative works to use the same license, which most notably requires publication of the source code and ensures that all derivitave works are similarly freely usable, modifiable and distributable. 
 
-
-
-
-
-![](presentation.webp)
-
-
-
-
-
-
-
-
-
-
-
-
-
-1. Create a new page for the assignment on your documentation website.
-2. Answer the following questions related to your final project.
-
-         What will it do?
-         Who's done what beforehand?
-         What will you design?
-         What materials and components will be used?
-         Where will come from?
-         How much will they cost?
-         What parts and systems will be made?
-         What processes will be used?
-         What questions need to be answered?
-         How will it be evaluated?
-3. Make sure that...
-
-      Your project should incorporate 2D and 3D design,
-         additive and subtractive fabrication processes,
-         electronics design and production,
-         embedded microcontroller interfacing and programming,
-         system integration and packaging
-      Where possible, you should make rather than buy
-         the parts of your project
-      Projects can be separate or joint, but need to show individual 
-         mastery of the skills, and be independently operable 
-
-
-
-- Describe what you plan to do with your final project in the future.
-- Explore and compare 3 different open source licences.
-- Add copyright notice to your documentation website with a licence of your choice.
-- Prepare a 1 minute long video presenting your final project (1080p, 25fps, mp4, <10MB) and add it to your final project page as well as the root of your website.
-- Prepare a 1920x1080 px slide representing your final project and add it to your final project page as well as the root of your website.
-- Submit a link to your assignment page here.
-
-
-Tuned gesture detection a little bit from input week
-
-
+Creative Commons licenses are typically not recommended for software but the majority of content in [this repository](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio) is actually not software but text, images, videos, 3D-models and other design and manufacturing files and hence the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1) license felt the most appropriate as I only wanted to have one license for the entire repository and, as even with software, it still communicates the right intention and idea, that being free non-commercial use, even if it were not typically directly applicable in that particular domain.
 
 ## Reflections
 
-Project evaluation
+![](presentation.webp)
 
+I have always evaluated the project by its user experience, utility, novelty, overall level of completeness, seamlessness of system integration and potential commercial viability. Although not quite having all the initially planned features, let alone any of the potential extensions, the final results scores pretty high on all of the metrics for me. 
 
+The user experience of controlling the gesture controlled lamp via touch is great, although seemingly slightly dependent on the conductivity of the user, where for some it flickers a bit more, whereas for me it is tuned not to do so practically at all. This results from the relatively crude gesture detection code, which could still be polished further by, for example, more sophisticated averaging of the readings. Regardless, it is very responsive usually behaves exactly as expected. Controlling the lamp via the mobile app is also very seamless with the app connecting to the lamp very quickly and the brightness and color values transferring with a slight delay but as a smooth, continuous animation. 
 
+The utility of the lamp is not quite as great as originally envisioned, due to the alarms not being completely implemented. This should be a relatively straigthforward and quick extension, however. Regardless, it is quite decent as a bit of a design element and as a lamp with adjustable brightness, which in itself is still too rare. Moreover, the interface for doing so is very intuitive and easily reachable at all times with the only criteria being that the lamp must be at arm's length. In fact, it did not even occur to me in the design phase, but a professor visiting the Fablab pointed out that it is actually great for accessibility too due to the intuitiveness and how error tolerant it is for someone with, for example, very shaky hands. Additionally, color control is great for, for example, reducing the amount of blue light viewed at night. 
 
+I am not sure about the novelty dimension as I have not really researched it too much apart from sunrise alarm clocks, of which it is considerably different. I have not bumped into any at any stores ever either, so such things are not at least widely spread yet, making it novel enough to be interesting to me. Certainly, the hypothetical final version with all the extensions would be highly unique as it could be characterized to function similarly to an [Amazon Alexa](https://www.alexa.com/) but with light and the even [Pixar](https://www.pixar.com/)-like character qualities that come from it. Hence, with additional development and cutting down the costs, I believe that it could eventually be very commercially viable. 
 
+In fact, I might one day return to it with a future co-founder after some successes in software first, which are much easier to attain due to the often close to neglible fixed costs. I am not quite so committed yet as to take a loan for further development and mass manufacturing but if I were to come up with some extra capital, I might be very interested in taking it all the way to what I originally envisioned. In the mean time, however, it will likely become my nightlamp and potentially alarm clock as well if I get the time to implement that functionality.
 
+The overall completeness is also a bit reduced due to omitting the sound output, but this is not actually noticeable to the end user and as all the other parts work mostly seamlessly together to create a coherent user experience, it can be said to be complete. The system integration is, as discussed somewhere above, partly deliberately perhaps the most lacking domain due to the shadows cast by the conductive wires and the diffuser halves not fastened together. These result from the lack of resources and wanting to leave some room for further improvement respectively though, and hence I think it is okay for the prototype.
 
+Overall, I am very proud of the very usable proof-of-concept prototype and see myself actually using it in my day-to-day life, which is a major win. This was an incredibly intense course, particularly with all the extracurriculars of taking four additional courses and joining the [Miitti App](https://www.miitti.app/) startup on the side, but ultimately definitely worth it being able to walk away with a somewhat impressive portfolio and long-needed custom solutions and decorations for our apartment. Reflections on those and each separate part of the process can be found in their respective documentations.
