@@ -24,7 +24,53 @@ links:
 
 The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where all the electronics are contained within the ellipsoid diffuser, that can be placed on or inside various different kinds of separate stands. It works as a regular lamp by tapping it to turn it on or off and swiping towards either end to adjust its brightness either up or down. The alarm clock functionality works via a mobile app where you can choose an animation including a sound that will start and reach its peak at the times set. The app can also be used to change the color as well as fine tune the brightness.
 
-![](presentation.webp)
+![LED Zeppelin - A Gesture Controlled Lamp by Miro Keimiöniemi poster](presentation.webp)
+
+## Demo video
+
+{{< video src="../presentation.mp4" loop="true" muted="true" >}}
+
+Watch a less compressed version of the demo video on [YouTube](https://www.youtube.com/watch?v=ouhtvRlAQOE). The music on the video is an old unfinished beat of mine, which I threw on it at 2am as I could not be bothered to start searching for royalty-free music at that point. 
+
+## Hero shots
+
+![](dark-close-hero.webp)
+![](dark-hero.webp)
+
+![](hero.webp)
+![](internals.webp)
+
+![](close-inside.webp)
+![](close-inside-2.webp)
+
+## Specs
+
+### Bill of materials (BOM)
+
+Below is a table of all the materials and components used along with their current price estimates:
+
+| Item / material | Quantity | Price |
+|-----------------|----------|-------|
+| 3mm translucent acrylic | 1 large sheet | 15.09€ |
+| Hard wood | 15 x 12 x 4.5 cm block | 15€ |
+| FR2 copper | 1 sheet | 5€ |
+| Transparent PLA | 240g | 5€ |
+| PEAMD50-10-B2 power supply | 1 | 23.70€ |
+| XIAO SAMD21 microcontroller | 1 | 4.99€ |
+| XIAO ESP32C3 microcontroller | 1 | 4.61€ |
+| TXB0104D level shifter | 1 | 1.26€ |
+| PJ-002AH-SMT-TR power jack | 1 | 1.14€ |
+| 220µF capacitor | 1 | 0.5€ |
+| Slide top switch | 1 | 0.6€ |
+| Schottky diode | 1 | 0.5€ |
+| Resistor | 10 | 0.9€ |
+| Pin socket | 5 pins | 0.5€ |
+| Pin header | 12 pins | 0.5€ |
+| Total | | 79.29€ |
+
+The above table is only constructed from the items and materials that currently make up the lamp, excluding wires, dupont connectors, zip ties, adhesives and tape as well as the SikaBlock and the glue used for that and other materials and tools similarly used in the manufacturing process. Furthermore, many components were difficult to pin down exactly and thus all prices without two decimal numbers represent rather the orders of magnitudes for that quantity of the given component instead of exact prices.
+
+All of the prices of the electronic components are taken from [DigiKey](https://www.digikey.fi/en) either as the exact prices or averaging over some reasonably similar components, whereas others are from the Fablab pricing or other sources from the internet. I noticed only afterwards that the prices from DigiKey are without VAT, so for regular consumers, 24% must be added to the prices of all electronics, hence bringing the total up to 88.7€. Accounting for wires, dupont connectors and everything else that was failed to be mentioned, it likely just exceeds 90€ and this of course does not include all the experimentation, failed attempts and intermediary material. Creating physical prototypes can get expensive very quickly - for a student anyway if we had to purchase everything ourselves. 
 
 ## Plan, progress and timeline
 
@@ -32,28 +78,28 @@ The LED Zeppelin is a custom gesture controlled sunrise alarm clock lamp, where 
 
 | Task | Status | Deadline |
 |----------|----------|----------|
-| 1. Design the lamp and a stand  | [2nd iteration complete]({{< relref "post/week-2/index.md" >}})  | 9.2.2024 |
+| 1. Design the lamp and a stand  | [Done]({{< relref "post/week-15/index.md" >}})  | 29.5.2024 |
 | 2. Design touch detection circuit  | [Done]({{< relref "post/week-10/index.md" >}})  | 10.4.2024  |
 | 3. Program touch detection circuit  | [Done]({{< relref "post/week-10/index.md" >}})  | 27.4.2024  |
 | 4. Implement gesture detection  | [Done]({{< relref "post/week-10/index.md" >}})  | 27.4.2024  |
 | 5. Design output circuit  | [Done]({{< relref "page/final-project/index.md" >}})  | 11.5.2024  |
-| 6. Program light animations  | To be done  | 31.5.2024  |
-| 7. Program ambient sound output  | To be done  | 21.5.2024  |
+| 6. Program light animations  | [Done](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/esp32c3-bluetooth/src/main.cpp?ref_type=heads)  | 6.6.2024  |
+| 7. Program ambient sound output  | Omitted  | 21.5.2024  |
 | 8. Program inter-board communication  | [Done]({{< relref "post/week-12/index.md" >}})  | 15.5.2024  |
 | 9. Design power delivery circuit  | [Done]({{< relref "post/week-9/index.md" >}})  | 19.5.2024  |
 | 10. Combine circuits and produce the result  | [Done]({{< relref "page/final-project/index.md" >}})  | 15.5.2024  |
 | 11. Design mobile app  | [Done]({{< relref "post/week-13/index.md" >}})  | 8.5.2024  |
-| 12. Implement mobile app with Flutter  | To be done  | 17.5.2024  |
-| 13. Program wireless networking with mobile app  | To be done  | 17.5.2024  |
-| 14. Design the internals and the ellipsoid lamp cover  | 1st iteration complete  | 10.5.2024  |
-| 15. Produce the lamp cover  | To be done  | 31.5.2024  |
-| 16. Assemble the lamp  | To be done  | 31.5.2024  |
-| 17. Produce the stand  | To be done  | 1.6.2024  |
+| 12. Implement mobile app with Flutter  | [Done]({{< relref "post/week-13/index.md" >}})  | 2.6.2024  |
+| 13. Program wireless networking with mobile app  | [Done]({{< relref "post/week-12/index.md" >}})  | 6.6.2024  |
+| 14. Design the internals and the ellipsoid lamp cover  | [Done]({{< relref "post/week-15/index.md" >}})  | 29.5.2024  |
+| 15. Produce the lamp cover  | [Done]({{< relref "post/week-14/index.md" >}})  | 30.5.2024  |
+| 16. Assemble the lamp  | [Done]({{< relref "post/week-15/index.md" >}})  | 4.6.2024  |
+| 17. Produce the stand  | [Done]({{< relref "post/week-15/index.md" >}})  | 31.5.2024  |
 | (18.) Design and produce an alternative stand  | Optional  | -  |
 | (19.) Add long touch and double tap gestures  | Optional  | -  |
 | (20.) Give the lamp a personality  | Optional  | -  |
 | (21.) Proximity detection using e.g. Bluetooth  | Optional  | -  |
-| 22. Make a presentation page and video  | To be done  | 7.6.2024  |
+| 22. Make a presentation page and video  | [Done]({{< relref "page/final-project/index.md" >}})  | 7.6.2024  |
 
 **Notes:**
 
@@ -222,9 +268,7 @@ wood block: 0 - 15€ depending on contacts
 
 ![](presentation.webp)
 
-{{< video src="../presentation.mp4" loop="true" muted="true" >}}
 
-Watch a less compressed version of the demo video on [YouTube](https://www.youtube.com/watch?v=ouhtvRlAQOE).
 
 
 
@@ -272,6 +316,7 @@ Watch a less compressed version of the demo video on [YouTube](https://www.youtu
 
 
 Tuned gesture detection a little bit from input week
+
 
 
 
