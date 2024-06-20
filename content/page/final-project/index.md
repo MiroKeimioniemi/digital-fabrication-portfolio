@@ -43,9 +43,7 @@ Watch a less compressed version of the demo video on [YouTube](https://www.youtu
 ![](close-inside.webp)
 ![](close-inside-2.webp)
 
-## Specs
-
-### Bill of materials (BOM)
+## Bill of materials (BOM)
 
 Below is a table of all the materials and components used along with their current price estimates:
 
@@ -55,6 +53,7 @@ Below is a table of all the materials and components used along with their curre
 | Hard wood | 15 x 12 x 4.5 cm block | 15€ |
 | FR2 copper | 1 sheet | 5€ |
 | Transparent PLA | 240g | 5€ |
+| LED diffuser foam | 1 sheet | 12€ |
 | PEAMD50-10-B2 power supply | 1 | 23.70€ |
 | XIAO SAMD21 microcontroller | 1 | 4.99€ |
 | XIAO ESP32C3 microcontroller | 1 | 4.61€ |
@@ -66,15 +65,27 @@ Below is a table of all the materials and components used along with their curre
 | Resistor | 10 | 0.9€ |
 | Pin socket | 5 pins | 0.5€ |
 | Pin header | 12 pins | 0.5€ |
-| Total | | 79.29€ |
+| Total | | 91.29€ |
 
-The above table is only constructed from the items and materials that currently make up the lamp, excluding wires, dupont connectors, zip ties, adhesives and tape as well as the SikaBlock and the glue used for that and other materials and tools similarly used in the manufacturing process. Furthermore, many components were difficult to pin down exactly and thus all prices without two decimal numbers represent rather the orders of magnitudes for that quantity of the given component instead of exact prices.
+The above table is only constructed from the items and materials that currently make up the lamp and are actively used, excluding, for example, the 3.5mm audio jack and the hard-to-quantify-at-this-low-of-a-level consumable stock such as wires, dupont connectors, zip ties, adhesives and tape, as well as the SikaBlock and the glue used with it and other materials and tools similarly used in the manufacturing process. Furthermore, many components were difficult to pin down exactly and thus all prices without two decimal numbers represent rather the orders of magnitudes for that quantity of the given component instead of exact prices.
 
-All of the prices of the electronic components are taken from [DigiKey](https://www.digikey.fi/en) either as the exact prices or averaging over some reasonably similar components, whereas others are from the Fablab pricing or other sources from the internet. I noticed only afterwards that the prices from DigiKey are without VAT, so for regular consumers, 24% must be added to the prices of all electronics, hence bringing the total up to 88.7€. Accounting for wires, dupont connectors and everything else that was failed to be mentioned, it likely just exceeds 90€ and this of course does not include all the experimentation, failed attempts and intermediary material. Creating physical prototypes can get expensive very quickly - for a student anyway if we had to purchase everything ourselves. 
+All of the prices of the electronic components are taken from [DigiKey](https://www.digikey.fi/en) either as the exact prices or averaging over some reasonably similar components, whereas other materials are looked up from the Fablab pricing or other sources from the internet. I noticed only afterwards that the prices from DigiKey are without VAT, so for regular consumers, 24% must be added to the prices of all electronics, hence bringing the total up to 100.7€. Accounting for wires, dupont connectors and everything else that was failed to be mentioned, it likely climbs up to 105 - 110€ conservatively and this of course does not include all the experimentation, failed attempts and intermediary material. 
+
+It must be noted though, that all the prices are looked up rather quickly so they are likely far from the lowest. Furthermore, they are non-bulk prices so that, for example, the DigiKey prices that were looked up, were only for single components. The prices of sheets are not necessarily for the exact sizes that were actually used in two ways: the sheets themselves might have been slightly different sizes and much of the sheet might not have been used so that they can still be used for other projects. The prices listed are nevertheless for the whole sheets. The price can certainly be pushed down by a fair margin by choosing different variants of components, buying them in bulk and sourcing them from different sources but replicating the project with access to appropriate machinery can be expected to cost well over 100€ particularly when adding the costs of SikaBlock, tape, adhesives, wires and other consumable stock.
+
+Creating physical prototypes can get expensive very quickly - for a student anyway if we had to purchase everything ourselves. Luckily the course let us explore and focus on learning instead of making us worry too much about the prices of particularly our failures too early in the process, where that might have been somewhat paralyzing.
 
 ## Plan, progress and timeline
 
-**TODO:**
+I am not aware of any prior, similar projects although I am certain that they do exist and am open to mentioning those here if they are pointed out to me. All the material that I have used such as tools, tutorials and documentation can be found as links at the relevant points throughout my documentation.
+
+As can be seen in the documentation section, I personally designed and manufactured [the PCB used to control the LED strips]({{< relref "page/final-project/index.md" >}}), [the logic running on the microcontrollers](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/tree/main/content/post/week-12?ref_type=heads), [the diffuser]({{< relref "post/week-14/index.md" >}}), [the stand]({{< relref "post/week-14/index.md" >}}), [the internal structure]({{< relref "post/week-15/index.md" >}}) and [the app used to control the lamp]({{< relref "post/week-13/index.md" >}}). These were created from the materials mentioned above in the bill of materials (BOM) and further explained in their respective documentation, most of which came from the [Aalto Fablab](https://studios.aalto.fi/fablab/) inventory with some of the electronics not found on the [Fab inventory](https://inventory.fabcloud.io/), such as the power supply and the level shifter, being order from [DigiKey](https://www.digikey.fi/en). Their costs are approximated above in the BOM.
+
+The PCB was designed in [KiCad](https://www.kicad.org/) and made by [milling an FR2 copper sheet]({{< relref "post/week-4/index.md" >}}) and soldering on the surface-mount components (/devices) (SMD) as documented below. The diffuser, stand and the internal structure were designed in [Fusion 360](https://www.autodesk.com/products/fusion-360/overview) and made by [3-axis milling double-layered SikaBlock and vacuum forming 3mm translucent acrylic over it]({{< relref "post/week-14/index.md" >}}), [3-axis milling]({{< relref "post/week-14/index.md" >}}) and [3D-printing]({{< relref "post/week-15/index.md" >}}) respectively so that both additive and subtractive fabrication processes were utilized.
+
+The most central questions to be answered during the project included mostly practical ones about which materials and processes to use for manufacturing the diffuser, how to detect the gestures in both hardware and software, how to drive the LEDs in spec in the most sensible way, how to avoid shadows inside the lamp as much as possible and how to deliver enough power to the LEDs, while still taking account safety both of the board and the users. 
+
+Below is the to-do list and the shchedule for answering the questions and producing the results that was used in development. Now, after the project has already been completed, the deadlines refer to the days of completion and the "Done" statuses link to the relevant documentation pages. The notes section below the table lists some of the questions in more detail with then preliminary potential answers as well.
 
 | Task | Status | Deadline |
 |----------|----------|----------|
@@ -84,7 +95,7 @@ All of the prices of the electronic components are taken from [DigiKey](https://
 | 4. Implement gesture detection  | [Done]({{< relref "post/week-10/index.md" >}})  | 27.4.2024  |
 | 5. Design output circuit  | [Done]({{< relref "page/final-project/index.md" >}})  | 11.5.2024  |
 | 6. Program light animations  | [Done](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/esp32c3-bluetooth/src/main.cpp?ref_type=heads)  | 6.6.2024  |
-| 7. Program ambient sound output  | Omitted  | 21.5.2024  |
+| 7. Program ambient sound output  | Omitted  | -  |
 | 8. Program inter-board communication  | [Done]({{< relref "post/week-12/index.md" >}})  | 15.5.2024  |
 | 9. Design power delivery circuit  | [Done]({{< relref "post/week-9/index.md" >}})  | 19.5.2024  |
 | 10. Combine circuits and produce the result  | [Done]({{< relref "page/final-project/index.md" >}})  | 15.5.2024  |
@@ -251,20 +262,50 @@ Kris recommended potentially using Nail polish on the thick power traces to make
 
 ![Speaker plugged into the output board](speaker-plugged-in.webp)
 
-5V 7A power source was acquired. 3D milling toolpaths were produced but the sikablock glue took 5 hours to harden and hence the actual milling had to be postponed. Hoping to do it along with vacuum forming tomorrow at the latest. Space for a [speaker](https://www.digikey.com/en/products/detail/mallory-sonalert-products-inc/PSR-57N08A01-AQ/2071452) was also made in the internals. An example for the audio output: https://fabacademy.org/2020/labs/kochi/students/ranjit-menon/projects/final-project/
+The headers with two sockets are unfortunately very fragile and I managed to accidentally rip both of them off along with their traces while assembling the lamp. Hence, the speaker connection ultimately remained unused and it did not matter that the wiring was a bit off. 
 
-A lot of experimentation with diffusion and avoiding shadows was done. The minimum distance between the diffuser and the LEDs should be at least 1.5cm for the light to appear fully uniform. Some shadows seem to be inevitable regardless of the type and thickness of the conductive material but the thin copper strips making up the internals of a power cable glued to the internal side of the cover seem to be the most promising approach currently as they can detect touch through the acrylic while leaving almost no or very little shadow if placed right with respect to the LEDs. I would likely be using multiple of them spaced apart for each QTouch pin to enhance and enlargen the touch detection area but make it as invisible as possible. [Transparent conductive film](https://www.digikey.fi/en/products/filter/films/965?s=N4IgTCBcDaIC4CcCGA7AzgByQgpiuABAMYD2KAJgK5FwCWAbjgQGa0A2AtiALoC%20QA) apparently [exists](https://www.digikey.fi/en/products/detail/tdk-corporation/AG-SHEETSAMPLE-10/9634767) too and might be interesting for further development but perhaps a bit overkill, especially in terms of price for this project. 
+Kris bought some 5V 7A power supplies as well and gave me one of those, solving the power delivery questions. The power budget is calculated in [System Integration]({{< relref "post/week-15/index.md" >}}). I set software headrooms ranging from 2% to 8% for additional safety although with 110 LEDs and no sound output, I could drive them at almost maximum brightness relatively comfortably. 
 
-The internal design currently has straight rails for the LEDs that do not quite account for all 30 LEDs with their length and I am going to test how it would integrate into the lamp cover but an alternative design might have the LED rails be spirals in order to distribute the light more evenly.
+### Diffuser & stand
+
+The lamp was redesigned from the [render]({{< relref "post/week-2/index.md" >}}) to a manufacturable form, which is documented in [System Integration]({{< relref "post/week-15/index.md" >}}). The diffuser was created during the [wildcard week]({{< relref "post/week-14/index.md" >}}) via 3-axis milling SikaBlock, over which 3mm translucent acrylic was vacuum formed and then sanded for an entire night. The stand was also 3-axis milled from a block of hard wood. These are extensively documented in [3-Axis Milling & Vacuum Forming]({{< relref "post/week-14/index.md" >}}). 
+
+![The external components of the lamp](lamp-externals.webp)
+
+### System integration
+
+An internal structure was iteratively designed and 3D-printed in [System Integration]({{< relref "post/week-15/index.md" >}}) to hold the PCB and LEDs in a maximally diffusing arrangement inside. The lamp was assembled by placing the PCB on the internal structure, connecting custom cables to the XIAO SAMD21's QTouch pins that had exposed dual copper wires taped on the inside of the diffuser for sensing capacitance changes, gluing the LED strips on the cut metal heat sinks glued to the internal structure and coating the inside with 2mm thick vacuum formed LED diffuser foam, all of which is documented in detail in [System Integration]({{< relref "post/week-15/index.md" >}}).
+
+![The internals of the fully assembled lamp](internals.webp)
+
+### Programming
+
+The [XIAO SAMD21 gesture detection code](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/samd21-i2c/src/main.cpp?ref_type=heads) written and documented in [Input Devices]({{< relref "post/week-10/index.md" >}}) was fine tuned for the assembled lamp and made to communicate with the [XIAO ESP32C3 code](https://gitlab.com/miro.keimioniemi/digital-fabrication-portfolio/-/blob/main/content/post/week-12/esp32c3-bluetooth/src/main.cpp?ref_type=heads) responsible for controlling the LED strips and communicating over Bluetooth Low Energy (BLE) with the [Flutter mobile app](https://gitlab.com/miro-keimioniemi/led-zeppelin-app/-/tree/master?ref_type=heads), via I2C. The I2C and BLE communication are documented in [Networking and Communications]({{< relref "post/week-12/index.md" >}}) and the design and development of the Flutter mobile app is documented in [Interface and Application Programming]({{< relref "post/week-13/index.md" >}}). It can be used to control the on/off state and brightness of the lamp, as well as change its color and set alarms with predefined animations in a dynamic user interface (UI) that responds to the selected color and brightness with changes to its background landscape.
+
+![](app-1.webp)
+![](app-2.webp)
+![](app-3.webp)
+![](app-4.webp)
+![](app-5.webp)
+![](app-6.webp)
+![](app-7.webp)
+
+![](app-8.webp)
+![](app-9.webp)
+![](app-11.webp)
+![](app-10.webp)
+![](app-12.webp)
+![](app-13.webp)
+![](app-14.webp)
+
+## License
 
 
 
-Inside connection is broken
-
-It might be better to properly separate gestures and state but it was faster not to do so
 
 
-wood block: 0 - 15€ depending on contacts
+
+
 
 ![](presentation.webp)
 
@@ -319,6 +360,9 @@ Tuned gesture detection a little bit from input week
 
 
 
+## Reflections
+
+Project evaluation
 
 
 

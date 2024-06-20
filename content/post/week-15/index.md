@@ -84,7 +84,7 @@ Below is the first iteration of the internal structure, which had space only for
 ![Printed internals without supports](3d-printed-internals.webp)
 ![Diffusion with 1st iteration of the internal structure](cover-on-1st-internal-structure.webp)
 
-The final design is significantly sturdier and has much better diffusion characteristics due to the increased density and flatness of the LED rails. It was also ultimately printed from transparent PLA, reducing shadows from the contact points and allowing for internal reflections to pass through ever so slightly more. The supports stick through and out of the diffuser ever so slightly because it is significantly easier to remove than to add material and the acrylic is actually vacuum formed over the solid model of the diffuser so that that should be the correct length.
+The final design is significantly sturdier and has much better diffusion characteristics due to the increased density and flatness of the LED rails, which are not placed perfectly symmetrically, however, in order for there to be space to slide the PCB in under them and to drill it on between them. It was also ultimately printed from transparent PLA, reducing shadows from the contact points and allowing for internal reflections to pass through ever so slightly more. The supports stick through and out of the diffuser ever so slightly because it is significantly easier to remove than to add material and the acrylic is actually vacuum formed over the solid model of the diffuser so that that should be the correct length.
 
 {{< 3DModel "lamp-final-see-through-render.glb" >}}
 
@@ -154,13 +154,16 @@ One more issue that arose was that one of the LEDs was not working as could be s
 ![Soldering the connectors to connect two LED strips](soldering-leds.webp)
 ![Output end after the improvised connection](programming.webp)
 
-As finishing touches, I fastened the loose connectors along with the power connector to the internal structure with zip ties in true prototyping spirit and made a loose strain relief for the optics. I had come to the conclusion that for the demo, I did not actually need to fasten the diffuser halves to each other at all. I got some diffusing foam from [Vytautas](https://timeritualslabour.gitlab.io/digital-fabrication/index.html)' connections to the [Design Factory](https://designfactory.aalto.fi/), which made the lamp diffuse light a bit more nicely and increased the friction between the halves so much that you could not really tell they were not fastened when operating it. To my delight, this too could be vacuum formed - even without warming it up much. - so that it could then just be placed inside and cut to just fill the shape. 
+As finishing touches, I fastened the loose connectors along with the power connector to the internal structure with zip ties in true prototyping spirit and made a loose strain relief for the optics. I had come to the conclusion that for the demo, I did not actually need to fasten the diffuser halves to each other at all. I got some diffusing foam from [Vytautas](https://timeritualslabour.gitlab.io/digital-fabrication/index.html)' connections to the [Design Factory](https://designfactory.aalto.fi/), which made the lamp diffuse light a bit more nicely and increased the friction between the halves so much that you could not really tell they were not fastened when operating it. To my delight, this too could be vacuum formed - even without warming it up much. - so that it could then just be placed inside and cut to perfectly fill the shape. 
+
+![Final internals of the lamp](foamed-internals.webp)
 
 ## Reflections
 
 System integration is very good to be focused on explicitly and is, in a way, what I most liked about this whole course in a way. Comparing to Design Thinking and Electronic Prototyping, where we got to build an electronics prototype as well, this felt a lot more serious and refined as the outcome is almost an actual product instead of just a one-dimensional prototype demoing a single feature. 
 
 My lamp prototype could of course be taken a tiny bit further too by fastening the halves to each other and the strain relief to them. However, this would have required a lot more time to do in a way in which I could still open the lamp and continue developing, for example, its software and internals by one day possibly replacing the copper wires with [transparent conductor film](https://www.digikey.com/en/products/filter/films/965?s=N4IgTCBcDaIC4CcCGA7AzgByQgpiuABAMYD2KAJgK5FwkIEBmAlgDYC2IAugL5A). This would be significantly harder and riskier if I were to glue it closed. Hence, in order to preserve the development potential of the prototype, I chose to leave it unclosed, which does not even really affect its user experience in the end. In fact, this allows me to improve it by still being able to fine tune, for example, the capacitance thresholds. 
+
 
 
 
